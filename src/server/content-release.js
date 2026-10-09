@@ -1,4 +1,5 @@
 import { ApiError, authorize, readJson, reply, supabaseTransport } from './api-foundation.js';
+import { releasedAssetMetadata } from './content-assets.js';
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const categories = ['INTRODUCTION', 'INFORMATION', 'EDITORIAL', 'DISCOVERY', 'FUTURE_JOURNEY', 'VALIDATION'];
@@ -47,7 +48,9 @@ export function createContentHandler(boundary, { env = process.env, fetchImpl = 
         return reply(200, Object.fromEntries(['id', 'category', 'title', 'body', 'state', 'created_at', 'updated_at', 'released_at'].map(key => [key, result[key]])));
       }
       const parameters = [...url.searchParams];
-      if (parameters.length > 1 || parameters.some(([key, value]) => key !== 'id' || !uuid.test(value))) throw new ApiError(400);
+      if (parameters.length > 2 || new Set(parameters.map(([key]) => key)).size !== parameters.length ||
+          parameters.some(([key, value]) => key === 'id' ? !uuid.test(value) : key !== 'assets' || value !== '1')) throw new ApiError(400);
+      const includeAssets = url.searchParams.get('assets') === '1';
       const contentId = url.searchParams.get('id');
       // Caller tokens are intentionally ignored: public reads always use the anonymous contract.
       const upstream = supabaseTransport(env, fetchImpl);
@@ -62,6 +65,13 @@ export function createContentHandler(boundary, { env = process.env, fetchImpl = 
         return { id: row.id, category: row.category, title, body };
       });
       if (contentId && safe.length === 0) return reply(404);
+      if (includeAssets) {
+        const assets = await releasedAssetMetadata(upstream, safe.map(row => row.id));
+        // A concurrent withdrawal/edit between reads removes the expanded record.
+        const visible = safe.filter(row => assets.has(row.id)).map(row => ({ ...row, assets: assets.get(row.id) }));
+        if (contentId && visible.length === 0) return reply(404);
+        return reply(200, contentId ? visible[0] : visible);
+      }
       return reply(200, contentId ? safe[0] : safe);
     } catch (error) {
       return reply(error instanceof ApiError ? error.status : 500);
