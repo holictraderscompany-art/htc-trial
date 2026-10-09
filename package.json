@@ -7,7 +7,7 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1",
-    "test": "node --test tests/api-foundation.test.js tests/content-release.test.js tests/media-assets.test.js tests/content-assets.test.js tests/content-media-foundation.test.js"
+    "test": "node --test tests/api-foundation.test.js tests/content-release.test.js tests/media-assets.test.js tests/content-assets.test.js tests/content-media-foundation.test.js tests/content-discovery.test.js"
   },
   "engines": { "node": ">=20.9.0" },
   "dependencies": {

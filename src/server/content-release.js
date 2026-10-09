@@ -1,5 +1,6 @@
 import { ApiError, authorize, readJson, reply, supabaseTransport } from './api-foundation.js';
 import { releasedAssetMetadata } from './content-assets.js';
+import { publicPageRequest, readPublicPage } from './content-discovery.js';
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const categories = ['INTRODUCTION', 'INFORMATION', 'EDITORIAL', 'DISCOVERY', 'FUTURE_JOURNEY', 'VALIDATION'];
@@ -47,14 +48,16 @@ export function createContentHandler(boundary, { env = process.env, fetchImpl = 
         if (!result || !uuid.test(result.id ?? '') || !['DRAFT', 'RELEASED', 'WITHDRAWN'].includes(result.state)) throw new ApiError(500);
         return reply(200, Object.fromEntries(['id', 'category', 'title', 'body', 'state', 'created_at', 'updated_at', 'released_at'].map(key => [key, result[key]])));
       }
+      const page = publicPageRequest(url, categories);
       const parameters = [...url.searchParams];
-      if (parameters.length > 2 || new Set(parameters.map(([key]) => key)).size !== parameters.length ||
-          parameters.some(([key, value]) => key === 'id' ? !uuid.test(value) : key !== 'assets' || value !== '1')) throw new ApiError(400);
+      if (!page && (parameters.length > 2 || new Set(parameters.map(([key]) => key)).size !== parameters.length ||
+          parameters.some(([key, value]) => key === 'id' ? !uuid.test(value) : key !== 'assets' || value !== '1'))) throw new ApiError(400);
       const includeAssets = url.searchParams.get('assets') === '1';
       const contentId = url.searchParams.get('id');
       // Caller tokens are intentionally ignored: public reads always use the anonymous contract.
       const upstream = supabaseTransport(env, fetchImpl);
-      const rows = await upstream('/rest/v1/rpc/read_released_content', { method: 'POST', body: JSON.stringify({ content_id: contentId }) });
+      const paginated = page ? await readPublicPage(upstream, page) : null;
+      const rows = paginated ? paginated.rows : await upstream('/rest/v1/rpc/read_released_content', { method: 'POST', body: JSON.stringify({ content_id: contentId }) });
       if (!Array.isArray(rows) || rows.length > 100 || (contentId && rows.length > 1)) throw new ApiError(500);
       const safe = rows.map(row => {
         const title = normalizeText(row?.title);
@@ -70,8 +73,10 @@ export function createContentHandler(boundary, { env = process.env, fetchImpl = 
         // A concurrent withdrawal/edit between reads removes the expanded record.
         const visible = safe.filter(row => assets.has(row.id)).map(row => ({ ...row, assets: assets.get(row.id) }));
         if (contentId && visible.length === 0) return reply(404);
+        if (page) return reply(200, { items: visible, next_cursor: paginated.nextCursor });
         return reply(200, contentId ? visible[0] : visible);
       }
+      if (page) return reply(200, { items: safe, next_cursor: paginated.nextCursor });
       return reply(200, contentId ? safe[0] : safe);
     } catch (error) {
       return reply(error instanceof ApiError ? error.status : 500);
