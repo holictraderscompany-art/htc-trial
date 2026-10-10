@@ -7,3 +7,7 @@ build/
 .next/
 coverage/
 .DS_Store
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+.agents/skills/playwright-cli/
+.claude/skills/playwright-cli/
