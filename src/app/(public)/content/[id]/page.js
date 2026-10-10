@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { detailContent } from '../../../server/public-experience.js';
-import { ContentArticle, PageState } from '../../../components/content-views.js';
+import { detailContent } from '../../../../server/public-experience.js';
+import { ContentArticle, PageState } from '../../../../components/content-views.js';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Read content' };

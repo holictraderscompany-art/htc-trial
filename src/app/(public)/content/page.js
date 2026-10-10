@@ -1,6 +1,6 @@
-import { discoveryContent } from '../../server/public-experience.js';
-import { categoryLabels, continuationPath } from '../../public/content-presentation.js';
-import { ContentList, PageState } from '../../components/content-views.js';
+import { discoveryContent } from '../../../server/public-experience.js';
+import { categoryLabels, continuationPath } from '../../../public/content-presentation.js';
+import { ContentList, PageState } from '../../../components/content-views.js';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Content' };

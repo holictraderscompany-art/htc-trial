@@ -28,7 +28,7 @@ function contentFixture(state = 'RELEASED') {
   return { handler: createContentHandler('public', { env, fetchImpl }), calls };
 }
 test('T10 public entry truthfully describes Trial and links to the real discovery route', async () => {
-  const page = await source('src/app/page.js');
+  const page = await source('src/app/(public)/page.js');
   assert.match(page, /Holic Traders Company/); assert.match(page, /January 2027/);
   assert.match(page, /href="\/content"/); assert.match(page, /without signing in/);
 });
@@ -88,13 +88,14 @@ test('T10 error and not-found presentation gives semantic, actionable states', (
   assert.match(rendered, /role="alert"/); assert.match(rendered, /<h1>/); assert.match(rendered, /href="\/content"/);
 });
 test('T10 shell has skip navigation and real links without Founder controls', async () => {
-  const layout = await source('src/app/layout.js'); const navigation = await source('src/components/session-navigation.js');
-  assert.match(layout, /lang="en"/); assert.match(layout, /href="#main"/); assert.match(layout, /<main id="main"/);
+  const root = await source('src/app/layout.js');
+  const layout = await source('src/components/public-shell.js'); const navigation = await source('src/components/session-navigation.js');
+  assert.match(root, /lang="en"/); assert.match(layout, /href="#main"/); assert.match(layout, /<main id="main"/);
   assert.match(layout, /aria-label="Main navigation"/); assert.match(navigation, /href="\/sign-in"/);
   assert.doesNotMatch(layout + navigation, /\/api\/founder|manage_trial|service.role|localStorage|sessionStorage/);
 });
 test('T10 loading and session failures have accessible messages and recovery', async () => {
-  const loading = await source('src/app/content/loading.js'); const navigation = await source('src/components/session-navigation.js');
+  const loading = await source('src/app/(public)/content/loading.js'); const navigation = await source('src/components/session-navigation.js');
   assert.match(loading, /aria-busy="true"/); assert.match(loading, /role="status"/);
   assert.match(navigation, /Sign-in status unavailable/); assert.match(navigation, /AbortController/); assert.match(navigation, /Retry/);
 });

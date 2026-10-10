@@ -1,14 +1,9 @@
 import { randomBytes, createHash } from 'node:crypto';
 import { ApiError, authorize, reply } from './api-foundation.js';
+import { sessionCookie, tokenPattern, readCookie as cookie } from './session-token.js';
 
 const project = 'https://vzkbcgfywyhtvprxpwfb.supabase.co';
-const sessionCookie = 'htc_trial_session';
 const flowCookie = 'htc_trial_pkce';
-const tokenPattern = /^[A-Za-z0-9._~+/=-]{1,3500}$/;
-function cookie(request, name) {
-  const matches = (request.headers.get('cookie') ?? '').split(';').map(part => part.trim()).filter(part => part.startsWith(`${name}=`));
-  return matches.length === 1 ? matches[0].slice(name.length + 1) : null;
-}
 function setCookie(response, request, name, value, age, path = '/') {
   response.headers.append('Set-Cookie', `${name}=${value}; Path=${path}; HttpOnly; SameSite=Lax; Max-Age=${age}${new URL(request.url).protocol === 'https:' ? '; Secure' : ''}`);
 }
