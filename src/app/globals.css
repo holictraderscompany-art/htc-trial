@@ -76,6 +76,13 @@ select { color: var(--ink); background: var(--surface); border: 1px solid var(--
 .sign-in form { margin: 2rem 0; }
 .site-footer { width: 100%; max-width: 1120px; margin: 0 auto; padding: 1.5rem 2rem; color: var(--muted); font-size: .85rem; }
 .site-footer p { margin: 0; }
+.workspace-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.workspace-form { max-width: 68ch; margin-top: 2rem; }
+.workspace-form fieldset { border: 1px solid var(--line); padding: 1rem; margin-bottom: 1rem; min-width: 0; }
+.workspace-form input, .workspace-form textarea { display: block; width: 100%; padding: .6rem; margin-bottom: 1rem; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--muted); border-radius: 4px; }
+.workspace-form select { margin-bottom: 1rem; }
+.workspace-form input:focus-visible, .workspace-form textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.founder-content button:disabled { opacity: .65; cursor: default; }
 @media (prefers-color-scheme: dark) {
   :root { color-scheme: dark; --paper: #142326; --surface: #1c2e30; --ink: #edf3ef; --muted: #b5c5c0; --accent: #8cc9b5; --line: #405551; --hover: #30453e; }
 }

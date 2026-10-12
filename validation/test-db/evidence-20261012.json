@@ -1,0 +1,124 @@
+{
+  "date_utc": "2026-10-12",
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T13-T16; T17 reserved for Founder",
+  "history": {
+    "status": "PASS_ISOLATED_TEST_WORKSPACE",
+    "entries": [
+      {
+        "version": "20261012061832",
+        "name": "htc_group3_core_auth_content_draft",
+        "parts": 1,
+        "source_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+      },
+      {
+        "version": "20261012062050",
+        "name": "trial_assets",
+        "parts": 1,
+        "source_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+      },
+      {
+        "version": "20261012062052",
+        "name": "trial_content_assets",
+        "parts": 1,
+        "source_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+      },
+      {
+        "version": "20261012062053",
+        "name": "public_content_discovery",
+        "parts": 1,
+        "source_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+      },
+      {
+        "version": "20261012062054",
+        "name": "founder_content_list",
+        "parts": 1,
+        "source_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+      },
+      {
+        "version": "20261012062323",
+        "name": "founder_operation_workspaces",
+        "parts": 1,
+        "source_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+      },
+      {
+        "version": "20261012062809",
+        "name": "founder_asset_delete_bridge",
+        "parts": 1,
+        "source_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+      }
+    ],
+    "remote_rewrite": false,
+    "root_migrations_preserved": true
+  },
+  "runtime_sql": [
+    {
+      "name": "content-release.sql",
+      "passed": true
+    },
+    {
+      "name": "content-draft-only.sql",
+      "passed": true
+    },
+    {
+      "name": "founder-content.sql",
+      "passed": true
+    },
+    {
+      "name": "founder-operations.sql",
+      "passed": true
+    }
+  ],
+  "multistatement_assertion_control": "EXPECTED_EXCEPTION_RECEIVED; confirms later DO assertions execute",
+  "fixtures_after_suites": {
+    "auth_users": 0,
+    "content": 0,
+    "assets": 0,
+    "relations": 0,
+    "objects": 0
+  },
+  "independent_transactions": {
+    "status": "NOT_VERIFIED",
+    "parallel_read_probe": "different backend PIDs but non-overlapping execution; not concurrency PASS",
+    "pids": [
+      151274,
+      151277
+    ],
+    "windows_utc": [
+      [
+        "07:20:43.356918",
+        "07:20:47.360987"
+      ],
+      [
+        "07:20:48.00989",
+        "07:20:52.013942"
+      ]
+    ]
+  },
+  "browser": {
+    "status": "NOT_VERIFIED",
+    "cloud_localhost": "ERR_CONNECTION_REFUSED",
+    "local_browser_binary": "unavailable"
+  },
+  "live_oauth_storage": {
+    "status": "NOT_VERIFIED",
+    "reason": "No authenticated live Founder/USER browser session available"
+  },
+  "vercel": {
+    "project": "htc-group3-validation",
+    "project_id": "prj_YJp6O364SN06VRYAGRrGbemiFwlq",
+    "preview_only_env": true,
+    "first_deployment": "dpl_32EUTBbuqAnfMUhLAtHVrVWKeeiR",
+    "first_deployment_status": "CANCELED",
+    "reason": "returned target production despite preview input; canceled immediately",
+    "corrected_preview_attempt": "AUTO_REVIEW_REJECTED before execution",
+    "live_deployment_created": false
+  },
+  "completion": {
+    "T13": "OPEN native independent-session checks",
+    "T14": "OPEN live media/UI",
+    "T15": "OPEN live integration/UI",
+    "T16": "OPEN live integration/UI",
+    "T17": "NOT_STARTED; Founder control"
+  }
+}
