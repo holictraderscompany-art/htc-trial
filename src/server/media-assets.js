@@ -1,8 +1,7 @@
-import { ApiError, authorize, readJson, reply } from './api-foundation.js';
+import { ApiError, authorize, readJson, reply, supabaseConfiguration } from './api-foundation.js';
 
 if (typeof window !== 'undefined') throw new Error('Server module');
 export const FILE_CAP = 6000000;
-const project = 'https://vzkbcgfywyhtvprxpwfb.supabase.co';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const formats = {
   'image/jpeg': ['IMAGE', 'THUMBNAIL'], 'image/png': ['IMAGE', 'THUMBNAIL'],
@@ -20,7 +19,7 @@ function validate(p) {
       typeof p.original_filename !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$/.test(p.original_filename) ||
       p.original_filename.includes('..') || !extensions[p.mime_type].includes(p.original_filename.split('.').at(-1).toLowerCase())) throw new ApiError(400);
 }
-function asset(row, id) {
+export function validateAssetRecord(row, id) {
   if (!row || !uuid.test(row.id ?? '') || (id && row.id !== id) || row.storage_bucket !== 'trial-assets' ||
       !formats[row.mime_type]?.includes(row.asset_type) || !Number.isInteger(row.byte_size) || row.byte_size < 1 || row.byte_size > FILE_CAP ||
       !['PENDING', 'READY', 'DELETING'].includes(row.status)) throw new ApiError(500);
@@ -31,7 +30,7 @@ function asset(row, id) {
 function projection(row) {
   return Object.fromEntries(['id', 'asset_type', 'mime_type', 'original_filename', 'byte_size', 'width', 'height', 'duration_seconds', 'status', 'created_at', 'updated_at'].map(k => [k, row[k]]));
 }
-function signature(bytes, mime) {
+export function assetSignature(bytes, mime) {
   const s = new TextDecoder('latin1').decode(bytes);
   if (mime === 'image/jpeg') return bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;
   if (mime === 'image/png') return [137,80,78,71,13,10,26,10].every((v,i) => bytes[i] === v);
@@ -62,6 +61,7 @@ export function createAssetHandler({ env = process.env, fetchImpl = fetch } = {}
     try {
       if (request.method !== 'POST') return reply(405, null, 'POST');
       const { upstream } = await authorize(request, 'founder', { env, fetchImpl });
+      const project = supabaseConfiguration(env).url;
       if (new URL(request.url).search) throw new ApiError(400);
       const p = await readJson(request, 2048); validate(p);
       const rpc = payload => upstream('/rest/v1/rpc/manage_trial_asset', { method: 'POST', body: JSON.stringify({ payload }) });
@@ -72,7 +72,7 @@ export function createAssetHandler({ env = process.env, fetchImpl = fetch } = {}
       });
       const remove = async id => {
         const row = await rpc({ action: 'begin_delete', id });
-        if (!row) return; asset(row, id);
+        if (!row) return; validateAssetRecord(row, id);
         const response = await storage('object/trial-assets', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prefixes: [row.storage_path] }) });
         if (!response.ok && response.status !== 404) throw new ApiError(500);
         const finished = await rpc({ action: 'finish_delete', id });
@@ -81,7 +81,7 @@ export function createAssetHandler({ env = process.env, fetchImpl = fetch } = {}
       if (p.action === 'delete') { await remove(p.id); return reply(200, { id: p.id, deleted: true }); }
       const result = await rpc(p.action === 'reserve' ? p : { action: 'inspect', id: p.id });
       if (!result) return reply(404);
-      const row = asset(result.asset, p.action === 'reserve' ? undefined : p.id);
+      const row = validateAssetRecord(result.asset, p.action === 'reserve' ? undefined : p.id);
       if (result.bucket_private !== true) throw new ApiError(500);
       if (p.action === 'reserve') {
         if (!Number.isFinite(Date.parse(row.expires_at))) throw new ApiError(500);
@@ -112,9 +112,9 @@ export function createAssetHandler({ env = process.env, fetchImpl = fetch } = {}
           await response.body?.cancel(); throw new ApiError(500);
         }
         const bytes = await prefix(response);
-        if (bytes.length !== end + 1 || !signature(bytes, row.mime_type)) { await remove(row.id); throw new ApiError(400); }
+        if (bytes.length !== end + 1 || !assetSignature(bytes, row.mime_type)) { await remove(row.id); throw new ApiError(400); }
         const ready = await rpc({ action: 'finalize', id: row.id });
-        asset(ready, row.id); if (ready.status !== 'READY') throw new ApiError(500);
+        validateAssetRecord(ready, row.id); if (ready.status !== 'READY') throw new ApiError(500);
         return reply(200, projection(ready));
       }
       if (row.status !== 'READY') throw new ApiError(400);
