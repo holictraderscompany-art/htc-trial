@@ -53,10 +53,13 @@ Successful runtime SQL:
 
 The initial eight source migrations have historical local versions different from
 these managed history versions. An atomic metadata alignment script was prepared.
-Two attempts failed at the connector with `Invalid or expired requestState`.
-Readback confirmed tracking remained unchanged. **History alignment remains OPEN.**
-Do not run `supabase db push` against this test project or replay DB1 until that
-history discrepancy is resolved through a working, reviewed execution path.
+Two remote metadata rewrite attempts failed at the connector with `Invalid or expired requestState`.
+Readback confirmed tracking remained unchanged. That rewrite path is abandoned.
+The isolated `validation/test-db` work directory now contains all seven actual
+managed versions and exact SQL bytes; live readback matched all seven SHA-256
+values. **Test-workspace source/history alignment PASS, no remote rewrite.**
+The historical root `supabase/migrations` remains intact and must NOT be pushed
+to this test project. Use the isolated work directory only; do not replay DB1.
 No attempt was made to modify production migration history.
 
 ## Code added
@@ -105,10 +108,41 @@ No attempt was made to modify production migration history.
 ## Next executor actions
 
 Reconcile this continuation with the local handoff; do not discard local work.
-Preserve the migration history table above. Finish history alignment, independent
+Preserve the migration history table above. Use the aligned isolated test migration workspace; finish independent
 PostgreSQL concurrency and live authenticated storage/UI checks. Configure only the
 test target explicitly. Do not replay DB1 or the new RPC migrations: they are already
 applied to the test project. Continue from measured state, not old checkpoint labels.
 T17 remains OPEN until the unresolved gates pass. Support ticket SU-503694 still has
 no technical reply in the last checked email thread; managed execution did not fix
 the previously rejected database password.
+
+## Autonomous continuation, T13–T16 only
+
+Latest Founder instruction reserves T17 for Founder control. No T17 closure or
+production release is authorized by this continuation.
+
+The isolated test migration workspace matches live versions/names/source hashes
+7/7. The root historical migration lineage is preserved. Runtime SQL suites
+content-release, content-draft-only, founder-content and founder-operations passed
+again on the test project with rollback. A deliberate later-statement exception
+confirmed that multi-statement assertion failures are propagated by the connector.
+No fixture users/content/assets/relations/storage objects remain.
+
+Parallel read probes returned different backend PIDs but non-overlapping four-second
+execution windows. This observed connector path cannot establish simultaneous
+transactions. Native isolation tests are still OPEN.
+
+A new Vercel project `htc-group3-validation` was created under the connected HTC
+team with explicit TEST configuration only for preview. Git linking was unavailable
+without a Vercel GitHub Login Connection, so reviewed source upload was attempted.
+Deployment `dpl_32EUTBbuqAnfMUhLAtHVrVWKeeiR` unexpectedly returned production target
+despite preview input and was immediately CANCELED. A documentation-corrected preview
+attempt was blocked by automatic approval review before execution due to production
+target risk. No further deployment workaround was attempted; no live site is claimed.
+Existing protected Supabase production was not accessed.
+
+Cloud Browser could not reach the local fixture (`ERR_CONNECTION_REFUSED`). It is
+a separate browser environment, not control of the user's laptop. Live Google
+Founder/USER sign-in, binary Storage and UI remain OPEN. Broad authorization does
+not supply an authenticated session or an independently controllable DB transport.
+Do not label T13–T16 complete from these partial results.
