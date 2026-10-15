@@ -17,7 +17,8 @@ export function FounderBoundary({ state, children }) {
     h('header', { className: 'site-header' }, h('div', { className: 'header-inner' },
       h('a', { className: 'brand', href: '/founder', 'aria-label': 'HTC Founder home' }, h('strong', null, 'HTC'), h('span', null, 'Founder workspace')),
       h('nav', { 'aria-label': 'Founder navigation' },
-        h('a', { href: '/founder', 'aria-current': 'page' }, 'Founder home'),
+        h('a', { href: '/founder' }, 'Founder home'),
+        h('a', { href: '/founder/content' }, 'Content workspace'),
         h('a', { href: '/content' }, 'Public content'),
         h('form', { method: 'post', action: '/auth/sign-out' }, h('button', { type: 'submit', className: 'text-button' }, 'Sign out'))))),
     h('main', { id: 'main', tabIndex: -1, className: 'page-container' }, children));

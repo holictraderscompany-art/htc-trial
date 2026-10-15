@@ -1,0 +1,50 @@
+# Explicit candidate line endings preserve byte-level validation/checksums after checkout.
+# Immutable curated proof is stored without text conversion.
+.gitignore text eol=crlf
+docs/founder-content-workspace.md text eol=lf
+docs/group3-cloud-continuation.md text eol=lf
+docs/local-sqlite-mode.md text eol=lf
+docs/t13-commit-manifest.md text eol=lf
+package.json text eol=lf
+src/app/api/founder/content/route.js text eol=crlf
+src/app/founder/content/page.js text eol=crlf
+src/app/globals.css text eol=crlf
+src/components/founder-content-workspace.js text eol=crlf
+src/components/founder-views.js text eol=crlf
+src/server/api-foundation.js text eol=crlf
+src/server/content-release.js text eol=crlf
+src/server/founder-content.js text eol=crlf
+src/server/trial-session.js text eol=crlf
+supabase/migrations/20261011090000_trial_content_draft_only.sql text eol=crlf
+supabase/migrations/20261011100000_founder_content_list.sql text eol=crlf
+tests/content-draft-only.spec text eol=crlf
+tests/content-draft-only.sql text eol=crlf
+tests/content-draft-only.test.js text eol=crlf
+tests/founder-access.test.js text eol=crlf
+tests/founder-content.fixture.mjs text eol=lf
+tests/founder-content.sql text eol=crlf
+tests/founder-content.test.js text eol=crlf
+tests/local-sqlite-adapter.js text eol=lf
+tests/local-sqlite.test.js text eol=crlf
+tests/t13-target.test.js text eol=lf
+validation/t13/commit-manifest.json text eol=lf
+validation/t13/evidence/db1-provenance.json -text
+validation/t13/evidence/live-oauth.json -text
+validation/t13/evidence/original-final-acceptance.json -text
+validation/t13/evidence/postgres-concurrency.json -text
+validation/t13/preservation.json text eol=lf
+validation/t13/reconciliation-results.json text eol=lf
+validation/t13/source-equivalence.json text eol=lf
+validation/t13/verify-candidate.mjs text eol=lf
+validation/test-db/README.md text eol=lf
+validation/test-db/history.json text eol=crlf
+validation/test-db/remote-history-20261015.json text eol=lf
+validation/test-db/source-scope.json text eol=lf
+validation/test-db/supabase/migrations/20261012061832_htc_group3_core_auth_content_draft.sql text eol=lf
+validation/test-db/supabase/migrations/20261012062050_trial_assets.sql text eol=lf
+validation/test-db/supabase/migrations/20261012062052_trial_content_assets.sql text eol=lf
+validation/test-db/supabase/migrations/20261012062053_public_content_discovery.sql text eol=lf
+validation/test-db/supabase/migrations/20261012062054_founder_content_list.sql text eol=lf
+validation/test-db/supabase/migrations/20261014232339_t13_approved_default_acl_hardening.sql text eol=lf
+validation/test-db/verify-history.mjs text eol=lf
+.gitattributes text eol=lf

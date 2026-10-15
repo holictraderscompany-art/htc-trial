@@ -2,6 +2,8 @@ import { ApiError, authorize, readJson, reply, supabaseTransport } from './api-f
 import { releasedAssetMetadata } from './content-assets.js';
 import { publicPageRequest, readPublicPage } from './content-discovery.js';
 
+export { categories as contentCategories, validate as validateContentRequest };
+
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const categories = ['INTRODUCTION', 'INFORMATION', 'EDITORIAL', 'DISCOVERY', 'FUTURE_JOURNEY', 'VALIDATION'];
 const keys = {

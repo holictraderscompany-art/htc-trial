@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-15",
+  "scope": "T13 only",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "oauthVerdict": "PASS",
+  "t13Verdict": "PARTIAL — PostgreSQL independent two-session concurrency pending",
+  "transport": "Real Supabase TEST HTTPS; localhost compiled application on port 3103; no SQLite/mock identity",
+  "provider": {"settingsHttpStatus":200,"googleEnabled":true,"configuredPrivatelyByFounder":true},
+  "founder": {
+    "privateGoogleLoginConfirmed":true,
+    "callback":{"path":"/auth/callback","httpStatus":303,"codeExchangeInferredFromAuthenticatedSession":true},
+    "cookie":{"present":true,"httpOnly":true,"sameSite":"Lax","secure":false,"note":"Existing HTTP loopback cookie policy; HTTPS Secure policy unchanged"},
+    "session":{"httpStatus":200,"authenticated":true},
+    "route":{"path":"/founder","httpStatus":200},
+    "contentApi":{"action":"list","cursor":null,"httpStatus":200},
+    "logout":{"httpStatus":303,"cookieRemoved":true,"sessionAnonymous":true,"withoutCookieApi":401,"oldCookieReplayApi":401}
+  },
+  "user": {
+    "privateGoogleLoginConfirmed":true,
+    "independentBrowserContext":true,
+    "callback":{"path":"/auth/callback","httpStatus":303},
+    "sessionAuthenticated":true,
+    "httpOnlyCookie":true,
+    "cookieInvisibleToBrowserJavaScript":true,
+    "founderRoute":{"path":"/founder","httpStatus":200,"controlledAccessDeniedVisible":true,"founderNavigationAbsent":true},
+    "contentRoute":{"path":"/founder/content","accessDeniedVisible":true,"draftWorkspaceHidden":true},
+    "contentApi":{"listHttpStatus":403,"createHttpStatus":403},
+    "logout":{"httpStatus":303,"cookieRemoved":true,"sessionAnonymous":true,"withoutCookieApi":401,"oldCookieReplayApi":401}
+  },
+  "databaseReadback":{"googleIdentities":2,"profiles":{"FOUNDER":1,"USER":1},"contentCount":0,"migrationCount":8},
+  "preservation":{"DB1":"Prior PASS preserved, no repeated audit or replay","authAccounts":"Approved real TEST login accounts retained; no real identity values exported","productCode":"Unchanged","nativeLogin":"No failed native PostgreSQL probe repeated"},
+  "observedProbeFailures":[
+    "Start-button probe arrived after manual navigation to Google; timeout did not establish a product defect",
+    "Initial session checks occurred before private interaction completed; no cookie and 401 observed, not counted as login PASS",
+    "page.goto was aborted during concurrent interactive navigation; replaced with read-only HTTP route verification",
+    "List probe omitted mandatory cursor:null and correctly received 400; corrected request returned 200",
+    "Nested Windows PowerShell diagnostic could not invoke npm ps1 under its policy; used installed cmd entry without changing execution policy"
+  ],
+  "mandatoryRemaining":"Prove overlapping PostgreSQL transactions with two independently authenticated native sessions; native authentication remains unavailable without new access evidence",
+  "finalTestsBuild":"Not repeated: final full gates remain conditional on PostgreSQL concurrency PASS; existing 202/202 and same-code build PASS retained",
+  "secretsExported":false,
+  "restrictions":{"commit":false,"push":false,"deploy":false,"productionAccess":false,"T14toT17Work":false,"migrationReplay":false}
+}

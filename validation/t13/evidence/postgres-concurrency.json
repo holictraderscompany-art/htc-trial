@@ -1,0 +1,436 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "status": "PASS",
+  "sessions": {
+    "A": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Session pooler",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)",
+      "localClientPid": 10344,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 8,
+        "backend_pid": 425911,
+        "backend_ssl": false,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-15T01:28:10.480Z"
+    },
+    "B": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Session pooler",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: none)",
+      "localClientPid": 1436,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 8,
+        "backend_pid": 425976,
+        "backend_ssl": false,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-15T01:31:14.183Z"
+    }
+  },
+  "cases": [
+    {
+      "name": "release_first_stale_edit_rejected",
+      "status": "PASS",
+      "fixtureId": "645d90e2-b44e-42fd-82b2-d40ee0465c92",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "id": "645d90e2-b44e-42fd-82b2-d40ee0465c92",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:34:21.722386+00:00",
+        "released_at": "2026-10-15T01:34:21.722386+00:00"
+      },
+      "waiterResult": {
+        "outcome": "not_draft"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "name": "save_first_release_waits",
+      "status": "PASS",
+      "fixtureId": "64dce12f-5223-4c52-b257-dff79e9188d2",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "content": {
+          "id": "64dce12f-5223-4c52-b257-dff79e9188d2",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+          "state": "DRAFT",
+          "title": "Edited",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:34:31.622247+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "waiterResult": {
+        "id": "64dce12f-5223-4c52-b257-dff79e9188d2",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+        "state": "RELEASED",
+        "title": "Edited",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:34:33.35974+00:00",
+        "released_at": "2026-10-15T01:34:33.35974+00:00"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+        "state": "RELEASED",
+        "title": "Edited",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "name": "release_rollback_allows_draft_save",
+      "status": "PASS",
+      "fixtureId": "97b3c5ca-9fc3-4cf9-b1bc-2cee447023cc",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "id": "97b3c5ca-9fc3-4cf9-b1bc-2cee447023cc",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:34:43.715305+00:00",
+        "released_at": "2026-10-15T01:34:43.715305+00:00"
+      },
+      "waiterResult": {
+        "content": {
+          "id": "97b3c5ca-9fc3-4cf9-b1bc-2cee447023cc",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+          "state": "DRAFT",
+          "title": "Edited",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:34:47.173221+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+        "state": "DRAFT",
+        "title": "Edited",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "name": "save_rollback_release_preserves_original",
+      "status": "PASS",
+      "fixtureId": "4bbe28ae-5a2d-42f1-95e4-2b763abf5d36",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "content": {
+          "id": "4bbe28ae-5a2d-42f1-95e4-2b763abf5d36",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+          "state": "DRAFT",
+          "title": "Edited",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:35:01.611395+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "waiterResult": {
+        "id": "4bbe28ae-5a2d-42f1-95e4-2b763abf5d36",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:35:02.87085+00:00",
+        "released_at": "2026-10-15T01:35:02.87085+00:00"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "name": "two_draft_saves_serialize_last_writer_wins",
+      "status": "PASS",
+      "fixtureId": "597c249b-1332-4b05-88f3-c12493f4e47f",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "content": {
+          "id": "597c249b-1332-4b05-88f3-c12493f4e47f",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+          "state": "DRAFT",
+          "title": "Edited",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:35:11.902661+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "waiterResult": {
+        "content": {
+          "id": "597c249b-1332-4b05-88f3-c12493f4e47f",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Other",
+          "state": "DRAFT",
+          "title": "Other",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:35:17.12631+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Other",
+        "state": "DRAFT",
+        "title": "Other",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "name": "first_draft_save_rollback_does_not_partially_write",
+      "status": "PASS",
+      "fixtureId": "406cc9dc-af47-45d1-ac8d-3ec0d74d2549",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "content": {
+          "id": "406cc9dc-af47-45d1-ac8d-3ec0d74d2549",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Edited",
+          "state": "DRAFT",
+          "title": "Edited",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:35:25.118779+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "waiterResult": {
+        "content": {
+          "id": "406cc9dc-af47-45d1-ac8d-3ec0d74d2549",
+          "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Other",
+          "state": "DRAFT",
+          "title": "Other",
+          "category": "INFORMATION",
+          "created_at": "2026-10-15T01:34:20.564213+00:00",
+          "updated_at": "2026-10-15T01:35:26.047518+00:00",
+          "released_at": null
+        },
+        "outcome": "saved"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Other",
+        "state": "DRAFT",
+        "title": "Other",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "name": "withdrawal_first_edit_rejected",
+      "status": "PASS",
+      "fixtureId": "d9255c11-57bc-4bea-a352-db27f59f3ec1",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "id": "d9255c11-57bc-4bea-a352-db27f59f3ec1",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "WITHDRAWN",
+        "title": "Before",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:35:36.168984+00:00",
+        "released_at": "2026-10-15T01:34:20.564213+00:00"
+      },
+      "waiterResult": {
+        "outcome": "not_draft"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "WITHDRAWN",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "name": "withdrawal_rollback_keeps_released_readonly",
+      "status": "PASS",
+      "fixtureId": "1e20046a-6a3a-41d3-b3d2-f440f3533d31",
+      "overlapAndBlocking": {
+        "blockers": [
+          425911
+        ],
+        "holder_pid": 425911,
+        "wait_event": "transactionid",
+        "waiter_pid": 425976,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_in_transaction": true,
+        "waiter_in_transaction": true
+      },
+      "holderResult": {
+        "id": "1e20046a-6a3a-41d3-b3d2-f440f3533d31",
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "WITHDRAWN",
+        "title": "Before",
+        "category": "INFORMATION",
+        "created_at": "2026-10-15T01:34:20.564213+00:00",
+        "updated_at": "2026-10-15T01:35:47.753218+00:00",
+        "released_at": "2026-10-15T01:34:20.564213+00:00"
+      },
+      "waiterResult": {
+        "outcome": "not_draft"
+      },
+      "final": {
+        "body": "T13 DB2 isolated 9af2c80e-90c4-427b-809d-15171ea7b100 Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    }
+  ],
+  "lastWriterWins": "Two valid DRAFT saves serialize but intentionally have no optimistic version contract",
+  "withdrawalScope": "Withdrawal is tested from RELEASED only; no DRAFT-to-WITHDRAWN transition is introduced",
+  "baseline": {
+    "content_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "history_hash": "0ca856b7132ee5ff8214b373780c2121",
+    "profile_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "content_count": 0
+  },
+  "cleanup": {
+    "remaining_fixture_rows": 0
+  },
+  "after": {
+    "content_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "history_hash": "0ca856b7132ee5ff8214b373780c2121",
+    "profile_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "content_count": 0
+  },
+  "foundationAndNonfixtureDataUnchanged": true
+}

@@ -25,12 +25,14 @@ export function reply(status, data, allow) {
   return Response.json(body, { status, headers });
 }
 
-function configuration(env) {
-  if (env.SUPABASE_URL !== projectUrl ||
+export function supabaseConfiguration(env) {
+  const expected = env.HTC_SUPABASE_TARGET === 'test'
+    ? 'https://uzhkzhmncxjplrdtdzgd.supabase.co' : projectUrl;
+  if ((env.HTC_SUPABASE_TARGET !== undefined && env.HTC_SUPABASE_TARGET !== 'test') || env.SUPABASE_URL !== expected ||
       !/^sb_publishable_[A-Za-z0-9_-]+$/.test(env.SUPABASE_PUBLISHABLE_KEY ?? '')) {
     throw new ApiError(500);
   }
-  return { url: projectUrl, key: env.SUPABASE_PUBLISHABLE_KEY };
+  return { url: expected, key: env.SUPABASE_PUBLISHABLE_KEY };
 }
 
 function bearer(request) {
@@ -74,7 +76,7 @@ async function validateProbe(request) {
 
 // Shared server transport: omit Authorization for the approved anonymous read path.
 export function supabaseTransport(env, fetchImpl, token) {
-  const config = configuration(env);
+  const config = supabaseConfiguration(env);
   return async function upstream(path, options = {}, auth = false) {
     const response = await fetchImpl(`${config.url}${path}`, {
       ...options,

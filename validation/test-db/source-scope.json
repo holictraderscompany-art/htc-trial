@@ -1,0 +1,26 @@
+{
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "mode": "READ_ONLY_HISTORY_ARCHIVE_NOT_A_CLI_DEPLOYMENT_WORKDIR",
+  "included_source_versions": [
+    "20261012061832",
+    "20261012062050",
+    "20261012062052",
+    "20261012062053",
+    "20261012062054",
+    "20261014232339"
+  ],
+  "excluded_historical_sources": [
+    {
+      "version": "20261012062323",
+      "name": "founder_operation_workspaces",
+      "source_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a",
+      "reason": "Previously applied T14-T16 operations SQL; preserved unchanged in authoritative worktree, excluded from T13 candidate"
+    },
+    {
+      "version": "20261012062809",
+      "name": "founder_asset_delete_bridge",
+      "source_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f",
+      "reason": "Previously applied T14-T16 operations SQL; preserved unchanged in authoritative worktree, excluded from T13 candidate"
+    }
+  ]
+}

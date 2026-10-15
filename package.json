@@ -7,9 +7,13 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1",
-    "test": "node --test tests/api-foundation.test.js tests/content-release.test.js tests/media-assets.test.js tests/content-assets.test.js tests/content-media-foundation.test.js tests/content-discovery.test.js tests/public-experience.test.js tests/public-release-validation.test.js tests/founder-access.test.js"
+    "local:sqlite": "node tests/founder-content.fixture.mjs --sqlite",
+    "test:local:sqlite": "node --test --test-concurrency=1 tests/local-sqlite.test.js",
+    "test": "node --test --test-concurrency=1 tests/api-foundation.test.js tests/content-release.test.js tests/media-assets.test.js tests/content-assets.test.js tests/content-media-foundation.test.js tests/content-discovery.test.js tests/public-experience.test.js tests/public-release-validation.test.js tests/founder-access.test.js tests/content-draft-only.test.js tests/founder-content.test.js tests/t13-target.test.js"
   },
-  "engines": { "node": ">=20.9.0" },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "dependencies": {
     "next": "16.3.8",
     "react": "19.3.0",

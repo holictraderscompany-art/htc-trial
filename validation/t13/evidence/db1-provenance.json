@@ -1,0 +1,31 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "approvedExportSHA256": "c5d358d852df38a0663b1a33423086ad4b8d93dbf1ada6ea54b90138cc220802",
+  "combinedSHA256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+  "sources": [
+    {
+      "file": "20260925_core_data_foundation.sql",
+      "bytes": 576,
+      "sha256": "e778de2bac2850925d15356761dd49d3a3d385210781966dd3f8f96360b7b1c8",
+      "byteIdentical": true
+    },
+    {
+      "file": "20261005_auth_role_foundation.sql",
+      "bytes": 3452,
+      "sha256": "ca7530c10db620bd1111b96ec6d0bd951711424a60454ec2311282cf8ef3661a",
+      "byteIdentical": true
+    },
+    {
+      "file": "20261008_content_release.sql",
+      "bytes": 5851,
+      "sha256": "c4f98313e410b40a793d5b726aed9bfa42a9b72b5f7109cd87b187582808dfb9",
+      "byteIdentical": true
+    },
+    {
+      "file": "20261011090000_trial_content_draft_only.sql",
+      "bytes": 3060,
+      "sha256": "3d8e94c8e7d910663b10c3d63293f2a232e88eee25794af4ced4089d46c43a88",
+      "byteIdentical": true
+    }
+  ]
+}

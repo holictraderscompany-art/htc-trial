@@ -1,0 +1,368 @@
+{
+  "date": "2026-10-15",
+  "scope": "T13 ONLY",
+  "verdict": "READY FOR FOUNDER COMMIT APPROVAL",
+  "branch": "codex/t13-precommit-candidate",
+  "base_head": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "authoritative_validated_head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+  "package_snapshot": {
+    "validated_head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+    "validated_package_sha256": "eb6ea0ea57d91b89056e2710535791ccfa80fd7c959df3bdd9a889d6a0ba0538",
+    "candidate_base": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "candidate_package_sha256": "dbadf6561f182fc0e0c24c43490d87af3be577c75ec76e543c8efdb3826f7683",
+    "dependency_versions_unchanged": true,
+    "full_snapshot_tests": 202,
+    "candidate_application_tests": 196,
+    "explanation": "Remove seven media/config suite cases; retain its TEST configuration boundary as one isolated T13 target test. All original Foundation/Public/T12/T13 suites remain registered."
+  },
+  "file_count_including_manifest": 48,
+  "self_hash_rule": "This manifest lists every other file; its own SHA-256 is recorded in external T13-CANDIDATE-FINAL-CHECKPOINT-20261015.json to avoid recursive hashing.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "06efb31acfd0e22476ea186853ff50d9f1a086e06cde46bdc63f3d353240f469",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "4f387164e8b0f2c9a431d40df6efc063e7b0d94ab198e13447a1bd6b468fd064"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a298a5cad653422c2fbf00fa0ee90f9fe2fb28e2ae8e857c4dfb7d1c27da9118",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "0543a6952961b6d6710ba085e807690e6054ff5ce0db7a07e8e6bc1630655b22"
+    },
+    {
+      "path": "docs/founder-content-workspace.md",
+      "sha256": "d1db99e8ece986e7abed38d4217ab4a33559236f5806203b6a858f43f529f120",
+      "classification": "synchronized T13 documentation",
+      "validated_source_sha256": "18a8236f8dc30ffdd51fdb4c1a69f53911f1c6bf77335e5f0d4a41f30c601cc1"
+    },
+    {
+      "path": "docs/group3-cloud-continuation.md",
+      "sha256": "36aafa0c8df734eed9c852e901d9f38fbf180c51ffc0b28beff919a6c5766584",
+      "classification": "synchronized T13 documentation",
+      "validated_source_sha256": "7c0d44f27978c362fb26efaac6b0c6c4bda293e02f8acb78ec028133b2ac0197"
+    },
+    {
+      "path": "docs/local-sqlite-mode.md",
+      "sha256": "d3ede78a4ead3befdfce1602bd9d5f75dad3a07d049dc35ced24696be83b0135",
+      "classification": "synchronized T13 documentation",
+      "validated_source_sha256": "05f597365d4ba4d4b9e3a4982f4624e41653aa05a3b2d079a6ee588b3b4f612c"
+    },
+    {
+      "path": "docs/t13-commit-manifest.md",
+      "sha256": "69fea7c98a357d4f8bb10da2fc7fdd1215a36efa8f669afb3caa1ca9c12bf9f0",
+      "classification": "synchronized T13 documentation"
+    },
+    {
+      "path": "package.json",
+      "sha256": "dbadf6561f182fc0e0c24c43490d87af3be577c75ec76e543c8efdb3826f7683",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "eb6ea0ea57d91b89056e2710535791ccfa80fd7c959df3bdd9a889d6a0ba0538"
+    },
+    {
+      "path": "src/app/api/founder/content/route.js",
+      "sha256": "08ac98f58a1b97700abd2075fb30beb5e62bb1d6fbef4244809938a0466dc139",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "08ac98f58a1b97700abd2075fb30beb5e62bb1d6fbef4244809938a0466dc139"
+    },
+    {
+      "path": "src/app/founder/content/page.js",
+      "sha256": "dfe648ca9717bd795460c6c1094170b7585d86e66b9edd82130441a03b363319",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "dfe648ca9717bd795460c6c1094170b7585d86e66b9edd82130441a03b363319"
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "4f59bb0b541f28e415ff27e5e27fee09cfd813dd368f8272c10c5bf535b2490a",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "4f59bb0b541f28e415ff27e5e27fee09cfd813dd368f8272c10c5bf535b2490a"
+    },
+    {
+      "path": "src/components/founder-content-workspace.js",
+      "sha256": "84926519a7c767618077baf25dcca9d581e576321339b6e1501def854acfd21a",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "84926519a7c767618077baf25dcca9d581e576321339b6e1501def854acfd21a"
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "sha256": "ce87a91155697609156b69f1a9b707763e99f9a18e9ee31a6e9795441c0def5c",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "fffa2fa1afa46a3c9d8ffef17b6e710bc1ac67960232d202ea79d1b29b251ee8"
+    },
+    {
+      "path": "src/server/api-foundation.js",
+      "sha256": "e6908bc7bfd426dda57267636b2fcdf96a00a933eebc78208ee49629851493e3",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "e6908bc7bfd426dda57267636b2fcdf96a00a933eebc78208ee49629851493e3"
+    },
+    {
+      "path": "src/server/content-release.js",
+      "sha256": "0717a1f4b211b04703efed362d5369ed0121c3ecece6c19ed2e31120bad7da2c",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "0717a1f4b211b04703efed362d5369ed0121c3ecece6c19ed2e31120bad7da2c"
+    },
+    {
+      "path": "src/server/founder-content.js",
+      "sha256": "e995666899642328f90a66fc5b278c5fef23ceade7abdc6518c5ae6107a70c7c",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "e995666899642328f90a66fc5b278c5fef23ceade7abdc6518c5ae6107a70c7c"
+    },
+    {
+      "path": "src/server/trial-session.js",
+      "sha256": "b40b7f3d475e31f2778e494712b19f72c99633c92f4c3847bb6e0ebb440684f5",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "b40b7f3d475e31f2778e494712b19f72c99633c92f4c3847bb6e0ebb440684f5"
+    },
+    {
+      "path": "supabase/migrations/20261011090000_trial_content_draft_only.sql",
+      "sha256": "278be9ff7ef59dcbad6e6a5a4e25c08c7f62d9dd1aaee478f74ddee0eeaba910",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "278be9ff7ef59dcbad6e6a5a4e25c08c7f62d9dd1aaee478f74ddee0eeaba910"
+    },
+    {
+      "path": "supabase/migrations/20261011100000_founder_content_list.sql",
+      "sha256": "76528ef9d4c441e80d1a6db4bbc3874cbe295944a617027f098eb27051607a84",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "76528ef9d4c441e80d1a6db4bbc3874cbe295944a617027f098eb27051607a84"
+    },
+    {
+      "path": "tests/content-draft-only.spec",
+      "sha256": "a30e61835a168c01628ebc14aa8eaa5cc09f0f0e271efa81fa49ab4953cdee16",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "a30e61835a168c01628ebc14aa8eaa5cc09f0f0e271efa81fa49ab4953cdee16"
+    },
+    {
+      "path": "tests/content-draft-only.sql",
+      "sha256": "2aeb84dd09f07397547c6d2bd3f9d6c00e13769cf0b7e54e9ca32c54f611d2ff",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "2aeb84dd09f07397547c6d2bd3f9d6c00e13769cf0b7e54e9ca32c54f611d2ff"
+    },
+    {
+      "path": "tests/content-draft-only.test.js",
+      "sha256": "3c32b7280bd81954331d14a9dcc2d0022680899d3c3be60ca646afef835e4bf7",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "3c32b7280bd81954331d14a9dcc2d0022680899d3c3be60ca646afef835e4bf7"
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "sha256": "68154d799b71c4cc2b8d0af615bc7885ca08f4bb4f50968691aac85f5aa4fea9",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "f49ccde3a02b370190a4a2341ce858cb94b6ac7ac2a28b98b7966869e38674cf"
+    },
+    {
+      "path": "tests/founder-content.fixture.mjs",
+      "sha256": "51bbb5c5331ebf0798ba3770bad2b179a0b6c6d6d3f89fdd05fec7011b0380d0",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "1658ee55efd771bd18b300a86a6f5c7c1f51d6f71871808296e62e9c58bf62e1"
+    },
+    {
+      "path": "tests/founder-content.sql",
+      "sha256": "eb2fccbdcdedf7fd2b63a17a2b52247c15ce9688e95aeeaa6835c197b1311c0d",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "eb2fccbdcdedf7fd2b63a17a2b52247c15ce9688e95aeeaa6835c197b1311c0d"
+    },
+    {
+      "path": "tests/founder-content.test.js",
+      "sha256": "3ef82d4d022a36aee5ff6884231490ea66e23cdd04ac272274a0bea8e0b16477",
+      "classification": "byte-identical validated T13 source",
+      "validated_source_sha256": "3ef82d4d022a36aee5ff6884231490ea66e23cdd04ac272274a0bea8e0b16477"
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "sha256": "46192c3b2199070017eba8f46d1a3c4b053fd5ecc81c03fc77f451443c99addc",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "de5cc66f427795649e67a09e994a2d5932ac9bf3ffec4d3402f36eb3c66354f8"
+    },
+    {
+      "path": "tests/local-sqlite.test.js",
+      "sha256": "b969ccfba11461ac08d656860cdb8ed566767d0eb1dd1ec526cf557f19dcae33",
+      "classification": "scoped shared/test/integrity hunk",
+      "validated_source_sha256": "dd5b8bc9177f17a38c94c490bfbce9ee2a5555c2ad5bf7f8291e28ea4a56cff0"
+    },
+    {
+      "path": "tests/t13-target.test.js",
+      "sha256": "54e5b92921e37153438e154ced71e0161cb531299c395f9d2c4f0d66fcb8db40",
+      "classification": "scoped shared/test/integrity hunk"
+    },
+    {
+      "path": "validation/t13/evidence/db1-provenance.json",
+      "sha256": "d5d9a76e49b21e5148b53eeb28892f7939718072262a452806894ef8f8505eec",
+      "classification": "immutable curated prior validation proof"
+    },
+    {
+      "path": "validation/t13/evidence/live-oauth.json",
+      "sha256": "2d5b9b37ce1a7e4a84aed46bed7ddeb1f1359b590030df422fbffc9c81e0871e",
+      "classification": "immutable curated prior validation proof"
+    },
+    {
+      "path": "validation/t13/evidence/original-final-acceptance.json",
+      "sha256": "22249db30f67494997ffc57418959906d9dd334b50cf1e09c7ab54eee08509ed",
+      "classification": "immutable curated prior validation proof"
+    },
+    {
+      "path": "validation/t13/evidence/postgres-concurrency.json",
+      "sha256": "74ca0b6a4820cf74944f53e2c34d78e70bb1f22892c1e9617afc04e6e5dff6fc",
+      "classification": "immutable curated prior validation proof"
+    },
+    {
+      "path": "validation/t13/preservation.json",
+      "sha256": "d8c7da2d2ec7d7c042631f906990a0f332b790b31e8c1ba4ae6914d0fd591864",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/t13/reconciliation-results.json",
+      "sha256": "4c71cdee5b002bab9a2157096bad52a3417e07098cb695e2541d3ac291a135d7",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/t13/source-equivalence.json",
+      "sha256": "dfcc7cd543a7f2bf5b61fe2857c5474fd172c9d9ce8487d6d6d5adc4b515abb3",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/t13/verify-candidate.mjs",
+      "sha256": "4648986411367eafcf53e3efe645eac161e4134d58137399fdd200a491e042ac",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/test-db/README.md",
+      "sha256": "be15c3bcd3cb32ac82c476f776a6d10d8243fd005a44f72e37bb0f103a569f6b",
+      "classification": "read-only reconciliation metadata or verifier",
+      "validated_source_sha256": "a83df3732475fec6401b376c634540b7e3bfba12746d968e7fa57cb7eac4c4f5"
+    },
+    {
+      "path": "validation/test-db/history.json",
+      "sha256": "1ce1f4d14d7b1587c5c2b74335e208afe111cb12c2416d4d634cd69e6430dbec",
+      "classification": "read-only reconciliation metadata or verifier",
+      "validated_source_sha256": "1ce1f4d14d7b1587c5c2b74335e208afe111cb12c2416d4d634cd69e6430dbec"
+    },
+    {
+      "path": "validation/test-db/remote-history-20261015.json",
+      "sha256": "f2b009e8c1c59474774df517dafe1e5bafbc7cf9ccc73bac61162d9584ad6387",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/test-db/source-scope.json",
+      "sha256": "70bf14483535d83a9c5642b77ed365ac3b8c1eee83d65c202280e9e169bbab9a",
+      "classification": "read-only reconciliation metadata or verifier"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261012061832_htc_group3_core_auth_content_draft.sql",
+      "sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261012062050_trial_assets.sql",
+      "sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261012062052_trial_content_assets.sql",
+      "sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261012062053_public_content_discovery.sql",
+      "sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261012062054_founder_content_list.sql",
+      "sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+    },
+    {
+      "path": "validation/test-db/supabase/migrations/20261014232339_t13_approved_default_acl_hardening.sql",
+      "sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7",
+      "classification": "exact applied TEST SQL source archive, NOT FOR EXECUTION",
+      "validated_source_sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+    },
+    {
+      "path": "validation/test-db/verify-history.mjs",
+      "sha256": "452dee43e300d7a9080ec87ee274cf9feb05da1fb5edfef43f5a6bd880004630",
+      "classification": "read-only reconciliation metadata or verifier",
+      "validated_source_sha256": "b70ace88f1f2b980a35350d4858c4bf687ac792d8da619024eef35e5d2f121be"
+    }
+  ],
+  "excluded_hunks": [
+    {
+      "file": "src/components/founder-views.js",
+      "excluded": "Three Founder navigation links: /founder/assets, /founder/publishing, /founder/operations",
+      "retained": "Validated T13 Content workspace link and unchanged T12/public/logout boundary"
+    },
+    {
+      "file": "tests/founder-access.test.js",
+      "excluded": "Three corresponding T14-T16 destinations in the exact navigation assertion",
+      "retained": "All access-denial checks; exact T13-only destination list"
+    },
+    {
+      "file": "package.json",
+      "excluded": "tests/founder-media.test.js registration (7 media/config cases)",
+      "retained": "All Foundation/Public/T12/T13 test registrations; one isolated TEST-target config test extracted into tests/t13-target.test.js"
+    },
+    {
+      "file": "tests/local-sqlite.test.js",
+      "excluded": "founder-operations import, operationFixture helper and five subsequent T14-T16 tests",
+      "retained": "First 12 existing Foundation/T13 regression tests unchanged"
+    },
+    {
+      "file": "tests/local-sqlite-adapter.js",
+      "excluded": "checked operation transition branch, DRAFT asset-operation wrapper and RPC routes manage_trial_content_asset_draft, transition_trial_content_checked, read_trial_assets_for_founder, founder_operation_counts, delete_trial_asset_for_founder",
+      "retained": "T13 transport, auth fixtures, transaction semantics, DRAFT guard and existing Foundation T06/T07 regression fixtures"
+    },
+    {
+      "file": "tests/founder-content.fixture.mjs",
+      "excluded": "T16 unavailable/empty read-model controls and unavailable flag",
+      "retained": "Shared T13 UI launcher, mode header, synthetic session, transition and ambiguous-save controls"
+    },
+    {
+      "file": "validation/test-db",
+      "excluded": "20261012062323_founder_operation_workspaces.sql, 20261012062809_founder_asset_delete_bridge.sql, CLI config/link and operation validation suites",
+      "retained": "All 8 actual history records; 6 exact SQL bodies, explicit exclusion hashes and read-only verifier"
+    },
+    {
+      "file": "docs",
+      "excluded": "founder-operation-workspaces.md; full Group 3 implementation task documentation and historical contradictory pending statements",
+      "retained": "Current T13-only docs and references to preserved approved authority; no changes to original specification documents"
+    }
+  ],
+  "excluded_whole_files": [
+    "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+    "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+    "docs/founder-operation-workspaces.md",
+    "docs/sql/db1-managed-review.sql",
+    "docs/sql/migration-history-alignment.sql",
+    "src/app/api/founder/assets/route.js",
+    "src/app/api/founder/assets/upload/route.js",
+    "src/app/api/founder/operations/route.js",
+    "src/app/founder/assets/page.js",
+    "src/app/founder/operations/page.js",
+    "src/app/founder/publishing/page.js",
+    "src/components/founder-operation-workspace.js",
+    "src/server/founder-media.js",
+    "src/server/founder-operations.js",
+    "supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+    "supabase/migrations/20261012062809_founder_asset_delete_bridge.sql",
+    "tests/founder-media.test.js",
+    "tests/founder-operations.sql",
+    "validation/test-db/evidence-20261012.json",
+    "validation/test-db/supabase/config.toml",
+    "validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+    "validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql"
+  ],
+  "excluded_generated_or_sensitive": [
+    ".env and credentials",
+    "node_modules dependency junction",
+    ".next/build/coverage outputs",
+    "browser profiles and .playwright-cli",
+    "SQLite database and WAL/SHM files",
+    "raw logs/screenshots and temporary test resources",
+    "external handoff ZIP files"
+  ],
+  "preservation": "Original main and Group 3 worktrees retained; see preservation.json. No staging, commit, push, deployment, production access or migration execution."
+}

@@ -1,0 +1,163 @@
+{
+  "authoritative_head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+  "candidate_base": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "byte_identical_validated_files": [
+    {
+      "file": "src/server/founder-content.js",
+      "source_sha256": "e995666899642328f90a66fc5b278c5fef23ceade7abdc6518c5ae6107a70c7c",
+      "candidate_sha256": "e995666899642328f90a66fc5b278c5fef23ceade7abdc6518c5ae6107a70c7c",
+      "byte_identical": true
+    },
+    {
+      "file": "src/components/founder-content-workspace.js",
+      "source_sha256": "84926519a7c767618077baf25dcca9d581e576321339b6e1501def854acfd21a",
+      "candidate_sha256": "84926519a7c767618077baf25dcca9d581e576321339b6e1501def854acfd21a",
+      "byte_identical": true
+    },
+    {
+      "file": "src/app/founder/content/page.js",
+      "source_sha256": "dfe648ca9717bd795460c6c1094170b7585d86e66b9edd82130441a03b363319",
+      "candidate_sha256": "dfe648ca9717bd795460c6c1094170b7585d86e66b9edd82130441a03b363319",
+      "byte_identical": true
+    },
+    {
+      "file": "src/app/api/founder/content/route.js",
+      "source_sha256": "08ac98f58a1b97700abd2075fb30beb5e62bb1d6fbef4244809938a0466dc139",
+      "candidate_sha256": "08ac98f58a1b97700abd2075fb30beb5e62bb1d6fbef4244809938a0466dc139",
+      "byte_identical": true
+    },
+    {
+      "file": "src/server/content-release.js",
+      "source_sha256": "0717a1f4b211b04703efed362d5369ed0121c3ecece6c19ed2e31120bad7da2c",
+      "candidate_sha256": "0717a1f4b211b04703efed362d5369ed0121c3ecece6c19ed2e31120bad7da2c",
+      "byte_identical": true
+    },
+    {
+      "file": "src/server/api-foundation.js",
+      "source_sha256": "e6908bc7bfd426dda57267636b2fcdf96a00a933eebc78208ee49629851493e3",
+      "candidate_sha256": "e6908bc7bfd426dda57267636b2fcdf96a00a933eebc78208ee49629851493e3",
+      "byte_identical": true
+    },
+    {
+      "file": "src/server/trial-session.js",
+      "source_sha256": "b40b7f3d475e31f2778e494712b19f72c99633c92f4c3847bb6e0ebb440684f5",
+      "candidate_sha256": "b40b7f3d475e31f2778e494712b19f72c99633c92f4c3847bb6e0ebb440684f5",
+      "byte_identical": true
+    },
+    {
+      "file": "src/app/globals.css",
+      "source_sha256": "4f59bb0b541f28e415ff27e5e27fee09cfd813dd368f8272c10c5bf535b2490a",
+      "candidate_sha256": "4f59bb0b541f28e415ff27e5e27fee09cfd813dd368f8272c10c5bf535b2490a",
+      "byte_identical": true
+    },
+    {
+      "file": "supabase/migrations/20261011090000_trial_content_draft_only.sql",
+      "source_sha256": "278be9ff7ef59dcbad6e6a5a4e25c08c7f62d9dd1aaee478f74ddee0eeaba910",
+      "candidate_sha256": "278be9ff7ef59dcbad6e6a5a4e25c08c7f62d9dd1aaee478f74ddee0eeaba910",
+      "byte_identical": true
+    },
+    {
+      "file": "supabase/migrations/20261011100000_founder_content_list.sql",
+      "source_sha256": "76528ef9d4c441e80d1a6db4bbc3874cbe295944a617027f098eb27051607a84",
+      "candidate_sha256": "76528ef9d4c441e80d1a6db4bbc3874cbe295944a617027f098eb27051607a84",
+      "byte_identical": true
+    },
+    {
+      "file": "tests/content-draft-only.spec",
+      "source_sha256": "a30e61835a168c01628ebc14aa8eaa5cc09f0f0e271efa81fa49ab4953cdee16",
+      "candidate_sha256": "a30e61835a168c01628ebc14aa8eaa5cc09f0f0e271efa81fa49ab4953cdee16",
+      "byte_identical": true
+    },
+    {
+      "file": "tests/content-draft-only.sql",
+      "source_sha256": "2aeb84dd09f07397547c6d2bd3f9d6c00e13769cf0b7e54e9ca32c54f611d2ff",
+      "candidate_sha256": "2aeb84dd09f07397547c6d2bd3f9d6c00e13769cf0b7e54e9ca32c54f611d2ff",
+      "byte_identical": true
+    },
+    {
+      "file": "tests/content-draft-only.test.js",
+      "source_sha256": "3c32b7280bd81954331d14a9dcc2d0022680899d3c3be60ca646afef835e4bf7",
+      "candidate_sha256": "3c32b7280bd81954331d14a9dcc2d0022680899d3c3be60ca646afef835e4bf7",
+      "byte_identical": true
+    },
+    {
+      "file": "tests/founder-content.sql",
+      "source_sha256": "eb2fccbdcdedf7fd2b63a17a2b52247c15ce9688e95aeeaa6835c197b1311c0d",
+      "candidate_sha256": "eb2fccbdcdedf7fd2b63a17a2b52247c15ce9688e95aeeaa6835c197b1311c0d",
+      "byte_identical": true
+    },
+    {
+      "file": "tests/founder-content.test.js",
+      "source_sha256": "3ef82d4d022a36aee5ff6884231490ea66e23cdd04ac272274a0bea8e0b16477",
+      "candidate_sha256": "3ef82d4d022a36aee5ff6884231490ea66e23cdd04ac272274a0bea8e0b16477",
+      "byte_identical": true
+    }
+  ],
+  "excluded_hunks": [
+    {
+      "file": "src/components/founder-views.js",
+      "excluded": "Three Founder navigation links: /founder/assets, /founder/publishing, /founder/operations",
+      "retained": "Validated T13 Content workspace link and unchanged T12/public/logout boundary"
+    },
+    {
+      "file": "tests/founder-access.test.js",
+      "excluded": "Three corresponding T14-T16 destinations in the exact navigation assertion",
+      "retained": "All access-denial checks; exact T13-only destination list"
+    },
+    {
+      "file": "package.json",
+      "excluded": "tests/founder-media.test.js registration (7 media/config cases)",
+      "retained": "All Foundation/Public/T12/T13 test registrations; one isolated TEST-target config test extracted into tests/t13-target.test.js"
+    },
+    {
+      "file": "tests/local-sqlite.test.js",
+      "excluded": "founder-operations import, operationFixture helper and five subsequent T14-T16 tests",
+      "retained": "First 12 existing Foundation/T13 regression tests unchanged"
+    },
+    {
+      "file": "tests/local-sqlite-adapter.js",
+      "excluded": "checked operation transition branch, DRAFT asset-operation wrapper and RPC routes manage_trial_content_asset_draft, transition_trial_content_checked, read_trial_assets_for_founder, founder_operation_counts, delete_trial_asset_for_founder",
+      "retained": "T13 transport, auth fixtures, transaction semantics, DRAFT guard and existing Foundation T06/T07 regression fixtures"
+    },
+    {
+      "file": "tests/founder-content.fixture.mjs",
+      "excluded": "T16 unavailable/empty read-model controls and unavailable flag",
+      "retained": "Shared T13 UI launcher, mode header, synthetic session, transition and ambiguous-save controls"
+    },
+    {
+      "file": "validation/test-db",
+      "excluded": "20261012062323_founder_operation_workspaces.sql, 20261012062809_founder_asset_delete_bridge.sql, CLI config/link and operation validation suites",
+      "retained": "All 8 actual history records; 6 exact SQL bodies, explicit exclusion hashes and read-only verifier"
+    },
+    {
+      "file": "docs",
+      "excluded": "founder-operation-workspaces.md; full Group 3 implementation task documentation and historical contradictory pending statements",
+      "retained": "Current T13-only docs and references to preserved approved authority; no changes to original specification documents"
+    }
+  ],
+  "excluded_whole_files": [
+    "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+    "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+    "docs/founder-operation-workspaces.md",
+    "docs/sql/db1-managed-review.sql",
+    "docs/sql/migration-history-alignment.sql",
+    "src/app/api/founder/assets/route.js",
+    "src/app/api/founder/assets/upload/route.js",
+    "src/app/api/founder/operations/route.js",
+    "src/app/founder/assets/page.js",
+    "src/app/founder/operations/page.js",
+    "src/app/founder/publishing/page.js",
+    "src/components/founder-operation-workspace.js",
+    "src/server/founder-media.js",
+    "src/server/founder-operations.js",
+    "supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+    "supabase/migrations/20261012062809_founder_asset_delete_bridge.sql",
+    "tests/founder-media.test.js",
+    "tests/founder-operations.sql",
+    "validation/test-db/evidence-20261012.json",
+    "validation/test-db/supabase/config.toml",
+    "validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+    "validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql"
+  ],
+  "behavior_note": "Exact core T13 source and live TEST RPC sources retained; scope changes to navigation/fixture dispatch/test registration require fresh candidate tests and build. No claim that the complete candidate equals the broader Group 3 snapshot."
+}

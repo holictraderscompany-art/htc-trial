@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-15",
+  "scope": "T13-only pre-commit reconciliation",
+  "verdict": "READY FOR FOUNDER COMMIT APPROVAL",
+  "candidate_branch": "codex/t13-precommit-candidate",
+  "candidate_base": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "authoritative_validated_head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+  "package_snapshot": {
+    "validated_head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+    "validated_package_sha256": "eb6ea0ea57d91b89056e2710535791ccfa80fd7c959df3bdd9a889d6a0ba0538",
+    "candidate_base": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "candidate_package_sha256": "dbadf6561f182fc0e0c24c43490d87af3be577c75ec76e543c8efdb3826f7683",
+    "dependency_versions_unchanged": true,
+    "full_snapshot_tests": 202,
+    "candidate_application_tests": 196,
+    "explanation": "Remove seven media/config suite cases; retain its TEST configuration boundary as one isolated T13 target test. All original Foundation/Public/T12/T13 suites remain registered."
+  },
+  "application": {
+    "total": 196,
+    "pass": 196,
+    "fail": 0,
+    "skipped": 0,
+    "command": "pnpm test",
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  "sqlite": {
+    "total": 12,
+    "pass": 12,
+    "fail": 0,
+    "skipped": 0,
+    "label": "LOCAL PASS",
+    "command": "pnpm test:local:sqlite",
+    "exit_code": 0
+  },
+  "build": {
+    "command": "pnpm build",
+    "exit_code": 0,
+    "status": "PASS",
+    "route_scope": "Only /founder and /founder/content UI; no T14-T16 route copied"
+  },
+  "browser": {
+    "checks": 21,
+    "passed": 21,
+    "failed": 0,
+    "label": "LOCAL PASS",
+    "headed": true,
+    "results": [
+      {
+        "name": "T13-only Founder navigation",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Explicit SQLite fixture mode",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Accessible labels",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Required form fields",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Draft creation",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Draft editing",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Keyset pagination",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Released fixture read-only",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Withdrawn fixture read-only",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "No publishing action controls in T13 main",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Mobile no horizontal overflow",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Desktop no horizontal overflow",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "T13 API denies publishing action",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "user API denied",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "user workspace hidden",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "expired API denied",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "expired workspace hidden",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "anonymous API denied",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "anonymous workspace hidden",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Lifecycle conflict blocks editing",
+        "status": "LOCAL PASS"
+      },
+      {
+        "name": "Ambiguous save no automatic retry",
+        "status": "LOCAL PASS"
+      }
+    ],
+    "initial_probe": "30-second New draft pointer-action timeout; a targeted 5-second pointer action also timed out. Both snapshots showed visible enabled button. Logs retained, no product source changed.",
+    "recovery": "Brought owned page to foreground; confirmed visible/focused/complete; normal pointer click opened New draft form. Fresh fixture navigation/readiness plus 60-second action timeout then passed all 21 unchanged assertions. Root cause of initial timeout is not conclusively established; no performance SLA is claimed."
+  },
+  "live_evidence_reused": {
+    "DB1": "PASS - approved combined provenance and ACL hardening",
+    "DB2": "PASS - real PostgreSQL suites and 8 independent-session cases",
+    "OAuth": "LIVE PASS - actual TEST Google Founder and USER, session/access/logout; no new login performed"
+  },
+  "migration_reconciliation": {
+    "target": "uzhkzhmncxjplrdtdzgd",
+    "fresh_read_only_history_matches": "8/8",
+    "included_sql_hashes": "6/6",
+    "excluded_historical_sources": "2 exact T14-T16 versions/hashes preserved in original worktree",
+    "mutations": 0
+  },
+  "source_identity": {
+    "byte_identical_core_files": 15,
+    "protected_baseline_files_unchanged": 10,
+    "shared_scope_changes": "Explicitly recorded in source-equivalence.json; fresh regression/build/browser PASS"
+  },
+  "known_risks": [
+    "Valid concurrent DRAFT saves serialize last-writer-wins; no optimistic version contract.",
+    "Pagination is not a cross-page snapshot.",
+    "SQLite/browser results are LOCAL PASS, separate from retained live TEST evidence.",
+    "Initial browser input timeout retained; no unproven root-cause attribution or performance claim."
+  ],
+  "cleanup": {
+    "status": "Owned browser context closed successfully; owned SQLite fixture process stopped; port 3103 verified closed (ECONNREFUSED). Synthetic database retained outside Git.",
+    "new_owned_sqlite_file": "C:/Users/ASUS/AppData/Local/Temp/htc-sqlite-fixture-KJzA9L/fixture.sqlite",
+    "sqlite_retained_outside_git": true,
+    "old_owned_temp_resources_untouched": true,
+    "fixture_process_exit": "Shell reports exit 1 after intentional Ctrl+C; no application test failure is inferred."
+  },
+  "preservation": {
+    "original_main": "HEAD/status/30 dirty file hashes unchanged",
+    "original_validated_worktree": "HEAD/status/5 content-dirty file hashes unchanged; all 8 original migration hashes match",
+    "staged_files": 0,
+    "commits": 0,
+    "pushes": 0,
+    "deployments": 0,
+    "production_access": false,
+    "migration_execution": false,
+    "T14_to_T17_implementation": false
+  },
+  "raw_evidence": [
+    {
+      "file": "T13-CANDIDATE-TEST-20261015.log",
+      "sha256": "1281e782cc3b72694005184bf6ba076dd5d5ac2aeddb87de0fa927a860333127",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    },
+    {
+      "file": "T13-CANDIDATE-SQLITE-20261015.log",
+      "sha256": "e3f4bc918e17109ca3e3cef90cd9aefaa9f070ec4eb7d6c27df1328eac8492ea",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    },
+    {
+      "file": "T13-CANDIDATE-BUILD-20261015.log",
+      "sha256": "83722d4ce72280622db93ef1ab14933fa8c58ac3fda7bab956645a1cd54a7578",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    },
+    {
+      "file": "T13-CANDIDATE-BROWSER-20261015.log",
+      "sha256": "3deec6f7f3cfa515d007fa07c1a7e24c758ae380803d3336cd5fbecb2bd8ccfc",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    },
+    {
+      "file": "T13-CANDIDATE-BROWSER-INITIAL-TIMEOUT-20261015.log",
+      "sha256": "554d4698f198e8dac727e5c24e3cc6d330615d7400903d9ee74c4b5fe0c06f07",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    },
+    {
+      "file": "T13-CANDIDATE-UI-20261015.js",
+      "sha256": "e8d28d0b42a9ca0a7c12fa44483661fe6c2d32719a38089a4044a408bacf89eb",
+      "location": "External chat artifact directory; raw generated output not included in commit"
+    }
+  ]
+}

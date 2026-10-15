@@ -11,3 +11,11 @@ coverage/
 .playwright-cli/
 .agents/skills/playwright-cli/
 .claude/skills/playwright-cli/
+# Local validation artifacts never belong in a source commit.
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.log
+playwright-report/
+test-results/
