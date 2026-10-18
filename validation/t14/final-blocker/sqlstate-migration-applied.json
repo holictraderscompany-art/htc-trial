@@ -1,0 +1,124 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "MIGRATION PASS",
+  "version": "20261016084813",
+  "name": "t14_guard_rejection_sqlstate",
+  "query_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe",
+  "review_sha256": "c6bc5a6bd10c74be8678f4c0ae6c0731598dba2f776040c04df21e44661ea6a3",
+  "founder_approval": "T14 TEST ONLY; two rejection SQLSTATEs",
+  "execution_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true}"
+      }
+    ],
+    "isError": false
+  },
+  "postconditions": {
+    "assets": 0,
+    "bucket": {
+      "limit": 6000000,
+      "mimes": [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "video/mp4",
+        "audio/mpeg",
+        "application/pdf"
+      ],
+      "private": true
+    },
+    "history": [
+      {
+        "name": "htc_group3_core_auth_content_draft",
+        "version": "20261012061832",
+        "statement_md5": "2d4d5c110b59cd9e637f2e3a263067e5",
+        "statement_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+      },
+      {
+        "name": "trial_assets",
+        "version": "20261012062050",
+        "statement_md5": "05e7e6ea00afe67c6cfc5da4b4af15fa",
+        "statement_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+      },
+      {
+        "name": "trial_content_assets",
+        "version": "20261012062052",
+        "statement_md5": "58f333c2192004cb2329d456b830cd1f",
+        "statement_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+      },
+      {
+        "name": "public_content_discovery",
+        "version": "20261012062053",
+        "statement_md5": "7d5ecf59830c246032de6e9db95dcb17",
+        "statement_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+      },
+      {
+        "name": "founder_content_list",
+        "version": "20261012062054",
+        "statement_md5": "5d7a21d7e8664c180dce2a33aa69303e",
+        "statement_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+      },
+      {
+        "name": "founder_operation_workspaces",
+        "version": "20261012062323",
+        "statement_md5": "86d95e67df915ae6c282d8c354f09fa7",
+        "statement_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+      },
+      {
+        "name": "founder_asset_delete_bridge",
+        "version": "20261012062809",
+        "statement_md5": "af5d43334902d3e687e8d48f83ad6fc7",
+        "statement_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+      },
+      {
+        "name": "t13_approved_default_acl_hardening",
+        "version": "20261014232339",
+        "statement_md5": "0981b80bc1111962dbdf425ceff02af3",
+        "statement_sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+      },
+      {
+        "name": "t14_signed_direct_upload_policy",
+        "version": "20261015220202",
+        "statement_md5": "3df274f15b5051394b5aa17a1148076b",
+        "statement_sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb"
+      },
+      {
+        "name": "t14_guard_rejection_sqlstate",
+        "version": "20261016084813",
+        "statement_md5": "3ac85a58177d8e5634dc1eb9087cbd79",
+        "statement_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe"
+      }
+    ],
+    "objects": 0,
+    "asset_rls": true,
+    "guard_acl": "{postgres=X/postgres,service_role=X/postgres}",
+    "guard_owner": "postgres",
+    "storage_rls": true,
+    "anon_execute": false,
+    "user_execute": false,
+    "guard_trigger": [
+      {
+        "name": "guard_trial_asset_object",
+        "enabled": "O"
+      }
+    ],
+    "profile_roles": {
+      "USER": 1,
+      "FOUNDER": 1
+    },
+    "guard_body_md5": "bc179d40465c4269ef4b731dc275fbc7",
+    "guard_settings": [
+      "search_path=\"\""
+    ],
+    "service_execute": true,
+    "guard_definition_md5": "11420ee8d31b28780791285b6a0493f9",
+    "upload_predicate_md5": "743855b05523b214ce6880cfb4e3056f",
+    "guard_security_definer": true
+  },
+  "historical_9_unchanged": true,
+  "source_archive": "validation/test-db/supabase/migrations/20261016084813_t14_guard_rejection_sqlstate.sql",
+  "retry_count": 0
+}
+

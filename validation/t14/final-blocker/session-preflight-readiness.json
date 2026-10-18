@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-16T21:15:06.144Z",
+  "scope": "Read-only session-diagnostic readiness, not a real browser session test",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "anonymous_readiness": {
+    "status": 401,
+    "target": "uzhkzhmncxjplrdtdzgd",
+    "cookie_state": "missing",
+    "upstream_checked": false,
+    "authenticated": false,
+    "founder": null,
+    "set_cookie": false
+  },
+  "current_harness_status": 200,
+  "exact_harness_bytes": true,
+  "real_chrome_founder_session": "NOT VERIFIED; requires request from existing normal Chrome",
+  "fixture_created": false,
+  "expiry_probe_executed": false,
+  "auth_refresh_or_security_change": false
+}

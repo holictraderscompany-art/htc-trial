@@ -1,0 +1,282 @@
+{
+  "date_jst": "2026-10-18",
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LIVE PASS",
+  "fixture": "4752746e-96f0-487c-9e3b-08b0c78f49cd",
+  "browser_observations": "expiry-browser-observations.json (to be archived immutably in final-acceptance evidence)",
+  "capability_ttl_seconds": 7200,
+  "ttl_or_clock_modified": false,
+  "storage": {
+    "result": [
+      {
+        "app_version": "1.80.2",
+        "error_code": "",
+        "explicit_exp_claim": 0,
+        "explicit_token_expired": 0,
+        "internal_status": "",
+        "jwt_expired_class": 0,
+        "method": "POST",
+        "operation": "storage.object.sign_upload_url",
+        "status": "200",
+        "timestamp": "2026-10-18T00:25:36.145000",
+        "timestamp_check_failure": 0
+      },
+      {
+        "app_version": "1.80.2",
+        "error_code": "InvalidJWT",
+        "explicit_exp_claim": 1,
+        "explicit_token_expired": 0,
+        "internal_status": "400",
+        "jwt_expired_class": 0,
+        "method": "PUT",
+        "operation": "storage.object.upload_signed",
+        "status": "400",
+        "timestamp": "2026-10-18T02:25:42.617000",
+        "timestamp_check_failure": 1
+      }
+    ]
+  },
+  "cleanup": [
+    {
+      "jsonb_build_object": {
+        "at": "2026-10-18T02:33:36.643766+00:00",
+        "bucket": {
+          "public": false,
+          "file_size_limit": 6000000,
+          "allowed_mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "video/mp4",
+            "audio/mpeg",
+            "application/pdf"
+          ]
+        },
+        "content": 0,
+        "relations": 0,
+        "all_assets": 0,
+        "owned_fixture": 0,
+        "owned_objects": 0,
+        "migration_records": 10,
+        "all_trial_storage_objects": 0
+      }
+    }
+  ],
+  "authorization_security": {
+    "at": "2026-10-18T02:34:31.076942+00:00",
+    "rls": [
+      {
+        "table": "objects",
+        "schema": "storage",
+        "enabled": true,
+        "anon_truncate": false,
+        "authenticated_truncate": false
+      },
+      {
+        "table": "trial_content",
+        "schema": "public",
+        "enabled": true,
+        "anon_truncate": false,
+        "authenticated_truncate": false
+      },
+      {
+        "table": "trial_content_assets",
+        "schema": "public",
+        "enabled": true,
+        "anon_truncate": false,
+        "authenticated_truncate": false
+      },
+      {
+        "table": "trial_assets",
+        "schema": "public",
+        "enabled": true,
+        "anon_truncate": false,
+        "authenticated_truncate": false
+      },
+      {
+        "table": "user_profiles",
+        "schema": "public",
+        "enabled": true,
+        "anon_truncate": false,
+        "authenticated_truncate": false
+      }
+    ],
+    "history": [
+      {
+        "name": "htc_group3_core_auth_content_draft",
+        "version": "20261012061832",
+        "source_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+      },
+      {
+        "name": "trial_assets",
+        "version": "20261012062050",
+        "source_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+      },
+      {
+        "name": "trial_content_assets",
+        "version": "20261012062052",
+        "source_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+      },
+      {
+        "name": "public_content_discovery",
+        "version": "20261012062053",
+        "source_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+      },
+      {
+        "name": "founder_content_list",
+        "version": "20261012062054",
+        "source_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+      },
+      {
+        "name": "founder_operation_workspaces",
+        "version": "20261012062323",
+        "source_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+      },
+      {
+        "name": "founder_asset_delete_bridge",
+        "version": "20261012062809",
+        "source_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+      },
+      {
+        "name": "t13_approved_default_acl_hardening",
+        "version": "20261014232339",
+        "source_sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+      },
+      {
+        "name": "t14_signed_direct_upload_policy",
+        "version": "20261015220202",
+        "source_sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb"
+      },
+      {
+        "name": "t14_guard_rejection_sqlstate",
+        "version": "20261016084813",
+        "source_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe"
+      }
+    ],
+    "functions": [
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "name": "delete_trial_asset_for_founder",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "definition_md5": "efb5013ed1b683d59af8572e30dc0481",
+        "anonymous_execute": false,
+        "authenticated_execute": true
+      },
+      {
+        "acl": "{postgres=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+        "name": "is_founder",
+        "owner": "postgres",
+        "config": [
+          "search_path=public, pg_temp"
+        ],
+        "definer": true,
+        "definition_md5": "349da2176a4de0d9744a1ab3087a5ccf",
+        "anonymous_execute": false,
+        "authenticated_execute": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "name": "manage_trial_asset",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "definition_md5": "7ce3cf4ed27fe964c712fcb4b985aab9",
+        "anonymous_execute": false,
+        "authenticated_execute": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "name": "manage_trial_content_asset_draft",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "definition_md5": "f529b11e7398121fbb844b8268b807d8",
+        "anonymous_execute": false,
+        "authenticated_execute": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "name": "read_trial_assets_for_founder",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "definition_md5": "2133132a58e5d656acc04a6db5e81e97",
+        "anonymous_execute": false,
+        "authenticated_execute": true
+      }
+    ],
+    "storage_policies": [
+      {
+        "name": "trial_assets_delete",
+        "qual": "(trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text]))",
+        "check": null,
+        "roles": [
+          "authenticated"
+        ],
+        "command": "DELETE"
+      },
+      {
+        "name": "trial_assets_private_read",
+        "qual": "((trial_asset_storage_allowed(bucket_id, name, false) AND storage.allow_any_operation(ARRAY['object.get_authenticated'::text, 'object.get_authenticated_info'::text])) OR (trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text])))",
+        "check": null,
+        "roles": [
+          "authenticated"
+        ],
+        "command": "SELECT"
+      },
+      {
+        "name": "trial_assets_upload",
+        "qual": null,
+        "check": "(storage.allow_any_operation(ARRAY['object.upload'::text, 'object.sign_upload_url'::text]) AND trial_asset_upload_allowed(bucket_id, name))",
+        "roles": [
+          "authenticated"
+        ],
+        "command": "INSERT"
+      }
+    ]
+  },
+  "guard_functions": [
+    {
+      "proname": "guard_trial_asset_object",
+      "owner": "postgres",
+      "security_definer": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "acl": "{postgres=X/postgres,service_role=X/postgres}",
+      "definition_md5": "11420ee8d31b28780791285b6a0493f9",
+      "anon_execute": false,
+      "authenticated_execute": false
+    },
+    {
+      "proname": "trial_asset_upload_allowed",
+      "owner": "postgres",
+      "security_definer": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+      "definition_md5": "743855b05523b214ce6880cfb4e3056f",
+      "anon_execute": false,
+      "authenticated_execute": true
+    }
+  ],
+  "proof": "Real signed URL issuance200; signed PUT after more than7200seconds rejected400/InvalidJWT with explicit exp-claim timestamp failure. Not generic400, reservation rejection, fixture auth, or elapsed time alone.",
+  "limitations": [
+    "Underlying S3 is not directly inspected; approved application cleanup and independent database/Storage catalog absence verified",
+    "Browser module capability not exported/persisted; telemetry corroborated by actual backend log"
+  ],
+  "production_access": false,
+  "new_fixture_in_this_review": false,
+  "migration_execution_in_this_review": false
+}

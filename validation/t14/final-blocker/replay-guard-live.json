@@ -1,0 +1,97 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "replay_http": {
+    "result": [
+      {
+        "default_raise_exception_sqlstate": 0,
+        "error_code": "",
+        "method": "POST",
+        "operation": "storage.object.sign_upload_url",
+        "reservation_guard": 0,
+        "status": "200",
+        "timestamp": "2026-10-16T07:58:06.598000"
+      },
+      {
+        "default_raise_exception_sqlstate": 0,
+        "error_code": "",
+        "method": "GET",
+        "operation": "object.get_authenticated_info",
+        "reservation_guard": 0,
+        "status": "200",
+        "timestamp": "2026-10-16T07:58:07.989000"
+      },
+      {
+        "default_raise_exception_sqlstate": 0,
+        "error_code": "",
+        "method": "GET",
+        "operation": "storage.object.get_authenticated",
+        "reservation_guard": 0,
+        "status": "200",
+        "timestamp": "2026-10-16T07:58:08.047000"
+      },
+      {
+        "default_raise_exception_sqlstate": 1,
+        "error_code": "DatabaseError",
+        "method": "PUT",
+        "operation": "storage.object.upload_signed",
+        "reservation_guard": 0,
+        "status": "500",
+        "timestamp": "2026-10-16T07:58:08.439000"
+      }
+    ]
+  },
+  "guard_error": {
+    "result": [
+      {
+        "default_raise_exception_sqlstate": 1,
+        "error_code": "DatabaseError",
+        "immutable_guard": 0,
+        "mismatch_guard": 0,
+        "reservation_guard": 1,
+        "status": "500"
+      }
+    ]
+  },
+  "precheck": [
+    {
+      "jsonb_build_object": {
+        "history": 9,
+        "guard_acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "guard_md5": "097b5cf3a902dc85795688911a547eae",
+        "guard_owner": "postgres",
+        "owned_probe": [
+          {
+            "id": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+            "status": "READY",
+            "filename": "t14-cap-17a3c332-3919-422f-b5da-d49ac825ef6f.png",
+            "byte_size": 70,
+            "mime_type": "image/png"
+          }
+        ],
+        "guard_config": [
+          "search_path=\"\""
+        ],
+        "guard_trigger": [
+          {
+            "name": "guard_trial_asset_object",
+            "enabled": "O"
+          }
+        ],
+        "guard_security_definer": true
+      }
+    }
+  ],
+  "definition_md5": "c1d2b94e8a70ac41649f70f6a65ad7bd",
+  "body_md5": "097b5cf3a902dc85795688911a547eae",
+  "approval_required": true,
+  "applied": false,
+  "review_sql": "validation/t14/guard-sqlstate-correction-review.sql",
+  "remaining_runtime_checks": [
+    "Re-run only affected strict mismatch/replay/expiry assertions after approved correction",
+    "Actual wrong-size direct capability check",
+    "Two-hour signed-token expiry proof"
+  ],
+  "history": "Nine existing records preserved; additive migration only after approval",
+  "review_scope": "Only No active asset reservation and Object does not match reservation raise sites gain SQLSTATE42501. Immutable UPDATE branch is unchanged.",
+  "expected_storage_status": "AccessDenied/internal403, legacy HTTP400; corrected runtime still NOT VERIFIED"
+}

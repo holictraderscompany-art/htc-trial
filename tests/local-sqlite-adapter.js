@@ -72,30 +72,33 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
       save(row); return draftOnly ? { outcome: 'saved', content: row } : row;
     });
   }
-  function relate(p) {
+  function relate(p, draftOnly = false) {
     const keys = { attach: ['action','content_id','asset_id','role'], detach: ['action','content_id','asset_id'], list: ['action','content_id'] };
     if (!keys[p?.action] || Object.keys(p).length !== keys[p.action].length || keys[p.action].some(k => typeof p[k] !== 'string')) throw Error('Invalid relation');
     return transaction(() => {
       const row = read(p.content_id);
-      if (!row) return null;
+      if (!row) return draftOnly ? {outcome:'not_found'} : null;
+      if (draftOnly && row.state!=='DRAFT')return {outcome:'not_draft'};
       if (p.action === 'list') return { content_id: p.content_id, relations: db.prepare('SELECT * FROM relations WHERE content_id=? ORDER BY role,created_at,id').all(p.content_id) };
       const asset = db.prepare('SELECT * FROM assets WHERE id=?').get(p.asset_id);
-      if (!asset) return null;
+      if (!asset) return draftOnly ? {outcome:'not_found'} : null;
       let result;
       if (p.action === 'attach') {
         if (asset.status !== 'READY' || asset.object_matches !== 1 || (p.role === 'THUMBNAIL' && !asset.mime_type.startsWith('image/'))) {
+          if(draftOnly)return {outcome:'asset_not_ready'};
           throw Error('Fixture asset cannot attach');
         }
+        if(draftOnly && db.prepare('SELECT id FROM relations WHERE content_id=? AND (asset_id=? OR (role=? AND role IN (\'PRIMARY\',\'THUMBNAIL\')))').get(row.id,asset.id,p.role))return {outcome:'relation_conflict'};
         result = { id: randomUUID(), content_id: row.id, asset_id: asset.id, role: p.role, created_at: stamp() };
         db.prepare('INSERT INTO relations VALUES (?,?,?,?,?)').run(...Object.values(result));
       } else {
         result = db.prepare('SELECT * FROM relations WHERE content_id=? AND asset_id=?').get(row.id,asset.id);
-        if (!result) return null;
+        if (!result) return draftOnly?{outcome:'not_found'}:null;
         db.prepare('DELETE FROM relations WHERE id=?').run(result.id);
       }
       // Existing T07B contract: relation edits reset content to DRAFT, even if released.
       Object.assign(row, { state: 'DRAFT', released_at: null, updated_at: stamp() }); save(row);
-      return result;
+      return draftOnly ? {outcome:'saved',relation:result} : result;
     });
   }
   const released = id => db.prepare('SELECT data FROM content ORDER BY json_extract(data,\'$.created_at\') DESC,id').all()
@@ -128,6 +131,15 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content') result = manage(args.payload);
     else if (url.pathname === '/rest/v1/rpc/update_trial_content_draft') result = manage(args.payload, true);
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset') result = relate(args.payload);
+    else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset_draft') result = relate(args.payload,true);
+    else if (url.pathname === '/rest/v1/rpc/read_trial_assets_for_founder') result = {source:'LOCAL_SQLITE_FIXTURE',items:db.prepare('SELECT * FROM assets WHERE id>? AND (? IS NULL OR id=?) ORDER BY id LIMIT 51').all(args.after_id??'',args.asset_id,args.asset_id).map(a=>({...JSON.parse(a.data),id:a.id,status:a.status,mime_type:a.mime_type}))};
+    else if (url.pathname === '/rest/v1/rpc/delete_trial_asset_for_founder') result=transaction(()=>{
+      const id=args.payload?.id;
+      if(args.payload?.action!=='delete_asset')throw Error('Invalid delete');
+      if(!db.prepare('SELECT id FROM assets WHERE id=?').get(id))return {outcome:'not_found'};
+      if(db.prepare('SELECT id FROM relations WHERE asset_id=?').get(id))return {outcome:'linked_asset'};
+      db.prepare('DELETE FROM assets WHERE id=?').run(id);return {outcome:'saved',id,deleted:true};
+    });
     else throw Error('Unsupported local RPC/storage: no fallback');
     const mutation = ['create','update','release','withdraw','attach','detach','delete_asset'].includes(args.payload?.action) || url.pathname.endsWith('/update_trial_content_draft');
     if (failure === 'after-commit' && mutation) { failure = undefined; throw Error('Synthetic ambiguous response after commit'); }

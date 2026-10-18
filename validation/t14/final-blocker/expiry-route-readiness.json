@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-16T09:34:14.879Z",
+  "scope": "T14 test route only",
+  "cause": "One-underscore path fell through to Next.js not-found. Canonical two-underscore route already returned current exact harness200.",
+  "correction": "TEST-only GET alias303 to canonical path, preserving expiry-only query. No application/middleware/auth changes.",
+  "server": {
+    "runner": "validation/t14/start-live.mjs",
+    "unified_session": 12022,
+    "port": 3103,
+    "bind": "127.0.0.1",
+    "capability_check": true
+  },
+  "before": {
+    "alias_status": 404,
+    "canonical_status": 200
+  },
+  "after": {
+    "alias_status": 303,
+    "location": "/__t14-capability-check?mode=expiry-only",
+    "canonical_status": 200,
+    "exact_current_html": true,
+    "test_target_header": true,
+    "expiry_button_present": true,
+    "expiry_button_visible_and_enabled_local_script_check": true
+  },
+  "limits": {
+    "real_browser_render_not_claimed": true,
+    "start_clicked": false,
+    "probe_executed": false,
+    "fixture_created": false,
+    "supabase_request": false,
+    "commit": false,
+    "push": false,
+    "deploy": false
+  },
+  "observations_file_present": false,
+  "runner_sha256": "7e8944756c07e16f0f6d4934a7d682ba69cc3799f4e7691c561122173e9d1f54"
+}

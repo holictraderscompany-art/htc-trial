@@ -1,0 +1,71 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LIVE PASS: USER private binary denial with positive Founder control",
+  "fixture": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+  "before_control_database": [
+    {
+      "jsonb_build_object": {
+        "bucket": {
+          "public": false,
+          "file_size_limit": 6000000
+        },
+        "history": 9,
+        "relations": 0,
+        "owned_asset": [
+          {
+            "id": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+            "status": "READY",
+            "filename": "t14-cap-17a3c332-3919-422f-b5da-d49ac825ef6f.png",
+            "byte_size": 70,
+            "mime_type": "image/png",
+            "storage_path": "image/d66c3442-570a-461d-8a2a-19e3d2da5509/asset.png"
+          }
+        ],
+        "owned_object": [
+          {
+            "etag": "\"6f9588d827a8d8f67acc72e2a26632e3\"",
+            "name": "image/d66c3442-570a-461d-8a2a-19e3d2da5509/asset.png",
+            "size": "70",
+            "bucket_id": "trial-assets",
+            "mime_type": "image/png"
+          }
+        ],
+        "missing_probe_remaining": 0
+      }
+    }
+  ],
+  "user_storage_log": {
+    "result": [
+      {
+        "error_code": "NoSuchKey",
+        "error_status": "404",
+        "mentions_rls": 0,
+        "method": "GET",
+        "not_found_class": 1,
+        "operation": "object.get_authenticated_info",
+        "status": "400",
+        "timestamp": "2026-10-16T08:05:08.236000"
+      }
+    ]
+  },
+  "user": {
+    "at": "2026-10-16T08:05:07.149Z",
+    "actor_founder": false,
+    "upstream_status": 400,
+    "binary_forwarded": false
+  },
+  "founder": {
+    "at": "2026-10-16T08:10:29.080Z",
+    "actor_founder": true,
+    "upstream_status": 206,
+    "binary_forwarded": false
+  },
+  "request_equivalence": "Same running server, exact registered synthetic bucket/path, GET, Range bytes=0-0, TEST origin and existing Foundation session bridge. Only the actual authenticated browser session differs. No token read/export/copy.",
+  "cause": "Existing private object is hidden from USER under current RLS. Storage logs NoSuchKey/internal404 and legacy wire400. Not a malformed path/body inference.",
+  "primary_source": [
+    "https://github.com/supabase/storage/blob/v1.80.2/src/http/routes/object/getObject.ts#L59-L71",
+    "https://github.com/supabase/storage/blob/v1.80.2/src/internal/errors/storage-error.ts#L16-L20"
+  ],
+  "security_changes": false
+}
+

@@ -1,0 +1,53 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "trust": "Untrusted browser observations; corroborate HTTP/Storage and database before PASS",
+  "events": [
+    {
+      "received_at": "2026-10-18T00:25:34.732Z",
+      "at": "2026-10-18T00:25:34.707Z",
+      "test": "previous_expiry_fixture_absent",
+      "status": 404
+    },
+    {
+      "received_at": "2026-10-18T00:25:35.063Z",
+      "at": "2026-10-18T00:25:35.052Z",
+      "test": "expiry_only_real_founder",
+      "status": 200,
+      "live_source": true
+    },
+    {
+      "received_at": "2026-10-18T00:25:35.748Z",
+      "at": "2026-10-18T00:25:35.741Z",
+      "test": "owned_fixture",
+      "id": "4752746e-96f0-487c-9e3b-08b0c78f49cd",
+      "reservation_expires_at": "2026-10-18T00:35:35.847Z"
+    },
+    {
+      "received_at": "2026-10-18T00:25:35.768Z",
+      "at": "2026-10-18T00:25:35.742Z",
+      "test": "expiry_only_started",
+      "id": "4752746e-96f0-487c-9e3b-08b0c78f49cd"
+    },
+    {
+      "received_at": "2026-10-18T00:25:36.597Z",
+      "at": "2026-10-18T00:25:36.592Z",
+      "test": "cleanup_response",
+      "id": "4752746e-96f0-487c-9e3b-08b0c78f49cd",
+      "status": 200,
+      "confirmed": true
+    },
+    {
+      "received_at": "2026-10-18T00:25:36.607Z",
+      "at": "2026-10-18T00:25:36.593Z",
+      "test": "timed_fixture_cleaned",
+      "id": "4752746e-96f0-487c-9e3b-08b0c78f49cd"
+    },
+    {
+      "received_at": "2026-10-18T02:25:42.317Z",
+      "at": "2026-10-18T02:25:42.184Z",
+      "test": "expired_signed_capability_denied",
+      "status": 400,
+      "explicit_token_expiry_reported": true
+    }
+  ]
+}

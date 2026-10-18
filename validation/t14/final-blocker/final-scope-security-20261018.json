@@ -1,0 +1,74 @@
+{
+  "candidate_files": 119,
+  "secret_hits": [],
+  "non_fixture_email_files": [],
+  "out_of_scope": [],
+  "validated_product_hashes": [
+    {
+      "path": "package.json",
+      "match": true
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "match": true
+    },
+    {
+      "path": "src/server/media-assets.js",
+      "match": true
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "match": true
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "match": true
+    },
+    {
+      "path": "src/app/api/founder/assets/route.js",
+      "match": true
+    },
+    {
+      "path": "src/app/api/founder/operations/route.js",
+      "match": true
+    },
+    {
+      "path": "src/app/founder/assets/page.js",
+      "match": true
+    },
+    {
+      "path": "src/components/founder-direct-upload.js",
+      "match": true
+    },
+    {
+      "path": "src/components/founder-operation-workspace.js",
+      "match": true
+    },
+    {
+      "path": "src/server/founder-media.js",
+      "match": true
+    },
+    {
+      "path": "src/server/founder-operations.js",
+      "match": true
+    },
+    {
+      "path": "tests/founder-assets.test.js",
+      "match": true
+    },
+    {
+      "path": "tests/founder-media.test.js",
+      "match": true
+    }
+  ],
+  "t15_t16_preserved": {
+    "count": 64,
+    "matches": 64,
+    "mismatches": []
+  },
+  "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "verdict": "PASS",
+  "synthetic_scan_exception": "Exact synthetic-scoped-capability literal in isolated unit test; not a real signed token",
+  "limitations": "Pattern scan plus manual source/diff review; no claim of infallible secret detection",
+  "application_source_changed_since_validated_build": false
+}

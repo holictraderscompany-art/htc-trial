@@ -1,0 +1,147 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "TEST harness only; no credential values",
+  "events": [
+    {
+      "at": "2026-10-16T03:15:30.716Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 6866
+    },
+    {
+      "at": "2026-10-16T03:19:32.118Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 2160
+    },
+    {
+      "at": "2026-10-16T03:19:40.077Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T03:19:41.858Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:19:42.028Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:19:42.203Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T03:19:44.315Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:28.037Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:30.526Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 4670
+    },
+    {
+      "at": "2026-10-16T03:21:51.759Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T03:21:53.014Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:54.308Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:54.407Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T03:21:54.442Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:54.489Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 4794
+    },
+    {
+      "at": "2026-10-16T03:21:55.474Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:56.977Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T03:21:57.480Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:57.664Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T03:21:57.686Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T03:21:58.390Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    }
+  ]
+}

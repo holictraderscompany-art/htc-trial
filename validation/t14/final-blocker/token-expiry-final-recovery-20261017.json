@@ -1,0 +1,55 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 only; read-only investigation",
+  "verdict": "PARTIAL; signed capability expiry NOT VERIFIED",
+  "latest_fixture": "eddd3263-df06-46b1-8743-e0d077e16b8c",
+  "browser_observations": "Real Founder200, reservation and immediate cleanup200 at2026-10-16T23:46:40Z; no expired_signed_capability_denied/STOP event retained",
+  "user_report": "Power/internet interruption; token-only page shows initial Start and Owned fixtures0 without expiry result",
+  "state_assessment": "Consistent with new document/module state. Initial timed=null and owned Set empty; capability has no persistent storage. Owned0 alone is not proof of state loss or cleanup.",
+  "log_window": {
+    "start": "2026-10-16T23:45:00Z",
+    "end": "2026-10-17T02:09:00Z"
+  },
+  "storage_log": {
+    "result": [
+      {
+        "error_code": "",
+        "explicit_exp_claim": 0,
+        "explicit_token_expired": 0,
+        "jwt_expired_class": 0,
+        "method": "POST",
+        "operation": "storage.object.sign_upload_url",
+        "path_without_query": "/object/upload/sign/trial-assets/image/eddd3263-df06-46b1-8743-e0d077e16b8c/asset.png",
+        "status": "200",
+        "timestamp": "2026-10-16T23:46:35.041000",
+        "timestamp_check_failure": 0
+      }
+    ]
+  },
+  "database": [
+    {
+      "jsonb_build_object": {
+        "at": "2026-10-17T02:08:31.894024+00:00",
+        "content": 0,
+        "relations": 0,
+        "all_assets": 0,
+        "migration_records": 10,
+        "prior_and_latest_objects": 0,
+        "all_trial_storage_objects": 0,
+        "prior_and_latest_fixtures": 0
+      }
+    }
+  ],
+  "limitations": [
+    "No live browser-memory inspection or private browser history/credential recovery performed",
+    "Log absence is not proof no request ever occurred; no affirmative runtime expiry rejection is available",
+    "Signing200 and elapsed two hours do not establish expiry rejection"
+  ],
+  "minimum_next_action": "If original live document still exists, preserve it and inspect its safe final status; no reload/retry. If as reported replaced/lost, original capability cannot be recovered under current restrictions. A single new token-only run with original7200s TTL and uninterrupted ordinary Founder Chrome is required; no other T14 tests need repeating.",
+  "new_fixture_created": false,
+  "tests_rerun": false,
+  "ttl_or_security_changed": false,
+  "commit": false,
+  "push": false,
+  "production_access": false
+}

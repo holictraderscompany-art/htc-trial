@@ -1,0 +1,68 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 expiry only",
+  "verdict": "STATE LOSS CONFIRMED; OLD FIXTURE CLEANUP PASS; LIVE EXPIRY NOT TESTED",
+  "old_fixture_id": "8505a112-842f-4307-bc63-536ccde1bcfa",
+  "source_evidence": {
+    "validation/t14/capability-live.html": "Module-local owned Set and timed value are initialized afresh for every document. Capabilities are not persisted."
+  },
+  "observations": {
+    "original_tab": "1998950180 no longer present in official inventory",
+    "replacement_tab": "1998950189; Founder reports Owned fixtures: 0 and disabled buttons",
+    "official_cleanup_tab_error": "Emulation.setFocusEmulationEnabled timed out after 10000ms",
+    "causal_limit": "Loss of the original document's volatile state is confirmed; precise navigation/closure trigger is not proven. No conclusion about Google authentication or DB malfunction."
+  },
+  "before_cleanup": {
+    "history": 10,
+    "all_assets": 1,
+    "server_time": "2026-10-16T09:11:46.801746+00:00",
+    "owned_fixture": [
+      {
+        "id": "8505a112-842f-4307-bc63-536ccde1bcfa",
+        "status": "PENDING",
+        "expired": true,
+        "filename": "t14-cap-0d334c40-a8ac-4e64-98c5-48416a395895.png",
+        "byte_size": 70,
+        "mime_type": "image/png",
+        "created_at": "2026-10-16T08:53:37.848781+00:00",
+        "expires_at": "2026-10-16T09:03:37.848781+00:00"
+      }
+    ],
+    "owned_objects": 0,
+    "all_trial_objects": 0
+  },
+  "after_cleanup": {
+    "content": 0,
+    "relations": 0,
+    "all_assets": 0,
+    "server_time": "2026-10-16T09:20:01.548998+00:00",
+    "all_trial_objects": 0,
+    "migration_records": 10,
+    "exact_owned_asset_remaining": 0,
+    "exact_owned_storage_remaining": 0
+  },
+  "capability": {
+    "recovered": false,
+    "extracted_or_copied": false,
+    "actual_expiration_result": "NOT TESTED",
+    "nominal_original_probe_after": "2026-10-16T10:53:42.038Z",
+    "limitation": "Nominal age is not runtime proof of expiry. Original capability is unavailable through approved page state."
+  },
+  "continuation": {
+    "route": "http://localhost:3103/__t14-capability-check?mode=expiry-only",
+    "started": false,
+    "created_replacement_fixture": false,
+    "required_action": "One manual Start in normal Founder Chrome; official control timeout prevents agent clicking.",
+    "scope": "Expiry only; prior MIME/size/replay/control tests not repeated",
+    "state_storage": "Capability remains in new ordinary document module memory only; keep page open",
+    "automatic_http": "Opt-in after Start only; one reservation probe/cleanup then one token probe, no retry",
+    "telemetry": "Bounded loopback status-only observations are untrusted until corroborated with real TEST logs/DB"
+  },
+  "restrictions": {
+    "production_access": false,
+    "migration_replay": false,
+    "commit": false,
+    "push": false,
+    "deployment": false
+  }
+}

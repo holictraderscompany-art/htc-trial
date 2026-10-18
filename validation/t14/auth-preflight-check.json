@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-16T03:15:31.130Z",
+  "kind": "Local TEST harness readiness self-check only; no Google request or sign-in",
+  "status": 303,
+  "redirect_origin": "https://uzhkzhmncxjplrdtdzgd.supabase.co",
+  "redirect_path": "/auth/v1/authorize",
+  "elapsed_ms": 7809,
+  "credentials_read_or_saved": false,
+  "foundation_auth_deadline_unchanged": true
+}

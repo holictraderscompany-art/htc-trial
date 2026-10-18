@@ -1,0 +1,57 @@
+{
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "verified_at": "2026-10-16 JST",
+  "method": "Independent read-only TEST history after one approved atomic T14 SQLSTATE migration; historical nine unchanged",
+  "migrations": [
+    {
+      "version": "20261012061832",
+      "name": "htc_group3_core_auth_content_draft",
+      "source_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+    },
+    {
+      "version": "20261012062050",
+      "name": "trial_assets",
+      "source_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+    },
+    {
+      "version": "20261012062052",
+      "name": "trial_content_assets",
+      "source_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+    },
+    {
+      "version": "20261012062053",
+      "name": "public_content_discovery",
+      "source_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+    },
+    {
+      "version": "20261012062054",
+      "name": "founder_content_list",
+      "source_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+    },
+    {
+      "version": "20261012062323",
+      "name": "founder_operation_workspaces",
+      "source_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+    },
+    {
+      "version": "20261012062809",
+      "name": "founder_asset_delete_bridge",
+      "source_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+    },
+    {
+      "version": "20261014232339",
+      "name": "t13_approved_default_acl_hardening",
+      "source_sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+    },
+    {
+      "version": "20261015220202",
+      "name": "t14_signed_direct_upload_policy",
+      "source_sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb"
+    },
+    {
+      "version": "20261016084813",
+      "name": "t14_guard_rejection_sqlstate",
+      "source_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe"
+    }
+  ]
+}

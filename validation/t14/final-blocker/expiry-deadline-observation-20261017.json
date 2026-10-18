@@ -1,0 +1,48 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 ONLY",
+  "verdict": "PARTIAL; signed capability expiry result not yet verified",
+  "fixture": "e276c472-dc7a-49f1-a3a2-7614c2177c83",
+  "reservation_expiry": "Previously corroborated LIVE PASS",
+  "token_probe_expected_utc": "2026-10-16T23:29:15Z",
+  "observations_at_2332_utc": "Last browser event remains timed_fixture_cleaned at21:40:11UTC; no signed-token result or STOP recorded",
+  "storage_log_window": {
+    "start": "2026-10-16T23:28:00Z",
+    "end": "2026-10-16T23:34:00Z",
+    "matching_requests": 0,
+    "limitation": "Empty log query is not proof that browser never attempted a request"
+  },
+  "database_readback_utc": "2026-10-16T23:33:26.421369Z",
+  "database": {
+    "owned_fixture_remaining": 0,
+    "owned_objects_remaining": 0,
+    "all_assets": 0,
+    "all_trial_objects": 0,
+    "content": 0,
+    "relations": 0,
+    "migration_records": 10
+  },
+  "local_runner": {
+    "observed_failure": "Loopback3103 ECONNREFUSED; no listening socket",
+    "cause": "NOT PROVEN; old tool sessions unavailable after context continuation",
+    "recovery": "Existing identical TEST-only runner relaunched once; ready message observed",
+    "arguments": "--callback-diagnostic --auth-preflight --access-check --capability-check",
+    "prior_observations": "expiry-observations-before-runner-recovery-20261017.json",
+    "prior_diagnostics": "callback-before-runner-recovery-20261017.json"
+  },
+  "official_browser_inventory": "Only in-app/MCP Apps available; ordinary Chrome not exposed",
+  "memory_available_kib": 249192,
+  "memory_causality": "Not proven",
+  "personal_action": "Read original tab's safe final status; do not reload, Start, duplicate fixtures or transfer credentials. If no result, activate original tab and let existing timer run without manual retry.",
+  "restrictions": {
+    "new_fixture": false,
+    "upload_retry": false,
+    "login_retry": false,
+    "sql_mutation": false,
+    "source_change": false,
+    "commit": false,
+    "push": false,
+    "deployment": false,
+    "production_access": false
+  }
+}

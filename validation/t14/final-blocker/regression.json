@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-16T06:17:24.967Z",
+  "scope": "T14 recovery UI correction; full application security/regression suite",
+  "command": "pnpm test",
+  "tests": 208,
+  "pass": 208,
+  "fail": 0,
+  "result": "PASS",
+  "log_sha256": "27dccd821761bbce37492db16b7ade5e9ae19ed65079a92f8002a65c26200a25",
+  "new_cases": [
+    "Unknown reservation preserves idempotency request identity",
+    "Only authoritative exact asset404 clears recovery state",
+    "Authorization/network/other errors preserve uncertain reservation"
+  ]
+}

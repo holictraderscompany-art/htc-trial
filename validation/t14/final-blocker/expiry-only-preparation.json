@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-16T09:22:25.109Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LOCAL HARNESS PASS; LIVE expiry NOT TESTED",
+  "html_status": 200,
+  "csp_exact_script_hash": true,
+  "observations_boundary": [
+    {
+      "test": "missing_origin",
+      "status": 403,
+      "pass": true
+    },
+    {
+      "test": "wrong_origin",
+      "status": 403,
+      "pass": true
+    },
+    {
+      "test": "unknown_field",
+      "status": 400,
+      "pass": true
+    },
+    {
+      "test": "capability_field_rejected",
+      "status": 400,
+      "pass": true
+    },
+    {
+      "test": "invalid_event",
+      "status": 400,
+      "pass": true
+    },
+    {
+      "test": "oversized_input",
+      "status": 400,
+      "pass": true
+    }
+  ],
+  "mocked_state_machine": [
+    "old fixture blocks new reservation",
+    "401 blocks new reservation",
+    "one-shot timed PUTs and cleanup",
+    "unexpected response halts without retry"
+  ],
+  "actual_fixture_created": false,
+  "actual_signed_capability_used": false,
+  "auth_changes": false,
+  "production_access": false
+}

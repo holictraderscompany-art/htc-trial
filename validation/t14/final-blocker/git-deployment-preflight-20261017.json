@@ -1,0 +1,29 @@
+{
+  "scope": "Read-only preparation; no commit/push before T14 FULL PASS",
+  "repository": "holictraderscompany-art/htc-trial",
+  "origin": "https://github.com/holictraderscompany-art/htc-trial.git",
+  "branch": "codex/t14-signed-direct",
+  "local_head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+  "remote_main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "remote_t14_branch_exists": false,
+  "repository_identity_verified": true,
+  "github_main_workflows_directory": "404 from accessible verified repository; no configured .github/workflows directory at main",
+  "github_webhooks": "Previously verified none visible by Founder and prior read-only Chrome UI; current connector does not expose webhook enumeration",
+  "vercel_validation": {
+    "project": "htc-group3-validation",
+    "project_id": "prj_YJp6O364SN06VRYAGRrGbemiFwlq",
+    "live": false,
+    "latest_deployment": "dpl_32EUTBbuqAnfMUhLAtHVrVWKeeiR",
+    "state": "CANCELED",
+    "git_connection": "Founder previously verified not connected; current metadata projection does not expose Git-link configuration"
+  },
+  "netlify_validation": {
+    "project": "sprightly-crostata-81cfe5",
+    "site_id": "dfdb6f67-b77d-49b7-a180-eb4dd67e18ea",
+    "current_deployment": "6a9e45585e20058349b45287",
+    "git_connection": "Founder previously verified Not linked; current metadata projection does not expose build/Git-link settings"
+  },
+  "cli_availability": {"gh":false,"vercel":false,"netlify":false},
+  "limitation": "Do not infer unlinked status solely from missing metadata fields. Historical Founder attestation is distinguished from current API observations. Final remote/deployment review remains conditional on expiry completion.",
+  "mutations": {"commit":false,"push":false,"merge":false,"deployment":false,"project_settings":false,"production_database":false}
+}

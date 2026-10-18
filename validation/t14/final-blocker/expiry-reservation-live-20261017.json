@@ -1,0 +1,86 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 natural reservation expiry",
+  "verdict": "LIVE PASS: expired reservation denied and exact fixture cleaned",
+  "fixture_id": "e276c472-dc7a-49f1-a3a2-7614c2177c83",
+  "reservation_expires_at": "2026-10-16T21:39:10.239970Z",
+  "browser": {
+    "expired_put": {
+      "at": "2026-10-16T21:40:02.594Z",
+      "status": 400
+    },
+    "guarded_cleanup": {
+      "at": "2026-10-16T21:40:11.102Z",
+      "status": 200,
+      "confirmed": true
+    },
+    "timed_fixture_cleaned_at": "2026-10-16T21:40:11.104Z"
+  },
+  "independent_storage_logs": {
+    "result": [
+      {
+        "app_version": "1.80.2",
+        "error_attribute_keys": [
+          "error.statusCode",
+          "error.name",
+          "error.errorCode",
+          "error.message",
+          "error.raw"
+        ],
+        "error_code": "",
+        "error_status": "403",
+        "method": "PUT",
+        "operation": "storage.object.upload_signed",
+        "path_without_query": "/object/upload/sign/trial-assets/image/e276c472-dc7a-49f1-a3a2-7614c2177c83/asset.png",
+        "reservation_guard_rejection": 1,
+        "status": "400",
+        "timestamp": "2026-10-16T21:40:03.885000"
+      },
+      {
+        "app_version": "1.80.2",
+        "error_attribute_keys": [],
+        "error_code": "",
+        "error_status": "",
+        "method": "DELETE",
+        "operation": "storage.object.delete_many",
+        "path_without_query": "/object/trial-assets",
+        "reservation_guard_rejection": 0,
+        "status": "200",
+        "timestamp": "2026-10-16T21:40:11.851000"
+      }
+    ]
+  },
+  "independent_database_readback": {
+    "content": 0,
+    "relations": 0,
+    "all_assets": 0,
+    "server_time": "2026-10-16T21:41:33.263245+00:00",
+    "all_trial_objects": 0,
+    "migration_records": 10,
+    "owned_fixture_remaining": 0,
+    "owned_objects_remaining": 0
+  },
+  "evidence_limits": {
+    "timer_execution": "Observed approximately52 seconds after threshold; browser timer scheduling cause not independently proven. No clock or TTL changed.",
+    "underlying_s3": "Not directly inspected; real Storage DELETE200 and catalog absence are verified.",
+    "signed_token_expiry": "NOT TESTED yet; guard rejection proves the capability reached reservation enforcement at the earlier probe but does not prove its later JWT expiry."
+  },
+  "next": {
+    "probe_approximately_jst": "2026-10-17 08:29:15 JST",
+    "new_fixture_required": false,
+    "new_login_required": false,
+    "owned_fixtures_zero_expected": true,
+    "capability": "Retained only in the original ordinary Chrome document memory; do not reload.",
+    "requirement": "Actual JWT expiry rejection and final independent zero-fixture readback before T14 FULL PASS/commit/push"
+  },
+  "restrictions": {
+    "automatic_retry": false,
+    "duplicate_fixture": false,
+    "credentials_exported": false,
+    "production_access": false,
+    "migration_replay": false,
+    "commit": false,
+    "push": false,
+    "deployment": false
+  }
+}

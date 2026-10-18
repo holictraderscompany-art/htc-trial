@@ -1,0 +1,234 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>T14 TEST scoped capability checks</title>
+<h1>T14 TEST scoped capability checks</h1>
+<p>TEST uzhkzhmncxjplrdtdzgd only. Requires a real Founder HTC session.
+Uses browser-generated synthetic PNG bytes, not local files. No cookie/token
+export, fixture authentication, persistent capabilities or automatic HTTP retries.</p>
+<p>Keep this page open for timed probes. Refreshing discards capabilities.
+Timers only enable buttons; they never send HTTP requests automatically.</p>
+<button id="start">Run scoped capability checks once</button>
+<button id="independent">Run remaining independent checks once</button>
+<button id="correction">Run approved correction and expiry checks once</button>
+<button id="expiry-only" hidden>Start expiry-only once with automatic timed probes</button>
+<button id="reservation" disabled>Probe expired reservation once</button>
+<button id="token" disabled>Probe expired signed capability once</button>
+<button id="cleanup" disabled>Clean up owned fixtures</button>
+<label>Existing owned READY fixture <input id="ready-id" autocomplete="off" maxlength="36"></label>
+<button id="register">Register owned READY fixture for private Storage check</button>
+<button id="missing">Check missing-object finalize once</button>
+<p id="clock"></p><pre id="results" aria-live="polite"></pre>
+<p><a href="/sign-in">HTC sign in</a> <a href="/founder/assets">Asset workspace</a></p>
+<script type="module">
+const target='https://uzhkzhmncxjplrdtdzgd.supabase.co';
+const bytes=Uint8Array.from(atob('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYGD4DwABBAEAX+XDSwAAAABJRU5ErkJggg=='),x=>x.charCodeAt(0));
+const png=new Blob([bytes],{type:'image/png'}),owned=new Set(),rows=[];
+const byId=id=>document.getElementById(id);
+let busy=false,started=false,independentStarted=false,missingStarted=false,correctionStarted=false,timed=null,reservationProbed=false,tokenProbed=false;
+const tokenOnly=new URL(location.href).searchParams.get('mode')==='token-expiry-only';
+const expiryOnly=tokenOnly||new URL(location.href).searchParams.get('mode')==='expiry-only';
+if(expiryOnly){
+  for(const id of ['start','independent','correction','register','ready-id','missing'])byId(id).hidden=true;
+  byId('expiry-only').hidden=false;
+  document.querySelector('label').hidden=true;
+  document.querySelectorAll('p')[1].textContent='Expiry-only mode. Start verifies that the previous fixture is absent before creating one new synthetic reservation. Keep this ordinary Chrome tab open. One reservation probe and cleanup run after ten minutes; one signed-token probe runs after two hours. No retries, token persistence or completed-case reruns.';
+  if(tokenOnly){
+    byId('expiry-only').textContent='Start token-expiry-only once';
+    document.querySelectorAll('p')[1].textContent='Token-expiry-only recovery. Verify the previous fixture is absent and real Founder access, reserve one synthetic path, then immediately delete that reservation through the approved API. No binary is uploaded until one expiry probe after the original two-hour TTL. Keep this tab/device running without reload or restart. No token persistence or automatic retries.';
+  }
+}
+function record(test,details={}){
+  const row={at:new Date().toISOString(),test,...details};
+  rows.push(row);byId('results').textContent=JSON.stringify(rows,null,2);
+  if(expiryOnly&&['previous_expiry_fixture_absent','expiry_only_real_founder','owned_fixture','expiry_only_started','expired_reservation_denied','cleanup_response','timed_fixture_cleaned','expired_signed_capability_denied','STOP'].includes(test)){
+    const safe={at:row.at,test};
+    for(const key of ['id','status','confirmed','live_source','reservation_expires_at','explicit_token_expiry_reported'])if(Object.hasOwn(row,key))safe[key]=row[key];
+    // Status-only observations are untrusted client evidence until independently
+    // corroborated. No signed URL, token, binary, cookie or error text is sent.
+    void fetch('/__t14-expiry-evidence',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',redirect:'error',cache:'no-store',body:JSON.stringify(safe),signal:AbortSignal.timeout(5000)}).then(r=>r.body?.cancel()).catch(()=>{});
+  }
+}
+function check(condition,message){if(!condition)throw Error(message);}
+async function api(path,payload){
+  const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify(payload),signal:AbortSignal.timeout(25000)});
+  const json=await r.json();return {status:r.status,data:json.ok===true?json.data:null};
+}
+async function reserve(label){
+  const requestId=crypto.randomUUID();record('reservation_request',{label,request_id:requestId});
+  const r=await api('/api/founder/assets',{action:'reserve',request_id:requestId,asset_type:'IMAGE',mime_type:'image/png',original_filename:`t14-cap-${requestId}.png`,byte_size:70});
+  record('reservation_response',{label,status:r.status});check(r.status===200&&r.data?.status==='PENDING','Reservation not confirmed');
+  const a=r.data;owned.add(a.id);
+  const url=new URL(a.upload?.url);
+  check(url.origin===target&&url.pathname===`/storage/v1/object/upload/sign/trial-assets/image/${a.id}/asset.png`&&url.searchParams.size===1&&Boolean(url.searchParams.get('token'))&&!url.hash&&!url.username&&!url.password,'Unexpected scoped capability');
+  check(a.upload.method==='PUT'&&a.upload.capability_ttl_seconds===7200&&a.upload.headers?.['x-upsert']==='false'&&a.upload.headers?.['Content-Type']==='image/png','Unexpected upload contract');
+  const expires=Date.parse(a.expires_at);check(Number.isFinite(expires),'Missing reservation expiry');
+  record('owned_fixture',{label,id:a.id,reservation_expires_at:new Date(expires).toISOString(),capability_ttl_seconds:7200});
+  return {id:a.id,url,expires,tokenAfter:Date.now()+7205000};
+}
+async function put(cap,{url=cap.url,body=png,mime='image/png'}={}){
+  return fetch(url,{method:'PUT',headers:{'Content-Type':mime,'x-upsert':'false'},credentials:'omit',referrerPolicy:'no-referrer',cache:'no-store',redirect:'error',body,signal:AbortSignal.timeout(25000)});
+}
+async function status(test,response,allowed){
+  const code=response.status;await response.body?.cancel();record(test,{status:code});check(allowed.includes(code),`${test}: unexpected status`);return code;
+}
+async function remove(id){
+  check(owned.has(id),'Unowned fixture');
+  const r=await api('/api/founder/operations',{action:'delete_asset',id});
+  record('cleanup_response',{id,status:r.status,confirmed:r.data?.confirmed===true});
+  check(r.status===200&&r.data?.confirmed===true,'Cleanup not confirmed');owned.delete(id);
+}
+function refreshControls(){
+  byId('start').disabled=busy||started;
+  byId('independent').disabled=busy||independentStarted;
+  byId('correction').disabled=busy||correctionStarted;
+  byId('expiry-only').disabled=busy||started;
+  byId('register').disabled=busy;
+  byId('missing').disabled=busy||missingStarted;
+  byId('cleanup').disabled=busy||owned.size===0;
+  byId('reservation').disabled=busy||!timed||reservationProbed||Date.now()<=timed.expires+2000;
+  byId('token').disabled=busy||!timed||!reservationProbed||owned.has(timed.id)||tokenProbed||Date.now()<=timed.tokenAfter;
+  byId('clock').textContent=timed?`Reservation probe after ${new Date(timed.expires+2000).toISOString()}; token probe after ${new Date(timed.tokenAfter).toISOString()}; owned fixtures: ${owned.size}`:`Owned fixtures: ${owned.size}`;
+}
+async function run(operation){
+  if(busy)return;busy=true;refreshControls();
+  try{await operation();}catch{if(expiryOnly)stopped=true;record('STOP',{reason:'Unconfirmed or unexpected result; inspect safe status/owned IDs. No automatic retry.'});}
+  finally{busy=false;refreshControls();}
+}
+byId('start').onclick=()=>run(async()=>{
+  check(!started,'Already started');started=true;
+  const access=await api('/api/founder/operations',{action:'assets',cursor:null});
+  record('real_founder_access',{status:access.status,live_source:access.data?.source==='SUPABASE_DATABASE'});
+  check(access.status===200&&access.data?.source==='SUPABASE_DATABASE','Real Founder access required');
+  const cap=await reserve('immediate');
+  const wrongPath=new URL(cap.url);wrongPath.pathname=wrongPath.pathname.replace(cap.id,crypto.randomUUID());
+  await status('wrong_path_denied',await put(cap,{url:wrongPath}),[400,403,404]);
+  await status('wrong_mime_denied',await put(cap,{mime:'application/pdf'}),[400,403]);
+  await status('wrong_size_denied',await put(cap,{body:new Blob([bytes,new Uint8Array(1)],{type:'image/png'})}),[400,403]);
+  await status('control_correct_upload',await put(cap),[200,201]);
+  const finalized=await api('/api/founder/assets',{action:'finalize',id:cap.id});
+  record('control_finalize',{id:cap.id,status:finalized.status,ready:finalized.data?.status==='READY'});
+  check(finalized.status===200&&finalized.data?.id===cap.id&&finalized.data?.status==='READY','Control not READY');
+  await status('replay_no_upsert_denied',await put(cap),[400,409]);
+  const registration=await fetch('/__t14-register-storage-probe',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify({id:cap.id}),signal:AbortSignal.timeout(25000)});
+  await status('ready_fixture_registered_for_user_storage_probe',registration,[200]);
+  record('ready_fixture_retained_until_user_probe',{id:cap.id});
+  const empty=await reserve('missing_object');
+  const missing=await api('/api/founder/assets',{action:'finalize',id:empty.id});
+  record('missing_object_finalize_denied',{id:empty.id,status:missing.status});check(missing.status===404,'Missing-object finalize not rejected');
+  await remove(empty.id);
+  timed=await reserve('expiry');record('timed_probes_ready',{id:timed.id});
+});
+// Founder-approved migration changes only two guard SQLSTATEs. Recheck the
+// affected signed capability cases with unchanged strict expectations. Earlier
+// path, USER, relationship, missing-object and UI PASS cases are not repeated.
+byId('correction').onclick=()=>run(async()=>{
+  check(!correctionStarted&&!timed,'Already started');correctionStarted=true;
+  const access=await api('/api/founder/operations',{action:'assets',cursor:null});
+  record('approved_correction_real_founder',{status:access.status,live_source:access.data?.source==='SUPABASE_DATABASE'});
+  check(access.status===200&&access.data?.source==='SUPABASE_DATABASE','Real Founder access required');
+  timed=await reserve('approved_expiry');record('timed_probes_ready',{id:timed.id});
+  const cap=await reserve('approved_negative_recheck');
+  await status('corrected_wrong_mime_denied',await put(cap,{mime:'application/pdf'}),[400,403]);
+  await status('corrected_wrong_size_denied',await put(cap,{body:new Blob([bytes,new Uint8Array(1)],{type:'image/png'})}),[400,403]);
+  await status('corrected_control_upload',await put(cap),[200,201]);
+  const finalized=await api('/api/founder/assets',{action:'finalize',id:cap.id});
+  record('corrected_control_finalize',{id:cap.id,status:finalized.status,ready:finalized.data?.status==='READY'});
+  check(finalized.status===200&&finalized.data?.id===cap.id&&finalized.data?.status==='READY','Control not READY');
+  await status('corrected_replay_denied',await put(cap),[400,409]);
+  await remove(cap.id);record('corrected_immediate_fixture_cleaned',{id:cap.id});
+});
+async function probeReservation(){
+  check(timed&&!reservationProbed&&Date.now()>timed.expires+2000,'Probe not ready');reservationProbed=true;
+  await status('expired_reservation_denied',await put(timed),[400,403]);
+  await remove(timed.id);record('timed_fixture_cleaned',{id:timed.id,token_retained_in_page_memory_only:true});
+}
+byId('reservation').onclick=()=>run(probeReservation);
+// This mode is opt-in and checks the previous owned reservation by the existing
+// real Founder API. It cannot repeat the old full suite or adopt a signed URL.
+byId('expiry-only').onclick=()=>run(async()=>{
+  check(expiryOnly&&!started&&!timed,'Already started');started=true;
+  const previous=await api('/api/founder/operations',{action:'asset',id:tokenOnly?'e276c472-dc7a-49f1-a3a2-7614c2177c83':'8505a112-842f-4307-bc63-536ccde1bcfa'});
+  record('previous_expiry_fixture_absent',{status:previous.status});
+  check(previous.status===404,'Previous fixture must be cleaned first');
+  const access=await api('/api/founder/operations',{action:'assets',cursor:null});
+  record('expiry_only_real_founder',{status:access.status,live_source:access.data?.source==='SUPABASE_DATABASE'});
+  check(access.status===200&&access.data?.source==='SUPABASE_DATABASE'&&access.data.items.length===0,'Expected empty real TEST asset workspace');
+  timed=await reserve('expiry_only');record('expiry_only_started',{id:timed.id});
+  if(tokenOnly){
+    await remove(timed.id);
+    reservationProbed=true;
+    record('timed_fixture_cleaned',{id:timed.id,token_retained_in_page_memory_only:true});
+  }
+});
+// Keep the failed MIME/size assertions above unchanged. These independent
+// cases do not retry that failure or reinterpret a Storage 500 as a pass.
+byId('independent').onclick=()=>run(async()=>{
+  check(!independentStarted,'Already started');independentStarted=true;
+  const access=await api('/api/founder/operations',{action:'assets',cursor:null});
+  record('independent_real_founder_access',{status:access.status,live_source:access.data?.source==='SUPABASE_DATABASE'});
+  check(access.status===200&&access.data?.source==='SUPABASE_DATABASE','Real Founder access required');
+  const cap=await reserve('independent_remaining');
+  await status('independent_correct_upload',await put(cap),[200,201]);
+  const finalized=await api('/api/founder/assets',{action:'finalize',id:cap.id});
+  record('independent_finalize',{id:cap.id,status:finalized.status,ready:finalized.data?.status==='READY'});
+  check(finalized.status===200&&finalized.data?.id===cap.id&&finalized.data?.status==='READY','Control not READY');
+  await status('independent_replay_no_upsert_denied',await put(cap),[400,409]);
+  const empty=await reserve('independent_missing_object');
+  const missing=await api('/api/founder/assets',{action:'finalize',id:empty.id});
+  record('independent_missing_object_finalize_denied',{id:empty.id,status:missing.status});
+  check(missing.status===404,'Missing-object finalize not rejected');
+  await remove(empty.id);
+  const registration=await fetch('/__t14-register-storage-probe',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify({id:cap.id}),signal:AbortSignal.timeout(25000)});
+  await status('independent_ready_fixture_registered',registration,[200]);
+  record('independent_ready_fixture_retained_for_private_storage_probe',{id:cap.id});
+});
+byId('register').onclick=()=>run(async()=>{
+  const id=byId('ready-id').value.trim();check(/^[0-9a-f-]{36}$/.test(id),'Expected owned synthetic fixture UUID');
+  const r=await fetch('/__t14-register-storage-probe',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify({id}),signal:AbortSignal.timeout(25000)});
+  await status('owned_ready_fixture_registered',r,[200]);
+  record('registered_fixture',{id});
+});
+byId('missing').onclick=()=>run(async()=>{
+  check(!missingStarted,'Already started');missingStarted=true;
+  const empty=await reserve('missing_object_only');
+  const missing=await api('/api/founder/assets',{action:'finalize',id:empty.id});
+  record('missing_object_only_finalize_denied',{id:empty.id,status:missing.status});
+  check(missing.status===404,'Missing-object finalize not rejected');
+  await remove(empty.id);
+});
+function explicitTokenExpiry(body){
+  const message=`${body?.error??''} ${body?.message??''}`;
+  return body?.error==='ExpiredToken'||body?.code==='ExpiredToken'
+    ||/(jwt|token).*expir|expir.*(jwt|token)/i.test(message)
+    ||/"exp" claim timestamp check failed/i.test(message);
+}
+async function probeToken(){
+  check(timed&&reservationProbed&&!owned.has(timed.id)&&!tokenProbed&&Date.now()>timed.tokenAfter,'Probe not ready');tokenProbed=true;
+  const r=await put(timed),code=r.status;let reportedExpiry=false;
+  try{reportedExpiry=explicitTokenExpiry(await r.json());}catch{}
+  record('expired_signed_capability_denied',{status:code,explicit_token_expiry_reported:reportedExpiry});
+  check([400,401,403].includes(code)&&reportedExpiry,'Token expiry not proven');timed=null;
+}
+byId('token').onclick=()=>run(probeToken);
+byId('cleanup').onclick=()=>run(async()=>{
+  if(expiryOnly)stopped=true;
+  for(const id of [...owned])await remove(id);
+  if(expiryOnly){timed=null;record('expiry_only_aborted');}
+});
+// Only expiry-only Start opts into these one-shot network actions. Absolute
+// deadlines tolerate background-tab timer throttling. Failed/ambiguous results
+// stop the automatic workflow; no request is retried.
+let stopped=false;
+const originalRun=run;
+async function autoProbe(operation){
+  await originalRun(async()=>{try{await operation();}catch(error){stopped=true;throw error;}});
+}
+setInterval(()=>{
+  refreshControls();
+  if(!expiryOnly||busy||stopped||!timed)return;
+  if(!tokenOnly&&!reservationProbed&&Date.now()>timed.expires+2000)void autoProbe(probeReservation);
+  else if(reservationProbed&&!owned.has(timed.id)&&!tokenProbed&&Date.now()>timed.tokenAfter)void autoProbe(probeToken);
+},1000);refreshControls();
+addEventListener('beforeunload',event=>{if(timed){event.preventDefault();event.returnValue='';}});
+</script>

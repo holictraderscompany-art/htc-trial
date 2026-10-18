@@ -1,0 +1,75 @@
+{
+  "date_jst": "2026-10-16",
+  "scope": "T14 only",
+  "verdict": "PARTIAL",
+  "repository": "holictraderscompany-art/htc-trial",
+  "branch": "codex/t14-signed-direct",
+  "worktree": "C:/Users/ASUS/.codex/worktrees/htc-t14-signed-direct",
+  "base": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+  "preserved_integration": "9a2e766ddf0a40201249776122e357ca7f44d422",
+  "test_project": "uzhkzhmncxjplrdtdzgd",
+  "approved_migration": {
+    "version": "20261015220202",
+    "name": "t14_signed_direct_upload_policy",
+    "source_sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb",
+    "attempts": 1,
+    "result": "COMMITTED and independently read back",
+    "old_eight_migrations": "Unchanged names, versions and statement hashes",
+    "guards_predicate_and_other_policies": "Unchanged",
+    "current_history": "9/9 source SHA-256 matches"
+  },
+  "validation": {
+    "application_regression": "205/205 PASS",
+    "t13_sqlite_regression": "12/12 LOCAL PASS",
+    "t14_sqlite_operations": "3/3 LOCAL PASS",
+    "t14_focused_transport_and_sqlite": "12/12 PASS; 9 mocked transport plus 3 LOCAL SQLite cases",
+    "production_build": "PASS; final application source unchanged afterward",
+    "browser": "20/20 LOCAL PASS; visible Chrome, SQLite, synthetic auth, no binary Storage",
+    "policy_postgresql": "PASS; synthetic metadata, role-denial and guard assertions; ROLLBACK",
+    "relations_postgresql": "PASS; synthetic metadata, DRAFT/READY/uniqueness/linked-delete assertions; ROLLBACK",
+    "anonymous_real_test_runner": "4/4 PASS; API401, protected redirect, obsolete proxy404",
+    "real_founder_user_sessions_for_t14": "NOT VERIFIED; interactive Founder Google login requested",
+    "real_signed_upload_finalize_delete": "NOT VERIFIED",
+    "secret_scan": "No matching secret-key/private-key/long-JWT literals in inspected source and T14 evidence",
+    "diff_check": "PASS; line-ending warnings only"
+  },
+  "testing_corrections": [
+    "SQL fixture variable renamed to avoid ambiguous column reference; failed transaction rollback independently verified before corrected suite",
+    "Browser locator corrected to observed combobox role and exact accessible name; no application change or assertion weakening",
+    "Live browser harness corrected from GET auth/start to existing Google sign-in POST button; no authentication code changes"
+  ],
+  "cleanup": {
+    "test_content_assets_relations_objects": "0 after SQL rollback",
+    "oauth_profiles": "Existing one FOUNDER and one USER preserved",
+    "sqlite_fixture_server": "Stopped",
+    "sqlite_fixture_file": "Only this task's closed synthetic fixture.sqlite removed",
+    "local_browser": "Closed",
+    "live_runtime": "Running on loopback localhost:3103 with TEST-only outbound transport",
+    "live_browser": "Visible Playwright Chrome at accounts.google.com; in-memory auth, no network/console/trace/HAR recording"
+  },
+  "remaining": [
+    "Founder completes private Google sign-in in the existing T14 LIVE browser",
+    "Prove deployed Storage signing compatibility without relaxing the catalog guard",
+    "Real binary upload, finalize, object/metadata consistency, relationships and guarded deletion",
+    "Real USER denial and session expiration/logout checks on T14 endpoints",
+    "Live UI upload completion/failure/conflict and token-replay/overwrite boundaries",
+    "Final acceptance checkpoint and any relevant regression after confirmed fixes"
+  ],
+  "capability_limitations": [
+    "Signed token TTL is two hours; no shorter configurable TTL claimed",
+    "Logout does not revoke an issued capability; existing ten-minute reservation and catalog lifecycle/expiry guards remain mandatory",
+    "SQL synthetic object metadata does not establish live binary Storage success",
+    "Code Review connector exposes PR CI checks only; local security/diff review performed without creating a PR"
+  ],
+  "prohibited_actions": {
+    "production_access": false,
+    "existing_migration_replay": false,
+    "commit": false,
+    "push": false,
+    "merge": false,
+    "deployment": false,
+    "t15_t17_implementation": false
+  },
+  "historical_snapshot": true,
+  "superseded_by": "docs/t14-final-acceptance-20261018.md"
+}

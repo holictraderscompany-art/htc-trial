@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-16T09:34:58.849Z",
+  "scope": "T14 ONLY",
+  "subsequent_checkpoint": "17 October read-only TEST session diagnostic added; real browser auth NOT VERIFIED. This earlier scan/hash snapshot is historical, not final commit approval. See expiry-401-diagnosis.json.",
+  "branch": "codex/t14-signed-direct",
+  "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+  "git_status": {
+    "modified": 9,
+    "untracked": 87,
+    "staged": 0,
+    "total": 96
+  },
+  "secrets": {
+    "prior_scan": {
+      "at": "2026-10-16T08:29:51.728Z",
+      "files": 86,
+      "hits": []
+    },
+    "incremental_scan": "Changed/new files since prior recovery manifest; matched values never printed",
+    "files": 17,
+    "hits": []
+  },
+  "sql_review": {
+    "sha256": "c6bc5a6bd10c74be8678f4c0ae6c0731598dba2f776040c04df21e44661ea6a3",
+    "exact_two_raise_suffixes": true,
+    "sql_executed": true,
+    "live_correction": "PASS for affected immediate cases; natural expiry NOT TESTED",
+    "version": "20261016084813"
+  },
+  "harness_syntax": "PASS",
+  "preservation": {
+    "t15_t16_files": 64,
+    "t15_t16_matches": 64,
+    "t15_t16_head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+    "main_head": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "main_status": {
+      "modified": 5,
+      "untracked": 25,
+      "staged": 0,
+      "total": 30
+    },
+    "approved_prior_manifest_sha256": "9bd13b9e2e26d5b584ed14f44b10b6c71a0a69bf71b3ba410167049abcc428b4",
+    "last_independent_verification": "2026-10-16T08:29:51.728Z"
+  },
+  "no_commit": true,
+  "no_push": true,
+  "no_merge": true,
+  "no_deployment": true,
+  "no_production_access": true,
+  "no_migration_execution": false,
+  "excluded": [
+    "validation/t14/callback-diagnostic.json",
+    "validation/t14/recovery-manifest.json"
+  ],
+  "final_cleanup": "validation/t14/final-blocker/expiry-state-loss.json; zero independently verified09:20:01UTC",
+  "approved_migration_only": "20261016084813 applied once; no historical replay",
+  "expiry": "NOT TESTED; original capability memory lost. Expiry-only replacement prepared but not started.",
+  "latest_route_check": {
+    "evidence": "validation/t14/final-blocker/expiry-route-readiness.json",
+    "incremental_files_scanned": 4,
+    "secret_hits": 0,
+    "auth_rls_or_product_changes": false,
+    "fixture_created": false
+  }
+}

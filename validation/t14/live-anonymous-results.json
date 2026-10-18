@@ -1,0 +1,26 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "syntheticAuth": false,
+  "results": [
+    {
+      "path": "/api/founder/assets",
+      "status": 401,
+      "result": "LIVE ANONYMOUS DENIAL PASS"
+    },
+    {
+      "path": "/api/founder/operations",
+      "status": 401,
+      "result": "LIVE ANONYMOUS DENIAL PASS"
+    },
+    {
+      "path": "/founder/assets",
+      "status": 307,
+      "result": "LIVE ANONYMOUS REDIRECT PASS"
+    },
+    {
+      "path": "/api/founder/assets/upload",
+      "status": 404,
+      "result": "OBSOLETE BINARY PROXY ABSENT"
+    }
+  ]
+}

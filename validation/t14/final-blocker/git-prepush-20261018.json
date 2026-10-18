@@ -1,0 +1,24 @@
+{
+  "repository": "holictraderscompany-art/htc-trial",
+  "branch": "codex/t14-signed-direct",
+  "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "remote_branch": "Absent in fresh ls-remote; no divergence",
+  "local_workflows": "None",
+  "local_hooks": "No active hooks or custom hooksPath",
+  "github_workflows": "Verified accessible repository; main workflows directory404",
+  "webhook_and_git_link_evidence": "Founder previously verified GitHub webhooks none, Vercel Git not connected and Netlify repository Not linked. No contrary evidence; current connectors do not project hook/Git-link settings.",
+  "vercel": {
+    "deployment": "dpl_32EUTBbuqAnfMUhLAtHVrVWKeeiR",
+    "state": "CANCELED",
+    "unchanged": true,
+    "live": false
+  },
+  "netlify": {
+    "deployment": "6a9e45585e20058349b45287",
+    "state": "ready",
+    "unchanged": true
+  },
+  "historical_evidence": "validation/t14/final-blocker/git-deployment-preflight-20261017.json",
+  "limitations": "Do not infer unlinked status solely from missing metadata fields. Historical Founder attestation is distinguished from current API observations. Final remote/deployment review remains conditional on expiry completion.",
+  "policy": "Normal push only to approved T14 branch; no main update, merge, PR or deployment"
+}

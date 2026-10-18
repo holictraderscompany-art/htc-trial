@@ -1,0 +1,27 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LOCAL PREPARATION PASS; actual token expiry NOT VERIFIED",
+  "founder_report": "Device restart closed all Chrome tabs before token probe",
+  "prior_capability": "Lost volatile document state; not recoverable under credential restrictions",
+  "storage_log_window_utc": ["2026-10-16T21:41:00Z", "2026-10-16T23:40:00Z"],
+  "matching_storage_requests": 0,
+  "cleanup_readback_utc": "2026-10-16T23:33:26.421369Z",
+  "assets_storage_content_relations": 0,
+  "migration_records": 10,
+  "new_fixture_created": false,
+  "route": "http://localhost:3103/__t14-capability-check?mode=token-expiry-only",
+  "http_readiness": {"status": 200, "tokenOnlyPresent": true, "testOnlyTarget": true, "cspPresent": true},
+  "local_harness_tests": {"passed": 6, "failed": 0, "command": "node --test validation/t14/capability-harness.test.mjs", "live_evidence": false},
+  "testing_only_changes": [
+    "Dedicated token-only mode reuses real Founder APIs, reserves one path and immediately cleans it before waiting",
+    "Preserves original7200-second TTL and single request after7205seconds",
+    "Supports precise JOSE exp-claim expiry result while rejecting generic InvalidJWT/signature/reservation errors",
+    "Any expiry-mode operation failure now stops automatic continuation; verified cleanup-failure regression"
+  ],
+  "product_changes": false,
+  "sql_changes": false,
+  "commit": false,
+  "push": false,
+  "deployment": false,
+  "required_personal_action": "Use ordinary Chrome real Founder session and click token-only Start once after session200; no available official integration exposes that Chrome profile"
+}

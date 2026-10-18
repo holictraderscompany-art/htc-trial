@@ -1,0 +1,77 @@
+{
+  "project": {
+    "id": "uzhkzhmncxjplrdtdzgd",
+    "name": "HTC-Trial-Test-DB",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17"
+  },
+  "baseline": {
+    "assets": 0,
+    "content": 0,
+    "history": [
+      {
+        "name": "htc_group3_core_auth_content_draft",
+        "version": "20261012061832",
+        "statement_md5": "2d4d5c110b59cd9e637f2e3a263067e5"
+      },
+      {
+        "name": "trial_assets",
+        "version": "20261012062050",
+        "statement_md5": "05e7e6ea00afe67c6cfc5da4b4af15fa"
+      },
+      {
+        "name": "trial_content_assets",
+        "version": "20261012062052",
+        "statement_md5": "58f333c2192004cb2329d456b830cd1f"
+      },
+      {
+        "name": "public_content_discovery",
+        "version": "20261012062053",
+        "statement_md5": "7d5ecf59830c246032de6e9db95dcb17"
+      },
+      {
+        "name": "founder_content_list",
+        "version": "20261012062054",
+        "statement_md5": "5d7a21d7e8664c180dce2a33aa69303e"
+      },
+      {
+        "name": "founder_operation_workspaces",
+        "version": "20261012062323",
+        "statement_md5": "86d95e67df915ae6c282d8c354f09fa7"
+      },
+      {
+        "name": "founder_asset_delete_bridge",
+        "version": "20261012062809",
+        "statement_md5": "af5d43334902d3e687e8d48f83ad6fc7"
+      },
+      {
+        "name": "t13_approved_default_acl_hardening",
+        "version": "20261014232339",
+        "statement_md5": "0981b80bc1111962dbdf425ceff02af3"
+      },
+      {
+        "name": "t14_signed_direct_upload_policy",
+        "version": "20261015220202",
+        "statement_md5": "3df274f15b5051394b5aa17a1148076b"
+      }
+    ],
+    "objects": 0,
+    "guard_acl": "{postgres=X/postgres,service_role=X/postgres}",
+    "relations": 0,
+    "guard_owner": "postgres",
+    "guard_body_md5": "097b5cf3a902dc85795688911a547eae",
+    "guard_settings": [
+      "search_path=\"\""
+    ],
+    "guard_definition_md5": "c1d2b94e8a70ac41649f70f6a65ad7bd"
+  },
+  "founder_approval": "Explicit T14 TEST-only two rejection SQLSTATE correction",
+  "review_sha256": "c6bc5a6bd10c74be8678f4c0ae6c0731598dba2f776040c04df21e44661ea6a3",
+  "execution_query_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe",
+  "expected_body_md5": "bc179d40465c4269ef4b731dc275fbc7",
+  "atomicity": "Single DO containing transactional CREATE OR REPLACE plus aborting pre/postconditions. No internal transaction control. Existing nine records untouched. One MCP apply_migration call, no automatic retry requested.",
+  "cli": "Not installed; no installation. Official Supabase migration capability used.",
+  "rollback": "Any DO error rolls back function replacement; independently inspect function and history on any ambiguous result.",
+  "history": "MCP migration tracking; generated new version will be read back and archived exactly"
+}
+

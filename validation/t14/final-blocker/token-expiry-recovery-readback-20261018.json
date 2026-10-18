@@ -1,0 +1,53 @@
+{
+  "date_jst": "2026-10-18",
+  "scope": "T14 read-only recovery; TEST only",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "PARTIAL; final signed-token expiry gate NOT VERIFIED",
+  "fixture": "eddd3263-df06-46b1-8743-e0d077e16b8c",
+  "browser_server_evidence": "Observation file unchanged since23:46:40UTC16Oct; contains real Founder200/reserve/immediate cleanup200, no token expiry event. Current page reported initial Start/Owned0. Capability is volatile module memory; no persistence exists.",
+  "state_assessment": "Initial controls plus interruption consistent with document state loss. Owned0 alone cannot distinguish successful immediate cleanup from lost state.",
+  "storage_log_window_utc": [
+    "2026-10-16T23:45:00Z",
+    "2026-10-17T23:45:00Z"
+  ],
+  "storage_logs": {
+    "result": [
+      {
+        "error_code": "",
+        "explicit_exp_claim": 0,
+        "explicit_token_expired": 0,
+        "jwt_expired_class": 0,
+        "method": "POST",
+        "operation": "storage.object.sign_upload_url",
+        "status": "200",
+        "timestamp": "2026-10-16T23:46:35.041000",
+        "timestamp_check_failure": 0
+      }
+    ]
+  },
+  "current_database": [
+    {
+      "jsonb_build_object": {
+        "at": "2026-10-18T00:11:43.000839+00:00",
+        "content": 0,
+        "relations": 0,
+        "all_assets": 0,
+        "owned_objects": 0,
+        "owned_fixtures": 0,
+        "all_trial_objects": 0,
+        "migration_records": 10
+      }
+    }
+  ],
+  "limitations": [
+    "No direct live browser inspection available in current tools",
+    "Absence from logs is not definitive proof no request occurred, but no affirmative runtime token-expiry rejection was recovered",
+    "Signed URL issuance200, expired reservation denial and elapsed time do not prove JWT expiry enforcement"
+  ],
+  "minimum_action": "If original document state is lost, a single new token-only run through a legitimate Founder session with original7200-second TTL on an uninterrupted device is necessary. No new run or fixture initiated in this investigation.",
+  "product_or_security_changes": false,
+  "fixture_mutations": false,
+  "commit": false,
+  "push": false,
+  "production_access": false
+}

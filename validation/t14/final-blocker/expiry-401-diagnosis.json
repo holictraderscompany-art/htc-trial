@@ -1,0 +1,71 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 read-only expiry authentication diagnosis",
+  "verdict": "LOCAL COOKIE PRECONDITION FAILURE CONFIRMED; REAL BROWSER SESSION STILL NOT VERIFIED",
+  "actual_browser_failures_utc": [
+    "2026-10-16T09:36:13.247Z",
+    "2026-10-16T09:38:15.984Z"
+  ],
+  "actual_browser_failures_jst": [
+    "2026-10-16 18:36:13 JST",
+    "2026-10-16 18:38:15 JST"
+  ],
+  "status": 401,
+  "upstream_auth_or_role_events_for_failed_requests": 0,
+  "source_contract": {
+    "session_parser": "src/server/session-token.js:16; exactly one well-formed htc_trial_session cookie required",
+    "authorization_order": "src/server/founder-operations.js:31; cookie parser runs before authorize()",
+    "session_lifetime": "src/server/trial-session.js:68; HttpOnly cookie Max-Age=min(expires_in,3600), no automatic renewal in this diagnostic"
+  },
+  "confirmed": "The failed requests stopped before Supabase auth and role validation; not evidence of a USER role403 or missing migration.",
+  "not_proven": [
+    "Whether the browser cookie was missing, duplicated or malformed at the historical failures",
+    "Whether expiry, different Chrome profile, logout or a localhost/127.0.0.1 host mismatch caused that local state",
+    "Current ordinary Chrome session and authoritative FOUNDER status"
+  ],
+  "test_environment": {
+    "project": "HTC-Trial-Test-DB",
+    "status": "ACTIVE_HEALTHY",
+    "public_configuration_exact_test": true,
+    "source_configuration_values_printed": false,
+    "current_database": {
+      "assets": 0,
+      "content": 0,
+      "relations": 0,
+      "server_time": "2026-10-16T21:14:29.554812+00:00",
+      "migration_records": 10,
+      "trial_storage_objects": 0
+    }
+  },
+  "server": {
+    "previously_stopped": true,
+    "restarted_owned_test_runner": true,
+    "unified_session": 39662,
+    "port": 3103,
+    "bind": "127.0.0.1",
+    "current_capability_page_status": 200
+  },
+  "minimal_next_step": {
+    "url": "http://localhost:3103/__t14-session-check",
+    "action": "Open read-only page from the actual ordinary Founder Chrome profile; return only its bounded status/boolean JSON. Do not start expiry or login again yet.",
+    "reason": "Official local Chrome control is not exposed by the current tool catalog; no cookie/token transfer is permitted.",
+    "test_only_endpoint": "Does not set/renew cookies, create fixtures or sign capabilities; verifies exact TEST authorization when a valid-format session is present"
+  },
+  "limitations": {
+    "anonymous_cli_readiness": "401 missing/upstream_checked=false is an intentional credential-free CLI check, not proof of the actual Chrome cookie state.",
+    "live_founder": "NOT VERIFIED",
+    "expiry": "NOT TESTED"
+  },
+  "restrictions": {
+    "new_fixture": false,
+    "expiry_probe": false,
+    "password_read_or_display": false,
+    "token_or_cookie_export": false,
+    "auth_or_rls_weakening": false,
+    "migration": false,
+    "production_access": false,
+    "commit": false,
+    "push": false,
+    "deploy": false
+  }
+}

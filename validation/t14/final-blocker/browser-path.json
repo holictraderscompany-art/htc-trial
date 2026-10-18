@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-16T06:48:22.183Z",
+  "scope": "T14 ONLY",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "official_chrome": {
+    "result": "PASS for native browser accessibility controls; debugger/DOM path remains intermittent",
+    "profile": "Holic Traders Company (Profile 28)",
+    "browser_version": "156.0.8078.35",
+    "extension_version": "1.26.1005.11759",
+    "extension_enabled": true,
+    "native_host_signature": "Valid; OpenAI OpCo, LLC",
+    "official_checks": [
+      "chrome-is-running --check: exit 0",
+      "check-extension-installed --json: exit 0",
+      "check-native-host-manifest --json: exit 0",
+      "open-chrome-window --dry-run --json: exit 0"
+    ],
+    "actual_operations": [
+      "Founder assets workspace loaded actual Supabase database snapshot",
+      "Selected each exact owned DELETING asset through native select keyboard controls",
+      "Executed existing Delete unlinked asset UI twice; both reported Operation confirmed",
+      "Independent database readback confirmed both assets and Storage metadata removed"
+    ],
+    "limitations": [
+      "claimTab/DOM path timed out on Emulation.setFocusEmulationEnabled",
+      "One stale tab returned Debugger unattached; a fresh tab in the same browser worked",
+      "Normal Chrome exposes no remote debugging endpoint; installed Playwright CLI cannot attach"
+    ],
+    "native_host_or_browser_security_modified": false
+  },
+  "authentication": {
+    "method": "Genuine existing Google SSO through ordinary Chrome, Supabase TEST PKCE callback",
+    "callback_at_utc": "2026-10-16T05:41:41Z",
+    "token_response": 200,
+    "verified_user_response": 200,
+    "callback_response": 303,
+    "destination": "/content",
+    "httponly_cookie_established": true,
+    "founder_protected_workspace_and_actual_database_read": "LIVE PASS",
+    "credential_or_cookie_extraction": false,
+    "evidence": "oauth-current-20261016.json"
+  },
+  "file_chooser": {
+    "result": "LIVE PASS: official chooser.setFiles selected only T14 synthetic fixtures after explicit temporary permission",
+    "synthetic_file": "t14-live-synthetic-20261016.png",
+    "bytes": 70,
+    "sha256": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+    "error": "fileChooser.setFiles failed; extension requires Allow access to file URLs",
+    "official_documentation": "https://developers.openai.com/codex/app/chrome-extension#upload-files",
+    "permission_enabled": false,
+    "last_explicit_permission_decision": "Temporary T14 permission used only for task-owned synthetic files; Founder confirmed disabled again",
+    "current_request": "Temporary permission must be disabled again after testing or blockage",
+    "standard_control_attempt": "Clicked existing File control without setFiles; browser still reports No file chosen",
+    "pending_action": null,
+    "settings_access_error": "Browser URL policy allows http/https only; chrome://extensions was rejected before settings were read or changed",
+    "binary_upload_or_reservation_started": true,
+    "successful_upload": "5f976994-b1f1-4ff0-b76a-25c4b1fdb861 READY; 70 bytes and image/png; Storage ETag matches local MD5",
+    "permission_state_evidence": "Founder explicitly confirmed Sudah OFF kembali after all T14 file selections. Settings cannot be independently read through the blocked chrome:// URL"
+  },
+  "cleanup": {
+    "result": "LIVE PASS",
+    "database_evidence": "cleanup-live.json",
+    "available_storage_http_evidence": "storage-cleanup-http.json",
+    "owned_assets_remaining": 0,
+    "owned_storage_metadata_remaining": 0,
+    "all_assets_remaining_at_verification": 0,
+    "all_trial_objects_remaining_at_verification": 0,
+    "test_accounts_preserved": true,
+    "migration_records": 9,
+    "note": "Two UI confirmations and independent zero counts; log query returned one HTTP DELETE 200 receipt, not two"
+  },
+  "overall": "PARTIAL: actual signing, upload and finalize PASS; remaining negative/cleanup/security gates pending",
+  "commit": false,
+  "push": false,
+  "production_access": false,
+  "migration_replay": false
+}

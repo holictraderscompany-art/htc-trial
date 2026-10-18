@@ -1,0 +1,62 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "migration_version": "20261016084813",
+  "verdict": "IMMEDIATE LIVE PASS; expiry pending",
+  "auth": {
+    "status": 200,
+    "source": "SUPABASE_DATABASE",
+    "session": "Existing legitimate Founder HttpOnly session; not exported"
+  },
+  "tests": [
+    {
+      "test": "corrected_wrong_mime_denied",
+      "status": 400,
+      "at": "2026-10-16T08:53:38.158Z"
+    },
+    {
+      "test": "corrected_wrong_size_denied",
+      "status": 400,
+      "at": "2026-10-16T08:53:38.468Z"
+    },
+    {
+      "test": "corrected_control_upload",
+      "status": 200,
+      "at": "2026-10-16T08:53:40.394Z"
+    },
+    {
+      "test": "corrected_control_finalize_READY",
+      "status": 200,
+      "at": "2026-10-16T08:53:42.154Z"
+    },
+    {
+      "test": "corrected_replay_denied",
+      "status": 400,
+      "at": "2026-10-16T08:53:42.371Z"
+    },
+    {
+      "test": "control_cleanup_confirmed",
+      "status": 200,
+      "at": "2026-10-16T08:53:43.843Z"
+    }
+  ],
+  "control_id": "c60bf572-3fa9-4e71-b710-3b3f55d4185d",
+  "control_remaining": 0,
+  "objects_remaining": 0,
+  "expiry": {
+    "id": "8505a112-842f-4307-bc63-536ccde1bcfa",
+    "created_at": "2026-10-16T08:53:37.848781Z",
+    "reservation_expires_at": "2026-10-16T09:03:37.848781Z",
+    "reservation_probe_after": "2026-10-16T09:03:39.848Z",
+    "capability_probe_after": "2026-10-16T10:53:42.038Z",
+    "ttl_seconds": 7200,
+    "state": "PENDING",
+    "capability_storage": "Browser module memory only",
+    "tab_id": "1998950180",
+    "auto_http_retries": 0,
+    "clock_or_ttl_changed": false
+  },
+  "evidence": "Official Chrome native accessibility tree, actual browser fetch response statuses; independent TEST database readback confirms sole timed fixture and deleted control",
+  "previous_pass_retested": false,
+  "strict_status_assertions_unchanged": true
+}
+

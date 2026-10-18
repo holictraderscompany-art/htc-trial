@@ -1,0 +1,239 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "TEST harness only; no credential values",
+  "events": [
+    {
+      "at": "2026-10-16T21:15:06.059Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:16:00.441Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:19:56.214Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:20:21.765Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:20:33.422Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:22:44.371Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 3942
+    },
+    {
+      "at": "2026-10-16T21:22:46.444Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T21:22:47.302Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:22:47.802Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:22:47.837Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T21:22:52.115Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:23:05.279Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-16T21:23:37.981Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:23:38.115Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:23:38.116Z",
+      "stage": "expiry_session_preflight",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "present_valid_format",
+      "upstream_checked": true,
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-16T21:28:58.854Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:29:03.327Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:29:04.628Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 404
+    },
+    {
+      "at": "2026-10-16T21:29:06.841Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:29:07.003Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:29:07.722Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:29:08.405Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:29:08.791Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:29:09.637Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:40:04.799Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:40:05.741Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:40:09.506Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:40:10.024Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:40:11.087Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:46:38.280Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T21:46:39.537Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T21:46:39.540Z",
+      "stage": "expiry_session_preflight",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "present_valid_format",
+      "upstream_checked": true,
+      "authenticated": true,
+      "founder": true
+    }
+  ]
+}

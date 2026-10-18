@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-16T02:50:22.944Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "T14 TEST runner only; no Google login, binary upload or role-success evidence",
+  "results": [
+    {
+      "path": "/api/founder/assets",
+      "status": 401,
+      "result": "LIVE anonymous denial PASS"
+    },
+    {
+      "path": "/api/founder/operations",
+      "status": 401,
+      "result": "LIVE anonymous denial PASS"
+    },
+    {
+      "path": "/founder/assets",
+      "status": 307,
+      "result": "LIVE anonymous redirect PASS"
+    },
+    {
+      "path": "/api/founder/assets/upload",
+      "status": 404,
+      "result": "Binary proxy absent PASS"
+    },
+    {
+      "path": "/auth/callback",
+      "status": 303,
+      "result": "Deliberately incomplete harness-only callback fails closed; no Google login or session fabricated"
+    }
+  ],
+  "prior_manifest": {
+    "count": 40,
+    "changed": [
+      "validation/t14/start-live.mjs"
+    ],
+    "application_source_unchanged": true
+  },
+  "secret_pattern_scan": {
+    "files": 40,
+    "matches": []
+  },
+  "diagnostic_self_check": {
+    "result": "PASS after independent completed-response read",
+    "initial_checker_failure": "Immediate file read preceded response finish event; no application error or assertion weakening",
+    "credential_values_recorded": false
+  },
+  "prior_pass_evidence_preserved": true,
+  "database_readback": {
+    "result": "PASS; read-only current-state integrity and protections, not binary runtime validation",
+    "migrations": 9,
+    "source_hashes_matched": 9,
+    "rls_enabled_tables": 5,
+    "catalog_guards_unchanged": true,
+    "private_bucket": true,
+    "unauthorized_truncate": false,
+    "cleanup_complete": false
+  },
+  "updated_at": "2026-10-16T03:30:26.231Z",
+  "real_private_oauth": {
+    "result": "LIVE Google PKCE and HTC session establishment PASS; T14 protected APIs still pending",
+    "token_status": 200,
+    "verified_user_status": 200,
+    "callback_status": 303,
+    "http_only_cookie_set": true,
+    "registered_founder_sessions": 3,
+    "archive": "callback-diagnostic-20261016-success.json",
+    "source": "Genuine private normal-Chrome Google sign-in; no fixture identity"
+  },
+  "auth_preflight_selfcheck": {
+    "at": "2026-10-16T03:15:31.130Z",
+    "kind": "Local TEST harness readiness self-check only; no Google request or sign-in",
+    "status": 303,
+    "redirect_origin": "https://uzhkzhmncxjplrdtdzgd.supabase.co",
+    "redirect_path": "/auth/v1/authorize",
+    "elapsed_ms": 7809,
+    "credentials_read_or_saved": false,
+    "foundation_auth_deadline_unchanged": true
+  },
+  "current_external_blocker": "Final official inventory after Founder checked connection has no Chrome provider; only in-app browser and MCP Apps. Supported CLI attach also lacks DevToolsActivePort. No debugging permission changed"
+}

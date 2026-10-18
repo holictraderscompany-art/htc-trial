@@ -1,0 +1,102 @@
+'use client';
+import {createElement as h,useEffect,useRef,useState} from 'react';
+import {reconcileUploadAttempt,sendSignedUpload} from './founder-direct-upload.js';
+
+export default function FounderOperationWorkspace() {
+  const [contents,setContents]=useState([]),[assets,setAssets]=useState([]),[relations,setRelations]=useState([]);
+  const [contentId,setContentId]=useState(''),[assetId,setAssetId]=useState(''),[role,setRole]=useState('PRIMARY');
+  const [source,setSource]=useState(''),[busy,setBusy]=useState(true),[blocked,setBlocked]=useState(false);
+  const [message,setMessage]=useState('Loading snapshot…'),[stale,setStale]=useState(false),[cursor,setCursor]=useState(null),[contentCursor,setContentCursor]=useState(null);
+  const pending=useRef(false),mounted=useRef(false);
+  const [uploadFile,setUploadFile]=useState(null),[uploadType,setUploadType]=useState('IMAGE');
+  const attempt=useRef(null),[pendingUpload,setPendingUpload]=useState(null);
+  async function call(payload,content=false,media=false) {
+    const response=await fetch(media?'/api/founder/assets':content?'/api/founder/content':'/api/founder/operations',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});
+    const result=await response.json();
+    if(!response.ok || result.ok!==true) {
+      if([401,403].includes(response.status)){setContents([]);setAssets([]);setRelations([]);setBlocked(true);}
+      const error=Error(response.status===401?'Session expired. Sign in again.':response.status===403?'Access denied.':response.status===400?'Check the selected fields.':response.status===409?'Operation rejected. Reload current state.':'Unavailable. Reload before trying again.');
+      error.status=response.status;throw error;
+    }
+    return result.data;
+  }
+  async function run(operation,mutation=false) {
+    if(pending.current)return;pending.current=true;setBusy(true);setMessage('Working…');
+    try{await operation();}
+    catch(error){setStale(true);setMessage([400,401,403,409].includes(error.status)?error.message:mutation?'Operation result is uncertain. Reload before retrying.':'Unavailable. Reload before trying again.');if(mutation && error.status!==400)setBlocked(true);}
+    finally{pending.current=false;setBusy(false);}
+  }
+  async function load() {
+    const [c,a]=await Promise.all([call({action:'list',cursor:null},true),call({action:'assets',cursor:null})]);
+    const recovered=await reconcileUploadAttempt(attempt.current,id=>call({action:'asset',id}));
+    if(attempt.current && recovered===null){attempt.current=null;setPendingUpload(null);setUploadFile(null);}
+    setSource(a.source);setContents(c.items);setContentCursor(c.next_cursor);setAssets(a.items);setCursor(a.next_cursor);setRelations([]);setContentId('');setAssetId('');
+    setBlocked(false);setStale(false);setMessage('Snapshot loaded.');
+  }
+  useEffect(()=>{if(!mounted.current){mounted.current=true;void run(load);}},[]);
+  const current=contents.find(c=>c.id===contentId),selectedAsset=assets.find(a=>a.id===assetId);
+  async function chooseContent(id){setContentId(id);setRelations([]);if(id){const r=await call({action:'relations',content_id:id});setRelations(r.relations);setMessage('Content relations loaded.');}}
+  async function mutate(action){
+    const payload=action==='delete_asset'?{action,id:assetId}:{action,content_id:contentId,asset_id:assetId,...(action==='attach'?{role}:{})};
+    await call(payload);
+    if(action==='delete_asset' && attempt.current?.id===assetId){attempt.current=null;setPendingUpload(null);}
+    await load();setMessage('Operation confirmed. Snapshot reloaded.');
+  }
+  async function finalize(id){
+    const ready=await call({action:'finalize',id},false,true);
+    if(ready.status!=='READY')throw Error('Finalization not confirmed.');
+    if(attempt.current?.id===id){attempt.current=null;setPendingUpload(null);}
+    setUploadFile(null);await load();setMessage('Private upload verified READY.');
+  }
+  async function upload(){
+    if(!uploadFile || source!=='SUPABASE_DATABASE')throw Error('Live upload unavailable.');
+    const fingerprint=JSON.stringify([uploadType,uploadFile.type,uploadFile.name,uploadFile.size]);
+    if(attempt.current?.id)throw Error('Inspect and finalize or delete the existing upload reservation first.');
+    if(attempt.current && attempt.current.fingerprint!==fingerprint)throw Error('Recover the previous reservation with the same file before starting another upload.');
+    if(!attempt.current)attempt.current={requestId:crypto.randomUUID(),fingerprint};
+    let reservation;
+    try {
+      reservation=await call({action:'reserve',request_id:attempt.current.requestId,asset_type:uploadType,
+        mime_type:uploadFile.type,original_filename:uploadFile.name,byte_size:uploadFile.size},false,true);
+    }catch(error){
+      // An explicit invalid-request response rejects reservation creation. Keep
+      // the idempotency identity for every uncertain/network/auth failure.
+      if(error.status===400)attempt.current=null;
+      throw error;
+    }
+    if(reservation.status==='READY'){attempt.current=null;setPendingUpload(null);setUploadFile(null);await load();return;}
+    attempt.current.id=reservation.id;setPendingUpload(reservation.id);
+    await sendSignedUpload(reservation,uploadFile);
+    await finalize(reservation.id);
+  }
+  const selector=(id,label,value,onChange,rows,text)=>h('label',{htmlFor:id},label,h('select',{id,value,disabled:busy||blocked,onChange:e=>onChange(e.target.value)},h('option',{value:''},'Select…'),...rows.map(row=>h('option',{key:row.id,value:row.id},text(row)))));
+  return h('section',{className:'founder-content','aria-busy':busy},
+    h('h1',null,'Media and asset workspace'),
+    h('p',{className:'notice'},source==='LOCAL_SQLITE_FIXTURE'?'LOCAL SQLite fixture · synthetic auth and asset metadata · no live storage or Supabase validation.':source==='SUPABASE_DATABASE'?'Supabase database snapshot; no service health claim.':'Database source not verified until a snapshot loads. No service health claim.'),
+    h('p',{role:'status','aria-live':'polite'},message),stale&&h('p',{className:'notice'},'Snapshot stale or unavailable. Reload to verify current state.'),
+    pendingUpload&&h('p',{className:'notice'},`Upload reservation: ${pendingUpload}. Reload, then select it to finalize or delete if recovery is needed.`),
+    h('button',{type:'button',className:'button secondary',disabled:busy,onClick:()=>void run(load)},'Reload snapshot'),
+    h('p',null,h('a',{href:'/founder/content'},'Content workspace')),
+    h('div',{className:'workspace-form'},
+      selector('operation-content','Content',contentId,id=>void run(()=>chooseContent(id)),contents,c=>`${c.title} · ${c.state}`),
+      contentCursor&&h('button',{disabled:busy||blocked,onClick:()=>void run(async()=>{const c=await call({action:'list',cursor:contentCursor},true);setContents(old=>[...old,...c.items]);setContentCursor(c.next_cursor);setMessage('More content loaded.');})},'Load more content'),
+      !contents.length&&!busy&&h('p',null,'No content available in this snapshot.'),
+      current&&h('p',null,`Selected state: ${current.state}`),
+      h('div',null,
+        source==='SUPABASE_DATABASE'?h('form',{onSubmit:e=>{e.preventDefault();void run(upload,true);}},
+          h('h2',null,'Private upload'),h('p',null,'Maximum 6,000,000 bytes. Use a filename with letters, numbers, dots, underscores or hyphens.'),
+          h('label',{htmlFor:'upload-type'},'Asset type',h('select',{id:'upload-type',value:uploadType,disabled:busy||blocked,onChange:e=>setUploadType(e.target.value)},
+            ...['IMAGE','THUMBNAIL','VIDEO','AUDIO','DOCUMENT'].map(value=>h('option',{key:value,value},value)))),
+          h('label',{htmlFor:'upload-file'},'File',h('input',{id:'upload-file',type:'file',disabled:busy||blocked,accept:'image/jpeg,image/png,image/webp,video/mp4,audio/mpeg,application/pdf',onChange:e=>setUploadFile(e.target.files?.[0]??null)})),
+          h('button',{className:'button',type:'submit',disabled:busy||blocked||!uploadFile},'Upload private asset')):
+        h('p',null,source==='LOCAL_SQLITE_FIXTURE'?'Upload unavailable in SQLite: metadata fixtures do not contain binary objects.':'Upload unavailable until a live Supabase snapshot loads.'),
+        selector('operation-asset','Asset metadata',assetId,setAssetId,assets,a=>`${a.original_filename} · ${a.status} · ${a.id}`),
+        cursor&&h('button',{disabled:busy||blocked,onClick:()=>void run(async()=>{const a=await call({action:'assets',cursor});setAssets(old=>[...old,...a.items]);setCursor(a.next_cursor);setMessage('More assets loaded.');})},'Load more assets'),
+        selectedAsset&&h('p',null,`${selectedAsset.asset_type} · ${selectedAsset.mime_type} · ${selectedAsset.byte_size} bytes · ${selectedAsset.status}`),
+        source==='SUPABASE_DATABASE'&&h('button',{className:'button secondary',disabled:busy||blocked||selectedAsset?.status!=='PENDING',onClick:()=>void run(()=>finalize(assetId),true)},'Finalize selected upload'),
+        h('label',{htmlFor:'operation-role'},'Relation role',h('select',{id:'operation-role',value:role,disabled:busy||blocked,onChange:e=>setRole(e.target.value)},...['PRIMARY','THUMBNAIL','ATTACHMENT'].map(value=>h('option',{key:value,value},value)))),
+        h('button',{className:'button',disabled:busy||blocked||current?.state!=='DRAFT'||selectedAsset?.status!=='READY',onClick:()=>void run(()=>mutate('attach'),true)},'Attach asset'),
+        h('button',{className:'button secondary',disabled:busy||blocked||current?.state!=='DRAFT'||!relations.some(r=>r.asset_id===assetId),onClick:()=>void run(()=>mutate('detach'),true)},'Detach asset'),
+        h('button',{className:'button secondary',disabled:busy||blocked||!selectedAsset,onClick:()=>void run(()=>mutate('delete_asset'),true)},'Delete unlinked asset'),
+        h('h2',null,'Content relations'),h('ul',null,...relations.map(r=>h('li',{key:r.id},`${r.role} · ${r.asset_id}`))))));
+}

@@ -1,0 +1,811 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "TEST harness only; no credential values",
+  "events": [
+    {
+      "at": "2026-10-16T07:29:47.378Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:29:48.148Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:29:49.839Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:29:50.018Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:29:50.164Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:29:50.972Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:38:00.947Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:38:01.608Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:38:03.855Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:38:03.979Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:38:04.597Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:38:05.775Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:38:05.944Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:38:06.059Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:39:26.357Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:08.987Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:09.303Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:40:11.296Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:11.470Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:40:12.258Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:12.814Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:13.142Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:13.314Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:40:13.333Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:40:13.689Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:40:14.601Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:47:36.861Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:47:37.418Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:47:37.444Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:48:31.832Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:48:31.980Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:48:31.985Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:49:57.233Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:49:57.383Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:49:57.394Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:52:11.843Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:52:12.108Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:58:01.301Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:58:01.890Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:58:03.490Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:58:04.013Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:58:04.187Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:58:05.411Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:58:06.148Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:58:06.279Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T07:58:06.988Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:01:58.496Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:01:58.954Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:02:59.627Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:02:59.806Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:03:01.651Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:03:01.771Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:03:01.897Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:03:01.999Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 404
+    },
+    {
+      "at": "2026-10-16T08:03:02.767Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:03:02.927Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:03:03.156Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:03:03.252Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:03:03.734Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:05:04.155Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:05:05.081Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T08:05:07.149Z",
+      "stage": "private_storage_probe",
+      "test_target": "uzhkzhmncxjplrdtdzgd",
+      "asset_id": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+      "actor_founder": false,
+      "upstream_status": 400,
+      "binary_forwarded": false
+    },
+    {
+      "at": "2026-10-16T08:10:26.546Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:10:26.835Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:10:29.080Z",
+      "stage": "private_storage_probe",
+      "test_target": "uzhkzhmncxjplrdtdzgd",
+      "asset_id": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+      "actor_founder": true,
+      "upstream_status": 206,
+      "binary_forwarded": false
+    },
+    {
+      "at": "2026-10-16T08:20:47.668Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "at": "2026-10-16T08:21:59.914Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 2599
+    },
+    {
+      "at": "2026-10-16T08:22:01.767Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T08:22:01.924Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:22:02.059Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:22:02.066Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T08:22:04.458Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:02.578Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:02.897Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:04.204Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:04.311Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:04.992Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:05.718Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:06.395Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:06.506Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:41.856Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:42.290Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:42.710Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:42.888Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:43.623Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.240Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.363Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.463Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:44.479Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:44.866Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:45.288Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:33.357Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:34.556Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:36.014Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:36.393Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:36.503Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:36.851Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:37.207Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:37.343Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:37.605Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:40.550Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:41.358Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:42.145Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:42.665Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:43.078Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:43.285Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:53:43.426Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:53:43.837Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:18:39.658Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:18:40.560Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:18:42.409Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:18:42.639Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:18:43.458Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:18:43.610Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:18:43.775Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:18:45.744Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:05.888Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:06.719Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:19:08.609Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:08.766Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:19:09.690Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:09.918Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:10.105Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:19:11.144Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:11.612Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T09:19:11.807Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T09:19:11.911Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    }
+  ]
+}

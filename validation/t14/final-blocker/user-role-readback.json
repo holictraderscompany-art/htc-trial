@@ -1,0 +1,33 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "method": "Read-only TEST SQL aggregate; no identity IDs or credentials",
+  "result": [
+    {
+      "jsonb_build_object": {
+        "assets": 0,
+        "relations": 0,
+        "profile_roles": {
+          "USER": 1,
+          "FOUNDER": 1
+        },
+        "trial_objects": 0,
+        "migration_records": 9,
+        "recent_session_roles": [
+          {
+            "role": "FOUNDER",
+            "created_at": "2026-10-16T07:07:36.394612+00:00"
+          },
+          {
+            "role": "FOUNDER",
+            "created_at": "2026-10-16T07:12:27.274451+00:00"
+          },
+          {
+            "role": "USER",
+            "created_at": "2026-10-16T07:13:56.04967+00:00"
+          }
+        ]
+      }
+    }
+  ]
+}
+

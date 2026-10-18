@@ -1,0 +1,19 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "requests": [
+    {
+      "path": "/_t14-access-check",
+      "status": 404,
+      "forms": false
+    },
+    {
+      "path": "/__t14-access-check",
+      "status": 200,
+      "forms": true
+    }
+  ],
+  "target_header": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd",
+  "source": "validation/t14/start-live.mjs:107",
+  "change_required": false
+}
+

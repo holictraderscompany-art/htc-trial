@@ -1,5 +1,7 @@
 {
   "project_id": "uzhkzhmncxjplrdtdzgd",
+  "verified_at": "2026-10-16 JST",
+  "method": "Independent read-only TEST history after one approved atomic T14 SQLSTATE migration; historical nine unchanged",
   "migrations": [
     {
       "version": "20261012061832",
@@ -40,6 +42,16 @@
       "version": "20261014232339",
       "name": "t13_approved_default_acl_hardening",
       "source_sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+    },
+    {
+      "version": "20261015220202",
+      "name": "t14_signed_direct_upload_policy",
+      "source_sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb"
+    },
+    {
+      "version": "20261016084813",
+      "name": "t14_guard_rejection_sqlstate",
+      "source_sha256": "c2f461b1d84ce3ca265f6dacc439d1df0a17118e25b592360dd7e2d3bbb08abe"
     }
   ]
 }

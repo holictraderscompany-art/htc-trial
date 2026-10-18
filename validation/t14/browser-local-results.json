@@ -1,0 +1,85 @@
+{
+  "scope": "LOCAL SQLite, synthetic auth, no binary Storage or live OAuth",
+  "results": [
+    {
+      "name": "T14 workspace and explicit LOCAL fixture label",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T14 navigation without T15/T16 pages",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "PENDING READY DELETING metadata",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "No fake live binary upload in SQLite",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "READY attach and relation readback",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Linked delete denied and mutation blocked",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "DRAFT detach readback",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Ambiguous committed relation blocks blind retry",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Explicit reload recovers committed relation",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "PENDING attach disabled",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Non-DRAFT relation controls disabled 61",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Non-DRAFT relation controls disabled 62",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Responsive no overflow 375",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Responsive no overflow 768",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Responsive no overflow 1440",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T15/T16 actions absent from T14 endpoint",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER direct URL denied without private workspace",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER operation denied",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Session expiry clears private metadata and blocks mutations",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous direct URL redirects to sign-in",
+      "result": "LOCAL PASS"
+    }
+  ]
+}

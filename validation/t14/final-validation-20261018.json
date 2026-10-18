@@ -1,0 +1,102 @@
+{
+  "scope": "T14 ONLY",
+  "date_jst": "2026-10-18",
+  "verdict": "PASS",
+  "fresh": {
+    "application": {
+      "pass": 208,
+      "fail": 0,
+      "command": "pnpm test"
+    },
+    "t14_sqlite": {
+      "pass": 3,
+      "fail": 0,
+      "label": "LOCAL PASS"
+    },
+    "t13_sqlite": {
+      "pass": 12,
+      "fail": 0,
+      "label": "LOCAL PASS"
+    },
+    "expiry_harness": {
+      "pass": 6,
+      "fail": 0,
+      "label": "LOCAL PASS"
+    },
+    "migration_history_sources": {
+      "pass": 10,
+      "fail": 0,
+      "command": "node validation/test-db/verify-history.mjs validation/test-db/remote-history-20261018.json"
+    }
+  },
+  "build": {
+    "result": "PASS reused",
+    "evidence": "validation/t14/final-blocker/final-regression.json",
+    "reason": "All14 product/package/test hashes match the validated208-test/production-build snapshot; later edits are TEST harness/evidence/docs only",
+    "validated_product_hashes": [
+      {
+        "path": "package.json",
+        "sha256": "20a4d276350025dd738878b43a23b5376aacb51336b62c4962aa5b5a4aeba680"
+      },
+      {
+        "path": "src/components/founder-views.js",
+        "sha256": "b55309059eda8c2e9ce56ad6a083d96d0064b65584fd763eab40b860daaefcde"
+      },
+      {
+        "path": "src/server/media-assets.js",
+        "sha256": "477476758da17481c12205ebc67560fc6a63605879230502707216d1a8efe2a3"
+      },
+      {
+        "path": "tests/founder-access.test.js",
+        "sha256": "50b685acda809153d1d5908853a6eb4e6c135dae3168011673fd8c7c4d462ad7"
+      },
+      {
+        "path": "tests/local-sqlite-adapter.js",
+        "sha256": "0330509681809f28a189e744c1cab624e981786c3e8369f1374fc5c8167b5f6d"
+      },
+      {
+        "path": "src/app/api/founder/assets/route.js",
+        "sha256": "86b9b8e8cfceb55876f38882d241ba0981b8cda4e62ffff8a25a8f1db5f953c4"
+      },
+      {
+        "path": "src/app/api/founder/operations/route.js",
+        "sha256": "f5aa60501eafe143af4e67d93e89e66e1b602e950c0121be956a00aab309ad0f"
+      },
+      {
+        "path": "src/app/founder/assets/page.js",
+        "sha256": "2ea3302ca36c2219ee698e5779fb038a3a4bcc090a4cae401d08b488d7e8db86"
+      },
+      {
+        "path": "src/components/founder-direct-upload.js",
+        "sha256": "570384ec8deb4a29361ea4d65bf7fe1c35c49e9e49a37763decd8af1640e92a9"
+      },
+      {
+        "path": "src/components/founder-operation-workspace.js",
+        "sha256": "f4926e2f194a198f2e9308ac3c46a9261c6ac4d4be60d648c8c7ff00865ff2d3"
+      },
+      {
+        "path": "src/server/founder-media.js",
+        "sha256": "af3329afe62fa75445b8af19c4ab5525bb87c400b7b9864234c34fcabb8f6c12"
+      },
+      {
+        "path": "src/server/founder-operations.js",
+        "sha256": "4523472bb094bed1993198a08bd61acabe973ae0da44ceca2f81be94eedc9cb1"
+      },
+      {
+        "path": "tests/founder-assets.test.js",
+        "sha256": "00d4d527e450dadb6be3ea7002e8ce771b1863986c23d86a513c9ffce88561aa"
+      },
+      {
+        "path": "tests/founder-media.test.js",
+        "sha256": "fb63e4d607fdfb6b6c5ab813c1a7f7c19be52cd5cfbc22eb60275b5ae412ee61"
+      }
+    ]
+  },
+  "browser": {
+    "local": "20/20 LOCAL PASS reused; validation/t14/browser-local-results.json",
+    "live": "Existing genuine upload/relationship/error/responsive/security evidence preserved; new actual signed expiry independently corroborated, no fixture auth substitute"
+  },
+  "sql": "10/10 actual TEST migration statement hashes equal source archives; no replay",
+  "remaining_acceptance_blockers": [],
+  "acceptance_report": "docs/t14-final-acceptance-20261018.md"
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "T14 session recovery only; no expiry retry",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "MISSING LOCAL SESSION CONFIRMED; AUTHENTICATED FOUNDER STILL BLOCKED",
+  "browser_report": {"cookie_state":"missing","authenticated":false,"session_checked":false},
+  "server_contract": {"path":"/__t14-session-check","field":"upstream_checked","missing_cookie_status":401},
+  "server_corroboration": "Non-readiness preflight events at2026-10-16T21:16:00.441Z and21:19:56.214Z report missing cookie, upstream_checked=false, authenticated=false. Exact Chrome profile is not observable from this safe log.",
+  "route_spelling": "Single-underscore /_t14-session-check is404. Use the canonical double-underscore link; the reported session_checked field is not the current server field name.",
+  "confirmed_source": {
+    "cookie_scope": "Host-only cookie; Path=/; HttpOnly; SameSite=Lax; capped Max-Age3600",
+    "expiry_behavior": "No refresh token is persisted; the existing Foundation contract requires sign-in again after expiry",
+    "host": "Use http://localhost:3103 consistently for sign-in, callback, session check and expiry page",
+    "profile": "Use the same ordinary Chrome profile/window throughout; profile identity and whether another profile retains a session are NOT VERIFIED"
+  },
+  "not_proven": ["Which profile originally owned the missing session", "Whether absence was caused by natural expiry, logout, profile selection, host mismatch or cookie deletion"],
+  "minimum_recovery": [
+    "In ordinary Founder Chrome, open http://localhost:3103/sign-in and complete one private Google Founder TEST sign-in; no browser automation or security bypass",
+    "After callback reaches /content, open http://localhost:3103/__t14-session-check in that same profile",
+    "Require target=uzhkzhmncxjplrdtdzgd, status200, upstream_checked=true, authenticated=true, founder=true before any expiry reservation",
+    "If callback fails or the read-only check remains401/403, stop and inspect new safe server evidence; do not retry credentials or start expiry"
+  ],
+  "current_actions": {"authentication_source_change":false,"cookie_or_token_export":false,"google_login_attempted_by_agent":false,"new_fixture":false,"expiry_probe":false,"migration":false,"production_access":false,"commit":false,"push":false,"deploy":false},
+  "evidence_limit": "Anonymous CLI route checks are not real browser authentication proof. Existing T14 PASS evidence is unchanged."
+}

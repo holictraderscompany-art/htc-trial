@@ -1,0 +1,99 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LIVE PASS: authenticated non-Founder API denial",
+  "checks": [
+    {
+      "path": "/api/founder/assets",
+      "status": 403,
+      "auth_user_status": 200,
+      "authoritative_founder": false,
+      "at": "2026-10-16T07:47:37.444Z"
+    },
+    {
+      "path": "/api/founder/operations",
+      "status": 403,
+      "auth_user_status": 200,
+      "authoritative_founder": false,
+      "at": "2026-10-16T07:49:57.394Z"
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-16T07:47:36.861Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:47:37.418Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:47:37.444Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:48:31.832Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:48:31.980Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:48:31.985Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:49:57.233Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:49:57.383Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    },
+    {
+      "at": "2026-10-16T07:49:57.394Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-16T07:52:11.843Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T07:52:12.108Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": false
+    }
+  ],
+  "route": {
+    "path": "/founder/assets",
+    "user_observation": "Access denied",
+    "server_role_at": "2026-10-16T07:52:12.108Z",
+    "authoritative_founder": false,
+    "html_http_status": "Not captured; API403 is independently verified"
+  },
+  "role_evidence": "user-role-readback.json; locked model contains USER and FOUNDER only. No identity values or credential headers captured."
+}

@@ -1,0 +1,64 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "NEEDS CORRECTION; not PASS",
+  "fixture": "2e7e708d-bb51-44ae-9016-97e8d033a8de",
+  "http": {
+    "result": [
+      {
+        "method": "PUT",
+        "operation": "storage.object.upload_signed",
+        "path": "/object/upload/sign/trial-assets/image/c1df2134-c116-44d5-a2cb-9837628ec2b8/asset.png",
+        "role": "",
+        "status": "400"
+      },
+      {
+        "method": "PUT",
+        "operation": "storage.object.upload_signed",
+        "path": "/object/upload/sign/trial-assets/image/2e7e708d-bb51-44ae-9016-97e8d033a8de/asset.png",
+        "role": "",
+        "status": "500"
+      }
+    ]
+  },
+  "error_class": {
+    "result": [
+      {
+        "error_code": "DatabaseError",
+        "error_name": "Error",
+        "error_status": "500",
+        "mentions_constraint": 0,
+        "mentions_metadata": 0,
+        "mentions_mime": 0,
+        "mentions_permission": 0,
+        "request_mime": "application/pdf",
+        "request_size": "70"
+      }
+    ]
+  },
+  "guard_classification": {
+    "result": [
+      {
+        "default_raise_exception_sqlstate": 1,
+        "expired_or_missing_reservation_guard": 0,
+        "reservation_mismatch_guard": 1,
+        "storage_version": "1.80.2"
+      }
+    ]
+  },
+  "cleanup": [
+    {
+      "jsonb_build_object": {
+        "assets": 0,
+        "content": 0,
+        "relations": 0,
+        "trial_objects": 0,
+        "migration_records": 9,
+        "failed_probe_remaining": 0
+      }
+    }
+  ],
+  "source": "validation/test-db/supabase/migrations/20261012062050_trial_assets.sql:54",
+  "upstream_mapper": "https://github.com/supabase/storage/blob/v1.80.2/src/storage/database/errors.ts#L14-L70",
+  "finding": "Reservation MIME mismatch is rejected by the Foundation guard. Its default P0001 exception maps to HTTP500 in deployed Storage1.80.2. Existing strict expected400/403 assertion is unchanged. No repeated mismatch PUT, migration, guard or policy change."
+}
+

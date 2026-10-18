@@ -1,0 +1,49 @@
+{
+  "scope": "T14 expiry readiness; actual existing Chrome session",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "LIVE FOUNDER SESSION PASS; expiry NOT STARTED",
+  "callback": {
+    "at": "2026-10-16T21:22:47.837Z",
+    "host_is_localhost": true,
+    "token_exchange_status": 200,
+    "auth_user_status": 200,
+    "callback_status": 303,
+    "redirected_to_content": true,
+    "httponly_session_cookie_set": true
+  },
+  "authoritative_session_check": {
+    "at": "2026-10-16T21:23:38.116Z",
+    "jst": "2026-10-17 06:23:38 JST",
+    "status": 200,
+    "cookie_state": "present_valid_format",
+    "upstream_checked": true,
+    "authenticated": true,
+    "founder": true,
+    "auth_user_status": 200,
+    "is_founder_rpc_status": 200,
+    "is_founder_rpc_result": true
+  },
+  "database_preflight": {
+    "at": "2026-10-16T21:27:12.712539Z",
+    "all_assets": 0,
+    "trial_storage_objects": 0,
+    "active_expiry_candidates": [],
+    "migration_records": 10
+  },
+  "historical_missing_cookie_cause": "Exact original profile/expiry/logout cause remains unproven; current real session recovery is independently verified",
+  "remaining": "One manual Start in new ordinary Chrome expiry-only tab, because local official Chrome control is not exposed in the current tool catalog",
+  "expiry_route": "http://localhost:3103/__t14-capability-check?mode=expiry-only",
+  "constraints": {
+    "new_login_required": false,
+    "existing_fixture_to_reuse": false,
+    "new_fixture_created_by_agent": false,
+    "expiry_probe_executed": false,
+    "token_or_cookie_export": false,
+    "auth_or_security_change": false,
+    "prior_pass_retested": false,
+    "commit": false,
+    "push": false,
+    "deployment": false
+  },
+  "evidence": "User's normal Chrome result corroborated by independent safe callback/auth/role/session logs and TEST-only database readback"
+}

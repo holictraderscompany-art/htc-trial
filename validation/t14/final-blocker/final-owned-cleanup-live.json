@@ -1,0 +1,157 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "at": "2026-10-16T08:25:13Z",
+  "method": "Founder used existing authorized UI; independent read-only TEST catalog and Storage logs",
+  "fixture": "d66c3442-570a-461d-8a2a-19e3d2da5509",
+  "verdict": "LIVE PASS: guarded application deletion200 followed by independent zero asset/object catalog counts",
+  "readback": [
+    {
+      "jsonb_build_object": {
+        "assets": 0,
+        "content": 0,
+        "history": 9,
+        "asset_rls": true,
+        "relations": 0,
+        "storage_rls": true,
+        "profile_roles": {
+          "USER": 1,
+          "FOUNDER": 1
+        },
+        "trial_objects": 0,
+        "guard_definition_md5": "c1d2b94e8a70ac41649f70f6a65ad7bd",
+        "owned_asset_remaining": 0,
+        "owned_object_remaining": 0,
+        "upload_predicate_definition_md5": "743855b05523b214ce6880cfb4e3056f"
+      }
+    }
+  ],
+  "storage_http": {
+    "result": []
+  },
+  "no_sql_storage_delete": true,
+  "security_changed": false,
+  "migration_replayed": false,
+  "existing_test_accounts_preserved": true,
+  "application_http_events": [
+    {
+      "at": "2026-10-16T08:23:02.578Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:02.897Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:04.204Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:04.311Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:04.992Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:05.718Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:06.395Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:06.506Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:41.856Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:42.290Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:42.710Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:42.888Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:43.623Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.240Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.363Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:44.463Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:44.479Z",
+      "stage": "role_authorization",
+      "status": 200,
+      "authoritative_founder": true
+    },
+    {
+      "at": "2026-10-16T08:23:44.866Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T08:23:45.288Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "limitations": "Focused new raw Storage HTTP query returned no rows; no independent Storage DELETE receipt or direct underlying S3 inspection is claimed."
+}

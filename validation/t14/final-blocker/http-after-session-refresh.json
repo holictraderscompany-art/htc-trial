@@ -1,0 +1,254 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "TEST harness only; no credential values",
+  "events": [
+    {
+      "at": "2026-10-16T06:22:56.481Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:22:58.997Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:22:59.381Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:23:00.472Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:23:01.705Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:23:39.652Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:23:39.831Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "at": "2026-10-16T06:24:57.681Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:24:57.850Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "at": "2026-10-16T06:26:16.582Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:18.233Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:19.416Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:21.459Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/assets",
+      "method": "POST",
+      "status": 400
+    },
+    {
+      "at": "2026-10-16T06:26:52.409Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:52.597Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:52.907Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:53.084Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:53.228Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:26:53.454Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 404
+    },
+    {
+      "at": "2026-10-16T06:27:19.532Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:27:20.501Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:27:57.575Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:27:58.737Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 409
+    },
+    {
+      "at": "2026-10-16T06:28:29.137Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:28:29.185Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:28:30.986Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:28:31.496Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:08.047Z",
+      "stage": "auth_preflight",
+      "status": 200,
+      "elapsed_ms": 2445
+    },
+    {
+      "at": "2026-10-16T06:51:11.197Z",
+      "stage": "callback_request",
+      "host_is_localhost": true,
+      "attempt_count": 1,
+      "code_count": 1,
+      "has_error": false,
+      "pkce_cookie_name_count": 1
+    },
+    {
+      "at": "2026-10-16T06:51:11.577Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/token",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:11.698Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:11.706Z",
+      "stage": "callback_response",
+      "status": 303,
+      "redirected_to_content": true,
+      "redirected_to_failed_signin": false,
+      "session_cookie_set": true
+    },
+    {
+      "at": "2026-10-16T06:51:13.520Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:26.394Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:28.567Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:30.378Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:30.382Z",
+      "stage": "auth_transport",
+      "path": "/auth/v1/user",
+      "status": 200
+    },
+    {
+      "at": "2026-10-16T06:51:30.853Z",
+      "stage": "founder_http_response",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    }
+  ]
+}

@@ -1,8 +1,7 @@
-import { ApiError, authorize, readJson, reply } from './api-foundation.js';
+import { ApiError, authorize, readJson, reply, supabaseConfiguration } from './api-foundation.js';
 
 if (typeof window !== 'undefined') throw new Error('Server module');
 export const FILE_CAP = 6000000;
-const project = 'https://vzkbcgfywyhtvprxpwfb.supabase.co';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const formats = {
   'image/jpeg': ['IMAGE', 'THUMBNAIL'], 'image/png': ['IMAGE', 'THUMBNAIL'],
@@ -62,6 +61,7 @@ export function createAssetHandler({ env = process.env, fetchImpl = fetch } = {}
     try {
       if (request.method !== 'POST') return reply(405, null, 'POST');
       const { upstream } = await authorize(request, 'founder', { env, fetchImpl });
+      const { url: project } = supabaseConfiguration(env);
       if (new URL(request.url).search) throw new ApiError(400);
       const p = await readJson(request, 2048); validate(p);
       const rpc = payload => upstream('/rest/v1/rpc/manage_trial_asset', { method: 'POST', body: JSON.stringify({ payload }) });

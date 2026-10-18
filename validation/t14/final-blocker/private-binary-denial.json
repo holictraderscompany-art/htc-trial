@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-16T06:07:53.415Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "asset_id": "5f976994-b1f1-4ff0-b76a-25c4b1fdb861",
+  "method": "Actual HTTPS GET to the public Storage object route for the known uploaded binary, with publishable header only and no user credentials",
+  "status": 400,
+  "error": "Bucket not found",
+  "binary_delivered": false,
+  "bucket_public_readback": false,
+  "note": "No authenticated USER success/denial is inferred from this anonymous request. Separate live USER gate remains pending"
+}

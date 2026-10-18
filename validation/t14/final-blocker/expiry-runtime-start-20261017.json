@@ -1,0 +1,44 @@
+{
+  "scope": "T14 natural expiry LIVE probe only",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "verdict": "STARTED; neither expiry gate is PASS yet",
+  "fixture": {
+    "id": "e276c472-dc7a-49f1-a3a2-7614c2177c83",
+    "filename": "t14-cap-7b358129-5a80-40f7-92b3-12e4e96fd425.png",
+    "status": "PENDING",
+    "mime_type": "image/png",
+    "byte_size": 70,
+    "created_at": "2026-10-16T21:29:10.239970Z",
+    "expires_at": "2026-10-16T21:39:10.239970Z",
+    "storage_object_present": false
+  },
+  "browser_observations": {
+    "old_fixture_absent404_at": "2026-10-16T21:29:06.516Z",
+    "real_founder200_live_source_at": "2026-10-16T21:29:07.783Z",
+    "started_at": "2026-10-16T21:29:09.659Z"
+  },
+  "database_readback": {
+    "at": "2026-10-16T21:30:12.911057Z",
+    "all_assets": 1,
+    "trial_storage_objects": 0,
+    "owned_objects": 0,
+    "expired": false,
+    "migration_records": 10
+  },
+  "founder_confirmation": "Same fixture ID, FOUNDER200, browser kept open without reload, laptop kept awake",
+  "probe_schedule_jst": {
+    "reservation_after": "2026-10-17 06:39:12 JST",
+    "token_after_approximately": "2026-10-17 08:29:15 JST"
+  },
+  "execution": {
+    "runner": "Existing ordinary Chrome document with real HttpOnly Founder session",
+    "capability_location": "Original document module memory only; never extracted, copied or persisted",
+    "automatic_network_actions": "One reservation PUT, guarded cleanup, then one token PUT; no retry",
+    "signed_upload_ttl_seconds": 7200,
+    "clock_or_ttl_modified": false,
+    "duplicate_fixture_created": false,
+    "new_login_required": false
+  },
+  "acceptance": "Actual browser status/expiry classification plus independent TEST Storage/DB evidence required. Time elapsed alone cannot establish PASS.",
+  "restrictions": {"production_access":false,"migration_replay":false,"commit":false,"push":false,"deployment":false}
+}

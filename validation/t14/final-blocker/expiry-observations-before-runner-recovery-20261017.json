@@ -1,0 +1,52 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "trust": "Untrusted browser observations; corroborate HTTP/Storage and database before PASS",
+  "events": [
+    {
+      "received_at": "2026-10-16T21:29:06.562Z",
+      "at": "2026-10-16T21:29:06.516Z",
+      "test": "previous_expiry_fixture_absent",
+      "status": 404
+    },
+    {
+      "received_at": "2026-10-16T21:29:07.816Z",
+      "at": "2026-10-16T21:29:07.783Z",
+      "test": "expiry_only_real_founder",
+      "status": 200,
+      "live_source": true
+    },
+    {
+      "received_at": "2026-10-16T21:29:09.649Z",
+      "at": "2026-10-16T21:29:09.647Z",
+      "test": "owned_fixture",
+      "id": "e276c472-dc7a-49f1-a3a2-7614c2177c83",
+      "reservation_expires_at": "2026-10-16T21:39:10.239Z"
+    },
+    {
+      "received_at": "2026-10-16T21:29:09.661Z",
+      "at": "2026-10-16T21:29:09.659Z",
+      "test": "expiry_only_started",
+      "id": "e276c472-dc7a-49f1-a3a2-7614c2177c83"
+    },
+    {
+      "received_at": "2026-10-16T21:40:02.764Z",
+      "at": "2026-10-16T21:40:02.594Z",
+      "test": "expired_reservation_denied",
+      "status": 400
+    },
+    {
+      "received_at": "2026-10-16T21:40:11.104Z",
+      "at": "2026-10-16T21:40:11.102Z",
+      "test": "cleanup_response",
+      "id": "e276c472-dc7a-49f1-a3a2-7614c2177c83",
+      "status": 200,
+      "confirmed": true
+    },
+    {
+      "received_at": "2026-10-16T21:40:11.115Z",
+      "at": "2026-10-16T21:40:11.104Z",
+      "test": "timed_fixture_cleaned",
+      "id": "e276c472-dc7a-49f1-a3a2-7614c2177c83"
+    }
+  ]
+}
