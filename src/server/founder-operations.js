@@ -1,12 +1,13 @@
 import { ApiError, authorize, readJson, reply } from './api-foundation.js';
 import { readSessionToken } from './session-token.js';
+import { projectFounderContent } from './founder-content.js';
 import { FILE_CAP } from './media-assets.js';
 import {createFounderMediaHandler} from './founder-media.js';
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const keys = { assets:['action','cursor'], asset:['action','id'], delete_asset:['action','id'],
   relations:['action','content_id'], attach:['action','content_id','asset_id','role'],
-  detach:['action','content_id','asset_id'] };
+  detach:['action','content_id','asset_id'], release:['action','id'],withdraw:['action','id'] };
 const source = value => ['LOCAL_SQLITE_FIXTURE','SUPABASE_DATABASE'].includes(value);
 const headers = () => reply(400).headers;
 function conflict(message) {
@@ -54,7 +55,7 @@ export function createFounderOperationsHandler(dependencies) {
         if(new Set(relations.map(x=>x.asset_id)).size!==relations.length || ['PRIMARY','THUMBNAIL'].some(role=>relations.filter(x=>x.role===role).length>1))throw new ApiError(500);
         return reply(200,{relations});
       }
-      const r=await rpc(p.action==='delete_asset'?'delete_trial_asset_for_founder':'manage_trial_content_asset_draft',{payload:p});
+      const r=await rpc(['release','withdraw'].includes(p.action)?'transition_trial_content_checked':p.action==='delete_asset'?'delete_trial_asset_for_founder':'manage_trial_content_asset_draft',{payload:p});
       if(p.action==='delete_asset' && r?.outcome==='storage_delete_required' && r.id===p.id) {
         const result=await createFounderMediaHandler(dependencies)(new Request(request.url,{method:'POST',headers:request.headers,body:JSON.stringify({action:'delete',id:p.id})}));
         if(!result.ok)return result;
@@ -65,6 +66,11 @@ export function createFounderOperationsHandler(dependencies) {
       if(r?.outcome==='not_found')return reply(404);
       if(['not_draft','invalid_transition','asset_not_ready','linked_asset','relation_conflict'].includes(r?.outcome))return conflict('Operation rejected. Reload the current content and asset state.');
       if(r?.outcome!=='saved')throw new ApiError(500);
+      if(['release','withdraw'].includes(p.action)) {
+        const content=projectFounderContent(r.content,p.id);
+        if(content.state!==(p.action==='release'?'RELEASED':'WITHDRAWN'))throw new ApiError(500);
+        return reply(200,{content});
+      }
       if(p.action==='delete_asset') {
         if(r.id!==p.id || r.deleted!==true)throw new ApiError(500);
       }else if(!uuid.test(r.relation?.id??'') || r.relation?.content_id!==p.content_id || r.relation?.asset_id!==p.asset_id ||

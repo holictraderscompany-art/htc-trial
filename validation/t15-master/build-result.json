@@ -1,0 +1,8 @@
+{
+  "startedAt": "2026-10-18T08:02:48.562Z",
+  "completedAt": "2026-10-18T08:04:33.038Z",
+  "command": "pnpm build",
+  "exitCode": 0,
+  "target": "TEST only",
+  "configValuesNotLogged": true
+}

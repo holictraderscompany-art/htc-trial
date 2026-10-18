@@ -1,0 +1,7 @@
+# Operator mailbox and live server progress are not portable acceptance evidence.
+# Curated immutable runtime reports are retained separately.
+active-job.json
+*.claim.json
+*.receipt.json
+server-http.json
+*.tmp

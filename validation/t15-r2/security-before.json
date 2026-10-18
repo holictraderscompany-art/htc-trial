@@ -1,0 +1,725 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "capturedAt": "2026-10-18T04:39:05.850Z",
+  "snapshot": {
+    "rls": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "table": "trial_assets",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "table": "trial_content",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "table": "trial_content_assets",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=r/postgres"
+        ],
+        "rls": true,
+        "table": "user_profiles",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "supabase_storage_admin=a*r*w*d*D*x*t*m*/supabase_storage_admin",
+          "service_role=arwdDxtm/supabase_storage_admin",
+          "authenticated=arwd/supabase_storage_admin",
+          "anon=arwd/supabase_storage_admin",
+          "postgres=a*r*w*d*D*x*t*m*/supabase_storage_admin"
+        ],
+        "rls": true,
+        "table": "objects",
+        "schema": "storage"
+      }
+    ],
+    "bucket": {
+      "mime": [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "video/mp4",
+        "audio/mpeg",
+        "application/pdf"
+      ],
+      "limit": 6000000,
+      "private": true
+    },
+    "policies": [
+      {
+        "cmd": "ALL",
+        "qual": "( SELECT is_founder() AS is_founder)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "trial_assets",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_assets_founder",
+        "schemaname": "public",
+        "with_check": "( SELECT is_founder() AS is_founder)"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "( SELECT is_founder() AS is_founder)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "trial_content",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_content_founder",
+        "schemaname": "public",
+        "with_check": "( SELECT is_founder() AS is_founder)"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "( SELECT is_founder() AS is_founder)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "trial_content_assets",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_content_assets_founder",
+        "schemaname": "public",
+        "with_check": "( SELECT is_founder() AS is_founder)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "user_profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "user_profiles_select_own_or_founder",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "user_profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "user_profiles_update_own_or_founder_display_name",
+        "schemaname": "public",
+        "with_check": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))"
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text]))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "objects",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_assets_delete",
+        "schemaname": "storage",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "((trial_asset_storage_allowed(bucket_id, name, false) AND storage.allow_any_operation(ARRAY['object.get_authenticated'::text, 'object.get_authenticated_info'::text])) OR (trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text])))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "objects",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_assets_private_read",
+        "schemaname": "storage",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "objects",
+        "permissive": "PERMISSIVE",
+        "policyname": "trial_assets_upload",
+        "schemaname": "storage",
+        "with_check": "(storage.allow_any_operation(ARRAY['object.upload'::text, 'object.sign_upload_url'::text]) AND trial_asset_upload_allowed(bucket_id, name))"
+      }
+    ],
+    "profiles": [
+      {
+        "role": "USER",
+        "count": 1
+      },
+      {
+        "role": "FOUNDER",
+        "count": 1
+      }
+    ],
+    "functions": [
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "efb5013ed1b683d59af8572e30dc0481",
+        "name": "delete_trial_asset_for_founder(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "b77fc185283902ad8468ccf3fe283889",
+        "name": "founder_operation_counts()",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "c14a421c00e0221c47f116ee967c683a",
+        "name": "guard_linked_trial_asset()",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "11420ee8d31b28780791285b6a0493f9",
+        "name": "guard_trial_asset_object()",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "349da2176a4de0d9744a1ab3087a5ccf",
+        "name": "is_founder()",
+        "owner": "postgres",
+        "config": [
+          "search_path=public, pg_temp"
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "48b131b70b0d044a8aef1333079d7f97",
+        "name": "list_trial_content_for_founder(uuid)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "7ce3cf4ed27fe964c712fcb4b985aab9",
+        "name": "manage_trial_asset(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "f529b11e7398121fbb844b8268b807d8",
+        "name": "manage_trial_content_asset_draft(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "dceea7b82c5aa20ea5988a291e38184d",
+        "name": "manage_trial_content_asset(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "cca3e75dc8c4c54a3350e03ad01b891d",
+        "name": "manage_trial_content(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "2bc51dcb14b1c1405e34a0a6177d1b5d",
+        "name": "protect_user_profile_fields()",
+        "owner": "postgres",
+        "config": [
+          "search_path=public, pg_temp"
+        ],
+        "definer": false
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "4286c3751fce7a8e5d4faee391e635f7",
+        "name": "read_released_content_assets(uuid[])",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "7cde8eaa72a34b8f06eb1a6663872783",
+        "name": "read_released_content_page(integer,timestamp with time zone,uuid,text)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "68d2ce5db92f0c0cd60c95893f04cb04",
+        "name": "read_released_content(uuid)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "2133132a58e5d656acc04a6db5e81e97",
+        "name": "read_trial_assets_for_founder(uuid,uuid)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "=X/postgres",
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "544b02df5bc45987c09c233ac67ab38e",
+        "name": "set_user_profiles_updated_at()",
+        "owner": "postgres",
+        "config": [
+          "search_path=public, pg_temp"
+        ],
+        "definer": false
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "md5": "e3ca461f523877727f3d63b6cebd9820",
+        "name": "sync_auth_user_profile()",
+        "owner": "postgres",
+        "config": [
+          "search_path=public, auth, pg_temp"
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "5a86af5f603d374974cf6b79381d10a1",
+        "name": "transition_trial_content_checked(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "ac2e12f622807061d2b6f422f09a9671",
+        "name": "trial_asset_storage_allowed(text,text,boolean)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "743855b05523b214ce6880cfb4e3056f",
+        "name": "trial_asset_upload_allowed(text,text)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "7b75d601a5d81c85b24ec69f8bd7947f",
+        "name": "update_trial_content_draft(jsonb)",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true
+      }
+    ],
+    "default_acl": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "type": "r",
+        "owner": "postgres",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "type": "f",
+        "owner": "postgres",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=rwU/postgres",
+          "service_role=rwU/postgres"
+        ],
+        "type": "S",
+        "owner": "postgres",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_admin",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_admin",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_admin",
+        "namespace": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "type": "r",
+        "owner": "postgres",
+        "namespace": "storage"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "type": "f",
+        "owner": "postgres",
+        "namespace": "storage"
+      },
+      {
+        "acl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ],
+        "type": "S",
+        "owner": "postgres",
+        "namespace": "storage"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/supabase_auth_admin",
+          "dashboard_user=arwdDxtm/supabase_auth_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_auth_admin",
+        "namespace": "auth"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_auth_admin",
+          "dashboard_user=rwU/supabase_auth_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_auth_admin",
+        "namespace": "auth"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_auth_admin",
+        "namespace": "auth"
+      },
+      {
+        "acl": [
+          "postgres=a*r*wdDxtm/supabase_admin",
+          "dashboard_user=arwdDxtm/supabase_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_admin",
+        "namespace": "realtime"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_admin",
+          "dashboard_user=rwU/supabase_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_admin",
+        "namespace": "realtime"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_admin",
+          "dashboard_user=X/supabase_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_admin",
+        "namespace": "realtime"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_admin",
+        "namespace": "graphql_public"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_admin",
+        "namespace": "graphql_public"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_admin",
+        "namespace": "graphql_public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_admin",
+        "namespace": "graphql"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_admin",
+        "namespace": "graphql"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_admin",
+        "namespace": "graphql"
+      },
+      {
+        "acl": [
+          "postgres=a*r*w*d*D*x*t*m*/supabase_admin"
+        ],
+        "type": "r",
+        "owner": "supabase_admin",
+        "namespace": "extensions"
+      },
+      {
+        "acl": [
+          "postgres=X*/supabase_admin"
+        ],
+        "type": "f",
+        "owner": "supabase_admin",
+        "namespace": "extensions"
+      },
+      {
+        "acl": [
+          "postgres=r*w*U*/supabase_admin"
+        ],
+        "type": "S",
+        "owner": "supabase_admin",
+        "namespace": "extensions"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "type": "f",
+        "owner": "postgres",
+        "namespace": "-"
+      }
+    ],
+    "preservation": {
+      "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+      "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7"
+    }
+  }
+}

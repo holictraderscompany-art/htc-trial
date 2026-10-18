@@ -1,0 +1,41 @@
+// Local read-only acceptance/source checks; writes only this task's review reports.
+import fs from 'node:fs';
+import cp from 'node:child_process';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const dir='validation/t15-master/';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const git=(...args)=>cp.execFileSync('git',args,{encoding:'utf8'}).trimEnd();
+const base='94981054f4fa2493205b44919e37802322312c3c';
+assert.equal(git('branch','--show-current'),'codex/t15-r1-reconciliation');
+assert.equal(git('rev-parse','HEAD'),base,'This is the original pre-commit gate; inspect committed evidence instead of replaying it after commit.');
+assert.equal(git('diff','--cached','--name-only'),'');
+const r2c=read(dir+'r2c-preserved/final-verification.json');assert.equal(r2c.status,'PASS');assert.equal(r2c.cases.length,10);
+assert(r2c.cases.every(c=>c.status==='PASS'));assert.equal(sha(fs.readFileSync(dir+'r2c-preserved/final-verification.json')),'64bbbcadb9b89780b166c6a86c1f68d78e88363167e9bc148c0db692b85e88c3');
+const r2d=read(dir+'r2d-runtime.json');assert.equal(r2d.status,'PASS');assert.equal(r2d.cases.length,7);assert(r2d.cases.every(c=>c.status==='PASS'));assert.equal(r2d.preservation,true);assert.notEqual(r2d.sessions.A.proof.backend_pid,r2d.sessions.B.proof.backend_pid);assert.equal(r2d.cleanup.length,2);
+const r3=read(dir+'r3-runtime.json');assert.equal(r3.status,'PASS');assert.equal(r3.cases.length,18);assert(r3.cases.every(c=>c.status==='PASS'));assert.equal(r3.preservation,true);
+const user=r3.cases.find(c=>c.name==='Genuine USER API and route denial').details;
+assert(user.receipt.ok&&user.receipt.authenticated&&user.receipt.founder===false);assert.deepEqual(user.receipt.statuses,[403,403,403,403,200]);assert(user.privilegedMutationRpcNotCalled&&user.page200IsAccessDeniedNotAuthorizedWorkspace);
+const db=read(dir+'final-db-verification.json'),session=read(dir+'final-readonly-session-check.json');
+assert.equal(db.target,'uzhkzhmncxjplrdtdzgd');assert(db.sourceAndDatabaseExactMatch&&db.fixturesAndObjectsAbsent);assert.equal(db.history.length,10);
+for(const field of ['content','assets','relations','objects'])assert.equal(db.snapshot[field],0);
+assert.deepEqual(session.final,db.snapshot);assert.deepEqual(r2d.baseline,db.snapshot);assert.deepEqual(r3.after,db.snapshot);
+assert.equal(session.A.read_only,'on');assert.equal(session.B.read_only,'on');assert.notEqual(session.A.pid,session.B.pid);
+const build=read(dir+'build-evidence.json'),regression=read(dir+'regression-and-security.json');assert.equal(build.status,'PASS');assert.equal(build.exitCode,0);assert(build.compiled&&build.typeScriptPhasePassed&&build.publishingRouteBuilt&&build.T16RouteAbsent);assert.equal(sha(fs.readFileSync(dir+'build.log')),build.log_sha256);
+assert.equal(regression.application.freshMaster,216);assert.equal(regression.application.failures,0);assert.equal(regression.focusedIncluded,8);
+for(const f of read('validation/t15-r1/file-manifest.json').files)assert.equal(sha(fs.readFileSync(f.path)),f.sha256,f.path);
+const inventory=read('validation/t15-r1/baseline-inventory.json');let originalFiles=0;
+for(const tree of inventory.worktrees){const invoke=(...args)=>cp.execFileSync('git',args,{cwd:tree.root,encoding:'utf8'}).trimEnd();assert.equal(invoke('rev-parse','HEAD'),tree.head);assert.equal(invoke('status','--porcelain=v1','-uall'),tree.status);for(const row of tree.files){assert.equal(sha(fs.readFileSync(tree.root+'/'+row.path)),row.sha256);originalFiles++;}}
+const protectedPaths=read('validation/t15-r1/verification.json').protected_baseline_paths;
+assert.equal(git('diff','--name-only','HEAD','--',...protectedPaths),'');assert(!fs.existsSync('src/app/founder/operations/page.js'));assert(!fs.readFileSync('src/server/founder-operations.js','utf8').includes('founder_operation_counts'));
+const completed={at:new Date().toISOString(),target:db.target,status:'T15 FULL PASS — acceptance and pre-commit gate',R1:'LOCAL PASS; validated snapshot unchanged',R2C:'10/10 native PASS preserved',R2D:'7/7 native PASS',R3:'18/18 actual TEST checks PASS',application:regression.application,focusedIncluded:8,localBrowser:regression.localBrowser,sqlite:regression.sqlite,build:{status:'PASS',fresh:true,evidence:'build-evidence.json'},cleanup:db.snapshot,originalDirtyFilesPreserved:originalFiles,branch:git('branch','--show-current'),startingHead:base,commitAuthorization:'Master Directive section 14: one validated task-scoped local T15 commit',commitNotYetCreated:true,push:false,merge:false,deployment:false,productionAccess:false,T16T17Untouched:true,knownLimits:['DRAFT saves retain approved last-writer-wins semantics.','Native SQL contexts and LOCAL fixture tests remain distinct from genuine browser OAuth/HttpOnly evidence.','Two R2C worker progress files changed after completion; immutable SQL/result/final evidence remains byte-identical.','No production query was performed; target restrictions and unchanged worktrees establish the boundary.'],next:'Stage only commit-manifest.json includedPaths, verify exact staged bytes and scope, then create one local T15 commit. No push.'};
+fs.writeFileSync(dir+'completion-checkpoint.json',JSON.stringify(completed,null,2)+'\n');
+const files=[...new Set([...git('diff','--name-only').split('\n'),...git('ls-files','--others','--exclude-standard').split('\n')].filter(Boolean))].filter(f=>f!==dir+'commit-manifest.json').sort();
+const allowed=['.gitattributes','package.json','src/components/founder-operation-workspace.js','src/components/founder-views.js','src/server/founder-operations.js','tests/founder-access.test.js','tests/founder-assets.test.js','tests/founder-content.fixture.mjs','tests/local-sqlite-adapter.js','tests/founder-publishing.test.js','src/app/founder/publishing/page.js','docs/t15-master-validation.md','docs/t15-r1-integration-manifest.md','docs/t15-r1-reconciliation.md'];
+const patterns={jwt:/eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/,privilegedKey:/\b(?:sb_secret_[A-Za-z0-9_-]{12,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b/,privateKey:/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,credentialUri:/postgres(?:ql)?:\/\/[^\s:'"/]+:[^\s@'"/]+@/};
+const entries=[];
+for(const file of files){assert(allowed.includes(file)||/^validation\/t15-(?:master|r1|r2)\//.test(file),file);assert(!/(?:\.env(?:\.|$)|node_modules|\.sqlite(?:-|$)|\.next\/|\.claim\.json$|\.receipt\.json$|active-job\.json$|server-http\.json$)/i.test(file),file);const bytes=fs.readFileSync(file),text=bytes.toString('utf8');for(const [kind,re]of Object.entries(patterns))assert(!re.test(text),`Credential pattern ${kind} in ${file}; value suppressed`);entries.push({path:file,working_tree_sha256:sha(bytes),canonical_lf_sha256:sha(text.replaceAll('\r\n','\n'))});}
+const manifestPath=dir+'commit-manifest.json';
+fs.writeFileSync(manifestPath,JSON.stringify({scope:'T15 only; local commit, NO PUSH',branch:completed.branch,base,includedPaths:[...files,manifestPath].sort(),files:entries,manifestSelfHashExcluded:true,securityPatternHits:0,originalDirtyFilesPreserved:originalFiles,excluded:['operator mailbox claims/receipts/active-job and mutable server-http log','ignored build/test logs, .next and dependencies','all secrets, .env, SQLite databases and browser profiles','all original worktrees and T16/T17 work'],lineEndingNote:'Staged bytes must match working tree SHA-256 or its CRLF-to-LF canonicalization; migration archives are unchanged.'},null,2)+'\n');
+console.log(JSON.stringify({status:completed.status,R2D:7,R3:18,originalFilesPreserved:originalFiles,includedFiles:files.length+1,secretHits:0,manifest:manifestPath}));

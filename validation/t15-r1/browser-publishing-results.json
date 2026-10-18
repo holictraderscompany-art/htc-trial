@@ -1,0 +1,101 @@
+{
+  "scope": "T15-R1 LOCAL SQLite/browser only; synthetic identity and metadata; no live OAuth, Storage or PostgreSQL concurrency",
+  "results": [
+    {
+      "name": "Protected publishing UI and explicit LOCAL fixture source",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Publishing navigation present; T16 navigation absent",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "No publishing operation without content selection",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Publishing view has no upload or asset mutation controls",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "DRAFT release allowed and withdrawal disabled",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "RELEASED readback disables duplicate release",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Duplicate release API returns409",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "WITHDRAWN readback allows existing re-release contract",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Duplicate withdrawal API returns409",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Re-release confirmed by current readback",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Ambiguous committed transition blocks blind retry",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Explicit reload recovers committed withdrawal",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 summary operation still rejected",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Publishing responsive without overflow 375",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Publishing responsive without overflow 768",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Publishing responsive without overflow 1440",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Expired session clears content and disables transitions",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER route denied without publishing controls",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER server/API denial release",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER server/API denial withdraw",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous direct URL redirects to sign-in",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous API denial release",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous API denial withdraw",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "No uncaught publishing browser JavaScript errors",
+      "result": "LOCAL PASS"
+    }
+  ]
+}

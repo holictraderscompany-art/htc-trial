@@ -1,0 +1,51 @@
+{
+  "verifiedAt": "2026-10-18T07:56:37.938Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "r2dPassed": 7,
+  "r2dCleanupPreserved": true,
+  "r3FounderPassed": 17,
+  "r3CleanupPreserved": true,
+  "doubleSubmit": [
+    {
+      "action": "release",
+      "windowStart": "2026-10-18T07:50:07.019Z",
+      "receiptAt": "2026-10-18T07:50:23.153Z",
+      "checkedRpcCalls": 1,
+      "checkedRpcCompletedAt": "2026-10-18T07:50:22.285Z",
+      "doubleClickTested": true,
+      "uiConfirmationAfterServer": true
+    },
+    {
+      "action": "withdraw",
+      "windowStart": "2026-10-18T07:50:37.791Z",
+      "receiptAt": "2026-10-18T07:50:46.186Z",
+      "checkedRpcCalls": 1,
+      "checkedRpcCompletedAt": "2026-10-18T07:50:44.374Z",
+      "doubleClickTested": true,
+      "uiConfirmationAfterServer": true
+    }
+  ],
+  "officialStorageDeletes": [
+    {
+      "at": "2026-10-18T07:47:36.695Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:40.300Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:14.336Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    }
+  ],
+  "remaining": null,
+  "USER": "LIVE PASS; receipt and server role/403/RPC non-call correlated in r3-runtime.json",
+  "r3TotalChecks": 18
+}

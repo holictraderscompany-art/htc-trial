@@ -1,0 +1,1030 @@
+{
+  "scope": "T15-R2C content/authorization ONLY",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "status": "PASS",
+  "sessions": {
+    "A": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Direct IPv6",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)",
+      "localClientPid": 19708,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 10,
+        "backend_pid": 748191,
+        "backend_ssl": true,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-18T05:23:27.438Z",
+      "finalProof": {
+        "at": "2026-10-18T05:32:50.152092+00:00",
+        "pid": 748191,
+        "role": "postgres",
+        "read_only": "on",
+        "subject_cleared": true
+      }
+    },
+    "B": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Direct IPv6",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)",
+      "localClientPid": 19088,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 10,
+        "backend_pid": 748222,
+        "backend_ssl": true,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-18T05:25:57.580Z",
+      "finalProof": {
+        "at": "2026-10-18T05:32:50.129975+00:00",
+        "pid": 748222,
+        "role": "postgres",
+        "read_only": "on",
+        "subject_cleared": true
+      }
+    }
+  },
+  "fixtureTag": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e",
+  "fixtureIds": [
+    "3712b69b-7a7e-4799-ae89-4e9d8e2698df",
+    "ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32",
+    "ab495e69-b122-409d-9ea7-cb610b7408d4",
+    "a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0",
+    "1a1e383e-acd5-4de8-a549-ec976dc2b2f7",
+    "ce7c79c9-16b6-4ff2-8595-2cc567408b29",
+    "8638207c-07e4-4e27-a9af-465265991a0c",
+    "86db1234-3fda-48fd-896e-eebeaba72820",
+    "a7f88296-91e2-4922-9608-779496d6ca08",
+    "62f2cfc8-af0c-45d8-be13-ba239aee023b"
+  ],
+  "cases": [
+    {
+      "id": "A1/G1",
+      "status": "PASS",
+      "fixtureId": "3712b69b-7a7e-4799-ae89-4e9d8e2698df",
+      "startedAt": "2026-10-18T05:30:58.553Z",
+      "completedAt": "2026-10-18T05:31:04.955Z",
+      "holder": {
+        "at": "2026-10-18T05:31:03.240457+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "3712b69b-7a7e-4799-ae89-4e9d8e2698df",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:30:59.455623+00:00",
+            "released_at": "2026-10-18T05:30:59.455623+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:30:59.455623+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:04.894879+00:00",
+        "pid": 748222,
+        "rpc": {
+          "outcome": "invalid_transition"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:00.396025+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:04.527214+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:30:59.455623+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:00.396025+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:04.97128+00:00",
+        "pid": 748191,
+        "event": "COMMIT"
+      },
+      "rollback": false,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "B1",
+      "status": "PASS",
+      "fixtureId": "ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32",
+      "startedAt": "2026-10-18T05:31:05.504Z",
+      "completedAt": "2026-10-18T05:31:11.299Z",
+      "holder": {
+        "at": "2026-10-18T05:31:08.667538+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "WITHDRAWN",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:06.367747+00:00",
+            "released_at": "2026-10-18T05:30:58.368631+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:06.367747+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:09.723824+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:07.11132+00:00",
+            "released_at": "2026-10-18T05:31:07.11132+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:07.11132+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:09.165767+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:06.367747+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:07.11132+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:10.333961+00:00",
+        "pid": 748191,
+        "event": "COMMIT"
+      },
+      "rollback": false,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "B2/F1",
+      "status": "PASS",
+      "fixtureId": "ab495e69-b122-409d-9ea7-cb610b7408d4",
+      "startedAt": "2026-10-18T05:31:13.235Z",
+      "completedAt": "2026-10-18T05:31:18.754Z",
+      "holder": {
+        "at": "2026-10-18T05:31:17.290823+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "ab495e69-b122-409d-9ea7-cb610b7408d4",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "WITHDRAWN",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:14.16018+00:00",
+            "released_at": "2026-10-18T05:30:58.368631+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:14.16018+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:18.942244+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "ab495e69-b122-409d-9ea7-cb610b7408d4",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "WITHDRAWN",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:16.000881+00:00",
+            "released_at": "2026-10-18T05:30:58.368631+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:16.000881+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:18.204924+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:14.16018+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:16.000881+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:19.034386+00:00",
+        "pid": 748191,
+        "event": "ROLLBACK"
+      },
+      "rollback": true,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "WITHDRAWN",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "id": "D1",
+      "status": "PASS",
+      "fixtureId": "a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0",
+      "startedAt": "2026-10-18T05:31:19.853Z",
+      "completedAt": "2026-10-18T05:31:35.522Z",
+      "holder": {
+        "at": "2026-10-18T05:31:27.659085+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:20.602672+00:00",
+            "released_at": "2026-10-18T05:31:20.602672+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:20.602672+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:35.30424+00:00",
+        "pid": 748222,
+        "rpc": {
+          "outcome": "not_draft"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:21.535661+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:34.571277+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:20.602672+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:21.535661+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:35.384771+00:00",
+        "pid": 748191,
+        "event": "COMMIT"
+      },
+      "rollback": false,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "D2",
+      "status": "PASS",
+      "fixtureId": "1a1e383e-acd5-4de8-a549-ec976dc2b2f7",
+      "startedAt": "2026-10-18T05:31:36.405Z",
+      "completedAt": "2026-10-18T05:31:39.848Z",
+      "holder": {
+        "at": "2026-10-18T05:31:38.909652+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "1a1e383e-acd5-4de8-a549-ec976dc2b2f7",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+            "state": "DRAFT",
+            "title": "Edited",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:37.239816+00:00",
+            "released_at": null
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:37.239816+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:39.965628+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "1a1e383e-acd5-4de8-a549-ec976dc2b2f7",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+            "state": "RELEASED",
+            "title": "Edited",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:38.135144+00:00",
+            "released_at": "2026-10-18T05:31:38.135144+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:38.135144+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:39.346013+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:37.239816+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:38.135144+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:40.050071+00:00",
+        "pid": 748191,
+        "event": "COMMIT"
+      },
+      "rollback": false,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+        "state": "RELEASED",
+        "title": "Edited",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "F2",
+      "status": "PASS",
+      "fixtureId": "ce7c79c9-16b6-4ff2-8595-2cc567408b29",
+      "startedAt": "2026-10-18T05:31:41.609Z",
+      "completedAt": "2026-10-18T05:31:46.201Z",
+      "holder": {
+        "at": "2026-10-18T05:31:44.805255+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "ce7c79c9-16b6-4ff2-8595-2cc567408b29",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:42.698847+00:00",
+            "released_at": "2026-10-18T05:31:42.698847+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:42.698847+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:46.165278+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "ce7c79c9-16b6-4ff2-8595-2cc567408b29",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+            "state": "DRAFT",
+            "title": "Edited",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:43.598561+00:00",
+            "released_at": null
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:43.598561+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:45.353824+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:42.698847+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:43.598561+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:46.521387+00:00",
+        "pid": 748191,
+        "event": "ROLLBACK"
+      },
+      "rollback": true,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+        "state": "DRAFT",
+        "title": "Edited",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "id": "F3",
+      "status": "PASS",
+      "fixtureId": "8638207c-07e4-4e27-a9af-465265991a0c",
+      "startedAt": "2026-10-18T05:31:46.797Z",
+      "completedAt": "2026-10-18T05:31:51.483Z",
+      "holder": {
+        "at": "2026-10-18T05:31:50.770503+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "8638207c-07e4-4e27-a9af-465265991a0c",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Edited",
+            "state": "DRAFT",
+            "title": "Edited",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:47.641652+00:00",
+            "released_at": null
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:47.641652+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:51.669978+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "8638207c-07e4-4e27-a9af-465265991a0c",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:48.960803+00:00",
+            "released_at": "2026-10-18T05:31:48.960803+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:48.960803+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:51.285874+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:47.641652+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:48.960803+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:51.747376+00:00",
+        "pid": 748191,
+        "event": "ROLLBACK"
+      },
+      "rollback": true,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "G2",
+      "status": "PASS",
+      "fixtureId": "86db1234-3fda-48fd-896e-eebeaba72820",
+      "startedAt": "2026-10-18T05:31:52.233Z",
+      "completedAt": "2026-10-18T05:31:55.580Z",
+      "holder": {
+        "at": "2026-10-18T05:31:54.679039+00:00",
+        "pid": 748191,
+        "rpc": {
+          "content": {
+            "id": "86db1234-3fda-48fd-896e-eebeaba72820",
+            "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+            "state": "RELEASED",
+            "title": "Before",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T05:30:58.368631+00:00",
+            "updated_at": "2026-10-18T05:31:53.148118+00:00",
+            "released_at": "2026-10-18T05:31:53.148118+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:53.148118+00:00"
+      },
+      "waiter": {
+        "at": "2026-10-18T05:31:55.436633+00:00",
+        "pid": 748222,
+        "rpc": {
+          "outcome": "invalid_transition"
+        },
+        "sqlstate": "00000",
+        "transaction_start": "2026-10-18T05:31:54.009491+00:00"
+      },
+      "overlapAndBlocking": {
+        "at": "2026-10-18T05:31:55.181839+00:00",
+        "blockers": [
+          748191
+        ],
+        "holder_pid": 748191,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T05:31:53.148118+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:54.009491+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "holderCompletion": {
+        "at": "2026-10-18T05:31:55.595474+00:00",
+        "pid": 748191,
+        "event": "COMMIT"
+      },
+      "rollback": false,
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "RELEASED",
+        "title": "Before",
+        "released_at_null": false
+      },
+      "publicRead": {
+        "visible": true
+      }
+    },
+    {
+      "id": "H1",
+      "status": "PASS",
+      "fixtureId": "a7f88296-91e2-4922-9608-779496d6ca08",
+      "startedAt": "2026-10-18T05:31:56.484Z",
+      "completedAt": "2026-10-18T05:32:00.288Z",
+      "role": "USER",
+      "denials": [
+        {
+          "action": "release",
+          "at": "2026-10-18T05:31:59.068009+00:00",
+          "pid": 748222,
+          "sqlstate": "42501",
+          "transaction_start": "2026-10-18T05:31:57.979379+00:00"
+        },
+        {
+          "action": "withdraw",
+          "at": "2026-10-18T05:31:59.414186+00:00",
+          "pid": 748222,
+          "sqlstate": "42501",
+          "transaction_start": "2026-10-18T05:31:57.979379+00:00"
+        }
+      ],
+      "overlap": {
+        "at": "2026-10-18T05:32:00.167473+00:00",
+        "blockers": [],
+        "holder_pid": 748191,
+        "wait_event": "ClientRead",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "idle in transaction",
+        "wait_event_type": "Client",
+        "holder_xact_start": "2026-10-18T05:31:57.299966+00:00",
+        "waiter_xact_start": "2026-10-18T05:31:57.979379+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "note": "Independent overlapping transactions; authorization denied before row lock, so no lock wait is expected",
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "DRAFT",
+        "title": "Before",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    },
+    {
+      "id": "H2",
+      "status": "PASS",
+      "fixtureId": "62f2cfc8-af0c-45d8-be13-ba239aee023b",
+      "startedAt": "2026-10-18T05:32:00.822Z",
+      "completedAt": "2026-10-18T05:32:06.281Z",
+      "role": "anon",
+      "denials": [
+        {
+          "action": "release",
+          "at": "2026-10-18T05:32:04.349621+00:00",
+          "pid": 748222,
+          "sqlstate": "42501",
+          "transaction_start": "2026-10-18T05:32:02.719573+00:00"
+        },
+        {
+          "action": "withdraw",
+          "at": "2026-10-18T05:32:04.761779+00:00",
+          "pid": 748222,
+          "sqlstate": "42501",
+          "transaction_start": "2026-10-18T05:32:02.719573+00:00"
+        }
+      ],
+      "overlap": {
+        "at": "2026-10-18T05:32:05.628421+00:00",
+        "blockers": [],
+        "holder_pid": 748191,
+        "wait_event": "ClientRead",
+        "waiter_pid": 748222,
+        "holder_locks": [
+          {
+            "mode": "RowShareLock",
+            "type": "relation",
+            "granted": true
+          },
+          {
+            "mode": "RowExclusiveLock",
+            "type": "relation",
+            "granted": true
+          }
+        ],
+        "holder_state": "active",
+        "waiter_state": "idle in transaction",
+        "wait_event_type": "Client",
+        "holder_xact_start": "2026-10-18T05:32:01.728263+00:00",
+        "waiter_xact_start": "2026-10-18T05:32:02.719573+00:00",
+        "holder_backend_start": "2026-10-18T05:23:24.992596+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "note": "Independent overlapping transactions; authorization denied before row lock, so no lock wait is expected",
+      "final": {
+        "body": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e Before",
+        "state": "DRAFT",
+        "title": "Before",
+        "released_at_null": true
+      },
+      "publicRead": {
+        "visible": false
+      }
+    }
+  ],
+  "authModel": "Existing TEST profile subject + SET LOCAL ROLE authenticated/anon. Actual DB authorization; not OAuth/browser proof.",
+  "storageMutation": false,
+  "sourceChanges": false,
+  "migrationsChanged": false,
+  "startedAt": "2026-10-18T05:30:54.512Z",
+  "preflight": {
+    "A": {
+      "at": "2026-10-18T05:30:56.409317+00:00",
+      "pid": 748191,
+      "role": "postgres",
+      "database": "postgres",
+      "read_only": "on",
+      "backend_start": "2026-10-18T05:23:24.992596+00:00"
+    },
+    "B": {
+      "at": "2026-10-18T05:30:57.030839+00:00",
+      "pid": 748222,
+      "role": "postgres",
+      "database": "postgres",
+      "read_only": "on",
+      "backend_start": "2026-10-18T05:25:56.141731+00:00"
+    }
+  },
+  "baseline": {
+    "asset_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "asset_count": 0,
+    "policy_hash": "5c7f41088daac317406671522537c9b8",
+    "content_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "profile_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "content_count": 0,
+    "function_hash": "03ead7b6c35a76edee0f5fc4677e1ef0",
+    "migration_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "relation_count": 0,
+    "migration_count": 10,
+    "default_acl_hash": "8380215e5138777424f33c3a2d344ded",
+    "auth_trigger_hash": "694e661685698cae9b6f02f3a5b1c046",
+    "table_security_hash": "bc8606a8672f118d699270463dd76550"
+  },
+  "cleanupPreflight": {
+    "relations": 0,
+    "collisions": 0,
+    "delete_triggers": 0
+  },
+  "fixturesCreated": true,
+  "cleanup": {
+    "remaining_content": 0,
+    "remaining_relations": 0
+  },
+  "after": {
+    "asset_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "asset_count": 0,
+    "policy_hash": "5c7f41088daac317406671522537c9b8",
+    "content_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "profile_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "content_count": 0,
+    "function_hash": "03ead7b6c35a76edee0f5fc4677e1ef0",
+    "migration_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "relation_count": 0,
+    "migration_count": 10,
+    "default_acl_hash": "8380215e5138777424f33c3a2d344ded",
+    "auth_trigger_hash": "694e661685698cae9b6f02f3a5b1c046",
+    "table_security_hash": "bc8606a8672f118d699270463dd76550"
+  },
+  "securityHistoryProfilesAndNonfixtureDataUnchanged": true,
+  "completedAt": "2026-10-18T05:32:08.905Z",
+  "git": {
+    "branch": "codex/t15-r1-reconciliation",
+    "head": "94981054f4fa2493205b44919e37802322312c3c",
+    "status": [
+      " M .gitattributes",
+      " M package.json",
+      " M src/components/founder-operation-workspace.js",
+      " M src/components/founder-views.js",
+      " M src/server/founder-operations.js",
+      " M tests/founder-access.test.js",
+      " M tests/founder-assets.test.js",
+      " M tests/founder-content.fixture.mjs",
+      " M tests/local-sqlite-adapter.js",
+      "?? docs/t15-r1-integration-manifest.md",
+      "?? docs/t15-r1-reconciliation.md",
+      "?? src/app/founder/publishing/page.js",
+      "?? tests/founder-publishing.test.js",
+      "?? validation/t15-r1/baseline-inventory.json",
+      "?? validation/t15-r1/baseline-inventory.sha256",
+      "?? validation/t15-r1/browser-publishing-results.json",
+      "?? validation/t15-r1/browser-publishing.js",
+      "?? validation/t15-r1/browser-t14-results.json",
+      "?? validation/t15-r1/browser-t14.js",
+      "?? validation/t15-r1/file-manifest.json",
+      "?? validation/t15-r1/log-hashes.json",
+      "?? validation/t15-r1/migration-checkout-recovery.json",
+      "?? validation/t15-r1/verification.json",
+      "?? validation/t15-r1/verify-reconciliation.mjs",
+      "?? validation/t15-r2/checkpoint.json",
+      "?? validation/t15-r2/plan.md",
+      "?? validation/t15-r2/security-before.json"
+    ],
+    "stagedFiles": "",
+    "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "r1ManifestMatched": 23,
+    "repositoryChangesByR2C": false
+  },
+  "independentPostVerification": {
+    "assets": 0,
+    "content": 0,
+    "sessions": [
+      {
+        "pid": 746817,
+        "state": "idle",
+        "xact_start": null,
+        "application": "htc_t15_r2b_direct_A",
+        "backend_start": "2026-10-18T05:09:22.648934+00:00"
+      },
+      {
+        "pid": 747362,
+        "state": "idle",
+        "xact_start": null,
+        "application": "htc_t15_r2b_direct_B",
+        "backend_start": "2026-10-18T05:11:20.843035+00:00"
+      },
+      {
+        "pid": 748191,
+        "state": "idle",
+        "xact_start": null,
+        "application": "htc_t15_r2c_A",
+        "backend_start": "2026-10-18T05:23:24.992596+00:00"
+      },
+      {
+        "pid": 748222,
+        "state": "idle",
+        "xact_start": null,
+        "application": "htc_t15_r2c_B",
+        "backend_start": "2026-10-18T05:25:56.141731+00:00"
+      }
+    ],
+    "relations": 0,
+    "verified_at": "2026-10-18T05:32:47.123591+00:00",
+    "migration_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "migration_count": 10
+  },
+  "preservedR2BConnections": [
+    {
+      "pid": 746817,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2b_direct_A",
+      "backend_start": "2026-10-18T05:09:22.648934+00:00"
+    },
+    {
+      "pid": 747362,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2b_direct_B",
+      "backend_start": "2026-10-18T05:11:20.843035+00:00"
+    }
+  ],
+  "remainingScope": "Seven asset scenarios and R3 LIVE publishing not executed",
+  "runnerSha256": "52e56c71b06c7356ad59d72d20dec8f84369b9b58bc4fa1b2f4d1251dd499f2e"
+}

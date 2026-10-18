@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-18T08:07:17.344Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "status": "T15 FULL PASS — acceptance and pre-commit gate",
+  "R1": "LOCAL PASS; validated snapshot unchanged",
+  "R2C": "10/10 native PASS preserved",
+  "R2D": "7/7 native PASS",
+  "R3": "18/18 actual TEST checks PASS",
+  "application": {
+    "historical": 216,
+    "freshMaster": 216,
+    "failures": 0,
+    "freshMasterDurationMs": 29443.5249,
+    "freshMasterEvidence": "Actual tool command output earlier in this Master execution; raw stdout was not redirected to a log"
+  },
+  "focusedIncluded": 8,
+  "localBrowser": {
+    "publishing": 24,
+    "T14": 20
+  },
+  "sqlite": {
+    "T13": 12,
+    "T14": 3
+  },
+  "build": {
+    "status": "PASS",
+    "fresh": true,
+    "evidence": "build-evidence.json"
+  },
+  "cleanup": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  },
+  "originalDirtyFilesPreserved": 112,
+  "branch": "codex/t15-r1-reconciliation",
+  "startingHead": "94981054f4fa2493205b44919e37802322312c3c",
+  "commitAuthorization": "Master Directive section 14: one validated task-scoped local T15 commit",
+  "commitNotYetCreated": true,
+  "push": false,
+  "merge": false,
+  "deployment": false,
+  "productionAccess": false,
+  "T16T17Untouched": true,
+  "knownLimits": [
+    "DRAFT saves retain approved last-writer-wins semantics.",
+    "Native SQL contexts and LOCAL fixture tests remain distinct from genuine browser OAuth/HttpOnly evidence.",
+    "Two R2C worker progress files changed after completion; immutable SQL/result/final evidence remains byte-identical.",
+    "No production query was performed; target restrictions and unchanged worktrees establish the boundary."
+  ],
+  "next": "Stage only commit-manifest.json includedPaths, verify exact staged bytes and scope, then create one local T15 commit. No push."
+}

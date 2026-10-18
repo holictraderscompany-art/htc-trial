@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-18T07:54:26.756Z",
+  "branch": "codex/t15-r1-reconciliation",
+  "head": "94981054f4fa2493205b44919e37802322312c3c",
+  "preservedWorktrees": [
+    {
+      "head": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+      "branch": "main",
+      "files": 30,
+      "status": "PASS"
+    },
+    {
+      "head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+      "branch": "",
+      "files": 12,
+      "status": "PASS"
+    },
+    {
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "branch": "codex/t13-precommit-candidate",
+      "files": 0,
+      "status": "PASS"
+    },
+    {
+      "head": "94981054f4fa2493205b44919e37802322312c3c",
+      "branch": "codex/t14-signed-direct",
+      "files": 5,
+      "status": "PASS"
+    },
+    {
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "branch": "codex/t15-t16-continuation",
+      "files": 65,
+      "status": "PASS"
+    }
+  ],
+  "originalDirtyFilesUnchanged": 112,
+  "r1SnapshotFilesMatched": 23,
+  "protectedPaths": [
+    "src/server/api-foundation.js",
+    "src/server/session-token.js",
+    "src/server/trial-session.js",
+    "src/server/founder-content.js",
+    "src/components/founder-content-workspace.js",
+    "src/server/media-assets.js",
+    "src/server/founder-media.js",
+    "src/components/founder-direct-upload.js",
+    "tests/founder-media.test.js",
+    "supabase/migrations",
+    "validation/test-db"
+  ],
+  "T16RouteAbsent": true,
+  "T16SummaryAbsent": true,
+  "stagedFiles": "",
+  "mainUnchanged": true
+}

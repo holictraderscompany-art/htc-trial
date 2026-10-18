@@ -43,13 +43,14 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
       return result;
     } catch (error) { db.exec('ROLLBACK'); throw error; }
   }
-  function manage(payload, draftOnly = false) {
+  function manage(payload, draftOnly = false, checked = false) {
     const p = structuredClone(payload);
     if (draftOnly) {
       if (Object.hasOwn(p, 'action')) throw Error('Forbidden draft field');
       p.action = 'update';
     }
     validateContentRequest(p);
+    if (checked && !['release','withdraw'].includes(p.action)) throw Error('Invalid checked transition');
     return transaction(() => {
       if (p.action === 'create') {
         const row = { id: randomUUID(), category: p.category, title: p.title, body: p.body,
@@ -57,7 +58,11 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
         save(row); return row;
       }
       const row = read(p.id);
-      if (!row) return draftOnly ? { outcome: 'not_found' } : null;
+      if (!row) return draftOnly || checked ? { outcome: 'not_found' } : null;
+      if (checked) {
+        if ((p.action==='release' && row.state==='RELEASED') || (p.action==='withdraw' && row.state!=='RELEASED')) return {outcome:'invalid_transition'};
+        if (p.action==='release' && db.prepare("SELECT count(*) n FROM relations r JOIN assets a ON a.id=r.asset_id WHERE r.content_id=? AND (a.status<>'READY' OR a.object_matches<>1)").get(row.id).n) return {outcome:'asset_not_ready'};
+      }
       if (p.action === 'update') {
         if (draftOnly && row.state !== 'DRAFT') return { outcome: 'not_draft' };
         Object.assign(row, { category: p.category, title: p.title, body: p.body,
@@ -69,7 +74,7 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
         if (row.state !== 'RELEASED') throw Error('Invalid withdrawal');
         Object.assign(row, { state: 'WITHDRAWN', updated_at: stamp() });
       }
-      save(row); return draftOnly ? { outcome: 'saved', content: row } : row;
+      save(row); return draftOnly || checked ? { outcome: 'saved', content: row } : row;
     });
   }
   function relate(p, draftOnly = false) {
@@ -130,6 +135,7 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
     if (url.pathname === '/rest/v1/rpc/list_trial_content_for_founder') result = db.prepare('SELECT data FROM content WHERE id>? ORDER BY id LIMIT 51').all(args.after_id ?? '').map(r => JSON.parse(r.data));
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content') result = manage(args.payload);
     else if (url.pathname === '/rest/v1/rpc/update_trial_content_draft') result = manage(args.payload, true);
+    else if (url.pathname === '/rest/v1/rpc/transition_trial_content_checked') result = manage(args.payload,false,true);
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset') result = relate(args.payload);
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset_draft') result = relate(args.payload,true);
     else if (url.pathname === '/rest/v1/rpc/read_trial_assets_for_founder') result = {source:'LOCAL_SQLITE_FIXTURE',items:db.prepare('SELECT * FROM assets WHERE id>? AND (? IS NULL OR id=?) ORDER BY id LIMIT 51').all(args.after_id??'',args.asset_id,args.asset_id).map(a=>({...JSON.parse(a.data),id:a.id,status:a.status,mime_type:a.mime_type}))};

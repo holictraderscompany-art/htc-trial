@@ -1,0 +1,811 @@
+{
+  "scope": "T15-R2D native independent sessions and actual TEST Storage",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "status": "PASS",
+  "sessions": {
+    "A": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Direct IPv6",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)",
+      "localClientPid": 13380,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 10,
+        "backend_pid": 756037,
+        "backend_ssl": true,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-18T07:16:28.590Z"
+    },
+    "B": {
+      "status": "PASS",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "method": "Direct IPv6",
+      "client": "psql 17.11",
+      "sslmode": "verify-full",
+      "clientTls": "SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)",
+      "localClientPid": 19088,
+      "proof": {
+        "role": "postgres",
+        "database": "postgres",
+        "core_hash": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185",
+        "read_only": "on",
+        "migrations": 10,
+        "backend_pid": 748222,
+        "backend_ssl": true,
+        "project_ref": null,
+        "server_version": "17.11"
+      },
+      "connectedAt": "2026-10-18T05:25:57.580Z"
+    }
+  },
+  "fixtureManifest": {
+    "target": "uzhkzhmncxjplrdtdzgd",
+    "tag": "T15-MASTER-20261018-01",
+    "created": false,
+    "assets": [
+      {
+        "label": "a",
+        "id": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+        "request_id": "7d3bfd44-49e6-4f5d-96cb-b0edc8a8f609",
+        "asset_type": "IMAGE",
+        "bucket": "trial-assets",
+        "path": "image/1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773/asset.png",
+        "filename": "t15-master-20261018-a.png",
+        "mime": "image/png",
+        "bytes": 70,
+        "binaryRequired": true,
+        "initial": "PENDING"
+      },
+      {
+        "label": "b",
+        "id": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+        "request_id": "7d3159fb-dae8-4222-b9c9-402106d43439",
+        "asset_type": "IMAGE",
+        "bucket": "trial-assets",
+        "path": "image/49d28bb4-21da-49f7-a5f4-6b719b0859a2/asset.png",
+        "filename": "t15-master-20261018-b.png",
+        "mime": "image/png",
+        "bytes": 70,
+        "binaryRequired": true,
+        "initial": "PENDING"
+      },
+      {
+        "label": "pending",
+        "id": "5705c7a2-c255-41a1-b3e0-885d6b34fa44",
+        "request_id": "c7e54b5f-f6e6-4ed4-95d8-af8a7f023624",
+        "asset_type": "IMAGE",
+        "bucket": "trial-assets",
+        "path": "image/5705c7a2-c255-41a1-b3e0-885d6b34fa44/asset.png",
+        "filename": "t15-master-20261018-pending.png",
+        "mime": "image/png",
+        "bytes": 70,
+        "binaryRequired": false,
+        "initial": "PENDING"
+      }
+    ],
+    "contents": [
+      {
+        "case": "C1/E1",
+        "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d523",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "C2/D3",
+        "id": "81c1fdc7-5360-4801-a4b9-e476da769be8",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "C3/D4",
+        "id": "9ce26494-cf0a-4429-bf7a-3aa4f6366147",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "C4",
+        "id": "c9a59845-f0c7-4bfb-9719-57d412c20e13",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "C5",
+        "id": "26b6ac6e-72f8-49ac-a4af-162c4fc0d0a1",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "D5/F4",
+        "id": "6af9e659-dfbc-4657-82cf-9e8235163c4d",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "E2/F5",
+        "id": "71deac31-dd57-4e26-8742-07d4beea01a5",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "C1/E1-secondary",
+        "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d524",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "R3",
+        "id": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      },
+      {
+        "case": "R3-readiness",
+        "id": "bffda474-099a-4dcc-9c7e-9df90fbf054f",
+        "state": "DRAFT",
+        "tag": "T15-MASTER-20261018-01"
+      }
+    ],
+    "png_sha256": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+    "setup": "Explicit TEST-only native admin PENDING fixture rows with fixed IDs. No READY bypass. Existing authenticated Founder HTTP signs, uploads real bytes and finalizes. No Storage catalog insertion/deletion via SQL.",
+    "cleanup": "All related releases ROLLBACK; C4 B always ROLLBACK. Detach DRAFT relations through checked RPC; actual Founder HTTP delete bridge and Storage API; narrowly owned content teardown as R2C."
+  },
+  "setupAttempted": true,
+  "cases": [
+    {
+      "id": "C1/E1",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:36.748606+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:36.471553+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:46:37.656869+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:36.962072+00:00"
+        }
+      },
+      "first": {
+        "at": "2026-10-18T07:46:37.794832+00:00",
+        "pid": 756037,
+        "rpc": {
+          "content": {
+            "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d523",
+            "body": "T15-MASTER-20261018-01 C1/E1",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C1/E1",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:36.471553+00:00",
+            "released_at": "2026-10-18T07:46:36.471553+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "second": {
+        "at": "2026-10-18T07:46:38.188804+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d524",
+            "body": "T15-MASTER-20261018-01 C1/E1-secondary",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C1/E1-secondary",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:36.962072+00:00",
+            "released_at": "2026-10-18T07:46:36.962072+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "proof": {
+        "at": "2026-10-18T07:46:38.561614+00:00",
+        "blockers": [],
+        "holder_pid": 756037,
+        "wait_event": "ClientRead",
+        "waiter_pid": 748222,
+        "waiter_state": "idle in transaction",
+        "wait_event_type": "Client",
+        "holder_xact_start": "2026-10-18T07:46:36.471553+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:36.962072+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "probes": [
+        {
+          "at": "2026-10-18T07:46:38.961854+00:00",
+          "pid": 756037,
+          "sqlstate": "55P03"
+        },
+        {
+          "at": "2026-10-18T07:46:40.283568+00:00",
+          "pid": 756037,
+          "sqlstate": "55P03"
+        },
+        {
+          "at": "2026-10-18T07:46:40.957498+00:00",
+          "pid": 748222,
+          "sqlstate": "55P03"
+        },
+        {
+          "at": "2026-10-18T07:46:41.287932+00:00",
+          "pid": 748222,
+          "sqlstate": "55P03"
+        }
+      ],
+      "final": {
+        "state": "DRAFT",
+        "relations": 2,
+        "assets_ready": true
+      },
+      "other": {
+        "state": "DRAFT",
+        "relations": 2,
+        "assets_ready": true
+      },
+      "completion": "ROLLBACK both"
+    },
+    {
+      "id": "C2/D3",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:42.90049+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:42.610975+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:46:46.348568+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:45.117839+00:00"
+        }
+      },
+      "held": {
+        "at": "2026-10-18T07:46:46.543513+00:00",
+        "pid": 756037,
+        "rpc": {
+          "content": {
+            "id": "81c1fdc7-5360-4801-a4b9-e476da769be8",
+            "body": "T15-MASTER-20261018-01 C2/D3",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C2/D3",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:42.610975+00:00",
+            "released_at": "2026-10-18T07:46:42.610975+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "waited": {
+        "at": "2026-10-18T07:46:47.368681+00:00",
+        "pid": 748222,
+        "rpc": {
+          "outcome": "linked_asset"
+        },
+        "sqlstate": "00000"
+      },
+      "blocking": {
+        "at": "2026-10-18T07:46:47.094089+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:46:42.610975+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:45.117839+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "completion": {
+        "at": "2026-10-18T07:46:47.447819+00:00",
+        "completion": "ROLLBACK"
+      },
+      "final": {
+        "state": "DRAFT",
+        "relations": 1,
+        "assets_ready": true
+      }
+    },
+    {
+      "id": "C3/D4",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:49.039021+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:48.71289+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:46:49.675038+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:49.398983+00:00"
+        }
+      },
+      "held": {
+        "at": "2026-10-18T07:46:50.249845+00:00",
+        "pid": 756037,
+        "rpc": {
+          "outcome": "linked_asset"
+        },
+        "sqlstate": "00000"
+      },
+      "waited": {
+        "at": "2026-10-18T07:46:52.196932+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "9ce26494-cf0a-4429-bf7a-3aa4f6366147",
+            "body": "T15-MASTER-20261018-01 C3/D4",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C3/D4",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:49.398983+00:00",
+            "released_at": "2026-10-18T07:46:49.398983+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "blocking": {
+        "at": "2026-10-18T07:46:50.736455+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:46:48.71289+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:49.398983+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "completion": {
+        "at": "2026-10-18T07:46:52.264536+00:00",
+        "completion": "ROLLBACK"
+      },
+      "final": {
+        "state": "DRAFT",
+        "relations": 1,
+        "assets_ready": true
+      }
+    },
+    {
+      "id": "C4",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:53.344956+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:53.062836+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:46:53.965456+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:53.56261+00:00"
+        }
+      },
+      "held": {
+        "at": "2026-10-18T07:46:54.302738+00:00",
+        "pid": 756037,
+        "rpc": {
+          "content": {
+            "id": "c9a59845-f0c7-4bfb-9719-57d412c20e13",
+            "body": "T15-MASTER-20261018-01 C4",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C4",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:53.062836+00:00",
+            "released_at": "2026-10-18T07:46:53.062836+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "waited": {
+        "at": "2026-10-18T07:46:54.925079+00:00",
+        "pid": 748222,
+        "rpc": {
+          "outcome": "not_draft"
+        },
+        "sqlstate": "00000"
+      },
+      "blocking": {
+        "at": "2026-10-18T07:46:54.655067+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:46:53.062836+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:53.56261+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "completion": {
+        "at": "2026-10-18T07:46:54.994695+00:00",
+        "completion": "COMMIT"
+      },
+      "final": {
+        "state": "RELEASED",
+        "relations": 0,
+        "assets_ready": true
+      }
+    },
+    {
+      "id": "C5",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:56.20914+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:55.744361+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:46:56.74197+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:56.46562+00:00"
+        }
+      },
+      "held": {
+        "at": "2026-10-18T07:46:57.019193+00:00",
+        "pid": 756037,
+        "rpc": {
+          "outcome": "saved",
+          "relation": {
+            "id": "c84e3d7c-b63b-4ca8-b0bc-ed9a701fa408",
+            "role": "PRIMARY",
+            "asset_id": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+            "content_id": "26b6ac6e-72f8-49ac-a4af-162c4fc0d0a1",
+            "created_at": "2026-10-18T07:46:55.744361+00:00"
+          }
+        },
+        "sqlstate": "00000"
+      },
+      "waited": {
+        "at": "2026-10-18T07:46:58.45114+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "26b6ac6e-72f8-49ac-a4af-162c4fc0d0a1",
+            "body": "T15-MASTER-20261018-01 C5",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 C5",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:56.46562+00:00",
+            "released_at": "2026-10-18T07:46:56.46562+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "blocking": {
+        "at": "2026-10-18T07:46:58.191231+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:46:55.744361+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:56.46562+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "final": {
+        "state": "DRAFT",
+        "relations": 1,
+        "assets_ready": true
+      }
+    },
+    {
+      "id": "D5/F4",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:46:59.570898+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:59.279228+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:47:00.40007+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:46:59.821224+00:00"
+        }
+      },
+      "guard": {
+        "at": "2026-10-18T07:47:01.13018+00:00",
+        "sqlstate": "23503"
+      },
+      "blocking": {
+        "at": "2026-10-18T07:47:01.410156+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:46:59.279228+00:00",
+        "waiter_xact_start": "2026-10-18T07:46:59.821224+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "waited": {
+        "at": "2026-10-18T07:47:01.685848+00:00",
+        "pid": 748222,
+        "rpc": {
+          "content": {
+            "id": "6af9e659-dfbc-4657-82cf-9e8235163c4d",
+            "body": "T15-MASTER-20261018-01 D5/F4",
+            "state": "RELEASED",
+            "title": "T15-MASTER-20261018-01 D5/F4",
+            "category": "INFORMATION",
+            "created_at": "2026-10-18T07:45:58.210299+00:00",
+            "updated_at": "2026-10-18T07:46:59.821224+00:00",
+            "released_at": "2026-10-18T07:46:59.821224+00:00"
+          },
+          "outcome": "saved"
+        },
+        "sqlstate": "00000"
+      },
+      "final": {
+        "state": "DRAFT",
+        "relations": 1,
+        "assets_ready": true
+      }
+    },
+    {
+      "id": "E2/F5",
+      "status": "PASS",
+      "starts": {
+        "A": {
+          "at": "2026-10-18T07:47:06.684593+00:00",
+          "pid": 756037,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:47:06.146664+00:00"
+        },
+        "B": {
+          "at": "2026-10-18T07:47:12.17521+00:00",
+          "pid": 748222,
+          "founder": true,
+          "read_only": "off",
+          "transaction_start": "2026-10-18T07:47:11.838475+00:00"
+        }
+      },
+      "blocking": {
+        "at": "2026-10-18T07:47:17.057503+00:00",
+        "blockers": [
+          756037
+        ],
+        "holder_pid": 756037,
+        "wait_event": "transactionid",
+        "waiter_pid": 748222,
+        "waiter_state": "active",
+        "wait_event_type": "Lock",
+        "holder_xact_start": "2026-10-18T07:47:06.146664+00:00",
+        "waiter_xact_start": "2026-10-18T07:47:11.838475+00:00",
+        "holder_backend_start": "2026-10-18T07:16:23.122607+00:00",
+        "waiter_backend_start": "2026-10-18T05:25:56.141731+00:00"
+      },
+      "order": {
+        "at": "2026-10-18T07:47:17.732372+00:00",
+        "sqlstate": "55P03"
+      },
+      "timeout": {
+        "at": "2026-10-18T07:47:25.791581+00:00",
+        "pid": 748222,
+        "sqlstate": "55P03"
+      },
+      "final": {
+        "state": "DRAFT",
+        "relations": 2,
+        "assets_ready": true
+      },
+      "sortedAssetIds": [
+        "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+        "49d28bb4-21da-49f7-a5f4-6b719b0859a2"
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "asset": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+      "receipt": {
+        "at": "2026-10-18T07:47:37.713Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r2d_cleanup_a",
+        "ok": true,
+        "statuses": [
+          200
+        ],
+        "assetId": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+        "details": {
+          "cleanup_confirmed": true
+        }
+      },
+      "readback": {
+        "assets": 0,
+        "objects": 0,
+        "relations": 0
+      }
+    },
+    {
+      "asset": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+      "receipt": {
+        "at": "2026-10-18T07:47:42.025Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r2d_cleanup_b",
+        "ok": true,
+        "statuses": [
+          200
+        ],
+        "assetId": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+        "details": {
+          "cleanup_confirmed": true
+        }
+      },
+      "readback": {
+        "assets": 0,
+        "objects": 0,
+        "relations": 0
+      }
+    }
+  ],
+  "startedAt": "2026-10-18T07:45:42.780Z",
+  "founderHttp": {
+    "at": "2026-10-18T07:45:54.969Z",
+    "authenticated": true,
+    "founder": true,
+    "jobId": "r2d_founder_preflight",
+    "ok": true,
+    "statuses": [
+      200
+    ],
+    "details": {
+      "expected_response": true
+    }
+  },
+  "baseline": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  },
+  "uploads": [
+    {
+      "receipt": {
+        "at": "2026-10-18T07:46:18.930Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r2d_upload_a",
+        "ok": true,
+        "statuses": [
+          200,
+          200,
+          200
+        ],
+        "assetId": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+        "details": {
+          "ready": true
+        }
+      },
+      "readback": {
+        "id": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+        "mime": "image/png",
+        "path": "image/1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773/asset.png",
+        "bytes": 70,
+        "bucket": "trial-assets",
+        "status": "READY",
+        "filename": "t15-master-20261018-a.png",
+        "request_id": "7d3bfd44-49e6-4f5d-96cb-b0edc8a8f609",
+        "object_count": 1
+      }
+    },
+    {
+      "receipt": {
+        "at": "2026-10-18T07:46:29.465Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r2d_upload_b",
+        "ok": true,
+        "statuses": [
+          200,
+          200,
+          200
+        ],
+        "assetId": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+        "details": {
+          "ready": true
+        }
+      },
+      "readback": {
+        "id": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+        "mime": "image/png",
+        "path": "image/49d28bb4-21da-49f7-a5f4-6b719b0859a2/asset.png",
+        "bytes": 70,
+        "bucket": "trial-assets",
+        "status": "READY",
+        "filename": "t15-master-20261018-b.png",
+        "request_id": "7d3159fb-dae8-4222-b9c9-402106d43439",
+        "object_count": 1
+      }
+    }
+  ],
+  "after": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  },
+  "preservation": true,
+  "completedAt": "2026-10-18T07:47:43.265Z"
+}

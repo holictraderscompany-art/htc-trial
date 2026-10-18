@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-18T07:41:06.838Z",
+  "scope": "T15 local route recovery",
+  "worktree": "C:\\Users\\ASUS\\.codex\\worktrees\\htc-t15-r1\\FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+  "server": "http://localhost:3103",
+  "route_recovered": "/__t14-session-check",
+  "original_source": "validation/t14/start-live.mjs",
+  "live_page_status": 200,
+  "founder_browser_status": "NOT VERIFIED: awaiting original Chrome profile",
+  "fixtures_created": false,
+  "mutations_executed": false,
+  "next": "Verify existing Founder session through recovered route, then start existing T15 live listener once. Do not replay any claimed job.",
+  "fresh_application_tests": {
+    "passed": 216,
+    "failed": 0,
+    "duration_ms": 29443.5249,
+    "evidence_type": "Actual pnpm test output from this master execution; not a rerun"
+  },
+  "build": "Existing R1 PASS preserved; no product changes during route recovery"
+}

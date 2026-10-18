@@ -1,0 +1,110 @@
+{
+  "scope": "T15-R1 ONLY",
+  "verdict": "R1 LOCAL PASS; T15 overall PARTIAL",
+  "base": "94981054f4fa2493205b44919e37802322312c3c",
+  "inventory_sha256": "e1c8d88ff60d91a84971d273258e907c0422c0a0785d0bd4ff5febd3de4e5a1f",
+  "preservation": [
+    {
+      "root": "C:/Users/ASUS/OneDrive/Documents/M.Devry Handoyo Founder Holic Traders Company/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+      "original_changed_files": 30,
+      "result": "PASS"
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-group3-reconciliation/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+      "original_changed_files": 12,
+      "result": "PASS"
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t13-commit-candidate/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "original_changed_files": 0,
+      "result": "PASS"
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t14-signed-direct",
+      "head": "94981054f4fa2493205b44919e37802322312c3c",
+      "original_changed_files": 5,
+      "result": "PASS"
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t15-t16-continuation/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "original_changed_files": 65,
+      "result": "PASS"
+    }
+  ],
+  "protected_baseline_paths": [
+    "src/server/api-foundation.js",
+    "src/server/session-token.js",
+    "src/server/trial-session.js",
+    "src/server/founder-content.js",
+    "src/components/founder-content-workspace.js",
+    "src/server/media-assets.js",
+    "src/server/founder-media.js",
+    "src/components/founder-direct-upload.js",
+    "tests/founder-media.test.js",
+    "supabase/migrations",
+    "validation/test-db"
+  ],
+  "original_worktree_file_hashes_verified": 112,
+  "tests": {
+    "application": 216,
+    "t15_focused_included": 8,
+    "t14_sqlite": 3,
+    "t13_sqlite": 12,
+    "t14_browser": 20,
+    "t15_browser": 24,
+    "failures": 0
+  },
+  "build": "PASS; fresh production build, existing Next TypeScript phase PASS",
+  "lint": "No standalone lint/typecheck script configured",
+  "migrations": "10/10 recorded history and exact source hashes; no SQL/database mutation",
+  "secret_hits": [],
+  "limits": [
+    "SQLite/browser auth is synthetic LOCAL evidence only",
+    "No native PostgreSQL concurrency performed; R2 remains NOT RUN",
+    "No genuine authenticated LIVE Publishing performed; R3 remains NOT RUN"
+  ],
+  "cleanup": {
+    "browser": "Own isolated Playwright session closed",
+    "server": "Own3104 fixture stopped",
+    "local_sqlite": "Task-created synthetic fixture retained after automatic approval review rejected deletion: blocked by policy; no alternative deletion attempted",
+    "path": "C:/Users/ASUS/AppData/Local/Temp/htc-sqlite-fixture-zm9BIV/fixture.sqlite",
+    "t14_server_session": "Untouched"
+  },
+  "staged_files": 0,
+  "commit": false,
+  "push": false,
+  "merge": false,
+  "deployment": false,
+  "production_access": false,
+  "security_scan_limit": "Pattern scan is supporting evidence; manual diff/boundary review also performed",
+  "changed_files": [
+    ".gitattributes",
+    "docs/t15-r1-integration-manifest.md",
+    "docs/t15-r1-reconciliation.md",
+    "package.json",
+    "src/app/founder/publishing/page.js",
+    "src/components/founder-operation-workspace.js",
+    "src/components/founder-views.js",
+    "src/server/founder-operations.js",
+    "tests/founder-access.test.js",
+    "tests/founder-assets.test.js",
+    "tests/founder-content.fixture.mjs",
+    "tests/founder-publishing.test.js",
+    "tests/local-sqlite-adapter.js",
+    "validation/t15-r1/baseline-inventory.json",
+    "validation/t15-r1/baseline-inventory.sha256",
+    "validation/t15-r1/browser-publishing-results.json",
+    "validation/t15-r1/browser-publishing.js",
+    "validation/t15-r1/browser-t14-results.json",
+    "validation/t15-r1/browser-t14.js",
+    "validation/t15-r1/file-manifest.json",
+    "validation/t15-r1/log-hashes.json",
+    "validation/t15-r1/migration-checkout-recovery.json",
+    "validation/t15-r1/verification.json",
+    "validation/t15-r1/verify-reconciliation.mjs"
+  ]
+}

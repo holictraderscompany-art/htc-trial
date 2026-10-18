@@ -1,0 +1,38 @@
+{
+  "assets": 0,
+  "content": 0,
+  "sessions": [
+    {
+      "pid": 746817,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2b_direct_A",
+      "backend_start": "2026-10-18T05:09:22.648934+00:00"
+    },
+    {
+      "pid": 747362,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2b_direct_B",
+      "backend_start": "2026-10-18T05:11:20.843035+00:00"
+    },
+    {
+      "pid": 748191,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2c_A",
+      "backend_start": "2026-10-18T05:23:24.992596+00:00"
+    },
+    {
+      "pid": 748222,
+      "state": "idle",
+      "xact_start": null,
+      "application": "htc_t15_r2c_B",
+      "backend_start": "2026-10-18T05:25:56.141731+00:00"
+    }
+  ],
+  "relations": 0,
+  "verified_at": "2026-10-18T05:32:47.123591+00:00",
+  "migration_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+  "migration_count": 10
+}

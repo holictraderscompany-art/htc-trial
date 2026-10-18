@@ -1,0 +1,28 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "A": {
+    "at": "2026-10-18T08:03:35.415989+00:00",
+    "pid": 756037,
+    "role": "postgres",
+    "read_only": "on"
+  },
+  "B": {
+    "at": "2026-10-18T08:03:36.047746+00:00",
+    "pid": 748222,
+    "role": "postgres",
+    "read_only": "on"
+  },
+  "final": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  }
+}

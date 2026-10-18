@@ -1,0 +1,380 @@
+{
+  "scope": "T15 only; local commit, NO PUSH",
+  "branch": "codex/t15-r1-reconciliation",
+  "base": "94981054f4fa2493205b44919e37802322312c3c",
+  "includedPaths": [
+    ".gitattributes",
+    "docs/t15-master-validation.md",
+    "docs/t15-r1-integration-manifest.md",
+    "docs/t15-r1-reconciliation.md",
+    "package.json",
+    "src/app/founder/publishing/page.js",
+    "src/components/founder-operation-workspace.js",
+    "src/components/founder-views.js",
+    "src/server/founder-operations.js",
+    "tests/founder-access.test.js",
+    "tests/founder-assets.test.js",
+    "tests/founder-content.fixture.mjs",
+    "tests/founder-publishing.test.js",
+    "tests/local-sqlite-adapter.js",
+    "validation/t15-master/.gitignore",
+    "validation/t15-master/README.md",
+    "validation/t15-master/browser-founder-preflight.json",
+    "validation/t15-master/browser-harness.html",
+    "validation/t15-master/build-evidence.json",
+    "validation/t15-master/build-result.json",
+    "validation/t15-master/commit-manifest.json",
+    "validation/t15-master/completion-checkpoint.json",
+    "validation/t15-master/final-db-verification.json",
+    "validation/t15-master/final-readonly-session-check.json",
+    "validation/t15-master/fixture-manifest.json",
+    "validation/t15-master/live-http-evidence.json",
+    "validation/t15-master/live-server-correlation.json",
+    "validation/t15-master/native.mjs",
+    "validation/t15-master/r2c-integrity.json",
+    "validation/t15-master/r2c-preserved/content-concurrency-evidence.json",
+    "validation/t15-master/r2c-preserved/evidence-sha256.json",
+    "validation/t15-master/r2c-preserved/final-verification.json",
+    "validation/t15-master/r2c-preserved/fixture-and-cleanup-manifest.json",
+    "validation/t15-master/r2c-preserved/independent-post-verification.json",
+    "validation/t15-master/r2d-runtime.json",
+    "validation/t15-master/r2d.mjs",
+    "validation/t15-master/r3-founder-phase.json",
+    "validation/t15-master/r3-runtime.json",
+    "validation/t15-master/r3.mjs",
+    "validation/t15-master/recovery-native-readonly.json",
+    "validation/t15-master/recovery-security.json",
+    "validation/t15-master/regression-and-security.json",
+    "validation/t15-master/route-recovery-checkpoint.json",
+    "validation/t15-master/route-recovery.json",
+    "validation/t15-master/scope-preservation.json",
+    "validation/t15-master/start-live.mjs",
+    "validation/t15-master/verify-final.mjs",
+    "validation/t15-r1/baseline-inventory.json",
+    "validation/t15-r1/baseline-inventory.sha256",
+    "validation/t15-r1/browser-publishing-results.json",
+    "validation/t15-r1/browser-publishing.js",
+    "validation/t15-r1/browser-t14-results.json",
+    "validation/t15-r1/browser-t14.js",
+    "validation/t15-r1/file-manifest.json",
+    "validation/t15-r1/log-hashes.json",
+    "validation/t15-r1/migration-checkout-recovery.json",
+    "validation/t15-r1/verification.json",
+    "validation/t15-r1/verify-reconciliation.mjs",
+    "validation/t15-r2/checkpoint.json",
+    "validation/t15-r2/plan.md",
+    "validation/t15-r2/security-before.json"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "working_tree_sha256": "333fd07770cd6edf4d5e17ac4171a9bc9050ff6be1091fbae510743bafba1d58",
+      "canonical_lf_sha256": "333fd07770cd6edf4d5e17ac4171a9bc9050ff6be1091fbae510743bafba1d58"
+    },
+    {
+      "path": "docs/t15-master-validation.md",
+      "working_tree_sha256": "dae62421eaa5796cf7b42b0681b89957c7ff94c8ee30166d26701c74d4ae94f6",
+      "canonical_lf_sha256": "dae62421eaa5796cf7b42b0681b89957c7ff94c8ee30166d26701c74d4ae94f6"
+    },
+    {
+      "path": "docs/t15-r1-integration-manifest.md",
+      "working_tree_sha256": "217965532e86923e7fe57c983c65541e7246cdcaa3a8e3b1bd1fb0eed31397ae",
+      "canonical_lf_sha256": "217965532e86923e7fe57c983c65541e7246cdcaa3a8e3b1bd1fb0eed31397ae"
+    },
+    {
+      "path": "docs/t15-r1-reconciliation.md",
+      "working_tree_sha256": "3177b4c08d15885ca39429388ab6b41562ce2097da43f38c9a89302d7a538fb0",
+      "canonical_lf_sha256": "3177b4c08d15885ca39429388ab6b41562ce2097da43f38c9a89302d7a538fb0"
+    },
+    {
+      "path": "package.json",
+      "working_tree_sha256": "2b53ab754fe36c87fba920a2ac135c9a2bfa71a6597ef9a26d721a03151ba15c",
+      "canonical_lf_sha256": "2b53ab754fe36c87fba920a2ac135c9a2bfa71a6597ef9a26d721a03151ba15c"
+    },
+    {
+      "path": "src/app/founder/publishing/page.js",
+      "working_tree_sha256": "59a38e328e7105f5300568c4ccdf6b7f45f505c4ed72f907e5666e3dc227c057",
+      "canonical_lf_sha256": "59a38e328e7105f5300568c4ccdf6b7f45f505c4ed72f907e5666e3dc227c057"
+    },
+    {
+      "path": "src/components/founder-operation-workspace.js",
+      "working_tree_sha256": "9f09e18f3fcb218ed77f9c9fe0d54f1e5bdadd7d693bebad146550bd8ab22b0f",
+      "canonical_lf_sha256": "04839bd5777c9f7b3c4e0243a48ca8c598da4ab06aeb9475e0f6babd59176cdb"
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "working_tree_sha256": "9c951bdb20f61a7efbf461f1fb14e4c2cc0f5c60c6d97f5d86e43c2de02ae6fb",
+      "canonical_lf_sha256": "1891a1455440a326e56bddb69d1be7bcff588f002f57f9829de25b663bcce44d"
+    },
+    {
+      "path": "src/server/founder-operations.js",
+      "working_tree_sha256": "6d2334eaac6d99b3dcd022f9c3316fecbf12c297b8f4869e799c34ddccec9bd1",
+      "canonical_lf_sha256": "e50316018a2159c4cdf582e3d2f5c699ae3188d824dc3e52b841f16f52c5dff2"
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "working_tree_sha256": "d89dd94a44006a8d623c543c82b28d799631cc9181138542f8a0afc8f62e35e1",
+      "canonical_lf_sha256": "92b9e1ab5b8df6be561330f2a67b023ca6e5821f2ca3ed710fc827977a632142"
+    },
+    {
+      "path": "tests/founder-assets.test.js",
+      "working_tree_sha256": "c32091efb75389b3b54a9a82d341f62ff2f016ec8eae424d3e28b1f9dd564834",
+      "canonical_lf_sha256": "d6e7c86ca3370cf6ee8bec77b87988e96d078448f5402e4a24f2494f1be963e6"
+    },
+    {
+      "path": "tests/founder-content.fixture.mjs",
+      "working_tree_sha256": "7d5b5a2efce5087687a1ca5dd21d0f6e6ba135d672871f4a975f6f4bcca94b47",
+      "canonical_lf_sha256": "7d5b5a2efce5087687a1ca5dd21d0f6e6ba135d672871f4a975f6f4bcca94b47"
+    },
+    {
+      "path": "tests/founder-publishing.test.js",
+      "working_tree_sha256": "8b8287b712300141c820a75ea242333c51c6bcc2724c3588e1d87ceaa491619e",
+      "canonical_lf_sha256": "8b8287b712300141c820a75ea242333c51c6bcc2724c3588e1d87ceaa491619e"
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "working_tree_sha256": "41784ee342a041792fcfc71b1a3c1eac9b77645a8197a0f63cf17fa147169b09",
+      "canonical_lf_sha256": "41784ee342a041792fcfc71b1a3c1eac9b77645a8197a0f63cf17fa147169b09"
+    },
+    {
+      "path": "validation/t15-master/.gitignore",
+      "working_tree_sha256": "f5246b58284e78db06dcada7c61c8fe079fe6996385fc25de98186c608bd6236",
+      "canonical_lf_sha256": "f5246b58284e78db06dcada7c61c8fe079fe6996385fc25de98186c608bd6236"
+    },
+    {
+      "path": "validation/t15-master/README.md",
+      "working_tree_sha256": "cf41cbfe0356d61383e24d823af94dace83d8fa6e3a05e462adc4daa5d2c9e21",
+      "canonical_lf_sha256": "cf41cbfe0356d61383e24d823af94dace83d8fa6e3a05e462adc4daa5d2c9e21"
+    },
+    {
+      "path": "validation/t15-master/browser-founder-preflight.json",
+      "working_tree_sha256": "1e140df8dee441ad171f12458d5c4d1326013564827b910f6d23424245bad904",
+      "canonical_lf_sha256": "1e140df8dee441ad171f12458d5c4d1326013564827b910f6d23424245bad904"
+    },
+    {
+      "path": "validation/t15-master/browser-harness.html",
+      "working_tree_sha256": "cac4fa503ae763fec9a362ace504cee17a6ed757ed0727a12d039d97ab455c6f",
+      "canonical_lf_sha256": "cac4fa503ae763fec9a362ace504cee17a6ed757ed0727a12d039d97ab455c6f"
+    },
+    {
+      "path": "validation/t15-master/build-evidence.json",
+      "working_tree_sha256": "5db8b55e194b6f63d9338f81ff3a0e1d08e38c698c2780aafb2bd7fa2e7fa076",
+      "canonical_lf_sha256": "5db8b55e194b6f63d9338f81ff3a0e1d08e38c698c2780aafb2bd7fa2e7fa076"
+    },
+    {
+      "path": "validation/t15-master/build-result.json",
+      "working_tree_sha256": "e9c0652d3d6a1fa58ed09cf72b99c29ff2941d0e768b2634cf3c4687660e2ac1",
+      "canonical_lf_sha256": "e9c0652d3d6a1fa58ed09cf72b99c29ff2941d0e768b2634cf3c4687660e2ac1"
+    },
+    {
+      "path": "validation/t15-master/completion-checkpoint.json",
+      "working_tree_sha256": "3e776cebc31c722967aff166dda33eb284fe96dfd7c82f70d0b0fa39ba05e0e5",
+      "canonical_lf_sha256": "3e776cebc31c722967aff166dda33eb284fe96dfd7c82f70d0b0fa39ba05e0e5"
+    },
+    {
+      "path": "validation/t15-master/final-db-verification.json",
+      "working_tree_sha256": "61ac742cdb4f9573e167108ccdc8936413c725bdc97734971c82f1091907af99",
+      "canonical_lf_sha256": "61ac742cdb4f9573e167108ccdc8936413c725bdc97734971c82f1091907af99"
+    },
+    {
+      "path": "validation/t15-master/final-readonly-session-check.json",
+      "working_tree_sha256": "09d1f6a4f8dcfb678e1ff7e303d147811fc48fff686f66e6849a208bbb1d7cd4",
+      "canonical_lf_sha256": "09d1f6a4f8dcfb678e1ff7e303d147811fc48fff686f66e6849a208bbb1d7cd4"
+    },
+    {
+      "path": "validation/t15-master/fixture-manifest.json",
+      "working_tree_sha256": "24946908793539b4d2f20295f6772bed3c7e55df54dfe66d1cc032478c821b57",
+      "canonical_lf_sha256": "24946908793539b4d2f20295f6772bed3c7e55df54dfe66d1cc032478c821b57"
+    },
+    {
+      "path": "validation/t15-master/live-http-evidence.json",
+      "working_tree_sha256": "95c29baf99d7913470c4dc36087795cee86df6ce705e92a15204b0b7c00da041",
+      "canonical_lf_sha256": "95c29baf99d7913470c4dc36087795cee86df6ce705e92a15204b0b7c00da041"
+    },
+    {
+      "path": "validation/t15-master/live-server-correlation.json",
+      "working_tree_sha256": "adfc66a0ec2c5071a1581eb854d6f87a59ba26fe8d9472ae0cb3a5f06c96b503",
+      "canonical_lf_sha256": "adfc66a0ec2c5071a1581eb854d6f87a59ba26fe8d9472ae0cb3a5f06c96b503"
+    },
+    {
+      "path": "validation/t15-master/native.mjs",
+      "working_tree_sha256": "58d4881b755c9db643445d236caef87921c20cf0ad896a3642a9e5e1c2b77320",
+      "canonical_lf_sha256": "58d4881b755c9db643445d236caef87921c20cf0ad896a3642a9e5e1c2b77320"
+    },
+    {
+      "path": "validation/t15-master/r2c-integrity.json",
+      "working_tree_sha256": "afa4c733d23f4849fc3eddaf239d51ef0233e6ca4d27b7e844dfcbe7f0379363",
+      "canonical_lf_sha256": "afa4c733d23f4849fc3eddaf239d51ef0233e6ca4d27b7e844dfcbe7f0379363"
+    },
+    {
+      "path": "validation/t15-master/r2c-preserved/content-concurrency-evidence.json",
+      "working_tree_sha256": "57ed55303d7b5e9abe44623b0e604dfae067fc301f71dfd99ec4f1d7a6785d94",
+      "canonical_lf_sha256": "57ed55303d7b5e9abe44623b0e604dfae067fc301f71dfd99ec4f1d7a6785d94"
+    },
+    {
+      "path": "validation/t15-master/r2c-preserved/evidence-sha256.json",
+      "working_tree_sha256": "12aaa442789cb2e2199dfad753466805d4caa21fc60d3be7ddd4d2b0218c7d27",
+      "canonical_lf_sha256": "12aaa442789cb2e2199dfad753466805d4caa21fc60d3be7ddd4d2b0218c7d27"
+    },
+    {
+      "path": "validation/t15-master/r2c-preserved/final-verification.json",
+      "working_tree_sha256": "64bbbcadb9b89780b166c6a86c1f68d78e88363167e9bc148c0db692b85e88c3",
+      "canonical_lf_sha256": "64bbbcadb9b89780b166c6a86c1f68d78e88363167e9bc148c0db692b85e88c3"
+    },
+    {
+      "path": "validation/t15-master/r2c-preserved/fixture-and-cleanup-manifest.json",
+      "working_tree_sha256": "140df9ffb720aa17fc66f25e0ad509339d38791ff55f1889421570a846174b5b",
+      "canonical_lf_sha256": "140df9ffb720aa17fc66f25e0ad509339d38791ff55f1889421570a846174b5b"
+    },
+    {
+      "path": "validation/t15-master/r2c-preserved/independent-post-verification.json",
+      "working_tree_sha256": "25f7d15f9ce2e4d22ddaad7de5fad0afa909c0c995a3135864fa4cbd260e84ff",
+      "canonical_lf_sha256": "25f7d15f9ce2e4d22ddaad7de5fad0afa909c0c995a3135864fa4cbd260e84ff"
+    },
+    {
+      "path": "validation/t15-master/r2d-runtime.json",
+      "working_tree_sha256": "33649fce5e67c7a7470c387966f33deaef302bf289a7f64496bcffc3ff4f52fd",
+      "canonical_lf_sha256": "33649fce5e67c7a7470c387966f33deaef302bf289a7f64496bcffc3ff4f52fd"
+    },
+    {
+      "path": "validation/t15-master/r2d.mjs",
+      "working_tree_sha256": "aeea8a85036a49037a7b11c15a96764842a674536b9c1fdb98f85a0c843bd43a",
+      "canonical_lf_sha256": "aeea8a85036a49037a7b11c15a96764842a674536b9c1fdb98f85a0c843bd43a"
+    },
+    {
+      "path": "validation/t15-master/r3-founder-phase.json",
+      "working_tree_sha256": "e536eb70d1cfb4bcd541e1084b379294176477238db2fcf12e5087506d6d111e",
+      "canonical_lf_sha256": "e536eb70d1cfb4bcd541e1084b379294176477238db2fcf12e5087506d6d111e"
+    },
+    {
+      "path": "validation/t15-master/r3-runtime.json",
+      "working_tree_sha256": "5db9d860452e8ded393670a3ef233aed081a5a61954e55c89325c21e7d03ee87",
+      "canonical_lf_sha256": "5db9d860452e8ded393670a3ef233aed081a5a61954e55c89325c21e7d03ee87"
+    },
+    {
+      "path": "validation/t15-master/r3.mjs",
+      "working_tree_sha256": "fbbad590cccf89f57b7359a96505a785a3d3e288f0f92224570ae4a5aa891c8c",
+      "canonical_lf_sha256": "fbbad590cccf89f57b7359a96505a785a3d3e288f0f92224570ae4a5aa891c8c"
+    },
+    {
+      "path": "validation/t15-master/recovery-native-readonly.json",
+      "working_tree_sha256": "977d822e75a73a31bcb364617637ced08eb5f7d96f382b2aa52fd3065bbdee21",
+      "canonical_lf_sha256": "977d822e75a73a31bcb364617637ced08eb5f7d96f382b2aa52fd3065bbdee21"
+    },
+    {
+      "path": "validation/t15-master/recovery-security.json",
+      "working_tree_sha256": "3f902f456c4fc46e174731c445a25e6dd0f5c4566511934795f941b7d2496461",
+      "canonical_lf_sha256": "3f902f456c4fc46e174731c445a25e6dd0f5c4566511934795f941b7d2496461"
+    },
+    {
+      "path": "validation/t15-master/regression-and-security.json",
+      "working_tree_sha256": "20907d9e1c49ec1664049033db235dac3745245d7c75c6115815f4800d149e20",
+      "canonical_lf_sha256": "20907d9e1c49ec1664049033db235dac3745245d7c75c6115815f4800d149e20"
+    },
+    {
+      "path": "validation/t15-master/route-recovery-checkpoint.json",
+      "working_tree_sha256": "ea251c8f0877df5fdd557fa4ae83347759043a462beac26e08b35bc8a1da5e13",
+      "canonical_lf_sha256": "ea251c8f0877df5fdd557fa4ae83347759043a462beac26e08b35bc8a1da5e13"
+    },
+    {
+      "path": "validation/t15-master/route-recovery.json",
+      "working_tree_sha256": "e830b6d394afcb1d08fcfad837e90d3454c552fabefb0cb3f2a37e8981fdb804",
+      "canonical_lf_sha256": "e830b6d394afcb1d08fcfad837e90d3454c552fabefb0cb3f2a37e8981fdb804"
+    },
+    {
+      "path": "validation/t15-master/scope-preservation.json",
+      "working_tree_sha256": "c308ce782981461708864286d09cff789edd99c404b4385ddb282b303f2bef67",
+      "canonical_lf_sha256": "c308ce782981461708864286d09cff789edd99c404b4385ddb282b303f2bef67"
+    },
+    {
+      "path": "validation/t15-master/start-live.mjs",
+      "working_tree_sha256": "185f3b7922ca45a9cf312445b8dffe06715e747add0e9952acf52a91eaf06dd6",
+      "canonical_lf_sha256": "185f3b7922ca45a9cf312445b8dffe06715e747add0e9952acf52a91eaf06dd6"
+    },
+    {
+      "path": "validation/t15-master/verify-final.mjs",
+      "working_tree_sha256": "1e8140a3cd27c89c7de9fb7d6d7f543489677ea7d3869cf35138b30521a97e98",
+      "canonical_lf_sha256": "1e8140a3cd27c89c7de9fb7d6d7f543489677ea7d3869cf35138b30521a97e98"
+    },
+    {
+      "path": "validation/t15-r1/baseline-inventory.json",
+      "working_tree_sha256": "e1c8d88ff60d91a84971d273258e907c0422c0a0785d0bd4ff5febd3de4e5a1f",
+      "canonical_lf_sha256": "e1c8d88ff60d91a84971d273258e907c0422c0a0785d0bd4ff5febd3de4e5a1f"
+    },
+    {
+      "path": "validation/t15-r1/baseline-inventory.sha256",
+      "working_tree_sha256": "da85abaabe80c8f5dc3162932af81dba15a0f4e8045c195e0117c122d7771334",
+      "canonical_lf_sha256": "da85abaabe80c8f5dc3162932af81dba15a0f4e8045c195e0117c122d7771334"
+    },
+    {
+      "path": "validation/t15-r1/browser-publishing-results.json",
+      "working_tree_sha256": "7f101e616e971a99874c65a7caadb161458a37681f29e91b7b9d7af2bdc0b986",
+      "canonical_lf_sha256": "7f101e616e971a99874c65a7caadb161458a37681f29e91b7b9d7af2bdc0b986"
+    },
+    {
+      "path": "validation/t15-r1/browser-publishing.js",
+      "working_tree_sha256": "caaacc5742115340f8ed2ace01d789e18d27f545dcc12a4e1964bef4b0c149a7",
+      "canonical_lf_sha256": "caaacc5742115340f8ed2ace01d789e18d27f545dcc12a4e1964bef4b0c149a7"
+    },
+    {
+      "path": "validation/t15-r1/browser-t14-results.json",
+      "working_tree_sha256": "b6c42631c457f34c001172ffcd0568d9410645a6c1dd4c634508421d043444d1",
+      "canonical_lf_sha256": "b6c42631c457f34c001172ffcd0568d9410645a6c1dd4c634508421d043444d1"
+    },
+    {
+      "path": "validation/t15-r1/browser-t14.js",
+      "working_tree_sha256": "3f19abdbcb3028e9e6731c8606bf8889bc3f7512de091de53709b866a9d63765",
+      "canonical_lf_sha256": "408fa3d31af7fdff22461f019b914808f9b79f2a01c95e17cbf92d386635f70e"
+    },
+    {
+      "path": "validation/t15-r1/file-manifest.json",
+      "working_tree_sha256": "c75bbaa3d53b1261b5500a8a8a957398580880c203084084638a7f0cb0f70752",
+      "canonical_lf_sha256": "c75bbaa3d53b1261b5500a8a8a957398580880c203084084638a7f0cb0f70752"
+    },
+    {
+      "path": "validation/t15-r1/log-hashes.json",
+      "working_tree_sha256": "c3587f83b10400bffd4816379d22a1910485bb7481d7c2de826a457141c72d29",
+      "canonical_lf_sha256": "c3587f83b10400bffd4816379d22a1910485bb7481d7c2de826a457141c72d29"
+    },
+    {
+      "path": "validation/t15-r1/migration-checkout-recovery.json",
+      "working_tree_sha256": "1e9e72d753524138a8f14e873786818b27bbef4005635d9e149caf18bf8c971a",
+      "canonical_lf_sha256": "1e9e72d753524138a8f14e873786818b27bbef4005635d9e149caf18bf8c971a"
+    },
+    {
+      "path": "validation/t15-r1/verification.json",
+      "working_tree_sha256": "28917a5222756496b18728661a5a422302445219ab53aac5639dc051c25b382d",
+      "canonical_lf_sha256": "28917a5222756496b18728661a5a422302445219ab53aac5639dc051c25b382d"
+    },
+    {
+      "path": "validation/t15-r1/verify-reconciliation.mjs",
+      "working_tree_sha256": "4afb28ea889f9f46384fedbb4af6bc7feef9c721b46f9a8fc04a8cdf14561375",
+      "canonical_lf_sha256": "4afb28ea889f9f46384fedbb4af6bc7feef9c721b46f9a8fc04a8cdf14561375"
+    },
+    {
+      "path": "validation/t15-r2/checkpoint.json",
+      "working_tree_sha256": "656db1bab8b1400f8295f6f99f7deb32992b97dbfc41ae8a8932d19e25187143",
+      "canonical_lf_sha256": "656db1bab8b1400f8295f6f99f7deb32992b97dbfc41ae8a8932d19e25187143"
+    },
+    {
+      "path": "validation/t15-r2/plan.md",
+      "working_tree_sha256": "f50d56117ef94ca845357bd7e53610384be9b9437bde4c490725b22b3bacc359",
+      "canonical_lf_sha256": "f50d56117ef94ca845357bd7e53610384be9b9437bde4c490725b22b3bacc359"
+    },
+    {
+      "path": "validation/t15-r2/security-before.json",
+      "working_tree_sha256": "d396264fb5fe0019b29b4b0677d0c57113de0eec2235edde796a9932905d1317",
+      "canonical_lf_sha256": "d396264fb5fe0019b29b4b0677d0c57113de0eec2235edde796a9932905d1317"
+    }
+  ],
+  "manifestSelfHashExcluded": true,
+  "securityPatternHits": 0,
+  "originalDirtyFilesPreserved": 112,
+  "excluded": [
+    "operator mailbox claims/receipts/active-job and mutable server-http log",
+    "ignored build/test logs, .next and dependencies",
+    "all secrets, .env, SQLite databases and browser profiles",
+    "all original worktrees and T16/T17 work"
+  ],
+  "lineEndingNote": "Staged bytes must match working tree SHA-256 or its CRLF-to-LF canonicalization; migration archives are unchanged."
+}

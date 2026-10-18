@@ -1,0 +1,42 @@
+{
+  "verifiedAt": "2026-10-18T07:52:56.181Z",
+  "historicalRuntimePreserved": true,
+  "runtimeNotRepeated": true,
+  "indexedFiles": 216,
+  "unchangedFiles": 214,
+  "mutableStatusChanges": [
+    {
+      "file": "A.running.json",
+      "original_sha256": "33ff291f52a6e73aef900a650959a95f7c56677eb675f091d2e94923dbc38193",
+      "current_sha256": "e0e81a9f434c6e47e70dba6e89e9d9113b162aeb0d117231cdcc425400d13e33"
+    },
+    {
+      "file": "B.running.json",
+      "original_sha256": "a79a2aec9005eb2740024544ed81e47309a8f4e2a7724a5b542d4cd6dc41b35f",
+      "current_sha256": "f9a09bb7db75928c43579de488dcb39a9d7be450077759ca195e1450a5cc01d5"
+    }
+  ],
+  "note": "Only worker liveness/progress status files changed after R2C while recovering A and reusing B. Accepted SQL, results, fixture evidence and final verification remain byte-identical. Original index is preserved, not rewritten.",
+  "copies": [
+    {
+      "file": "final-verification.json",
+      "sha256": "64bbbcadb9b89780b166c6a86c1f68d78e88363167e9bc148c0db692b85e88c3"
+    },
+    {
+      "file": "content-concurrency-evidence.json",
+      "sha256": "57ed55303d7b5e9abe44623b0e604dfae067fc301f71dfd99ec4f1d7a6785d94"
+    },
+    {
+      "file": "independent-post-verification.json",
+      "sha256": "25f7d15f9ce2e4d22ddaad7de5fad0afa909c0c995a3135864fa4cbd260e84ff"
+    },
+    {
+      "file": "fixture-and-cleanup-manifest.json",
+      "sha256": "140df9ffb720aa17fc66f25e0ad509339d38791ff55f1889421570a846174b5b"
+    },
+    {
+      "file": "evidence-sha256.json",
+      "sha256": "12aaa442789cb2e2199dfad753466805d4caa21fc60d3be7ddd4d2b0218c7d27"
+    }
+  ]
+}

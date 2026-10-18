@@ -2,7 +2,7 @@
 import {createElement as h,useEffect,useRef,useState} from 'react';
 import {reconcileUploadAttempt,sendSignedUpload} from './founder-direct-upload.js';
 
-export default function FounderOperationWorkspace() {
+export default function FounderOperationWorkspace({kind='assets'}) {
   const [contents,setContents]=useState([]),[assets,setAssets]=useState([]),[relations,setRelations]=useState([]);
   const [contentId,setContentId]=useState(''),[assetId,setAssetId]=useState(''),[role,setRole]=useState('PRIMARY');
   const [source,setSource]=useState(''),[busy,setBusy]=useState(true),[blocked,setBlocked]=useState(false);
@@ -37,7 +37,7 @@ export default function FounderOperationWorkspace() {
   const current=contents.find(c=>c.id===contentId),selectedAsset=assets.find(a=>a.id===assetId);
   async function chooseContent(id){setContentId(id);setRelations([]);if(id){const r=await call({action:'relations',content_id:id});setRelations(r.relations);setMessage('Content relations loaded.');}}
   async function mutate(action){
-    const payload=action==='delete_asset'?{action,id:assetId}:{action,content_id:contentId,asset_id:assetId,...(action==='attach'?{role}:{})};
+    const payload=['release','withdraw'].includes(action)?{action,id:contentId}:action==='delete_asset'?{action,id:assetId}:{action,content_id:contentId,asset_id:assetId,...(action==='attach'?{role}:{})};
     await call(payload);
     if(action==='delete_asset' && attempt.current?.id===assetId){attempt.current=null;setPendingUpload(null);}
     await load();setMessage('Operation confirmed. Snapshot reloaded.');
@@ -71,7 +71,7 @@ export default function FounderOperationWorkspace() {
   }
   const selector=(id,label,value,onChange,rows,text)=>h('label',{htmlFor:id},label,h('select',{id,value,disabled:busy||blocked,onChange:e=>onChange(e.target.value)},h('option',{value:''},'Select…'),...rows.map(row=>h('option',{key:row.id,value:row.id},text(row)))));
   return h('section',{className:'founder-content','aria-busy':busy},
-    h('h1',null,'Media and asset workspace'),
+    h('h1',null,kind==='publishing'?'Publishing operations':'Media and asset workspace'),
     h('p',{className:'notice'},source==='LOCAL_SQLITE_FIXTURE'?'LOCAL SQLite fixture · synthetic auth and asset metadata · no live storage or Supabase validation.':source==='SUPABASE_DATABASE'?'Supabase database snapshot; no service health claim.':'Database source not verified until a snapshot loads. No service health claim.'),
     h('p',{role:'status','aria-live':'polite'},message),stale&&h('p',{className:'notice'},'Snapshot stale or unavailable. Reload to verify current state.'),
     pendingUpload&&h('p',{className:'notice'},`Upload reservation: ${pendingUpload}. Reload, then select it to finalize or delete if recovery is needed.`),
@@ -82,6 +82,10 @@ export default function FounderOperationWorkspace() {
       contentCursor&&h('button',{disabled:busy||blocked,onClick:()=>void run(async()=>{const c=await call({action:'list',cursor:contentCursor},true);setContents(old=>[...old,...c.items]);setContentCursor(c.next_cursor);setMessage('More content loaded.');})},'Load more content'),
       !contents.length&&!busy&&h('p',null,'No content available in this snapshot.'),
       current&&h('p',null,`Selected state: ${current.state}`),
+      kind==='publishing'?h('div',null,
+        h('p',null,'Release readiness is checked atomically by the operation. No scheduling or direct lifecycle editing.'),
+        h('button',{className:'button',disabled:busy||blocked||!current||current.state==='RELEASED',onClick:()=>void run(()=>mutate('release'),true)},'Release content'),
+        h('button',{className:'button secondary',disabled:busy||blocked||current?.state!=='RELEASED',onClick:()=>void run(()=>mutate('withdraw'),true)},'Withdraw content')):
       h('div',null,
         source==='SUPABASE_DATABASE'?h('form',{onSubmit:e=>{e.preventDefault();void run(upload,true);}},
           h('h2',null,'Private upload'),h('p',null,'Maximum 6,000,000 bytes. Use a filename with letters, numbers, dots, underscores or hyphens.'),

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-18T07:40:32.834Z",
+  "results": [
+    {
+      "label": "foreign origin",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "anonymous claim",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "label": "query rejected",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "anonymous publishing",
+      "status": 401,
+      "expected": 401
+    }
+  ],
+  "opening_harness_starts_no_requests": true,
+  "product_code_changed": false
+}

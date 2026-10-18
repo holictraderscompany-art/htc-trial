@@ -48,3 +48,8 @@ validation/test-db/supabase/migrations/20261012062054_founder_content_list.sql t
 validation/test-db/supabase/migrations/20261014232339_t13_approved_default_acl_hardening.sql text eol=lf
 validation/test-db/verify-history.mjs text eol=lf
 .gitattributes text eol=lf
+# Preserve the exact approved T14 SQL archive bytes on Windows checkouts.
+validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql text eol=lf
+validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql text eol=lf
+validation/test-db/supabase/migrations/20261015220202_t14_signed_direct_upload_policy.sql text eol=lf
+validation/test-db/supabase/migrations/20261016084813_t14_guard_rejection_sqlstate.sql text eol=lf

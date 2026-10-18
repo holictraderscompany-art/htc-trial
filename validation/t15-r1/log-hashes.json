@@ -1,0 +1,33 @@
+{
+  "scope": "LOCAL validation logs; ignored by Git",
+  "files": [
+    {
+      "path": "validation/t15-r1/application-tests.log",
+      "sha256": "fbd4b5d84a2d9fc9d47e077580b478a13747cd09b1a6993f3248874806bb1f15"
+    },
+    {
+      "path": "validation/t15-r1/t14-sqlite.log",
+      "sha256": "2cd733640e9fde227d211f05f9819a69f1ce4192befd613002eaa42bb1d8b541"
+    },
+    {
+      "path": "validation/t15-r1/t13-sqlite.log",
+      "sha256": "6f256d831dbc7180c12cb040d6dfb4842c1f89a91a9f0b577e39e32dc749f6b4"
+    },
+    {
+      "path": "validation/t15-r1/build.log",
+      "sha256": "fc7682934097992e599d7eef56bbe18106b1ce4163209d678b64f6230392b80a"
+    },
+    {
+      "path": "validation/t15-r1/migration-verification.log",
+      "sha256": "8eb28e8141e30c78a2917d46ba530f4d6d81571a7ea354b21e95cb8e98a3270b"
+    },
+    {
+      "path": "validation/t15-r1/browser-t14-cli.log",
+      "sha256": "7d4fc457e453a8b7e0930009cc47f9237c6a253ca1ae6c226cdf46bacaef9680"
+    },
+    {
+      "path": "validation/t15-r1/browser-publishing-cli.log",
+      "sha256": "948206bcdf6e478edce8107a807d2937ea31a8b2b4081c8b57356128f0455bd0"
+    }
+  ]
+}

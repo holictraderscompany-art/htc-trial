@@ -1,0 +1,105 @@
+{
+  "scope": "T15-R1 only; no commit/push approval inferred",
+  "branch": "codex/t15-r1-reconciliation",
+  "base": "94981054f4fa2493205b44919e37802322312c3c",
+  "inventory_sha256": "e1c8d88ff60d91a84971d273258e907c0422c0a0785d0bd4ff5febd3de4e5a1f",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "333fd07770cd6edf4d5e17ac4171a9bc9050ff6be1091fbae510743bafba1d58"
+    },
+    {
+      "path": "docs/t15-r1-integration-manifest.md",
+      "sha256": "217965532e86923e7fe57c983c65541e7246cdcaa3a8e3b1bd1fb0eed31397ae"
+    },
+    {
+      "path": "docs/t15-r1-reconciliation.md",
+      "sha256": "3177b4c08d15885ca39429388ab6b41562ce2097da43f38c9a89302d7a538fb0"
+    },
+    {
+      "path": "package.json",
+      "sha256": "2b53ab754fe36c87fba920a2ac135c9a2bfa71a6597ef9a26d721a03151ba15c"
+    },
+    {
+      "path": "src/app/founder/publishing/page.js",
+      "sha256": "59a38e328e7105f5300568c4ccdf6b7f45f505c4ed72f907e5666e3dc227c057"
+    },
+    {
+      "path": "src/components/founder-operation-workspace.js",
+      "sha256": "9f09e18f3fcb218ed77f9c9fe0d54f1e5bdadd7d693bebad146550bd8ab22b0f"
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "sha256": "9c951bdb20f61a7efbf461f1fb14e4c2cc0f5c60c6d97f5d86e43c2de02ae6fb"
+    },
+    {
+      "path": "src/server/founder-operations.js",
+      "sha256": "6d2334eaac6d99b3dcd022f9c3316fecbf12c297b8f4869e799c34ddccec9bd1"
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "sha256": "d89dd94a44006a8d623c543c82b28d799631cc9181138542f8a0afc8f62e35e1"
+    },
+    {
+      "path": "tests/founder-assets.test.js",
+      "sha256": "c32091efb75389b3b54a9a82d341f62ff2f016ec8eae424d3e28b1f9dd564834"
+    },
+    {
+      "path": "tests/founder-content.fixture.mjs",
+      "sha256": "7d5b5a2efce5087687a1ca5dd21d0f6e6ba135d672871f4a975f6f4bcca94b47"
+    },
+    {
+      "path": "tests/founder-publishing.test.js",
+      "sha256": "8b8287b712300141c820a75ea242333c51c6bcc2724c3588e1d87ceaa491619e"
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "sha256": "41784ee342a041792fcfc71b1a3c1eac9b77645a8197a0f63cf17fa147169b09"
+    },
+    {
+      "path": "validation/t15-r1/baseline-inventory.json",
+      "sha256": "e1c8d88ff60d91a84971d273258e907c0422c0a0785d0bd4ff5febd3de4e5a1f"
+    },
+    {
+      "path": "validation/t15-r1/baseline-inventory.sha256",
+      "sha256": "da85abaabe80c8f5dc3162932af81dba15a0f4e8045c195e0117c122d7771334"
+    },
+    {
+      "path": "validation/t15-r1/browser-publishing-results.json",
+      "sha256": "7f101e616e971a99874c65a7caadb161458a37681f29e91b7b9d7af2bdc0b986"
+    },
+    {
+      "path": "validation/t15-r1/browser-publishing.js",
+      "sha256": "caaacc5742115340f8ed2ace01d789e18d27f545dcc12a4e1964bef4b0c149a7"
+    },
+    {
+      "path": "validation/t15-r1/browser-t14-results.json",
+      "sha256": "b6c42631c457f34c001172ffcd0568d9410645a6c1dd4c634508421d043444d1"
+    },
+    {
+      "path": "validation/t15-r1/browser-t14.js",
+      "sha256": "3f19abdbcb3028e9e6731c8606bf8889bc3f7512de091de53709b866a9d63765"
+    },
+    {
+      "path": "validation/t15-r1/log-hashes.json",
+      "sha256": "c3587f83b10400bffd4816379d22a1910485bb7481d7c2de826a457141c72d29"
+    },
+    {
+      "path": "validation/t15-r1/migration-checkout-recovery.json",
+      "sha256": "1e9e72d753524138a8f14e873786818b27bbef4005635d9e149caf18bf8c971a"
+    },
+    {
+      "path": "validation/t15-r1/verification.json",
+      "sha256": "28917a5222756496b18728661a5a422302445219ab53aac5639dc051c25b382d"
+    },
+    {
+      "path": "validation/t15-r1/verify-reconciliation.mjs",
+      "sha256": "4afb28ea889f9f46384fedbb4af6bc7feef9c721b46f9a8fc04a8cdf14561375"
+    }
+  ],
+  "manifest_self": {
+    "path": "validation/t15-r1/file-manifest.json",
+    "note": "Omitted from its own recursive hash list"
+  },
+  "excluded": "Existing ignore rules exclude node_modules, .next, .playwright-cli, log files, browser profiles and local databases. Raw validation log hashes are recorded separately; no secrets or credential files included."
+}

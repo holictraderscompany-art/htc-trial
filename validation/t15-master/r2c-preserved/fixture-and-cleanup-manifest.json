@@ -1,0 +1,126 @@
+{
+  "scope": "T15-R2C ten content-only scenarios; no Storage mutation",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "tag": "T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e",
+  "cases": [
+    {
+      "id": "A1/G1",
+      "initial": "DRAFT",
+      "operationA": "release COMMIT",
+      "operationB": "release",
+      "expected": "invalid_transition; exactly one successful release",
+      "fixtureContentId": "3712b69b-7a7e-4799-ae89-4e9d8e2698df",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "B1",
+      "initial": "RELEASED",
+      "operationA": "withdraw COMMIT",
+      "operationB": "release",
+      "expected": "serialized saved/RELEASED",
+      "fixtureContentId": "ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "B2/F1",
+      "initial": "RELEASED",
+      "operationA": "withdraw ROLLBACK",
+      "operationB": "withdraw",
+      "expected": "saved/WITHDRAWN after rollback",
+      "fixtureContentId": "ab495e69-b122-409d-9ea7-cb610b7408d4",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "D1",
+      "initial": "DRAFT",
+      "operationA": "checked release COMMIT",
+      "operationB": "draft edit",
+      "expected": "not_draft; original text preserved",
+      "fixtureContentId": "a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "D2",
+      "initial": "DRAFT",
+      "operationA": "draft edit COMMIT",
+      "operationB": "checked release",
+      "expected": "saved/RELEASED with committed text",
+      "fixtureContentId": "1a1e383e-acd5-4de8-a549-ec976dc2b2f7",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "F2",
+      "initial": "DRAFT",
+      "operationA": "checked release ROLLBACK",
+      "operationB": "draft edit",
+      "expected": "saved/DRAFT",
+      "fixtureContentId": "ce7c79c9-16b6-4ff2-8595-2cc567408b29",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "F3",
+      "initial": "DRAFT",
+      "operationA": "draft edit ROLLBACK",
+      "operationB": "checked release",
+      "expected": "saved/RELEASED with original text",
+      "fixtureContentId": "8638207c-07e4-4e27-a9af-465265991a0c",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "G2",
+      "initial": "WITHDRAWN",
+      "operationA": "release COMMIT",
+      "operationB": "release retry",
+      "expected": "serialized invalid_transition; no duplicate release",
+      "fixtureContentId": "86db1234-3fda-48fd-896e-eebeaba72820",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "H1",
+      "initial": "DRAFT",
+      "operationA": "existing USER database caller context",
+      "operationB": "checked release and withdrawal",
+      "expected": "42501; unchanged fixture",
+      "fixtureContentId": "a7f88296-91e2-4922-9608-779496d6ca08",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    },
+    {
+      "id": "H2",
+      "initial": "DRAFT",
+      "operationA": "anon database role without subject",
+      "operationB": "checked release and withdrawal",
+      "expected": "42501 EXECUTE denial; unchanged fixture",
+      "fixtureContentId": "62f2cfc8-af0c-45d8-be13-ba239aee023b",
+      "storageRequired": false,
+      "status": "PREPARED_NOT_RUN"
+    }
+  ],
+  "created": false,
+  "cleanupSql": "ROLLBACK; RESET ROLE; BEGIN READ WRITE; DO $$ BEGIN IF EXISTS(SELECT 1 FROM public.trial_content_assets WHERE content_id IN ('3712b69b-7a7e-4799-ae89-4e9d8e2698df'::uuid,'ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32'::uuid,'ab495e69-b122-409d-9ea7-cb610b7408d4'::uuid,'a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0'::uuid,'1a1e383e-acd5-4de8-a549-ec976dc2b2f7'::uuid,'ce7c79c9-16b6-4ff2-8595-2cc567408b29'::uuid,'8638207c-07e4-4e27-a9af-465265991a0c'::uuid,'86db1234-3fda-48fd-896e-eebeaba72820'::uuid,'a7f88296-91e2-4922-9608-779496d6ca08'::uuid,'62f2cfc8-af0c-45d8-be13-ba239aee023b'::uuid)) OR EXISTS(SELECT 1 FROM public.trial_content WHERE id IN ('3712b69b-7a7e-4799-ae89-4e9d8e2698df'::uuid,'ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32'::uuid,'ab495e69-b122-409d-9ea7-cb610b7408d4'::uuid,'a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0'::uuid,'1a1e383e-acd5-4de8-a549-ec976dc2b2f7'::uuid,'ce7c79c9-16b6-4ff2-8595-2cc567408b29'::uuid,'8638207c-07e4-4e27-a9af-465265991a0c'::uuid,'86db1234-3fda-48fd-896e-eebeaba72820'::uuid,'a7f88296-91e2-4922-9608-779496d6ca08'::uuid,'62f2cfc8-af0c-45d8-be13-ba239aee023b'::uuid) AND body NOT LIKE 'T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e%') THEN RAISE EXCEPTION 'Fixture ownership or relation conflict; no deletion'; END IF; END $$; DELETE FROM public.trial_content WHERE id IN ('3712b69b-7a7e-4799-ae89-4e9d8e2698df'::uuid,'ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32'::uuid,'ab495e69-b122-409d-9ea7-cb610b7408d4'::uuid,'a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0'::uuid,'1a1e383e-acd5-4de8-a549-ec976dc2b2f7'::uuid,'ce7c79c9-16b6-4ff2-8595-2cc567408b29'::uuid,'8638207c-07e4-4e27-a9af-465265991a0c'::uuid,'86db1234-3fda-48fd-896e-eebeaba72820'::uuid,'a7f88296-91e2-4922-9608-779496d6ca08'::uuid,'62f2cfc8-af0c-45d8-be13-ba239aee023b'::uuid) AND body LIKE 'T15-R2-012d8940-752e-4a44-b5c6-0f306f37f64e%'; SELECT jsonb_build_object('remaining_content',(SELECT count(*) FROM public.trial_content WHERE id IN ('3712b69b-7a7e-4799-ae89-4e9d8e2698df'::uuid,'ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32'::uuid,'ab495e69-b122-409d-9ea7-cb610b7408d4'::uuid,'a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0'::uuid,'1a1e383e-acd5-4de8-a549-ec976dc2b2f7'::uuid,'ce7c79c9-16b6-4ff2-8595-2cc567408b29'::uuid,'8638207c-07e4-4e27-a9af-465265991a0c'::uuid,'86db1234-3fda-48fd-896e-eebeaba72820'::uuid,'a7f88296-91e2-4922-9608-779496d6ca08'::uuid,'62f2cfc8-af0c-45d8-be13-ba239aee023b'::uuid)),'remaining_relations',(SELECT count(*) FROM public.trial_content_assets WHERE content_id IN ('3712b69b-7a7e-4799-ae89-4e9d8e2698df'::uuid,'ca0a0bee-39d7-4cff-a7c9-9bdfac34ec32'::uuid,'ab495e69-b122-409d-9ea7-cb610b7408d4'::uuid,'a5f6f9c2-5d2a-487d-bbf9-0fe363e223e0'::uuid,'1a1e383e-acd5-4de8-a549-ec976dc2b2f7'::uuid,'ce7c79c9-16b6-4ff2-8595-2cc567408b29'::uuid,'8638207c-07e4-4e27-a9af-465265991a0c'::uuid,'86db1234-3fda-48fd-896e-eebeaba72820'::uuid,'a7f88296-91e2-4922-9608-779496d6ca08'::uuid,'62f2cfc8-af0c-45d8-be13-ba239aee023b'::uuid))); COMMIT;",
+  "cleanupReview": {
+    "contentTriggers": 0,
+    "contentForeignKey": "trial_content_assets content_id ON DELETE RESTRICT",
+    "relationsBaseline": 0,
+    "storageRequired": false,
+    "onlyInventoriedContentIds": true,
+    "requiresOwnershipTag": true,
+    "rollbackBothSessionsBeforeCleanup": true,
+    "noTriggersDisabled": true,
+    "noRlsOrGrantChanges": true
+  },
+  "preservedReadOnlyBackends": [
+    746817,
+    747362
+  ],
+  "nativeRunner": "C:\\Users\\ASUS\\.codex\\visualizations\\2026\\10\\10\\01a123df-92ce-7e03-ae21-cbf0a442bf94\\T15-R2C-NATIVE-SESSION-WORKER.mjs",
+  "runnerSha256": "22ba8a2dfc685289270e8fa0e5367f19c433f3018000995a060e11de246be11f"
+}

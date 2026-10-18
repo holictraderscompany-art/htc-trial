@@ -1,0 +1,2661 @@
+{
+  "target": "https://uzhkzhmncxjplrdtdzgd.supabase.co",
+  "events": [
+    {
+      "at": "2026-10-18T07:37:30.736Z",
+      "stage": "expiry_session_preflight",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "missing",
+      "upstream_checked": false,
+      "authenticated": false,
+      "founder": null
+    },
+    {
+      "at": "2026-10-18T07:37:31.181Z",
+      "event": "application_response",
+      "path": "/founder/publishing",
+      "status": 307,
+      "method": "GET"
+    },
+    {
+      "at": "2026-10-18T07:37:32.107Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:37:34.673Z",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:29.539Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:32.610Z",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:32.833Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:33.418Z",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:34.823Z",
+      "path": "/rest/v1/rpc/read_released_content_page",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:35.895Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:39:36.232Z",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:40:31.877Z",
+      "stage": "expiry_session_preflight",
+      "status": 403,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "not_checked",
+      "upstream_checked": false,
+      "authenticated": null,
+      "founder": null
+    },
+    {
+      "at": "2026-10-18T07:40:32.823Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 401,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:40:35.030Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:40:35.906Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:40:35.919Z",
+      "stage": "expiry_session_preflight",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "cookie_state": "present_valid_format",
+      "upstream_checked": true,
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:08.197Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:08.729Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:08.732Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:08.903Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:09.028Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:09.190Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:09.624Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:09.626Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:09.812Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:09.957Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:41:11.554Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:11.562Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:41:11.691Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:41:11.808Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:45:49.634Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:45:50.435Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:45:51.060Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:45:51.825Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:45:51.827Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:45:52.414Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:45:52.635Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:45:54.096Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:45:54.111Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:45:54.454Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:45:54.963Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:05.527Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:05.722Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:05.870Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:06.582Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:06.588Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:08.619Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:08.739Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:09.950Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:10.231Z",
+      "path": "/storage/v1/object/upload/sign/trial-assets/image/1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773/asset.png",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:10.249Z",
+      "event": "application_response",
+      "path": "/api/founder/assets",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:46:14.239Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:14.351Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:14.915Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:18.383Z",
+      "path": "/storage/v1/object/authenticated/trial-assets/image/1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773/asset.png",
+      "method": "GET",
+      "status": 206
+    },
+    {
+      "at": "2026-10-18T07:46:18.630Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:18.638Z",
+      "event": "application_response",
+      "path": "/api/founder/assets",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:46:18.824Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:18.924Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:24.084Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:24.207Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:24.393Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:24.497Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:24.509Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:24.677Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:24.830Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:26.887Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:27.006Z",
+      "path": "/storage/v1/object/upload/sign/trial-assets/image/49d28bb4-21da-49f7-a5f4-6b719b0859a2/asset.png",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:27.014Z",
+      "event": "application_response",
+      "path": "/api/founder/assets",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:46:28.205Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:28.311Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:46:28.479Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:28.725Z",
+      "path": "/storage/v1/object/authenticated/trial-assets/image/49d28bb4-21da-49f7-a5f4-6b719b0859a2/asset.png",
+      "method": "GET",
+      "status": 206
+    },
+    {
+      "at": "2026-10-18T07:46:28.846Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:28.854Z",
+      "event": "application_response",
+      "path": "/api/founder/assets",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:46:29.164Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:46:29.461Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:34.583Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:34.890Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:35.031Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:35.158Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:35.162Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:35.346Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:35.626Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:36.081Z",
+      "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:36.179Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:36.312Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:36.484Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:36.695Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:36.848Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:36.858Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:47:37.167Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:37.711Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:39.078Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:39.194Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:39.312Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:39.434Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:39.437Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:39.542Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:39.641Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:39.766Z",
+      "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:39.855Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:39.961Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:47:40.108Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:40.300Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:40.428Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:40.529Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:47:40.985Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:47:42.015Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:36.294Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:36.558Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:36.783Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:36.895Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:36.897Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:37.089Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:37.261Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:38.226Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:38.253Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:38.359Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:38.529Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:40.224Z",
+      "path": "/rest/v1/rpc/read_released_content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:40.409Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 401,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:40.421Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 401,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:42.075Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:42.406Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:42.574Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:42.847Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:42.854Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:43.019Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:43.128Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:43.554Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:43.562Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:43.691Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:43.800Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:46.733Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:46.875Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:47.040Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:47.132Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:47.135Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:47.285Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:47.394Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:47.399Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 400,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:47.539Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:47.636Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:49.054Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:49.152Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:49.255Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:49.357Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:49.359Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:49.533Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:49.629Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:49.634Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 400,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:49.750Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:49.868Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:52.561Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:52.678Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:52.932Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:53.029Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:53.031Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:53.135Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:53.231Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:53.236Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 400,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:53.394Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:53.490Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:55.050Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:55.178Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:55.301Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:55.548Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:55.551Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:55.669Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:55.759Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:56.299Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:56.303Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 404,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:56.404Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:56.498Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:58.048Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:58.137Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:58.533Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:58.633Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:58.635Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:58.741Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:58.836Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:49:58.987Z",
+      "path": "/rest/v1/rpc/manage_trial_content_asset_draft",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:58.996Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 404,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:49:59.248Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:49:59.379Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:01.343Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:01.444Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:01.650Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:01.824Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:01.827Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:02.912Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:03.001Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:03.169Z",
+      "path": "/rest/v1/rpc/manage_trial_content_asset_draft",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:03.175Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:03.555Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:03.647Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:06.042Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:06.145Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:06.322Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:06.416Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:06.418Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:06.531Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:06.688Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:06.832Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:06.836Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:06.926Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:07.016Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:08.258Z",
+      "path": "/rest/v1/rpc/read_released_content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:15.333Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:15.449Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:16.420Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:16.523Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:16.529Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:16.831Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:17.497Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:17.530Z",
+      "event": "application_response",
+      "path": "/founder/publishing",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "at": "2026-10-18T07:50:18.620Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:18.808Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:20.059Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:20.158Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:20.281Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:20.292Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:20.337Z",
+      "path": "/rest/v1/rpc/list_trial_content_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:20.608Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:21.107Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:21.198Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:21.297Z",
+      "path": "/rest/v1/rpc/manage_trial_content_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:21.316Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:22.051Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.155Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:22.285Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.298Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:22.408Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.448Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.495Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:22.581Z",
+      "path": "/rest/v1/rpc/list_trial_content_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.588Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:22.597Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:22.716Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:22.723Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:23.066Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:23.149Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:23.758Z",
+      "path": "/rest/v1/rpc/read_released_content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:23.868Z",
+      "path": "/rest/v1/rpc/read_released_content_assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:25.057Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:25.169Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:25.390Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:25.652Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:25.654Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:26.899Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:27.008Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:29.279Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:29.287Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:30.016Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:30.130Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:36.075Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:36.330Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:36.451Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:36.564Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:36.566Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:36.675Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:36.787Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:37.550Z",
+      "path": "/rest/v1/rpc/update_trial_content_draft",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:37.554Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:37.676Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:37.787Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:40.058Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:40.182Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:40.287Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:40.378Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:40.380Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:40.570Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:41.150Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:41.164Z",
+      "event": "application_response",
+      "path": "/founder/publishing",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "at": "2026-10-18T07:50:41.544Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:41.550Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:41.657Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:41.800Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:41.894Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:41.901Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:42.579Z",
+      "path": "/rest/v1/rpc/list_trial_content_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:42.605Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:43.276Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:43.377Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:43.493Z",
+      "path": "/rest/v1/rpc/manage_trial_content_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:43.512Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:44.171Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:44.272Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:44.374Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:44.382Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:45.602Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:45.641Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:45.701Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:45.730Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:45.795Z",
+      "path": "/rest/v1/rpc/list_trial_content_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:45.802Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:45.811Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:45.818Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:46.058Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:46.183Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:46.851Z",
+      "path": "/rest/v1/rpc/read_released_content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.044Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.145Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:48.245Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.326Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:48.329Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:48.467Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.579Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:48.684Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.688Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:48.794Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:48.891Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:56.984Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:57.169Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:57.558Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:57.664Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:57.667Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:57.883Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:57.986Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:50:59.316Z",
+      "path": "/rest/v1/rpc/update_trial_content_draft",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:59.320Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 409,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:50:59.498Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:50:59.609Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:01.688Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:01.827Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:02.716Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:02.970Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:02.978Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:04.025Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:04.170Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:05.827Z",
+      "path": "/rest/v1/rpc/transition_trial_content_checked",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:05.833Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:51:06.044Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:06.147Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:07.043Z",
+      "path": "/rest/v1/rpc/read_released_content",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:07.160Z",
+      "path": "/rest/v1/rpc/read_released_content_assets",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:10.079Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:10.191Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:10.327Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:10.452Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:10.457Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:10.581Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:10.681Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:11.136Z",
+      "path": "/rest/v1/rpc/manage_trial_content_asset_draft",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:11.151Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:51:11.305Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:11.446Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:13.152Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:13.248Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:13.394Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:13.491Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:13.495Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:13.599Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:13.704Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:13.848Z",
+      "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:13.939Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:14.032Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:51:14.181Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:14.336Z",
+      "path": "/storage/v1/object/trial-assets",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:14.601Z",
+      "path": "/rest/v1/rpc/manage_trial_asset",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:14.612Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:51:15.762Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:51:15.996Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:52:59.644Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:53:00.420Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:53:00.425Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:55:52.565Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:55:52.922Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:55:53.309Z",
+      "event": "application_response",
+      "path": "/founder/publishing",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "at": "2026-10-18T07:55:58.898Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:55:58.909Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:55:59.039Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:55:59.057Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-18T07:55:59.197Z",
+      "path": "/rest/v1/rpc/list_trial_content_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:55:59.213Z",
+      "event": "application_response",
+      "path": "/api/founder/content",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:55:59.638Z",
+      "path": "/rest/v1/rpc/read_trial_assets_for_founder",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:55:59.650Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:57:18.428Z",
+      "path": "/rest/v1/rpc/read_released_content_page",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:57:20.009Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:57:20.315Z",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:06.516Z",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:06.703Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:07.256Z",
+      "path": "/rest/v1/rpc/read_released_content_page",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:07.740Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:08.058Z",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:17.626Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:17.750Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:17.754Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:17.891Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:18.051Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:18.161Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:18.292Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:18.299Z",
+      "event": "browser_identity",
+      "authenticated": true,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:18.647Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:18.959Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:18.977Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 403,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:58:19.084Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:19.203Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:19.215Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 403,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:58:19.337Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:19.440Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:19.446Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 403,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:58:19.561Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:19.688Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:19.692Z",
+      "event": "application_response",
+      "path": "/api/founder/operations",
+      "status": 403,
+      "method": "POST"
+    },
+    {
+      "at": "2026-10-18T07:58:19.830Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:19.914Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-18T07:58:19.946Z",
+      "event": "application_response",
+      "path": "/founder/publishing",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "at": "2026-10-18T07:58:20.036Z",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-18T07:58:20.151Z",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    }
+  ]
+}

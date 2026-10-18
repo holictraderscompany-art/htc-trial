@@ -1,0 +1,610 @@
+{
+  "scope": "T15-R1 preservation inventory; no original worktree changes authorized",
+  "at": "2026-10-18T03:13:13.071Z",
+  "repository": "holictraderscompany-art/htc-trial",
+  "verified_t14": "94981054f4fa2493205b44919e37802322312c3c",
+  "common_ancestor": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+  "remote": "94981054f4fa2493205b44919e37802322312c3c\trefs/heads/codex/t14-signed-direct\n6df86a0e630f38b933d5e269c54ef20906d6bcf5\trefs/heads/main",
+  "worktrees": [
+    {
+      "root": "C:/Users/ASUS/OneDrive/Documents/M.Devry Handoyo Founder Holic Traders Company/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+      "branch": "main",
+      "status": " M package.json\n M src/app/globals.css\n M src/components/founder-views.js\n M src/server/content-release.js\n M tests/founder-access.test.js\n?? docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md\n?? docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md\n?? docs/founder-content-workspace.md\n?? docs/founder-operation-workspaces.md\n?? docs/local-sqlite-mode.md\n?? src/app/api/founder/content/route.js\n?? src/app/api/founder/operations/route.js\n?? src/app/founder/assets/page.js\n?? src/app/founder/content/page.js\n?? src/app/founder/operations/page.js\n?? src/app/founder/publishing/page.js\n?? src/components/founder-content-workspace.js\n?? src/components/founder-operation-workspace.js\n?? src/server/founder-content.js\n?? src/server/founder-operations.js\n?? supabase/migrations/20261011090000_trial_content_draft_only.sql\n?? supabase/migrations/20261011100000_founder_content_list.sql\n?? tests/content-draft-only.spec\n?? tests/content-draft-only.sql\n?? tests/content-draft-only.test.js\n?? tests/founder-content.fixture.mjs\n?? tests/founder-content.sql\n?? tests/founder-content.test.js\n?? tests/local-sqlite-adapter.js\n?? tests/local-sqlite.test.js",
+      "files": [
+        {
+          "status": " M",
+          "path": "package.json",
+          "sha256": "85c49db85f75d5cafec99a35858612aeda99f11977f77873c1dc8338f571723e"
+        },
+        {
+          "status": " M",
+          "path": "src/app/globals.css",
+          "sha256": "7eae01128e58b05f6f8b1c82afd480c578d7985bcbef8fa5f624b308477ce5b4"
+        },
+        {
+          "status": " M",
+          "path": "src/components/founder-views.js",
+          "sha256": "8488f102e18c645222c5b2e81bb3eb0700a9a6748cc61a40300a71a2de1fabec"
+        },
+        {
+          "status": " M",
+          "path": "src/server/content-release.js",
+          "sha256": "c108224278c154ff773100fefcd70817cf62633653ede860d8f1740b51472e0d"
+        },
+        {
+          "status": " M",
+          "path": "tests/founder-access.test.js",
+          "sha256": "e1531e3f52f144222530cb5323e96c012e518a4ee1f4c3759a07e289d40cf293"
+        },
+        {
+          "status": "??",
+          "path": "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+          "sha256": "a74fd929920d61f2167cdaf20fc259bc8419661f1661ece6091e8436012d0730"
+        },
+        {
+          "status": "??",
+          "path": "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+          "sha256": "c2b3bddad0ec34e4de96c8c9641da78c3e670b14440604010e6836ffeb819995"
+        },
+        {
+          "status": "??",
+          "path": "docs/founder-content-workspace.md",
+          "sha256": "6d728ec5d1073663fd93deb3b7ca152ad5627bc2a7be8b1a8741d923ba8b986e"
+        },
+        {
+          "status": "??",
+          "path": "docs/founder-operation-workspaces.md",
+          "sha256": "d69a8a1114f9bc106a725a82cb8df3398905e42e63b86e238149840913e8678c"
+        },
+        {
+          "status": "??",
+          "path": "docs/local-sqlite-mode.md",
+          "sha256": "cade9ed292c822935f8c117391498c9da2f50d3aad26afedc1f4a33ad4e7a920"
+        },
+        {
+          "status": "??",
+          "path": "src/app/api/founder/content/route.js",
+          "sha256": "b00d795782d3781bb73d36680658386557b4088ea870c619dd9ce862be804ae1"
+        },
+        {
+          "status": "??",
+          "path": "src/app/api/founder/operations/route.js",
+          "sha256": "ce1432e0092135e903bccf82d294b710df2545203f7a3b5c2a8cc5c389bced49"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/assets/page.js",
+          "sha256": "90391f5ef9db41b2b09c293b30f3e9b7c96cbc85687cccb222516490ba7be39c"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/content/page.js",
+          "sha256": "efb37c7aed33797710e8ef52f0ba2e6d9cc662a5f395ea199eb87f2d0a415ea6"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/operations/page.js",
+          "sha256": "8745832515a96eda5a92c78509dcfd86060bbc5dc500834439b50c2812efd2e7"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/publishing/page.js",
+          "sha256": "59a38e328e7105f5300568c4ccdf6b7f45f505c4ed72f907e5666e3dc227c057"
+        },
+        {
+          "status": "??",
+          "path": "src/components/founder-content-workspace.js",
+          "sha256": "8074d8552f6b2209b0ee423883ce7ea72102ca694215a05a5c7c6dedcf057f80"
+        },
+        {
+          "status": "??",
+          "path": "src/components/founder-operation-workspace.js",
+          "sha256": "82c5e73d267ccac44f22e37af16e2a8683e2fa5a2b4456bdf61e88adb9d4a48b"
+        },
+        {
+          "status": "??",
+          "path": "src/server/founder-content.js",
+          "sha256": "b1177ee8ff39d560c634b405327a395dfb32997d982c999db6c3346dedfe3038"
+        },
+        {
+          "status": "??",
+          "path": "src/server/founder-operations.js",
+          "sha256": "6ecc9537fe5c675a4680b80fe5c293c16acfceb29d8daf1fa777a218de67fdb5"
+        },
+        {
+          "status": "??",
+          "path": "supabase/migrations/20261011090000_trial_content_draft_only.sql",
+          "sha256": "3d8e94c8e7d910663b10c3d63293f2a232e88eee25794af4ced4089d46c43a88"
+        },
+        {
+          "status": "??",
+          "path": "supabase/migrations/20261011100000_founder_content_list.sql",
+          "sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+        },
+        {
+          "status": "??",
+          "path": "tests/content-draft-only.spec",
+          "sha256": "d3ba76496e2e0d4854e8f7eaaa13dd770087d5335fa3bc513fb877c1d9689c5e"
+        },
+        {
+          "status": "??",
+          "path": "tests/content-draft-only.sql",
+          "sha256": "196484fb26cd6f2a77f3c79555298ca9ec1e042ae19dea2ac59f92072d54aba8"
+        },
+        {
+          "status": "??",
+          "path": "tests/content-draft-only.test.js",
+          "sha256": "aad53d961fc7f773fe367c648f9f9d32c4e15e6ce52aa296d81d1409ced32c8a"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-content.fixture.mjs",
+          "sha256": "e2c18d56f7bdfde3c19bdadf81d27ec78508233083a800bf7ba526a6763f9483"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-content.sql",
+          "sha256": "d61d38e442c966139b72871b94bb0b7eade11e40608f4e7d7654808aec897b97"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-content.test.js",
+          "sha256": "06f4a1c610ebca280f1b363ee01a121f88e09f76128d51d1fca08d1187f551ae"
+        },
+        {
+          "status": "??",
+          "path": "tests/local-sqlite-adapter.js",
+          "sha256": "a16e873dd132bcb75a6e0cf71920723c8bd087ce52e156d54e93af682d9b1fd9"
+        },
+        {
+          "status": "??",
+          "path": "tests/local-sqlite.test.js",
+          "sha256": "c4a06a7462b8bc379088af03dd36d3efbacb476cd40357c1bc9a9599a4867861"
+        }
+      ]
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-group3-reconciliation/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "9a2e766ddf0a40201249776122e357ca7f44d422",
+      "branch": "",
+      "status": " M docs/founder-content-workspace.md\n M docs/group3-cloud-continuation.md\n M validation/test-db/history.json\n M validation/test-db/supabase/migrations/20261012061832_htc_group3_core_auth_content_draft.sql\n M validation/test-db/supabase/migrations/20261012062050_trial_assets.sql\n M validation/test-db/supabase/migrations/20261012062052_trial_content_assets.sql\n M validation/test-db/supabase/migrations/20261012062053_public_content_discovery.sql\n M validation/test-db/supabase/migrations/20261012062054_founder_content_list.sql\n M validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql\n M validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql\n?? .gitattributes\n?? validation/test-db/supabase/migrations/20261014232339_t13_approved_default_acl_hardening.sql",
+      "files": [
+        {
+          "status": " M",
+          "path": "docs/founder-content-workspace.md",
+          "sha256": "18a8236f8dc30ffdd51fdb4c1a69f53911f1c6bf77335e5f0d4a41f30c601cc1"
+        },
+        {
+          "status": " M",
+          "path": "docs/group3-cloud-continuation.md",
+          "sha256": "7c0d44f27978c362fb26efaac6b0c6c4bda293e02f8acb78ec028133b2ac0197"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/history.json",
+          "sha256": "1ce1f4d14d7b1587c5c2b74335e208afe111cb12c2416d4d634cd69e6430dbec"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012061832_htc_group3_core_auth_content_draft.sql",
+          "sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062050_trial_assets.sql",
+          "sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062052_trial_content_assets.sql",
+          "sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062053_public_content_discovery.sql",
+          "sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062054_founder_content_list.sql",
+          "sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+          "sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql",
+          "sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+        },
+        {
+          "status": "??",
+          "path": ".gitattributes",
+          "sha256": "4f387164e8b0f2c9a431d40df6efc063e7b0d94ab198e13447a1bd6b468fd064"
+        },
+        {
+          "status": "??",
+          "path": "validation/test-db/supabase/migrations/20261014232339_t13_approved_default_acl_hardening.sql",
+          "sha256": "09d7d2db4007c6e24e247956174cdd86f8df7894b42193eb48a88a3af34284e7"
+        }
+      ]
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t13-commit-candidate/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "branch": "codex/t13-precommit-candidate",
+      "status": "",
+      "files": []
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t14-signed-direct",
+      "head": "94981054f4fa2493205b44919e37802322312c3c",
+      "branch": "codex/t14-signed-direct",
+      "status": "?? validation/t14/callback-diagnostic.json\n?? validation/t14/file-manifest.json\n?? validation/t14/final-blocker/expiry-browser-observations.json\n?? validation/t14/live-browser.mjs\n?? validation/t14/recovery-manifest.json",
+      "files": [
+        {
+          "status": "??",
+          "path": "validation/t14/callback-diagnostic.json",
+          "sha256": "42b5434001b698d06f83518d7dd2fcd1ab3b33577be7b4b8127d78d1951cffbd"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/file-manifest.json",
+          "sha256": "9bd13b9e2e26d5b584ed14f44b10b6c71a0a69bf71b3ba410167049abcc428b4"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/final-blocker/expiry-browser-observations.json",
+          "sha256": "2cb855bc65452d3da73f0160f66dd4bc3e324d7889be878d6cd9e8f09217951e"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/live-browser.mjs",
+          "sha256": "34b0d0436ed1b09439e4e1f5bc877467506aa319c2287e18d2a94c7044445a05"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/recovery-manifest.json",
+          "sha256": "9b9bcde6776c850c93d6da3e105a205e88183b0c6a4475242695e72266eb00ae"
+        }
+      ]
+    },
+    {
+      "root": "C:/Users/ASUS/.codex/worktrees/htc-t15-t16-continuation/FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+      "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+      "branch": "codex/t15-t16-continuation",
+      "status": " M package.json\n M src/components/founder-views.js\n M src/server/media-assets.js\n M tests/founder-access.test.js\n M tests/founder-content.fixture.mjs\n M tests/local-sqlite-adapter.js\n M validation/test-db/README.md\n M validation/test-db/history.json\n M validation/test-db/source-scope.json\n M validation/test-db/verify-history.mjs\n?? docs/t14-media-workspace.md\n?? docs/t14-signed-direct-upload-review.md\n?? docs/t15-t16-continuation.md\n?? src/app/api/founder/assets/route.js\n?? src/app/api/founder/operations/route.js\n?? src/app/founder/assets/page.js\n?? src/app/founder/operations/page.js\n?? src/app/founder/publishing/page.js\n?? src/components/founder-direct-upload.js\n?? src/components/founder-operation-workspace.js\n?? src/server/founder-media.js\n?? src/server/founder-operations.js\n?? tests/founder-assets.test.js\n?? tests/founder-media.test.js\n?? tests/founder-publishing-overview.test.js\n?? validation/t14/browser-local-results.json\n?? validation/t14/browser-local.js\n?? validation/t14/check-anonymous.mjs\n?? validation/t14/checkpoint.json\n?? validation/t14/live-anonymous-results.json\n?? validation/t14/live-browser.mjs\n?? validation/t14/migration-execution.json\n?? validation/t14/migration-history.json\n?? validation/t14/migration-readback.json\n?? validation/t14/policy-runtime-result.json\n?? validation/t14/policy-runtime.sql\n?? validation/t14/post-sql-state.json\n?? validation/t14/relations-runtime-result.json\n?? validation/t14/relations-runtime.sql\n?? validation/t14/signed-upload-policy-review.sql\n?? validation/t14/start-live.mjs\n?? validation/t15-t16/auth-blocker.json\n?? validation/t15-t16/browser-local.js\n?? validation/t15-t16/browser-results.json\n?? validation/t15-t16/browser-t14-regression.js\n?? validation/t15-t16/browser-t14-results.json\n?? validation/t15-t16/checkpoint.json\n?? validation/t15-t16/concurrency-attempts.json\n?? validation/t15-t16/concurrency-cleanup.json\n?? validation/t15-t16/concurrency-matrix.json\n?? validation/t15-t16/connection-probe.json\n?? validation/t15-t16/file-manifest.json\n?? validation/t15-t16/live-anonymous-current.json\n?? validation/t15-t16/pending-cleanup.md\n?? validation/t15-t16/post-runtime-state.json\n?? validation/t15-t16/remote-history.json\n?? validation/t15-t16/runtime-result.json\n?? validation/t15-t16/runtime.sql\n?? validation/t15-t16/security-review.json\n?? validation/t15-t16/t14-prerequisite-manifest.json\n?? validation/t15-t16/test-project.json\n?? validation/test-db/remote-history-20261016.json\n?? validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql\n?? validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql\n?? validation/test-db/supabase/migrations/20261015220202_t14_signed_direct_upload_policy.sql",
+      "files": [
+        {
+          "status": " M",
+          "path": "package.json",
+          "sha256": "0f4bbd8ea2bf908e598302fbd50323b67d7f712a3265966dc925bdba4decad05"
+        },
+        {
+          "status": " M",
+          "path": "src/components/founder-views.js",
+          "sha256": "8488f102e18c645222c5b2e81bb3eb0700a9a6748cc61a40300a71a2de1fabec"
+        },
+        {
+          "status": " M",
+          "path": "src/server/media-assets.js",
+          "sha256": "477476758da17481c12205ebc67560fc6a63605879230502707216d1a8efe2a3"
+        },
+        {
+          "status": " M",
+          "path": "tests/founder-access.test.js",
+          "sha256": "f49ccde3a02b370190a4a2341ce858cb94b6ac7ac2a28b98b7966869e38674cf"
+        },
+        {
+          "status": " M",
+          "path": "tests/founder-content.fixture.mjs",
+          "sha256": "35e1f495c0f1232d21275f1af1e1c9086a6f661695fc068d547926f25db944f7"
+        },
+        {
+          "status": " M",
+          "path": "tests/local-sqlite-adapter.js",
+          "sha256": "a16e873dd132bcb75a6e0cf71920723c8bd087ce52e156d54e93af682d9b1fd9"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/README.md",
+          "sha256": "3685f48539fc6404b5c2832888850d214b49019336418f60a7db5ff988782e63"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/history.json",
+          "sha256": "23d064b6ebabede28e6f5179c16110adcf302adbb7059423659edad52f12871d"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/source-scope.json",
+          "sha256": "deef8aa11850577798c4ee373bab7edb27e5e5994b6569e9e0023bda43168c13"
+        },
+        {
+          "status": " M",
+          "path": "validation/test-db/verify-history.mjs",
+          "sha256": "2f9f91c4b36462f9cf41426ae0210b60ae988844ed3fc67557c897eef7acb40d"
+        },
+        {
+          "status": "??",
+          "path": "docs/t14-media-workspace.md",
+          "sha256": "5546989cc50ce270a037039c5ec4f6915d2cfddcad795718c3ea13cc2a5ea285"
+        },
+        {
+          "status": "??",
+          "path": "docs/t14-signed-direct-upload-review.md",
+          "sha256": "db10f196dc1923926560c1afffff158748953ed8e3c34980f666e9714e34b9a5"
+        },
+        {
+          "status": "??",
+          "path": "docs/t15-t16-continuation.md",
+          "sha256": "9818454dedc349393e12d898ad74a15a3314aa1fafdaf0f30b03b1a3e207c38b"
+        },
+        {
+          "status": "??",
+          "path": "src/app/api/founder/assets/route.js",
+          "sha256": "86b9b8e8cfceb55876f38882d241ba0981b8cda4e62ffff8a25a8f1db5f953c4"
+        },
+        {
+          "status": "??",
+          "path": "src/app/api/founder/operations/route.js",
+          "sha256": "f5aa60501eafe143af4e67d93e89e66e1b602e950c0121be956a00aab309ad0f"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/assets/page.js",
+          "sha256": "2ea3302ca36c2219ee698e5779fb038a3a4bcc090a4cae401d08b488d7e8db86"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/operations/page.js",
+          "sha256": "8745832515a96eda5a92c78509dcfd86060bbc5dc500834439b50c2812efd2e7"
+        },
+        {
+          "status": "??",
+          "path": "src/app/founder/publishing/page.js",
+          "sha256": "59a38e328e7105f5300568c4ccdf6b7f45f505c4ed72f907e5666e3dc227c057"
+        },
+        {
+          "status": "??",
+          "path": "src/components/founder-direct-upload.js",
+          "sha256": "1f1b9444a7e9242bdf35230ccc819e2299c8101021cb87c0dd8e1cd5e5fc15d6"
+        },
+        {
+          "status": "??",
+          "path": "src/components/founder-operation-workspace.js",
+          "sha256": "1dc7cb77b83d34cfd62779c9658588121393b74c58365152d85e56f9c390b074"
+        },
+        {
+          "status": "??",
+          "path": "src/server/founder-media.js",
+          "sha256": "af3329afe62fa75445b8af19c4ab5525bb87c400b7b9864234c34fcabb8f6c12"
+        },
+        {
+          "status": "??",
+          "path": "src/server/founder-operations.js",
+          "sha256": "998c97e904f34b2eebff3db5707026a2c03dbdf7d91ef0c0db9e5dea23a2e131"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-assets.test.js",
+          "sha256": "d323c27d7c2355cc21ffe35e0bdd379da0dd76f698d6a188c6eb8b844c0587cf"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-media.test.js",
+          "sha256": "8cd97b7da28d965dd2004fd5a425455fddd3347ed9a564241c827d4d6835023a"
+        },
+        {
+          "status": "??",
+          "path": "tests/founder-publishing-overview.test.js",
+          "sha256": "cff877324bb32bf6b1b65c6f64ab1ac6e7faf0c26404eadc91223cef90e2cf11"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/browser-local-results.json",
+          "sha256": "703080f8c688df9bd56fec2d58c05a2b17783613a9fa4147716431ed9063c979"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/browser-local.js",
+          "sha256": "dbbb8c52c0b0b429888c3163f26c85b6dfd770aa81540ab5015b852a00f48d3e"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/check-anonymous.mjs",
+          "sha256": "3ddba6102ceafe8b9493f05532f878ed3b2de24a5d32bea5f354f8b2b94a9be6"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/checkpoint.json",
+          "sha256": "9270a7fbe67bb67dd0418bdcccb9c0834d471bffe0a4e6e08570fccd97f3f06e"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/live-anonymous-results.json",
+          "sha256": "322680ea58e3be83d4ccc90580202835215302e47096af10f99b08e294c5ad74"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/live-browser.mjs",
+          "sha256": "34b0d0436ed1b09439e4e1f5bc877467506aa319c2287e18d2a94c7044445a05"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/migration-execution.json",
+          "sha256": "2009f43f81ed0e9275edcb44eea7c32e106a522483a98035b84c39e47b6aa694"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/migration-history.json",
+          "sha256": "1606c79ef887b9b929a6aded8bb6cb833db8c289d31a3610ca3479088adb465d"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/migration-readback.json",
+          "sha256": "0cec770c66a036556de1abb322cdfe0492e1e3364fe3553a1e948ba21bb175bf"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/policy-runtime-result.json",
+          "sha256": "e9c71ec8fd1b610de72743c9877ab7304f8726ef1e649f62c6e5975c69432094"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/policy-runtime.sql",
+          "sha256": "36478c3ec418543ac56d557a5aaed987c1cbbfca0232c7c6f475db883ff4fc48"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/post-sql-state.json",
+          "sha256": "6be0a21ba0c4ff649f06b92443df41a817ff7e56486d0b60ef21be3d38139205"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/relations-runtime-result.json",
+          "sha256": "2f3ed2b479be707b7392ee2c3c0570be07dadb0eb4283a37c2dbe5cddb88a95f"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/relations-runtime.sql",
+          "sha256": "cb13325741d6710b9560f4c5218f399d100020146b170a25607ca8c4866dab95"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/signed-upload-policy-review.sql",
+          "sha256": "cb5ee373d50b1dd6011621c44c5bf9da0e12d9118f9bf501effc14c15f04d8da"
+        },
+        {
+          "status": "??",
+          "path": "validation/t14/start-live.mjs",
+          "sha256": "93533a9205923e56b08cf26ac8c7a9504fbe3446dca6097cd80ae48589706d96"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/auth-blocker.json",
+          "sha256": "55c60071304109927b6aa545b5c70f6e057e0bf05479c9467f0b4d503f7160ad"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/browser-local.js",
+          "sha256": "1d0d24ff32b18932f29952843532b6244d2f04365b5fbfd189d30cb37dea91d9"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/browser-results.json",
+          "sha256": "7bed3174f0e5311a9c3bd91ff11e4a1564082fe12ada40658dadf508e97c6d17"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/browser-t14-regression.js",
+          "sha256": "6f3a08e2549ebf450aa6e3302124e0179b0236e6347baf39c2730bf5394e4271"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/browser-t14-results.json",
+          "sha256": "443e51871fb09949c330b4fb8306be00b60831a02852392339b0776b5ee99b93"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/checkpoint.json",
+          "sha256": "8748c58ab6245ba25ecc7d09f2406c061f270f9da6ea84a49cae001b4a1fd614"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/concurrency-attempts.json",
+          "sha256": "80f1583f00f2691742cd5f7b1bb4557930d56eebb66a8166c826fe8114552cc6"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/concurrency-cleanup.json",
+          "sha256": "2d493825edc50be1b429321403a43014d05b6f96ead8ef724984b5d9ccdfa192"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/concurrency-matrix.json",
+          "sha256": "ded4f821c21bbce46e0539036df71320fae2227261781721c544cd3b43eaa0c7"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/connection-probe.json",
+          "sha256": "afb6bec96438daad4506dbe49f2466f9b392b12ed38765d9c1a01cfb146d0fe3"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/file-manifest.json",
+          "sha256": "9f5bc2f3483251bd795593c3a80df40f22dcc552942e0475d59d91526df8c2c0"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/live-anonymous-current.json",
+          "sha256": "fe886be349f43bf31e9dc6336c30a91dff0b8083676a89d2183a63139c9be4ae"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/pending-cleanup.md",
+          "sha256": "a9117e748ce14674c03291f079612da36043402c5cf11e4c92e67c0c03c8891f"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/post-runtime-state.json",
+          "sha256": "bf4b7ba739a5961de7a182fe7ddd3cb3ba3db4b419096fbe512fe6f32f3d5ee6"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/remote-history.json",
+          "sha256": "030f5e8311d4c88a4023c5aa3c70eb9bc3a5bab1973bf922329e82c34f39cab5"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/runtime-result.json",
+          "sha256": "57abd00827a9af23feff2e4a580dae55c0f958e9947ed2648e63691f4d67a28f"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/runtime.sql",
+          "sha256": "4c56e3f15a0e91aad01d69824e2e735d00ed496c8e0136d9d2c05698c300fed8"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/security-review.json",
+          "sha256": "616527dff6b6688a4d45c2641fbd0c3e27aff9bf9fa894121be4660cddec28e2"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/t14-prerequisite-manifest.json",
+          "sha256": "8140e4f7f8ee6b0f6be41e199264c2d5a1748e8bf717e75e2b41adb6c9472383"
+        },
+        {
+          "status": "??",
+          "path": "validation/t15-t16/test-project.json",
+          "sha256": "2b25d503e1de6425771c90ecbef76ec62d38916d532e776cd1cdb1e488f66bab"
+        },
+        {
+          "status": "??",
+          "path": "validation/test-db/remote-history-20261016.json",
+          "sha256": "23d064b6ebabede28e6f5179c16110adcf302adbb7059423659edad52f12871d"
+        },
+        {
+          "status": "??",
+          "path": "validation/test-db/supabase/migrations/20261012062323_founder_operation_workspaces.sql",
+          "sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+        },
+        {
+          "status": "??",
+          "path": "validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql",
+          "sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+        },
+        {
+          "status": "??",
+          "path": "validation/test-db/supabase/migrations/20261015220202_t14_signed_direct_upload_policy.sql",
+          "sha256": "e5a2835c34f2ed8b2c81cb3df5c89975b3d640ede6e88c3e17d2f7798127adfb"
+        }
+      ]
+    }
+  ],
+  "supersedes": "First inventory retained unchanged; v2 preserves leading porcelain status spaces and correctly hashes every first changed file"
+}

@@ -8,7 +8,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const require = createRequire(import.meta.url);
-const origin = 'http://localhost:3103';
+const port=Number(process.env.HTC_FIXTURE_PORT??3103);
+if(![3103,3104].includes(port))throw Error('Unapproved fixture port');
+const origin = `http://localhost:${port}`;
 const stamp = '2026-10-11T00:00:00Z';
 const identifier = i => `00000000-0000-4000-8000-${String(i).padStart(12, '0')}`;
 const records = Array.from({ length: 53 }, (_, i) => ({ id: identifier(i + 10), category: 'INFORMATION',
@@ -67,7 +69,7 @@ globalThis.fetch = async (input, options = {}) => {
   throw Error('Fixture blocks unhandled transport');
 };
 const next = require('next');
-const app = next({ dev: false, hostname: 'localhost', port: 3103 });
+const app = next({ dev: false, hostname: 'localhost', port });
 await app.prepare();
 const handle = app.getRequestHandler();
 const server = createServer((request, response) => {
@@ -99,8 +101,8 @@ const server = createServer((request, response) => {
   if (url.pathname === '/__fixture/uncertain') { if (local) local.fixture.failNextWrite('after-commit'); else uncertain = true; response.end('synthetic failure enabled'); return; }
   return handle(request, response);
 });
-server.listen(3103, '127.0.0.1', () => {
-  console.log(`${local ? 'LOCAL SQLite with synthetic auth; no live storage' : 'T13 synthetic memory'} fixture ready at http://localhost:3103`);
+server.listen(port, '127.0.0.1', () => {
+  console.log(`${local ? 'LOCAL SQLite with synthetic auth; no live storage' : 'T13 synthetic memory'} fixture ready at ${origin}`);
   if (local) console.log(`Disposable local database: ${sqliteFilename}`);
 });
 process.on('SIGINT', () => server.close(() => { local?.close(); process.exit(0); }));

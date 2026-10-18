@@ -1,0 +1,50 @@
+<!doctype html><meta charset="utf-8"><title>T15 TEST live validation</title>
+<style>body{font:16px system-ui;max-width:900px;margin:24px auto;padding:12px}button{padding:12px}pre{white-space:pre-wrap}iframe{width:100%;height:650px;border:1px solid #aaa}</style>
+<h1>T15 TEST live validation</h1><p>TEST only: uzhkzhmncxjplrdtdzgd. Uses your existing HttpOnly session. No credentials are exported. Keep this tab open.</p>
+<button id="start">Verify session and start approved T15 job listener</button><pre id="status">Not started. No fixtures created by opening this page.</pre><iframe id="ui" title="HTC Publishing UI"></iframe>
+<script>
+const origin=location.origin,target='https://uzhkzhmncxjplrdtdzgd.supabase.co';
+const output=document.querySelector('#status'),button=document.querySelector('#start'),frame=document.querySelector('#ui');
+let running=false,seen=new Set();
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const assert=ok=>{if(!ok)throw Error('UNEXPECTED');};
+async function until(fn){const end=Date.now()+30000;while(Date.now()<end){if(fn())return;await sleep(100);}throw Error('UI_TIMEOUT');}
+async function call(path,payload,statuses){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',redirect:'error',cache:'no-store',body:JSON.stringify(payload)});statuses.push(r.status);let j;try{j=await r.json();}catch{throw Error('HTTP_FAILURE');}return {status:r.status,data:j.data,ok:j.ok};}
+async function perform(job){
+ const statuses=[],details={};let assetId;
+ try{
+  const identity=await fetch('/__t15-check',{cache:'no-store'});assert(identity.status===200);const role=await identity.json();assert(role.authenticated&&role.founder===(job.role!=='USER'));
+  if(job.type==='upload'){
+   const a=job.asset;assetId=a.id;assert(a.bucket==='trial-assets'&&a.path===`image/${a.id}/asset.png`&&a.bytes===70&&a.mime==='image/png');
+   const reserve=await call('/api/founder/assets',{action:'reserve',request_id:a.request_id,asset_type:'IMAGE',mime_type:a.mime,original_filename:a.filename,byte_size:a.bytes},statuses);
+   assert(reserve.status===200&&reserve.data.id===a.id&&reserve.data.status==='PENDING');const capability=reserve.data.upload,url=new URL(capability.url);
+   assert(url.origin===target&&url.pathname===`/storage/v1/object/upload/sign/trial-assets/${a.path}`&&url.searchParams.has('token')&&capability.capability_ttl_seconds===7200);
+   const bytes=Uint8Array.from(atob(job.png),c=>c.charCodeAt(0));assert(bytes.length===70);
+   const put=await fetch(url,{method:'PUT',headers:{'Content-Type':a.mime,'x-upsert':'false'},body:bytes,credentials:'omit',redirect:'error'});statuses.push(put.status);assert(put.ok);await put.body?.cancel();
+   const done=await call('/api/founder/assets',{action:'finalize',id:a.id},statuses);assert(done.status===200&&done.data.id===a.id&&done.data.status==='READY');details.ready=true;
+  }else if(job.type==='delete'){
+   assetId=job.asset.id;const done=await call('/api/founder/operations',{action:'delete_asset',id:assetId},statuses);assert(done.status===200&&done.data.confirmed===true);details.cleanup_confirmed=true;
+  }else if(job.type==='api'){
+   const r=await call(job.path,job.payload,statuses);assert(r.status===job.expectedStatus);if(job.expectedState)assert(r.data.content.state===job.expectedState);details.expected_response=true;
+  }else if(job.type==='ui'){
+   frame.src='/founder/publishing';await until(()=>frame.contentDocument?.querySelector('[role="status"]')?.textContent.includes('Snapshot loaded.'));
+   const doc=frame.contentDocument,select=doc.querySelector('#operation-content');assert(select);select.value=job.contentId;select.dispatchEvent(new Event('change',{bubbles:true}));await until(()=>doc.querySelector('[role="status"]')?.textContent.includes('Content relations loaded.'));
+   const control=[...doc.querySelectorAll('button')].find(b=>b.textContent===(job.action==='release'?'Release content':'Withdraw content'));assert(control&&!control.disabled);control.click();if(job.doubleSubmit)control.click();
+   await until(()=>doc.querySelector('[role="status"]')?.textContent.includes('Operation confirmed. Snapshot reloaded.'));
+   details.confirmed_after_server=true;details.no_overflow=doc.documentElement.scrollWidth<=frame.clientWidth+2;details.double_submit=!!job.doubleSubmit;
+  }else if(job.type==='USER'){
+   for(const payload of job.payloads){const r=await call('/api/founder/operations',payload,statuses);assert(r.status===403);}details.all_forbidden=true;
+   const route=await fetch('/founder/publishing',{cache:'no-store',redirect:'error'});statuses.push(route.status);const html=await route.text();assert(route.status===200&&html.includes('Access denied')&&!html.includes('id="operation-content"'));details.route_denied=true;details.no_publishing_controls=true;
+  }else throw Error('UNEXPECTED');
+  return {jobId:job.id,ok:true,statuses,...(assetId?{assetId}:{}),details};
+ }catch(e){return {jobId:job.id,ok:false,statuses,...(assetId?{assetId}:{}),error:['HTTP_FAILURE','IDENTITY','UPLOAD','UI_TIMEOUT','UNEXPECTED'].includes(e.message)?e.message:'NETWORK'};}
+}
+button.onclick=async()=>{
+ if(running)return;running=true;button.disabled=true;
+ try{
+  const r=await fetch('/__t15-check',{cache:'no-store'});const identity=await r.json();if(r.status!==200||!identity.authenticated)throw Error('Session unavailable: sign in privately through the existing HTC sign-in page, then return here.');
+  output.textContent=JSON.stringify({authenticated:identity.authenticated,founder:identity.founder,status:r.status})+'\nWaiting for scoped jobs. No job is rerun automatically.';
+  while(running){const response=await fetch('/__t15-command',{cache:'no-store'});assert(response.ok);const {job}=await response.json();if(job&&!seen.has(job.id)&&identity.founder===(job.role!=='USER')){seen.add(job.id);const lease=await fetch('/__t15-claim',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jobId:job.id})});if(lease.status===409)continue;assert(lease.status===200);const receipt=await perform(job);const posted=await fetch('/__t15-receipt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(receipt)});assert(posted.status===200);output.textContent+='\n'+JSON.stringify(receipt);if(!receipt.ok)throw Error('STOP: job failed; leave this tab open for diagnosis.');}await sleep(1200);}
+ }catch(e){running=false;output.textContent+='\n'+e.message;}
+};
+</script>

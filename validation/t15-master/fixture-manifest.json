@@ -1,0 +1,111 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "tag": "T15-MASTER-20261018-01",
+  "created": false,
+  "assets": [
+    {
+      "label": "a",
+      "id": "1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773",
+      "request_id": "7d3bfd44-49e6-4f5d-96cb-b0edc8a8f609",
+      "asset_type": "IMAGE",
+      "bucket": "trial-assets",
+      "path": "image/1b268cc7-cfb7-4ff0-9cde-4b6b27a6b773/asset.png",
+      "filename": "t15-master-20261018-a.png",
+      "mime": "image/png",
+      "bytes": 70,
+      "binaryRequired": true,
+      "initial": "PENDING"
+    },
+    {
+      "label": "b",
+      "id": "49d28bb4-21da-49f7-a5f4-6b719b0859a2",
+      "request_id": "7d3159fb-dae8-4222-b9c9-402106d43439",
+      "asset_type": "IMAGE",
+      "bucket": "trial-assets",
+      "path": "image/49d28bb4-21da-49f7-a5f4-6b719b0859a2/asset.png",
+      "filename": "t15-master-20261018-b.png",
+      "mime": "image/png",
+      "bytes": 70,
+      "binaryRequired": true,
+      "initial": "PENDING"
+    },
+    {
+      "label": "pending",
+      "id": "5705c7a2-c255-41a1-b3e0-885d6b34fa44",
+      "request_id": "c7e54b5f-f6e6-4ed4-95d8-af8a7f023624",
+      "asset_type": "IMAGE",
+      "bucket": "trial-assets",
+      "path": "image/5705c7a2-c255-41a1-b3e0-885d6b34fa44/asset.png",
+      "filename": "t15-master-20261018-pending.png",
+      "mime": "image/png",
+      "bytes": 70,
+      "binaryRequired": false,
+      "initial": "PENDING"
+    }
+  ],
+  "contents": [
+    {
+      "case": "C1/E1",
+      "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d523",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "C2/D3",
+      "id": "81c1fdc7-5360-4801-a4b9-e476da769be8",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "C3/D4",
+      "id": "9ce26494-cf0a-4429-bf7a-3aa4f6366147",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "C4",
+      "id": "c9a59845-f0c7-4bfb-9719-57d412c20e13",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "C5",
+      "id": "26b6ac6e-72f8-49ac-a4af-162c4fc0d0a1",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "D5/F4",
+      "id": "6af9e659-dfbc-4657-82cf-9e8235163c4d",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "E2/F5",
+      "id": "71deac31-dd57-4e26-8742-07d4beea01a5",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "C1/E1-secondary",
+      "id": "254f73c7-b33c-4e75-a1c2-29e6d9e3d524",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "R3",
+      "id": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    {
+      "case": "R3-readiness",
+      "id": "bffda474-099a-4dcc-9c7e-9df90fbf054f",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    }
+  ],
+  "png_sha256": "abc58d5127d7cdf313beb9ec8ee839860a9c6bfbc48c8b8eb6a3f7d8bb63de6f",
+  "setup": "Explicit TEST-only native admin PENDING fixture rows with fixed IDs. No READY bypass. Existing authenticated Founder HTTP signs, uploads real bytes and finalizes. No Storage catalog insertion/deletion via SQL.",
+  "cleanup": "All related releases ROLLBACK; C4 B always ROLLBACK. Detach DRAFT relations through checked RPC; actual Founder HTTP delete bridge and Storage API; narrowly owned content teardown as R2C."
+}

@@ -1,0 +1,450 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "status": "FOUNDER PASS; USER HTTP pending",
+  "startedAt": "2026-10-18T07:49:32.113Z",
+  "cases": [
+    {
+      "name": "Founder current HTTP authorization",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:49:38.538Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_founder_preflight",
+        "ok": true,
+        "statuses": [
+          200
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "DRAFT private public read",
+      "status": "PASS",
+      "details": {
+        "status": 404,
+        "contentId": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+        "visible": false
+      }
+    },
+    {
+      "name": "Anonymous release and withdrawal denied",
+      "status": "PASS",
+      "details": [
+        {
+          "action": "release",
+          "status": 401
+        },
+        {
+          "action": "withdraw",
+          "status": 401
+        }
+      ]
+    },
+    {
+      "name": "DRAFT withdrawal rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:49:43.803Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_invalid_draft_withdraw",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Forbidden role and lifecycle fields rejected",
+      "status": "PASS",
+      "details": [
+        {
+          "at": "2026-10-18T07:49:47.644Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_invalid_role",
+          "ok": true,
+          "statuses": [
+            400
+          ],
+          "details": {
+            "expected_response": true
+          }
+        },
+        {
+          "at": "2026-10-18T07:49:49.873Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_invalid_state",
+          "ok": true,
+          "statuses": [
+            400
+          ],
+          "details": {
+            "expected_response": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid UUID rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:49:53.495Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_invalid_uuid",
+        "ok": true,
+        "statuses": [
+          400
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Missing content rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:49:56.502Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_missing_content",
+        "ok": true,
+        "statuses": [
+          404
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Missing asset relation rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:49:59.386Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_missing_asset",
+        "ok": true,
+        "statuses": [
+          404
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Pending asset relation rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:50:03.649Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_pending_attach",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Actual HTTP non-ready linked release rejected atomically",
+      "status": "PASS",
+      "details": {
+        "receipt": {
+          "at": "2026-10-18T07:50:07.019Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_pending_release",
+          "ok": true,
+          "statuses": [
+            409
+          ],
+          "details": {
+            "expected_response": true
+          }
+        },
+        "committed": {
+          "body": "T15-MASTER-20261018-01 R3-readiness",
+          "state": "DRAFT",
+          "title": "T15-MASTER-20261018-01 R3-readiness",
+          "relations": 1
+        },
+        "publicState": {
+          "status": 404,
+          "contentId": "bffda474-099a-4dcc-9c7e-9df90fbf054f",
+          "visible": false
+        }
+      }
+    },
+    {
+      "name": "Founder browser release and double submit",
+      "status": "PASS",
+      "details": {
+        "receipt": {
+          "at": "2026-10-18T07:50:23.153Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_ui_release",
+          "ok": true,
+          "statuses": [],
+          "details": {
+            "confirmed_after_server": true,
+            "no_overflow": true,
+            "double_submit": true
+          }
+        },
+        "committed": {
+          "body": "T15-MASTER-20261018-01 R3",
+          "state": "RELEASED",
+          "title": "T15-MASTER-20261018-01 R3",
+          "relations": 0
+        },
+        "public": {
+          "status": 200,
+          "contentId": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+          "visible": true
+        }
+      }
+    },
+    {
+      "name": "Repeated release rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:50:30.135Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_duplicate_release",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "T13 RELEASED editing denied",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:50:37.791Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_released_edit",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Founder browser withdrawal",
+      "status": "PASS",
+      "details": {
+        "receipt": {
+          "at": "2026-10-18T07:50:46.186Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_ui_withdraw",
+          "ok": true,
+          "statuses": [],
+          "details": {
+            "confirmed_after_server": true,
+            "no_overflow": true,
+            "double_submit": true
+          }
+        },
+        "committed": {
+          "body": "T15-MASTER-20261018-01 R3",
+          "state": "WITHDRAWN",
+          "title": "T15-MASTER-20261018-01 R3",
+          "relations": 0
+        },
+        "public": {
+          "status": 404,
+          "contentId": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+          "visible": false
+        }
+      }
+    },
+    {
+      "name": "Repeated withdrawal rejected",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:50:48.896Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_duplicate_withdraw",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "T13 WITHDRAWN editing denied",
+      "status": "PASS",
+      "details": {
+        "at": "2026-10-18T07:50:59.615Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_withdrawn_edit",
+        "ok": true,
+        "statuses": [
+          409
+        ],
+        "details": {
+          "expected_response": true
+        }
+      }
+    },
+    {
+      "name": "Authorized re-release and committed readback",
+      "status": "PASS",
+      "details": {
+        "receipt": {
+          "at": "2026-10-18T07:51:06.153Z",
+          "authenticated": true,
+          "founder": true,
+          "jobId": "r3_rerelease",
+          "ok": true,
+          "statuses": [
+            200
+          ],
+          "details": {
+            "expected_response": true
+          }
+        },
+        "committed": {
+          "body": "T15-MASTER-20261018-01 R3",
+          "state": "RELEASED",
+          "title": "T15-MASTER-20261018-01 R3",
+          "relations": 0
+        },
+        "public": {
+          "status": 200,
+          "contentId": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+          "visible": true
+        }
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "ownership": {
+        "assets": 1,
+        "content": 2,
+        "objects": 0,
+        "negative_state": "DRAFT"
+      },
+      "detach": {
+        "at": "2026-10-18T07:51:11.450Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_cleanup_detach",
+        "ok": true,
+        "statuses": [
+          200
+        ],
+        "details": {
+          "expected_response": true
+        }
+      },
+      "deleted": {
+        "at": "2026-10-18T07:51:15.999Z",
+        "authenticated": true,
+        "founder": true,
+        "jobId": "r3_cleanup_pending",
+        "ok": true,
+        "statuses": [
+          200
+        ],
+        "assetId": "5705c7a2-c255-41a1-b3e0-885d6b34fa44",
+        "details": {
+          "cleanup_confirmed": true
+        }
+      }
+    }
+  ],
+  "setupAttempted": true,
+  "fixtures": {
+    "main": {
+      "case": "R3",
+      "id": "edd8a6d2-86e9-409f-8ccb-17f468adc2a2",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    "negative": {
+      "case": "R3-readiness",
+      "id": "bffda474-099a-4dcc-9c7e-9df90fbf054f",
+      "state": "DRAFT",
+      "tag": "T15-MASTER-20261018-01"
+    },
+    "pending": {
+      "label": "pending",
+      "id": "5705c7a2-c255-41a1-b3e0-885d6b34fa44",
+      "request_id": "c7e54b5f-f6e6-4ed4-95d8-af8a7f023624",
+      "asset_type": "IMAGE",
+      "bucket": "trial-assets",
+      "path": "image/5705c7a2-c255-41a1-b3e0-885d6b34fa44/asset.png",
+      "filename": "t15-master-20261018-pending.png",
+      "mime": "image/png",
+      "bytes": 70,
+      "binaryRequired": false,
+      "initial": "PENDING"
+    },
+    "missing": "e8b30c88-2648-4c57-8ac6-cd8a2e84a3f2"
+  },
+  "limitations": [
+    "Negative readiness relation is a deliberately invalid native administrator TEST fixture. It is not claimed to be creatable through the application.",
+    "Ambiguous network failure and delayed-response UI behavior use preserved explicit LOCAL evidence, not manufactured live failures."
+  ],
+  "baseline": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  },
+  "after": {
+    "assets": 0,
+    "content": 0,
+    "objects": 0,
+    "relations": 0,
+    "history_hash": "ccf92d3a4743c4ae3e596528d2e24683",
+    "defaults_hash": "8380215e5138777424f33c3a2d344ded",
+    "history_count": 10,
+    "policies_hash": "5c7f41088daac317406671522537c9b8",
+    "profiles_hash": "b2745e3c76d883b10b61b54e15d2dac7",
+    "functions_hash": "70e4535951a5fe804b9454c4badfd9f9",
+    "table_acl_hash": "f14c5fb676b24dc853aacb1813b8c08d"
+  },
+  "preservation": true,
+  "completedAt": "2026-10-18T07:51:16.783Z"
+}

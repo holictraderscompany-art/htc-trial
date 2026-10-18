@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-18T07:37:31.186Z",
+  "worktree": "C:\\Users\\ASUS\\.codex\\worktrees\\htc-t15-r1\\FOUNDER HTC GRUP ( M.DEVRY HANDOYO )",
+  "publishing_build_route": "app/founder/publishing/page.js",
+  "results": [
+    {
+      "route": "/sign-in",
+      "status": 200,
+      "target": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd"
+    },
+    {
+      "route": "/__t14-session-check",
+      "status": 401,
+      "target": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd",
+      "safe": {
+        "target": "uzhkzhmncxjplrdtdzgd",
+        "cookie_state": "missing",
+        "upstream_checked": false,
+        "authenticated": false,
+        "founder": null,
+        "status": 401
+      }
+    },
+    {
+      "route": "/__t15-live",
+      "status": 200,
+      "target": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd",
+      "start_button_present": true
+    },
+    {
+      "route": "/__t15-check",
+      "status": 401,
+      "target": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd"
+    },
+    {
+      "route": "/founder/publishing",
+      "status": 307,
+      "target": "SUPABASE-TEST-uzhkzhmncxjplrdtdzgd"
+    }
+  ]
+}
