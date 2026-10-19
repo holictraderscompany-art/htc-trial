@@ -53,3 +53,16 @@ validation/test-db/supabase/migrations/20261012062323_founder_operation_workspac
 validation/test-db/supabase/migrations/20261012062809_founder_asset_delete_bridge.sql text eol=lf
 validation/test-db/supabase/migrations/20261015220202_t14_signed_direct_upload_policy.sql text eol=lf
 validation/test-db/supabase/migrations/20261016084813_t14_guard_rejection_sqlstate.sql text eol=lf
+# T15 B1: reproduce the sealed historical working bytes on every checkout.
+docs/t15-*.md text eol=lf
+src/app/founder/publishing/page.js text eol=lf
+src/components/founder-operation-workspace.js text eol=crlf
+src/server/founder-operations.js text eol=crlf
+tests/founder-assets.test.js text eol=crlf
+tests/founder-publishing.test.js text eol=lf
+validation/t15-r1/** text eol=lf
+validation/t15-r1/browser-t14.js text eol=crlf
+validation/t15-r2/** text eol=lf
+validation/t15-master/** text eol=lf
+validation/t15-master/r2c-preserved/** -text
+validation/t15-b1/** text eol=lf

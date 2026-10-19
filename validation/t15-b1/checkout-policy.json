@@ -1,0 +1,9 @@
+{
+  "scope": "T15 B1 EOL correction only; no historical seals replaced",
+  "original_commit": "68ecb871736489db25f592e5683d23124e0ef5b1",
+  "original_attributes_sha256": "333fd07770cd6edf4d5e17ac4171a9bc9050ff6be1091fbae510743bafba1d58",
+  "corrected_attributes_sha256": "c701aae1ae280141a7f67dee2e04db00ccf779cb742e9e6f24b5bfc6676c0fc4",
+  "attributes_suffix": "# T15 B1: reproduce the sealed historical working bytes on every checkout.\ndocs/t15-*.md text eol=lf\nsrc/app/founder/publishing/page.js text eol=lf\nsrc/components/founder-operation-workspace.js text eol=crlf\nsrc/server/founder-operations.js text eol=crlf\ntests/founder-assets.test.js text eol=crlf\ntests/founder-publishing.test.js text eol=lf\nvalidation/t15-r1/** text eol=lf\nvalidation/t15-r1/browser-t14.js text eol=crlf\nvalidation/t15-r2/** text eol=lf\nvalidation/t15-master/** text eol=lf\nvalidation/t15-master/r2c-preserved/** -text\nvalidation/t15-b1/** text eol=lf\n",
+  "historical_validation": "All 23 R1 seals verified against original blobs and sealed historical working bytes. Current .gitattributes is the sole intentional configuration delta; the other 22 snapshots must match exactly.",
+  "legacy_generators": "R1 verify-reconciliation.mjs and master verify-final.mjs remain unchanged historical pre-commit generators. Do not rerun them as post-commit validators; they write historical reports. Use verify-checkout.mjs, which writes only stdout."
+}
