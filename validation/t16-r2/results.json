@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-19T03:44:21.497Z",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "branch": "codex/t16-r1-reconciliation",
+  "verdict": "PARTIAL",
+  "gates": {
+    "baseline": "PASS",
+    "project_identity_health": "PASS",
+    "ten_migrations_raw_integrity": "PASS",
+    "Founder_LIVE_session": "PASS",
+    "Founder_LIVE_dashboard": "PASS",
+    "Founder_LIVE_summary_API": "PASS",
+    "six_empty_counts_SQL_API_UI": "PASS",
+    "nonempty_LIVE_counts": "NOT VERIFIED",
+    "USER_LIVE_session": "PASS",
+    "USER_LIVE_API_denial": "PASS",
+    "USER_LIVE_dashboard": "PASS",
+    "anonymous_API_401": "PASS",
+    "anonymous_dashboard_307": "PASS",
+    "expiry_LIVE": "NOT VERIFIED",
+    "revocation_LIVE": "NOT VERIFIED",
+    "loading_with_LIVE_auth": "PASS",
+    "injected_HTTP500_safe_error_stale_recovery": "PASS",
+    "held_response_timeout": "PASS",
+    "database_history_security_preserved": "PASS",
+    "regressions": "PASS",
+    "build": "PASS",
+    "T15_B1_23_snapshots": "PASS",
+    "controlled_upstream_deadline": "PASS",
+    "browser_cleanup": "PASS"
+  },
+  "counts": {
+    "content": {
+      "DRAFT": 0,
+      "RELEASED": 0,
+      "WITHDRAWN": 0
+    },
+    "assets": {
+      "PENDING": 0,
+      "READY": 0,
+      "DELETING": 0
+    }
+  },
+  "checks": [
+    {
+      "name": "t16-focused",
+      "exitCode": 0,
+      "tests": 7,
+      "failures": 0,
+      "log_sha256": "f0c741ae2bcbe941ff87556dc20ff94ad042b7fcd2c2ca90d52a2361d8fea1e5"
+    },
+    {
+      "name": "application",
+      "exitCode": 0,
+      "tests": 223,
+      "failures": 0,
+      "log_sha256": "0763bba6e209b849dc9cafa8142ad5d48e5d722104a1a58a185d6b522464a32f"
+    },
+    {
+      "name": "t13-sqlite",
+      "exitCode": 0,
+      "tests": 12,
+      "failures": 0,
+      "log_sha256": "b833fe8cd499dcd7ff58655491accb2a2d6472fc345bc35ab6a21c975b6da523"
+    },
+    {
+      "name": "t14-sqlite",
+      "exitCode": 0,
+      "tests": 3,
+      "failures": 0,
+      "log_sha256": "06009a87c00a331fa692dd5912d0dc40bbfa77e7f103b075633b9ff11388904f"
+    },
+    {
+      "name": "production-build",
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": null,
+      "log_sha256": "84f6fea3265305c06d6bd831beeee16164c84ae804ebd2f08276da3ca5426c0c"
+    }
+  ],
+  "local_browser": {
+    "result": "LOCAL PASS",
+    "checks": 36,
+    "source": "validation/t16-r1/browser-results.json",
+    "execution": "Preserved R1 evidence; not rerun or claimed LIVE"
+  },
+  "scope": {
+    "application_source_changed_in_R2": false,
+    "old_R1_files_preserved": 19,
+    "production_access": false,
+    "content_asset_relation_storage_mutations": false,
+    "new_migrations": false,
+    "policy_grant_changes": false,
+    "fixtures_created": 0,
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "T17": false
+  },
+  "cleanup": {
+    "database": "PASS zero content/assets/relations/Storage, before/after identical",
+    "browser_timeout_tab": "PASS: old manual cleanup independently verified; new task tab closed through official API",
+    "test_server": "Loopback TEST runner left available for legitimate private authentication; no background monitoring",
+    "fault_injection": "Disabled after validation; normal TEST runner restored"
+  },
+  "limitations": [
+    "LIVE revocation/expiry needs a safe authorized session and runtime evidence; personal sessions are not revoked.",
+    "No nonempty LIVE dataset exists and LIVE fixture creation is prohibited.",
+    "HTTP500 was a tab-scoped injected response with genuine Founder auth, not an actual Supabase outage.",
+    "One initial read-only diagnostic SELECT used an incorrect table name (42P01); corrected to authoritative trial_content. No mutation occurred.",
+    "The original interrupted timeout attempt remains NOT VERIFIED historically; the distinct resumed attempt has observed abort/UI/runtime proof."
+  ],
+  "manual_next": [
+    "No repeated Founder/USER/anonymous or timeout tests are needed.",
+    "Expiry: use a safely identified TEST session after natural expiration and record actual API/UI denial, without editing cookie/token/TTL.",
+    "Revocation: needs an explicitly disposable TEST session and a scope permitting its invalidation; current no-mutation/personal-session restrictions are preserved.",
+    "Nonempty LIVE aggregation: no authorized dataset exists; LIVE fixtures cannot be created under this phase."
+  ],
+  "runtime_evidence": {
+    "USER": "user-live.json",
+    "client_timeout": "timeout-live.json",
+    "upstream_deadline": "upstream-timeout.json",
+    "cleanup": "browser-cleanup.json",
+    "final_db": "db-resume-final.json"
+  }
+}

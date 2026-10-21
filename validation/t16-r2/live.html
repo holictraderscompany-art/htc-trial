@@ -1,0 +1,14 @@
+<!doctype html><meta charset="utf-8"><title>T16 TEST read-only validation</title>
+<h1>T16 TEST read-only checks</h1>
+<p>Target: uzhkzhmncxjplrdtdzgd. Uses the existing browser session; never exports credentials or modifies data.</p>
+<button id="session">Verify current session</button>
+<button id="summary">Check summary API once</button>
+<button id="timeout">Check controlled upstream deadline once</button>
+<p><a href="/founder/operations">Open actual Operations overview</a></p>
+<pre id="result" role="status">No checks run.</pre>
+<script>
+const output=document.querySelector('#result');
+document.querySelector('#session').onclick=async()=>{const r=await fetch('/__t16-session-check',{cache:'no-store',credentials:'same-origin',redirect:'error'});const body=await r.json();output.textContent=JSON.stringify({check:'session',status:r.status,...body},null,2);};
+document.querySelector('#summary').onclick=async()=>{const r=await fetch('/api/founder/operations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'summary'}),cache:'no-store',credentials:'same-origin',redirect:'error'});const body=await r.json();output.textContent=JSON.stringify({check:'summary',status:r.status,no_store:r.headers.get('Cache-Control')==='no-store',...body},null,2);};
+document.querySelector('#timeout').onclick=async event=>{event.target.disabled=true;const started=performance.now();output.textContent='Controlled read-only upstream deadline check running…';try{const r=await fetch('/api/founder/operations',{method:'POST',headers:{'Content-Type':'application/json','X-HTC-T16-Fault':'summary-timeout'},body:JSON.stringify({action:'summary'}),cache:'no-store',credentials:'same-origin',redirect:'error'});const body=await r.json();output.textContent=JSON.stringify({check:'controlled_upstream_deadline',status:r.status,elapsed_ms:Math.round(performance.now()-started),no_store:r.headers.get('Cache-Control')==='no-store',...body},null,2);}catch{output.textContent=JSON.stringify({check:'controlled_upstream_deadline',result:'NOT VERIFIED',reason:'Browser transport failure'});}};
+</script>

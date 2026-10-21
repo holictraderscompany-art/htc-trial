@@ -1,0 +1,359 @@
+{
+  "purpose": "Founder review candidate only; no staging or commit authorization",
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "branch": "codex/t16-r1-reconciliation",
+  "existing_curated_paths": 47,
+  "audit_resolution_additions": 7,
+  "included_paths": [
+    ".gitattributes",
+    "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+    "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+    "docs/group03-baseline-and-t16-closure.md",
+    "docs/t16-r1-reconciliation.md",
+    "package.json",
+    "src/app/founder/operations/page.js",
+    "src/components/founder-operation-workspace.js",
+    "src/components/founder-views.js",
+    "src/server/founder-operations.js",
+    "tests/founder-access.test.js",
+    "tests/founder-assets.test.js",
+    "tests/founder-content.fixture.mjs",
+    "tests/founder-overview.test.js",
+    "tests/founder-publishing.test.js",
+    "tests/local-sqlite-adapter.js",
+    "validation/t16-final/closure.json",
+    "validation/t16-final/commit-manifest.json",
+    "validation/t16-final/verify-final.mjs",
+    "validation/t16-final/verify-final.test.mjs",
+    "validation/t16-r1/browser-boundaries.js",
+    "validation/t16-r1/browser-local.js",
+    "validation/t16-r1/browser-results.json",
+    "validation/t16-r1/reconciliation-manifest.json",
+    "validation/t16-r1/results.json",
+    "validation/t16-r1/verify-reconciliation.mjs",
+    "validation/t16-r2/REPORT.md",
+    "validation/t16-r2/anonymous.json",
+    "validation/t16-r2/audit-local.mjs",
+    "validation/t16-r2/browser-cleanup.json",
+    "validation/t16-r2/bundle-security.json",
+    "validation/t16-r2/check-local.mjs",
+    "validation/t16-r2/checkpoint.mjs",
+    "validation/t16-r2/checks.json",
+    "validation/t16-r2/db-after.json",
+    "validation/t16-r2/db-before.json",
+    "validation/t16-r2/db-resume-final.json",
+    "validation/t16-r2/fault-cleanup.json",
+    "validation/t16-r2/fault-control-anonymous.json",
+    "validation/t16-r2/founder-ui.json",
+    "validation/t16-r2/history-sha256-acls.json",
+    "validation/t16-r2/integrity.json",
+    "validation/t16-r2/live.html",
+    "validation/t16-r2/manifest.json",
+    "validation/t16-r2/preflight.json",
+    "validation/t16-r2/resilience.json",
+    "validation/t16-r2/results.json",
+    "validation/t16-r2/server-http-snapshot.json",
+    "validation/t16-r2/start-live.mjs",
+    "validation/t16-r2/t15-b1.json",
+    "validation/t16-r2/timeout-live.json",
+    "validation/t16-r2/upstream-timeout.json",
+    "validation/t16-r2/user-live.json",
+    "validation/t16-r2/verify-final.mjs"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "1b9db868b747d813ecb0c486f668b5784edf0c0d3d1816b05c2d2721b3a8fd2b",
+      "category": "checkout configuration"
+    },
+    {
+      "path": "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+      "sha256": "a74fd929920d61f2167cdaf20fc259bc8419661f1661ece6091e8436012d0730",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+      "sha256": "c2b3bddad0ec34e4de96c8c9641da78c3e670b14440604010e6836ffeb819995",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/group03-baseline-and-t16-closure.md",
+      "sha256": "0caee714e98d7d07f81dd59df35469a1d95a78db46cc2d18c8f6fc3b19d7c979",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/t16-r1-reconciliation.md",
+      "sha256": "c789a3417343c4c257ab3c3a8551a9d2da845f9fc871238cdc5a93f66bfccfc6",
+      "category": "documentation"
+    },
+    {
+      "path": "package.json",
+      "sha256": "af5ce758e57745d6c3e59d385c3e240c1923b44fbf776e40623ea584419f39fd",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "src/app/founder/operations/page.js",
+      "sha256": "8745832515a96eda5a92c78509dcfd86060bbc5dc500834439b50c2812efd2e7",
+      "category": "previously validated T16 source"
+    },
+    {
+      "path": "src/components/founder-operation-workspace.js",
+      "sha256": "3b30f6e4463705ca6e7b91322ca18561f5e72a521a18226d470bedbc02ade766",
+      "category": "previously validated T16 source"
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "sha256": "fffa2fa1afa46a3c9d8ffef17b6e710bc1ac67960232d202ea79d1b29b251ee8",
+      "category": "previously validated T16 source"
+    },
+    {
+      "path": "src/server/founder-operations.js",
+      "sha256": "ed014ee62a143c83ea56dda74a27b468acfac852c9b3d4d1fd5c5aff65074e72",
+      "category": "previously validated T16 source"
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "sha256": "f49ccde3a02b370190a4a2341ce858cb94b6ac7ac2a28b98b7966869e38674cf",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "tests/founder-assets.test.js",
+      "sha256": "9dd5b37f5c1c988f66ec816a075ed445012c8e336239ecf7f0607673107ebd99",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "tests/founder-content.fixture.mjs",
+      "sha256": "35e1f495c0f1232d21275f1af1e1c9086a6f661695fc068d547926f25db944f7",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "tests/founder-overview.test.js",
+      "sha256": "9bcf17db960366a82c3b8a7d542fcbad03157e666ccc8dbaca0de38c31f0dda5",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "tests/founder-publishing.test.js",
+      "sha256": "60c39df3f4610f0b5b47a036ebfb3dc4de6b9f57a10c545623ab1cd92a5d405b",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "sha256": "e35ee44e296174d7fedde10c97a21c1c71c74110d5db0a468ebd94da08e11f6a",
+      "category": "previously validated regression tests"
+    },
+    {
+      "path": "validation/t16-final/closure.json",
+      "sha256": "5a71b4b5ca5253179692e86ae7c826ba295c5fa8e97d0732c69fb67b2a5abde0",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-final/verify-final.mjs",
+      "sha256": "4ba15925f345599f4d0e429e987c4eb05dfd9ebc2a099af9576641ad3f348ac0",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-final/verify-final.test.mjs",
+      "sha256": "b0fd49f0d50a6c3972f689332356fede58e08c13f00b503e224f1851e08630f9",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/browser-boundaries.js",
+      "sha256": "f6f84f5d4af884e0751ee406b262ac46286eca42e5a0c665212c6f90bc4238b6",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/browser-local.js",
+      "sha256": "1d0d24ff32b18932f29952843532b6244d2f04365b5fbfd189d30cb37dea91d9",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/browser-results.json",
+      "sha256": "c0bde3af3eb746e2359b4cb97a3e05331b1205eaf863b891bf6f6a0ff3dfea4a",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/reconciliation-manifest.json",
+      "sha256": "70d1641831632f02a9f19392fb7cd879a2325720945d1673c9957440105a29ae",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/results.json",
+      "sha256": "0ce89b693c69562ccf091a2f844554c83c4bde7ebf3dfbdc260cfb64e04c3292",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r1/verify-reconciliation.mjs",
+      "sha256": "9762146ad063c97061d98d5d891eea9ca2e9f1025065300eaa1926b414c7935f",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/REPORT.md",
+      "sha256": "04a368e5833bf52591552f26414081818e3ef65f3a2f9b54ff67261a014e7db0",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/anonymous.json",
+      "sha256": "3b351e802a76adddeb5c753d82f45f8797fe82bb0919f37a2ee0e675923cac8f",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/audit-local.mjs",
+      "sha256": "b33e06773f9162faccc04cfc0a77809613c13ff89038fc72dd215e9721e946fc",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/browser-cleanup.json",
+      "sha256": "d916c580d69e271ccf30bf9f68e2d6edb86eda4dec1f6064bd9b3e6c8c454012",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/bundle-security.json",
+      "sha256": "7c4e02de24dcb659062f21923542f1f87d7668b4830ccc37fafa85b7c23d7042",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/check-local.mjs",
+      "sha256": "ddc6a5a8a5dd05955e8442c991732d99e2f447d8b155a4097bd1e83eda06a1b4",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/checkpoint.mjs",
+      "sha256": "b324261674268d1e6a775996e09988cdda98cea9138352c8973c8d843e62c8c3",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/checks.json",
+      "sha256": "5661134a3a8bf56ac9ed0ba6bb21f8189f0bcc62418fdf6446385b672a3508ac",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/db-after.json",
+      "sha256": "9734fa59ffa68f3fa79641af9a3ece3f370ce02897153d3d2fac3337edbe5508",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/db-before.json",
+      "sha256": "45fc5033cbbfdfc9bf808b80768e95ac39cd36454a6e97b82a3ef6be216dc3e5",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/db-resume-final.json",
+      "sha256": "a8460c874845bd55b215e776706675aac67f2fe5f5c1a79bdcf1b644553e7e97",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/fault-cleanup.json",
+      "sha256": "d15398d4c1e5fccecb313f7d2fc37ee028ab803dd59ea47d8e58837582b382ed",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/fault-control-anonymous.json",
+      "sha256": "7e7e41e6fc33e64fd94fc26e66566c374829651b51c59c2240402c32b2167072",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/founder-ui.json",
+      "sha256": "4dd86390b183296873a86abed7b5fba634feb5d4d2df146d8dd60958afa7df16",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/history-sha256-acls.json",
+      "sha256": "5aa7ad32169ca5a1fffa0bdd9ab49555e1f84c29df53aaafa3027a619d7d89dc",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/integrity.json",
+      "sha256": "3fbcfa716e330a75c68efe6c18978fb6965c075ee4b46ccb3c65b56f5ae2ca9c",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/live.html",
+      "sha256": "061b7712a9931a3935b903c79bccd29f02612fea92ebc18f28dfe28ed6dcf895",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/manifest.json",
+      "sha256": "5608c98c80413ae016fae200bc79008dbeaa2ce504f39c0bd3e26e2aacb4bf61",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/preflight.json",
+      "sha256": "74827f1c6e934614b08b9ed33f1b163d13431cfb668a12cefca7f4c4f20d1905",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/resilience.json",
+      "sha256": "03168528d6b504fe222f3c6af65d12bea5c2d31b930dd58feee104df0ebe3eaf",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/results.json",
+      "sha256": "56d7ce14f6ada699df9a6fdcd3d62c3a83595ee5ced401e6a41651b2e1e263cb",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/server-http-snapshot.json",
+      "sha256": "4147cdeb18166b243324725f09054fc0fd6ddb19866760b1fb36890fd9454be4",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/start-live.mjs",
+      "sha256": "2aea8e56052fc2f503f6e130c07aa344e688e227a274b0bb8187158054f10394",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/t15-b1.json",
+      "sha256": "5c9de327a1ac1380598c49fcf0cd8b29e3da64e363286bdb8211013a40e5b0e2",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/timeout-live.json",
+      "sha256": "40f4f08af8e5931afbefbce8b69f9c4473f4c1cd6d41c229ab4cf7742a605771",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/upstream-timeout.json",
+      "sha256": "d2038a065b75c08e1ac6c58c5f577ee15e2ca8d3309a7e9c5c0950f49db4b8dc",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/user-live.json",
+      "sha256": "25397cba23bcf88e639740b803d248a576b71f2179bd07ebc6fdfaf7c6518c96",
+      "category": "validation evidence or read-only verifier"
+    },
+    {
+      "path": "validation/t16-r2/verify-final.mjs",
+      "sha256": "6a27c4c6d0f41664e253e46695bb5e0ee737f378f3901ee006b10b304461493d",
+      "category": "validation evidence or read-only verifier"
+    }
+  ],
+  "self_excluded_from_digests": true,
+  "exclusions": [
+    {
+      "path": "validation/t16-r2/server-http.json",
+      "reason": "Mutable append-only projection; sealed server-http-snapshot.json is included"
+    },
+    {
+      "path": "external runtime/profile/Auth binding/config and one-use cleanup SQL",
+      "reason": "Private execution resources, not portable feature source"
+    },
+    {
+      "path": ".env*, *.log, *.sqlite*, .next/, node_modules/, browser profiles",
+      "reason": "Secrets or generated/local resources"
+    }
+  ],
+  "changes_this_audit": {
+    "existing_candidate_file_modified": ".gitattributes",
+    "application_source_changed": false,
+    "historical_reports_or_manifests_changed": false,
+    "SQL_or_database_changed": false,
+    "other_worktrees_changed": false
+  },
+  "new_validation": {
+    "focused_tests": "7/7 LOCAL PASS",
+    "command": "node --test validation/t16-final/verify-final.test.mjs",
+    "LIVE_tests_repeated": 0,
+    "application_tests_and_build": "Existing unchanged-source PASS evidence preserved"
+  },
+  "stage_commit_push_merge_deploy": false
+}

@@ -19,6 +19,7 @@ const records = Array.from({ length: 53 }, (_, i) => ({ id: identifier(i + 10), 
   created_at: stamp, updated_at: stamp, released_at: i >= 51 ? stamp : null }));
 let sequence = 1000;
 let uncertain = false;
+let unavailable = false;
 const sqliteMode = process.argv.includes('--sqlite');
 const sqliteFilename = sqliteMode ? join(mkdtempSync(join(tmpdir(), 'htc-sqlite-fixture-')), 'fixture.sqlite') : null;
 const local = sqliteMode ? (await import('./local-sqlite-adapter.js')).createLocalSqlite({
@@ -34,6 +35,7 @@ process.env.SUPABASE_URL = 'https://vzkbcgfywyhtvprxpwfb.supabase.co';
 process.env.SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_synthetic_fixture_only';
 globalThis.fetch = async (input, options = {}) => {
   if (local) {
+    if(unavailable && String(input).includes('/rest/v1/rpc/') && !String(input).endsWith('/is_founder'))throw Error('Synthetic unavailable read model');
     return local.fetchImpl(input, options);
   }
   const url = new URL(String(input));
@@ -75,6 +77,8 @@ const handle = app.getRequestHandler();
 const server = createServer((request, response) => {
   const url = new URL(request.url, origin);
   response.setHeader('X-HTC-Test-Mode', local ? 'LOCAL-SQLITE-SYNTHETIC-AUTH-NO-STORAGE' : 'SYNTHETIC-MEMORY');
+  if(local && url.pathname==='/__fixture/unavailable'){unavailable=url.searchParams.get('enabled')==='1';response.end('Synthetic read-model availability changed');return;}
+  if(local && url.pathname==='/__fixture/empty'){local.fixture.clear();response.end('Owned synthetic database emptied');return;}
   if (local && url.pathname === '/') {
     response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
     response.end('<h1>HTC LOCAL SQLite fixture</h1><p>Synthetic identities only. No live Supabase, OAuth, storage or PostgreSQL validation.</p><a href="/__fixture/session?role=founder">Open shared T13 UI as fixture Founder</a>'); return;

@@ -7,7 +7,7 @@ import {createFounderMediaHandler} from './founder-media.js';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const keys = { assets:['action','cursor'], asset:['action','id'], delete_asset:['action','id'],
   relations:['action','content_id'], attach:['action','content_id','asset_id','role'],
-  detach:['action','content_id','asset_id'], release:['action','id'],withdraw:['action','id'] };
+  detach:['action','content_id','asset_id'], release:['action','id'],withdraw:['action','id'],summary:['action'] };
 const source = value => ['LOCAL_SQLITE_FIXTURE','SUPABASE_DATABASE'].includes(value);
 const headers = () => reply(400).headers;
 function conflict(message) {
@@ -36,6 +36,13 @@ export function createFounderOperationsHandler(dependencies) {
       if(p.action==='assets' && p.cursor!==null && !uuid.test(p.cursor ?? '')) throw new ApiError(400);
       if(p.action==='attach' && !['PRIMARY','THUMBNAIL','ATTACHMENT'].includes(p.role)) throw new ApiError(400);
       const rpc=(name,args)=>upstream(`/rest/v1/rpc/${name}`,{method:'POST',body:JSON.stringify(args)});
+      if(p.action==='summary') {
+        const r=await rpc('founder_operation_counts',{});
+        if(!source(r?.source) || !Number.isFinite(Date.parse(r.captured_at)) ||
+          ['DRAFT','RELEASED','WITHDRAWN'].some(k=>!Number.isSafeInteger(r.content?.[k]) || r.content[k]<0) ||
+          ['PENDING','READY','DELETING'].some(k=>!Number.isSafeInteger(r.assets?.[k]) || r.assets[k]<0)) throw new ApiError(500);
+        return reply(200,{source:r.source,captured_at:r.captured_at,content:Object.fromEntries(['DRAFT','RELEASED','WITHDRAWN'].map(k=>[k,r.content[k]])),assets:Object.fromEntries(['PENDING','READY','DELETING'].map(k=>[k,r.assets[k]]))});
+      }
       if(['assets','asset'].includes(p.action)) {
         const r=await rpc('read_trial_assets_for_founder',{after_id:p.action==='assets'?p.cursor:null,asset_id:p.action==='asset'?p.id:null});
         if(!source(r?.source) || !Array.isArray(r.items) || r.items.length>51) throw new ApiError(500);

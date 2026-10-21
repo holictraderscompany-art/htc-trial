@@ -1,0 +1,12 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "method": "Official Chrome tab-scoped CDP Fetch interception of the localhost summary Fetch resource only; no Document/auth interception",
+  "credentials_read_or_exported": false,
+  "database_or_service_disruption": false,
+  "results": [
+    {"gate":"LIVE normal reload","result":"PASS","ui_pending":"Working…","reload_disabled_while_pending":true,"recovered":"Snapshot loaded.","captured_at":"2026-10-19T03:13:37.464921+00:00"},
+    {"gate":"Controlled 500 response with legitimate LIVE Founder session","result":"PASS","server_original_status":200,"browser_injected_status":500,"ui_error":"Unavailable. Reload before trying again.","ui_stale":"Snapshot stale or unavailable. Reload to verify current state.","old_timestamp_preserved":"2026-10-19T03:13:37.464921+00:00","no_health_claim":true,"fault_removed":true},
+    {"gate":"Recovery after controlled 500","result":"PASS","ui_status":"Snapshot loaded.","captured_at":"2026-10-19T03:14:05.992504+00:00","six_counts":0}
+  ],
+  "limitation":"Injected HTTP failure is controlled client-side resilience evidence, not an actual Supabase outage. Expiry/revocation are not simulated by these tests."
+}

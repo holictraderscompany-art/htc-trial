@@ -1,0 +1,82 @@
+{
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "R1_manifest_files_preserved": 18,
+  "history_count": 10,
+  "history": [
+    {
+      "version": "20261012061832",
+      "name": "htc_group3_core_auth_content_draft",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062050",
+      "name": "trial_assets",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062052",
+      "name": "trial_content_assets",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062053",
+      "name": "public_content_discovery",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062054",
+      "name": "founder_content_list",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062323",
+      "name": "founder_operation_workspaces",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261012062809",
+      "name": "founder_asset_delete_bridge",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261014232339",
+      "name": "t13_approved_default_acl_hardening",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261015220202",
+      "name": "t14_signed_direct_upload_policy",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    },
+    {
+      "version": "20261016084813",
+      "name": "t14_guard_rejection_sqlstate",
+      "source_SHA256": "PASS",
+      "history_identity": "PASS",
+      "history_statement_md5_match": "raw"
+    }
+  ],
+  "count_function_body_matches_source": true,
+  "anon_execute": false,
+  "authenticated_execute": true,
+  "database_empty": true,
+  "database_read_only": "on"
+}

@@ -1,0 +1,880 @@
+{
+  "format": 1,
+  "compiled_on": "2026-10-22",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "scope": "Existing T16 validation evidence closure; no new LIVE execution",
+  "verdict": "T16 FULL PASS",
+  "baseline": {
+    "version": "PRD & MASTER TASK MAP v3.0 - Rebased Actual Build",
+    "companion": "HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+    "MASTER_v2": "Historical transition baseline; not a separate current specification",
+    "source_documents": [
+      {
+        "path": "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+        "sha256": "c2b3bddad0ec34e4de96c8c9641da78c3e670b14440604010e6836ffeb819995"
+      },
+      {
+        "path": "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+        "sha256": "a74fd929920d61f2167cdaf20fc259bc8419661f1661ece6091e8436012d0730"
+      }
+    ],
+    "decision_provenance": [
+      "Founder designated PRD v3.0 Rebased Actual Build as authoritative in T12 planning.",
+      "Founder supplied both source files and explicitly approved the implementation contract as companion to PRD.",
+      "Later task-specific approvals govern execution and amend only their stated scope."
+    ],
+    "current_restrictions": [
+      "No staging, commit, push, merge, deployment or T17",
+      "No source, database, Auth, Storage, migration or security changes"
+    ]
+  },
+  "checkout_policy": {
+    "original_gitattributes_sha256": "395e0ad83cc7d9391ae185826348e6f3f62b89d9ebcc5abad862fecadac6ddce",
+    "append_utf8": "# T16 final audit: preserve raw historical R2 bytes (including mixed EOL).\nvalidation/t16-r2/** -text\n# Approved input documents remain byte-identical to Founder-supplied files.\ndocs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md -text\ndocs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md -text\ndocs/group03-baseline-and-t16-closure.md text eol=lf\nvalidation/t16-final/** text eol=lf\n",
+    "result_sha256": "1b9db868b747d813ecb0c486f668b5784edf0c0d3d1816b05c2d2721b3a8fd2b",
+    "historical_R1_manifest_sha256": "70d1641831632f02a9f19392fb7cd879a2325720945d1673c9957440105a29ae",
+    "historical_R2_manifest_sha256": "5608c98c80413ae016fae200bc79008dbeaa2ce504f39c0bd3e26e2aacb4bf61",
+    "R2_rule": "-text",
+    "historical_hashes_regenerated": false
+  },
+  "final_report": {
+    "archive": "t16-r3-20261021",
+    "file": "T16-FINAL-VALIDATION-20261022-PASS.json",
+    "sha256": "f837771e041ba3bc90fcafbca8393805f24c8a0ca402d1177d64a51ecb8e49fa",
+    "at": "2026-10-21T23:00:45.022Z",
+    "gates": {
+      "T16_R1_local": "PASS",
+      "T16_R2_Founder_USER_anonymous_authorization": "LIVE PASS",
+      "T16_R2_empty_SQL_API_UI": "LIVE PASS - preserved R2 evidence",
+      "T16_R2_loading_error_stale_timeout_recovery": "PASS - genuine live auth with controlled fault injection; not a real Supabase outage",
+      "T16_R2B_disposable_local_logout_and_natural_expiry": "LIVE PASS",
+      "T16_R3_nonempty_six_SQL_API_UI_counts_and_refresh": "LIVE PASS",
+      "T16_R3_official_three_asset_and_Storage_cleanup": "LIVE PASS",
+      "T16_R3_exact_three_content_atomic_cleanup_R2": "LIVE PASS",
+      "T16_R3_independent_final_zero_counts": "LIVE PASS",
+      "security_and_migration_integrity": "PASS",
+      "candidate_source_preservation": "48/48 byte-identical"
+    },
+    "regressions": {
+      "application": "223/223 PASS - preserved unchanged-source evidence",
+      "T16_focused": "7/7 PASS - preserved",
+      "SQLite": "T13 12/12; T14 3/3 PASS - preserved",
+      "browser_local": "36/36 LOCAL PASS - preserved; not live evidence",
+      "production_build": "PASS - preserved unchanged-source evidence",
+      "guard_fix_local": "4/4 PASS",
+      "guard_fix_PostgreSQL_READ_ONLY_assertions": "8/8 PASS",
+      "no_unnecessary_test_or_build_rerun": true
+    }
+  },
+  "R2_history": {
+    "report": "validation/t16-r2/REPORT.md",
+    "results": "validation/t16-r2/results.json",
+    "historical_verdict": "PARTIAL",
+    "closed_later": [
+      "nonempty_LIVE_counts",
+      "expiry_LIVE",
+      "revocation_LIVE"
+    ],
+    "historical_files_unchanged": true
+  },
+  "auth": {
+    "source_sha256": "d9b95023f4e2cb38a9162deb09eb5b86bb5da6cd9a0f6f46afccf52bc7b0f06d",
+    "target": "uzhkzhmncxjplrdtdzgd",
+    "logout_attempts": 1,
+    "official_local_logout_confirmed": true,
+    "expiry_probe_scheduled_at": "2026-10-20T23:03:51.000Z",
+    "expiry_observation_complete": true,
+    "volatile_token_discarded": true,
+    "original_ttl_seconds": 3600,
+    "events": [
+      {
+        "at": "2026-10-20T22:15:26.937Z",
+        "event": "disposable_bound"
+      },
+      {
+        "at": "2026-10-20T22:15:31.569Z",
+        "event": "jwt_observation",
+        "phase": "BEFORE_LOGOUT",
+        "provider_status": 200,
+        "provider_expiry_explicit": false,
+        "provider_error_code": null,
+        "protected_api_status": 200,
+        "count_rpc_calls": 1
+      },
+      {
+        "at": "2026-10-20T22:15:31.574Z",
+        "event": "official_local_logout_dispatched"
+      },
+      {
+        "at": "2026-10-20T22:15:32.249Z",
+        "event": "official_local_logout_response",
+        "provider_status": 204
+      },
+      {
+        "at": "2026-10-20T22:15:32.285Z",
+        "event": "application_signout",
+        "status": 303,
+        "confirmed": true
+      },
+      {
+        "at": "2026-10-20T22:15:32.607Z",
+        "event": "jwt_observation",
+        "phase": "IMMEDIATELY_AFTER_LOCAL_LOGOUT",
+        "provider_status": 403,
+        "provider_expiry_explicit": false,
+        "provider_error_code": "OTHER",
+        "protected_api_status": 401,
+        "count_rpc_calls": 0
+      },
+      {
+        "at": "2026-10-20T22:15:32.610Z",
+        "event": "no_cookie_protected_API",
+        "status": 401
+      },
+      {
+        "at": "2026-10-20T22:15:32.611Z",
+        "event": "natural_expiry_timer_armed"
+      },
+      {
+        "at": "2026-10-20T23:03:55.208Z",
+        "event": "jwt_observation",
+        "phase": "AFTER_ORIGINAL_EXP_PLUS_90_SECONDS",
+        "provider_status": 403,
+        "provider_expiry_explicit": true,
+        "provider_error_code": "OTHER",
+        "protected_api_status": 401,
+        "count_rpc_calls": 0
+      },
+      {
+        "at": "2026-10-20T23:03:55.216Z",
+        "event": "experiment_ended"
+      }
+    ],
+    "session_binding": "Disposable session identity was checked at execution; binding and private profile metadata intentionally omitted from this export"
+  },
+  "nonempty": {
+    "source_sha256": "b6ffae4531cf4bcac67689991eaffee29744bcfaa1ed0c59e7554f53dd1dfb17",
+    "at": "2026-10-21T22:11:25.778Z",
+    "target": "uzhkzhmncxjplrdtdzgd",
+    "old_job": {
+      "id": "r3_rem_ui_ALL111_20261021_01",
+      "status": "FAILED",
+      "late_receipt_ok": false,
+      "stop_preserved": {
+        "jobId": "r3_rem_ui_ALL111_20261021_01",
+        "reason": "TIMEOUT_UNCERTAIN_NO_RETRY"
+      },
+      "preserved_hashes": {
+        "dispatch-stopped.json": "c8249d11a0a1dd7a374aafef6522477f3e88d2f5e7558abce7b21e6e05ee8771",
+        "r3_rem_ui_ALL111_20261021_01.failed-job.json": "142a9c91a698f1072bc32d847709c1aca736e66a4b73a3e537e5415b05fcf810",
+        "r3_rem_ui_ALL111_20261021_01.job.json": "142a9c91a698f1072bc32d847709c1aca736e66a4b73a3e537e5415b05fcf810",
+        "r3_rem_ui_ALL111_20261021_01.claim.json": "b60fc20e96c978108c7eeff74c4db858ea542eebc8f062c22c8f58836a72f88c",
+        "r3_rem_ui_ALL111_20261021_01.receipt.json": "63f313c86d57d68d98a052e25d03eb4f064c8785f035979c910832e224b69a2e",
+        "r3_rem_ui_ALL111_20261021_01.stopped.json": "392b1500429d1eaae43f7a5a439a9537fec384ad3b34c99ce69ae913fec688cb",
+        "actual-manifest.json": "e032aca4a4ae3dc9bb2a23f913a9de1b436aa79e9332a7ffa07bdbbc6dfccf6d",
+        "dispatch-once-before-all111-recovery-20261022.mjs": "47330d2b81cd7e9c2a670f9c71573b357f7968daeebac10bba0b7a6b18f84de4",
+        "r3-receipt-budget.mjs": "c512a97ca7293ad555919309239ce241c864eed33b59de11be18720c0dfb78d2"
+      }
+    },
+    "new_job": {
+      "at": "2026-10-21T22:07:38.263Z",
+      "jobId": "r3_rem_ui_ALL111_resume_20261022_01",
+      "ok": true,
+      "statuses": [
+        200
+      ],
+      "details": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-21T22:07:30.55394+00:00",
+        "refresh_captured_at": "2026-10-21T22:07:39.540809+00:00",
+        "content": {
+          "DRAFT": 1,
+          "RELEASED": 1,
+          "WITHDRAWN": 1
+        },
+        "assets": {
+          "PENDING": 1,
+          "READY": 1,
+          "DELETING": 1
+        }
+      }
+    },
+    "receipt_sha256": "10a24a8f3819095078dd944ff7dd5306571c121361090e81a5e5ba404da012b8",
+    "exactly_one_successor": true,
+    "active_job": false,
+    "dashboard_http": {
+      "at": "2026-10-21T22:07:23.870Z",
+      "event": "http",
+      "request": 799,
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 200
+    },
+    "count_api_events": [
+      {
+        "at": "2026-10-21T22:07:28.797Z",
+        "event": "upstream",
+        "request": 800,
+        "job": null,
+        "path": "/rest/v1/rpc/founder_operation_counts",
+        "method": "POST",
+        "status": 200,
+        "summary": {
+          "source": "SUPABASE_DATABASE",
+          "captured_at": "2026-10-21T22:07:30.55394+00:00",
+          "content": {
+            "DRAFT": 1,
+            "RELEASED": 1,
+            "WITHDRAWN": 1
+          },
+          "assets": {
+            "READY": 1,
+            "PENDING": 1,
+            "DELETING": 1
+          }
+        }
+      },
+      {
+        "at": "2026-10-21T22:07:37.850Z",
+        "event": "upstream",
+        "request": 801,
+        "job": null,
+        "path": "/rest/v1/rpc/founder_operation_counts",
+        "method": "POST",
+        "status": 200,
+        "summary": {
+          "source": "SUPABASE_DATABASE",
+          "captured_at": "2026-10-21T22:07:39.540809+00:00",
+          "content": {
+            "DRAFT": 1,
+            "RELEASED": 1,
+            "WITHDRAWN": 1
+          },
+          "assets": {
+            "READY": 1,
+            "PENDING": 1,
+            "DELETING": 1
+          }
+        }
+      }
+    ],
+    "postgresql": {
+      "captured_at": "2026-10-21T22:09:04.523304+00:00",
+      "content": {
+        "DRAFT": 1,
+        "RELEASED": 1,
+        "WITHDRAWN": 1
+      },
+      "assets": {
+        "READY": 1,
+        "PENDING": 1,
+        "DELETING": 1
+      },
+      "relations": 0,
+      "storage_objects": 1,
+      "history_count": 10,
+      "preflight_equivalent_except_timestamp": true,
+      "security_fingerprints_unchanged": true
+    }
+  },
+  "asset_cleanup": {
+    "source_sha256": "4af05213b91aa2c49f2aab99fd95d2790ded2bc60dba750e11d51c054231bfc9",
+    "operations": [
+      {
+        "slot": "AP",
+        "id": "e60e5b4b-ab0d-4a1b-aed6-675d893d56c4",
+        "initial_state": "PENDING",
+        "request_id": "1d421bda-9bcd-4ef6-ad03-fdb2205821bd",
+        "bucket": "trial-assets",
+        "exact_path": "image/e60e5b4b-ab0d-4a1b-aed6-675d893d56c4/asset.png",
+        "receipt": {
+          "at": "2026-10-21T22:19:49.421Z",
+          "jobId": "r3_rem_cleanup_AP_20261021_01",
+          "ok": true,
+          "statuses": [
+            200
+          ],
+          "details": {}
+        },
+        "receipt_sha256": "56795c96711f788cefa5e0070ca39c9fd67af9efa20048682c8f8c453038937a",
+        "claim_sha256": "7c03d3c49b7e7f1517259182defacaf41dd3d566745357e1c64683ce80842716",
+        "used_sha256": "21625d98e6f3f598c157d59d8cf9cd548609ef7fd3033e2acab97cb4f573e865",
+        "job_sha256": "e67f0047b0e2cc4ed2e497f9d2edbe5507d7ee43bd3d0880734582f6a3519d5c",
+        "snapshot_file": "asset-cleanup-after-AP-20261022.json",
+        "snapshot_sha256": "a66d1fcaf734fc3aaf0705aa24eaf441439cf576cea5f0c5fb0c10fccb723ae2",
+        "after": {
+          "content": {
+            "DRAFT": 1,
+            "RELEASED": 1,
+            "WITHDRAWN": 1
+          },
+          "assets": {
+            "READY": 1,
+            "PENDING": 0,
+            "DELETING": 1
+          },
+          "relations": 0,
+          "storage_objects": 1
+        },
+        "official_storage_DELETE_count": 1,
+        "server_events": [
+          {
+            "at": "2026-10-21T22:19:44.243Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:44.330Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:19:46.267Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:46.378Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:46.706Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:19:47.059Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:47.220Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/storage/v1/object/trial-assets",
+            "method": "DELETE",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:47.339Z",
+            "event": "upstream",
+            "request": 846,
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:19:47.350Z",
+            "event": "application_response",
+            "job": "r3_rem_cleanup_AP_20261021_01",
+            "path": "/api/founder/operations",
+            "status": 200,
+            "action": "delete_asset",
+            "founder": true
+          }
+        ]
+      },
+      {
+        "slot": "AR",
+        "id": "61158778-8da6-4c80-94c8-b7744eb4268e",
+        "initial_state": "READY",
+        "request_id": "1b9cf2f6-fe1b-4189-80bd-e37c1f23ebb8",
+        "bucket": "trial-assets",
+        "exact_path": "image/61158778-8da6-4c80-94c8-b7744eb4268e/asset.png",
+        "receipt": {
+          "at": "2026-10-21T22:21:05.532Z",
+          "jobId": "r3_rem_cleanup_AR_20261021_01",
+          "ok": true,
+          "statuses": [
+            200
+          ],
+          "details": {}
+        },
+        "receipt_sha256": "a6545deef709099e1e137a486e250a8da177f0cc6c87aa793c4fd5510627bfcc",
+        "claim_sha256": "4a337416ebe0df5d950c1085ac11cb1d4a7cd8821fbf9b5d6fa3939d518b647d",
+        "used_sha256": "78b065686a1b1eafe428778715814bb9e434a6ba92a58a1d1891e8659b15bc97",
+        "job_sha256": "aecaf7618fc56226e1b8fc3e9276575b9fdc3a8398b279ac6115051431f944e8",
+        "snapshot_file": "asset-cleanup-after-AR-20261022.json",
+        "snapshot_sha256": "6dd7e3256c48efe57589f4a654c8ba7e7083bcc03e5e31b1fd2564ee9d6a154e",
+        "after": {
+          "content": {
+            "DRAFT": 1,
+            "RELEASED": 1,
+            "WITHDRAWN": 1
+          },
+          "assets": {
+            "READY": 0,
+            "PENDING": 0,
+            "DELETING": 1
+          },
+          "relations": 0,
+          "storage_objects": 0
+        },
+        "official_storage_DELETE_count": 1,
+        "server_events": [
+          {
+            "at": "2026-10-21T22:20:55.392Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:20:55.561Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:20:58.296Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:20:58.929Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:20:59.175Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:20:59.715Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:00.430Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/storage/v1/object/trial-assets",
+            "method": "DELETE",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:00.886Z",
+            "event": "upstream",
+            "request": 859,
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:00.898Z",
+            "event": "application_response",
+            "job": "r3_rem_cleanup_AR_20261021_01",
+            "path": "/api/founder/operations",
+            "status": 200,
+            "action": "delete_asset",
+            "founder": true
+          }
+        ]
+      },
+      {
+        "slot": "AD",
+        "id": "8b65602a-13c5-4586-bd31-058803103df7",
+        "initial_state": "DELETING",
+        "request_id": "d23180b6-5360-4514-93cc-0a01f1879fdf",
+        "bucket": "trial-assets",
+        "exact_path": "image/8b65602a-13c5-4586-bd31-058803103df7/asset.png",
+        "receipt": {
+          "at": "2026-10-21T22:21:49.047Z",
+          "jobId": "r3_rem_cleanup_AD_20261021_01",
+          "ok": true,
+          "statuses": [
+            200
+          ],
+          "details": {}
+        },
+        "receipt_sha256": "1f2382918c57cfd2cef8cf7faadfb4329ac47c4adeb1e834eb062a73530dce4d",
+        "claim_sha256": "9a60b7ae4fb93d0dbb209f89ec2ada88635f6079416d6b845877685957b9d08c",
+        "used_sha256": "0d45aeef30f8126df9cb5dacb5ce6edf47c2f3698d84dda18e2ac8f058bb78b0",
+        "job_sha256": "843d8ba5c9743590e05296935156eca26a8f73be0cca73f2d97cda63215c8ac7",
+        "snapshot_file": "asset-cleanup-after-AD-20261022.json",
+        "snapshot_sha256": "d187eb21f386aa06c5d03072ce6d0d52af2811020c3fe1c50a8e77a291851754",
+        "after": {
+          "content": {
+            "DRAFT": 1,
+            "RELEASED": 1,
+            "WITHDRAWN": 1
+          },
+          "assets": {
+            "READY": 0,
+            "PENDING": 0,
+            "DELETING": 0
+          },
+          "relations": 0,
+          "storage_objects": 0
+        },
+        "official_storage_DELETE_count": 1,
+        "server_events": [
+          {
+            "at": "2026-10-21T22:21:41.061Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:41.172Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:21:44.459Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/rest/v1/rpc/delete_trial_asset_for_founder",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:44.756Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/auth/v1/user",
+            "method": "GET",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:44.889Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/rest/v1/rpc/is_founder",
+            "method": "POST",
+            "status": 200,
+            "founder": true
+          },
+          {
+            "at": "2026-10-21T22:21:45.031Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:45.170Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/storage/v1/object/trial-assets",
+            "method": "DELETE",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:45.349Z",
+            "event": "upstream",
+            "request": 866,
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/rest/v1/rpc/manage_trial_asset",
+            "method": "POST",
+            "status": 200
+          },
+          {
+            "at": "2026-10-21T22:21:45.358Z",
+            "event": "application_response",
+            "job": "r3_rem_cleanup_AD_20261021_01",
+            "path": "/api/founder/operations",
+            "status": 200,
+            "action": "delete_asset",
+            "founder": true
+          }
+        ]
+      }
+    ],
+    "final": {
+      "captured_at": "2026-10-21T22:22:01.386463+00:00",
+      "content": {
+        "DRAFT": 1,
+        "RELEASED": 1,
+        "WITHDRAWN": 1
+      },
+      "assets": {
+        "READY": 0,
+        "PENDING": 0,
+        "DELETING": 0
+      },
+      "relations": 0,
+      "storage_objects": 0,
+      "remaining_content_ids": [
+        {
+          "id": "0bf0a5d2-e13f-40af-b366-3b3ce4baa02c",
+          "state": "DRAFT"
+        },
+        {
+          "id": "3b5b15be-df37-40d9-8cf1-3bdb2e044287",
+          "state": "WITHDRAWN"
+        },
+        {
+          "id": "fcd2cb3e-f23e-4cfb-8da6-26f254b5c31c",
+          "state": "RELEASED"
+        }
+      ]
+    },
+    "content_rows_unchanged": true,
+    "migration_and_security_hashes_unchanged": true,
+    "old_STOP_receipts_claims_unchanged": true,
+    "automatic_retries": 0
+  },
+  "content_cleanup": {
+    "sql_sha256": "ed75084e58c046857193fd38a6192c0691805682e1991a0107c4ea39a6a3275a",
+    "approval": "FOUNDER APPROVAL — T16 FINAL CLEANUP R2",
+    "R2_submission_count": 1,
+    "automatic_retries": 0,
+    "execution_success": true,
+    "transaction": "COMMITTED - full batch success plus independent empty database snapshot",
+    "deleted_content_rows": 3,
+    "deleted_ids": [
+      "0bf0a5d2-e13f-40af-b366-3b3ce4baa02c",
+      "fcd2cb3e-f23e-4cfb-8da6-26f254b5c31c",
+      "3b5b15be-df37-40d9-8cf1-3bdb2e044287"
+    ],
+    "post_cleanup_captured_at": "2026-10-21T22:57:00.723003+00:00",
+    "content": {
+      "DRAFT": 0,
+      "RELEASED": 0,
+      "WITHDRAWN": 0
+    },
+    "assets": {
+      "READY": 0,
+      "PENDING": 0,
+      "DELETING": 0
+    },
+    "relations": 0,
+    "storage_objects": 0,
+    "original_empty_baseline_restored": true,
+    "all_security_history_fingerprints_unchanged": true,
+    "migration_count": 10,
+    "post_cleanup_SQL_API_UI_distinction": "Final zero values independently queried in PostgreSQL; live API/UI non-empty counts and refresh are from preserved successful ALL111 job. No fresh post-cleanup browser test claimed.",
+    "execution_receipt": {
+      "at": "2026-10-21T22:56:38.010Z",
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "approval": "FOUNDER APPROVAL — T16 FINAL CLEANUP R2",
+      "approved_sql_file": "content-cleanup-guard-fixed-20261022-review.sql",
+      "sql_sha256": "ed75084e58c046857193fd38a6192c0691805682e1991a0107c4ea39a6a3275a",
+      "preflight_sha256": "afd712e321293a1fe6cf61debb32f44f3f9c9ed641ee6ff93b2287e6c214c432",
+      "exact_ids": [
+        "0bf0a5d2-e13f-40af-b366-3b3ce4baa02c",
+        "fcd2cb3e-f23e-4cfb-8da6-26f254b5c31c",
+        "3b5b15be-df37-40d9-8cf1-3bdb2e044287"
+      ],
+      "required_rows": 3,
+      "submission_limit": 1,
+      "automatic_retry": false,
+      "prior_failed_batch_must_not_be_retried": true,
+      "all_guards_pass": true,
+      "status": "ARMED FOR ONE R2 SUBMISSION; independently reconcile if interrupted"
+    },
+    "execution_result": {
+      "source_sha256": "cda56269d3b3e3959eaeeaa97290e89b347c78d34a096c892f8116d4c30074a5",
+      "isError": false,
+      "sql_result": []
+    },
+    "before_security_snapshot": {
+      "assets": {
+        "READY": 0,
+        "PENDING": 0,
+        "DELETING": 0
+      },
+      "content": {
+        "DRAFT": 0,
+        "RELEASED": 0,
+        "WITHDRAWN": 0
+      },
+      "relations": 0,
+      "captured_at": "2026-10-20T23:42:15.711728+00:00",
+      "history_count": 10,
+      "history_sha256": "4ca67eda964c64226eb0b5bbba4093174f596beb37ef508cfa60e4b25bfe313a",
+      "policies_sha256": "a6e44c7a808fb97015c5c7444c071766488978c6141689cc989a36b2e9a00d1b",
+      "storage_objects": 0,
+      "functions_sha256": "a63d18026c6979cb56d242311b7e0d6c0b84ba3a28b01dc2aef66b3ddf7e9510",
+      "default_acl_sha256": "628e9e2bf2a14fdf7640cad6f2c1b0be922291b2a494daa1c6fe648694ec39b4",
+      "table_acl_rls_sha256": "f6cee34730057a762b3c8daba67c3a772de93186581b88c6e66ace5af6edfcc5",
+      "cleanup_schema_sha256": "fcb0b0be05e1807121e00ca6fd0ff477a4251236875e9b05b70206cdcee01ca6",
+      "profiles_roles_sha256": "b70bf93bcc90a7c0c839a4606a1829a0ab5a2aec6623300065d1a8f9616462ba"
+    },
+    "after_snapshot": {
+      "assets": {
+        "READY": 0,
+        "PENDING": 0,
+        "DELETING": 0
+      },
+      "content": {
+        "DRAFT": 0,
+        "RELEASED": 0,
+        "WITHDRAWN": 0
+      },
+      "relations": 0,
+      "asset_rows": null,
+      "captured_at": "2026-10-21T22:57:00.723003+00:00",
+      "content_rows": null,
+      "storage_rows": null,
+      "history_count": 10,
+      "history_sha256": "4ca67eda964c64226eb0b5bbba4093174f596beb37ef508cfa60e4b25bfe313a",
+      "policies_sha256": "a6e44c7a808fb97015c5c7444c071766488978c6141689cc989a36b2e9a00d1b",
+      "storage_objects": 0,
+      "functions_sha256": "a63d18026c6979cb56d242311b7e0d6c0b84ba3a28b01dc2aef66b3ddf7e9510",
+      "default_acl_sha256": "628e9e2bf2a14fdf7640cad6f2c1b0be922291b2a494daa1c6fe648694ec39b4",
+      "table_acl_rls_sha256": "f6cee34730057a762b3c8daba67c3a772de93186581b88c6e66ace5af6edfcc5",
+      "cleanup_schema_sha256": "fcb0b0be05e1807121e00ca6fd0ff477a4251236875e9b05b70206cdcee01ca6",
+      "profiles_roles_sha256": "b70bf93bcc90a7c0c839a4606a1829a0ab5a2aec6623300065d1a8f9616462ba"
+    },
+    "preserved_failed_attempt": {
+      "status": "Historical first batch FAILED and aborted before DELETE; unchanged",
+      "automatic_retry": false,
+      "correction_was_separately_approved": true
+    },
+    "do_not_replay": true
+  },
+  "provenance": {
+    "verified_linked_sources": 13,
+    "sources": [
+      {
+        "archive": "t16-r3-20261021",
+        "file": "content-cleanup-r2-execution-once-20261022.json",
+        "sha256": "2d316ff0cfcc0437d4255320839c36b6a783cf6bcf0a8a9dda719167e642d336"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "content-cleanup-r2-preflight-20261022.json",
+        "sha256": "afd712e321293a1fe6cf61debb32f44f3f9c9ed641ee6ff93b2287e6c214c432"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "content-cleanup-guard-fixed-20261022-review.sql",
+        "sha256": "ed75084e58c046857193fd38a6192c0691805682e1991a0107c4ea39a6a3275a"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "content-cleanup-r2-execution-result-20261022.json",
+        "sha256": "cda56269d3b3e3959eaeeaa97290e89b347c78d34a096c892f8116d4c30074a5"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "content-cleanup-r2-final-snapshot-20261022.json",
+        "sha256": "f75ae5ca2d7660de9f613c06d9d6d85984ce146e52f985d71706996def79434c"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "T16-CONTENT-CLEANUP-20261022-FAILED.json",
+        "sha256": "a4b5477752b4e402b30b4a32614620d6676e7aef5aec571413537b4ef93decb5"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "T16-GUARD-RCA-20261022-READY.json",
+        "sha256": "fca0ad9b23a7cb82966ca777b540da2842ae8118ca39584c7d58178467398819"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "ASSET-CLEANUP-20261022-PASS.json",
+        "sha256": "4af05213b91aa2c49f2aab99fd95d2790ded2bc60dba750e11d51c054231bfc9"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "UI-ALL111-RECOVERY-20261022-PASS.json",
+        "sha256": "b6ffae4531cf4bcac67689991eaffee29744bcfaa1ed0c59e7554f53dd1dfb17"
+      },
+      {
+        "archive": "t16-r3-20261021",
+        "file": "cleanup-baseline-verified.json",
+        "sha256": "8231c64bb6caaba315caa540b280d4552aa3e74e46b7f019c188de23bb429dd0"
+      },
+      {
+        "archive": "repository",
+        "file": "validation/t16-r1/results.json",
+        "sha256": "0ce89b693c69562ccf091a2f844554c83c4bde7ebf3dfbdc260cfb64e04c3292"
+      },
+      {
+        "archive": "repository",
+        "file": "validation/t16-r2/results.json",
+        "sha256": "56d7ce14f6ada699df9a6fdcd3d62c3a83595ee5ced401e6a41651b2e1e263cb"
+      },
+      {
+        "archive": "t16-r2b-20261021",
+        "file": "auth-runtime.json",
+        "sha256": "d9b95023f4e2cb38a9162deb09eb5b86bb5da6cd9a0f6f46afccf52bc7b0f06d"
+      }
+    ],
+    "sanitized_exports": true,
+    "originals_preserved": true,
+    "export_note": "Sections are whitelisted projections, not byte-identical copies of source archives. source_sha256 refers to original bytes. No token, cookie, account ID, email or session fingerprint is exported."
+  },
+  "limitations": [
+    "No LIVE test was rerun for this consolidation.",
+    "Final zero counts are independently observed PostgreSQL/Storage catalog counts; no fresh post-cleanup API/UI check is claimed.",
+    "R2 resilience uses controlled faults with genuine LIVE authorization; it is not an actual provider outage.",
+    "LOCAL SQLite/browser evidence is not LIVE evidence.",
+    "Historical R1/R2 validators seal their original phase and remain unchanged; use verify-final.mjs in this directory for the consolidated candidate.",
+    "Known approved T13 last-writer-wins and scoped T14 signed capability TTL remain unchanged."
+  ],
+  "no_new_mutations": true,
+  "T17_started": false
+}

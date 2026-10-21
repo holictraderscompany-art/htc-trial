@@ -139,6 +139,12 @@ export function createLocalSqlite({ mode, filename = ':memory:' } = {}) {
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset') result = relate(args.payload);
     else if (url.pathname === '/rest/v1/rpc/manage_trial_content_asset_draft') result = relate(args.payload,true);
     else if (url.pathname === '/rest/v1/rpc/read_trial_assets_for_founder') result = {source:'LOCAL_SQLITE_FIXTURE',items:db.prepare('SELECT * FROM assets WHERE id>? AND (? IS NULL OR id=?) ORDER BY id LIMIT 51').all(args.after_id??'',args.asset_id,args.asset_id).map(a=>({...JSON.parse(a.data),id:a.id,status:a.status,mime_type:a.mime_type}))};
+    else if (url.pathname === '/rest/v1/rpc/founder_operation_counts') {
+      const content={DRAFT:0,RELEASED:0,WITHDRAWN:0};const assets={PENDING:0,READY:0,DELETING:0};
+      for(const r of db.prepare("SELECT json_extract(data,'$.state') state,count(*) n FROM content GROUP BY state").all())content[r.state]=r.n;
+      for(const r of db.prepare('SELECT status,count(*) n FROM assets GROUP BY status').all())assets[r.status]=r.n;
+      result={source:'LOCAL_SQLITE_FIXTURE',captured_at:stamp(),content,assets};
+    }
     else if (url.pathname === '/rest/v1/rpc/delete_trial_asset_for_founder') result=transaction(()=>{
       const id=args.payload?.id;
       if(args.payload?.action!=='delete_asset')throw Error('Invalid delete');

@@ -1,0 +1,1438 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "events": [
+    {
+      "at": "2026-10-19T03:02:49.997Z",
+      "request": 1,
+      "event": "session",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": false,
+      "founder": false,
+      "upstream_checked": false
+    },
+    {
+      "at": "2026-10-19T03:02:50.051Z",
+      "request": 1,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:04:13.864Z",
+      "request": 2,
+      "event": "session",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": false,
+      "founder": false,
+      "upstream_checked": false
+    },
+    {
+      "at": "2026-10-19T03:04:13.875Z",
+      "request": 2,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:04:16.572Z",
+      "request": 3,
+      "event": "http",
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 307
+    },
+    {
+      "at": "2026-10-19T03:04:18.765Z",
+      "request": 4,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:08:52.983Z",
+      "request": 5,
+      "event": "http",
+      "path": "/sign-in",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:08:55.640Z",
+      "request": 9,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:08:55.978Z",
+      "request": 11,
+      "event": "http",
+      "path": "/auth/start",
+      "method": "POST",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:08:56.284Z",
+      "request": 10,
+      "event": "http",
+      "path": "/icon.svg",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:00.439Z",
+      "request": 12,
+      "event": "upstream",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:00.738Z",
+      "request": 12,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:00.761Z",
+      "request": 12,
+      "event": "http",
+      "path": "/auth/callback",
+      "method": "GET",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:09:01.308Z",
+      "request": 13,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:01.385Z",
+      "request": 14,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:02.402Z",
+      "request": 14,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:03.001Z",
+      "request": 14,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:23.525Z",
+      "request": 15,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:23.937Z",
+      "request": 15,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:09:23.942Z",
+      "request": 15,
+      "event": "session",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": true,
+      "founder": true,
+      "upstream_checked": true
+    },
+    {
+      "at": "2026-10-19T03:09:23.953Z",
+      "request": 15,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:09:52.799Z",
+      "request": 16,
+      "event": "http",
+      "path": "/sign-in",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:10:13.024Z",
+      "request": 17,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:10:14.307Z",
+      "request": 17,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:10:14.358Z",
+      "request": 17,
+      "event": "http",
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:10:35.700Z",
+      "request": 19,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:10:36.111Z",
+      "request": 19,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:10:38.483Z",
+      "request": 19,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:10:38.551091+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:10:38.492Z",
+      "request": 19,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:32.474Z",
+      "request": 20,
+      "event": "http",
+      "path": "/__t16-live.",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "at": "2026-10-19T03:13:35.194Z",
+      "request": 21,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:35.696Z",
+      "request": 21,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:35.766Z",
+      "request": 21,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:37.035Z",
+      "request": 22,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:37.206Z",
+      "request": 22,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:13:37.407Z",
+      "request": 22,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:13:37.464921+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:13:37.425Z",
+      "request": 22,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:52.185Z",
+      "request": 23,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:52.379Z",
+      "request": 23,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:13:52.830Z",
+      "request": 23,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:13:52.909885+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:13:52.845Z",
+      "request": 23,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:13:58.605Z",
+      "request": 24,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:00.511Z",
+      "request": 26,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:00.791Z",
+      "request": 25,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:00.939Z",
+      "request": 25,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:01.934Z",
+      "request": 27,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:02.119Z",
+      "request": 27,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:02.139Z",
+      "request": 27,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:05.665Z",
+      "request": 28,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:05.781Z",
+      "request": 28,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:14:05.938Z",
+      "request": 28,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:14:05.992504+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:14:06.107Z",
+      "request": 28,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:24.427Z",
+      "request": 29,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:14:25.032Z",
+      "request": 29,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:14:26.480Z",
+      "request": 29,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:14:26.511762+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:14:26.494Z",
+      "request": 29,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:15:13.450Z",
+      "request": 30,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:15:24.289Z",
+      "request": 31,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:15:24.486Z",
+      "request": 31,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:15:25.445Z",
+      "request": 31,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:15:25.521217+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:15:25.459Z",
+      "request": 31,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:18:01.109Z",
+      "request": 32,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:18:18.634Z",
+      "request": 33,
+      "event": "session",
+      "status": 401,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": false,
+      "founder": false,
+      "upstream_checked": false
+    },
+    {
+      "at": "2026-10-19T03:18:18.645Z",
+      "request": 33,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:18:40.233Z",
+      "request": 34,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:20:14.971Z",
+      "request": 35,
+      "event": "http",
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 307
+    },
+    {
+      "at": "2026-10-19T03:20:17.870Z",
+      "request": 36,
+      "event": "http",
+      "path": "/sign-in",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:21.483Z",
+      "request": 40,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:28.347Z",
+      "request": 41,
+      "event": "http",
+      "path": "/auth/start",
+      "method": "POST",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:20:30.309Z",
+      "request": 42,
+      "event": "upstream",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:30.452Z",
+      "request": 42,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:30.464Z",
+      "request": 42,
+      "event": "http",
+      "path": "/auth/callback",
+      "method": "GET",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:20:30.530Z",
+      "request": 43,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:31.230Z",
+      "request": 44,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:31.461Z",
+      "request": 44,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:20:31.471Z",
+      "request": 44,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:21:55.046Z",
+      "request": 45,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:21:57.599Z",
+      "request": 46,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:21:58.515Z",
+      "request": 46,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:21:58.525Z",
+      "request": 46,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:01.896Z",
+      "request": 47,
+      "event": "http",
+      "path": "/auth/sign-out",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-19T03:22:15.021Z",
+      "request": 48,
+      "event": "http",
+      "path": "/sign-in",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:18.306Z",
+      "request": 49,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:18.428Z",
+      "request": 49,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:18.433Z",
+      "request": 49,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:20.333Z",
+      "request": 50,
+      "event": "http",
+      "path": "/auth/start",
+      "method": "POST",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:22:25.602Z",
+      "request": 51,
+      "event": "upstream",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:27.512Z",
+      "request": 51,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:27.535Z",
+      "request": 51,
+      "event": "http",
+      "path": "/auth/callback",
+      "method": "GET",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:22:29.170Z",
+      "request": 52,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:29.715Z",
+      "request": 53,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:30.338Z",
+      "request": 53,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:22:30.354Z",
+      "request": 53,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:23:07.420Z",
+      "request": 54,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:23:13.678Z",
+      "request": 55,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:23:14.422Z",
+      "request": 55,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-19T03:23:14.427Z",
+      "request": 55,
+      "event": "session",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": true,
+      "founder": false,
+      "upstream_checked": true
+    },
+    {
+      "at": "2026-10-19T03:23:14.436Z",
+      "request": 55,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:24:30.903Z",
+      "request": 56,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:24:31.247Z",
+      "request": 56,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-19T03:24:31.344Z",
+      "request": 56,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 403
+    },
+    {
+      "at": "2026-10-19T03:24:59.690Z",
+      "request": 57,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:24:59.850Z",
+      "request": 57,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": false
+    },
+    {
+      "at": "2026-10-19T03:24:59.978Z",
+      "request": 57,
+      "event": "http",
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:07.036Z",
+      "request": 58,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:07.583Z",
+      "request": 58,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:27:07.588Z",
+      "request": 58,
+      "event": "session",
+      "status": 200,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": true,
+      "founder": true,
+      "upstream_checked": true
+    },
+    {
+      "at": "2026-10-19T03:27:07.597Z",
+      "request": 58,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:14.656Z",
+      "request": 59,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:17.308Z",
+      "request": 60,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:21.927Z",
+      "request": 61,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:22.137Z",
+      "request": 61,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:27:22.177Z",
+      "request": 61,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:31:54.301Z",
+      "request": 62,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:31:54.542Z",
+      "request": 62,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:31:54.577Z",
+      "request": 62,
+      "event": "http",
+      "path": "/founder/operations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:31:55.630Z",
+      "request": 63,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:31:56.010Z",
+      "request": 63,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:31:56.274Z",
+      "request": 64,
+      "event": "http",
+      "path": "/favicon.ico",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "at": "2026-10-19T03:31:56.297Z",
+      "request": 65,
+      "event": "http",
+      "path": "/favicon.ico",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "at": "2026-10-19T03:31:57.263Z",
+      "request": 63,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:31:57.241123+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:31:57.270Z",
+      "request": 63,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:32:33.347Z",
+      "request": 66,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:32:33.629Z",
+      "request": 66,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:32:34.398Z",
+      "request": 66,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:32:34.448276+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:32:34.406Z",
+      "request": 66,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:33:34.365Z",
+      "request": 67,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:33:34.572Z",
+      "request": 67,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:33:35.396Z",
+      "request": 67,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:33:35.462823+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:33:35.400Z",
+      "request": 67,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:34:23.983Z",
+      "request": 68,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "at": "2026-10-19T03:35:33.784Z",
+      "request": 69,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:35:57.426Z",
+      "request": 70,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:35:57.786Z",
+      "request": 70,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:35:57.801Z",
+      "request": 70,
+      "event": "controlled_fault",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "mode": "summary_upstream_deadline",
+      "forwarded_to_database": false
+    },
+    {
+      "at": "2026-10-19T03:36:07.809Z",
+      "request": 70,
+      "event": "controlled_fault_complete",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "error": "TimeoutError"
+    },
+    {
+      "at": "2026-10-19T03:36:07.830Z",
+      "request": 70,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 500
+    },
+    {
+      "at": "2026-10-19T03:36:39.587Z",
+      "request": 71,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:36:39.762Z",
+      "request": 71,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:36:40.764Z",
+      "request": 71,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "method": "POST",
+      "status": 200,
+      "summary": {
+        "source": "SUPABASE_DATABASE",
+        "captured_at": "2026-10-19T03:36:40.847459+00:00",
+        "content": {
+          "DRAFT": 0,
+          "RELEASED": 0,
+          "WITHDRAWN": 0
+        },
+        "assets": {
+          "READY": 0,
+          "PENDING": 0,
+          "DELETING": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T03:36:40.768Z",
+      "request": 71,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:38:30.569Z",
+      "request": 72,
+      "event": "http",
+      "path": "/favicon.ico",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "at": "2026-10-19T03:39:10.692Z",
+      "request": 73,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "error": "TimeoutError"
+    },
+    {
+      "at": "2026-10-19T03:39:10.701Z",
+      "request": 73,
+      "event": "session",
+      "status": 500,
+      "target": "uzhkzhmncxjplrdtdzgd",
+      "authenticated": false,
+      "founder": false,
+      "upstream_checked": true
+    },
+    {
+      "at": "2026-10-19T03:39:10.757Z",
+      "request": 73,
+      "event": "http",
+      "path": "/__t16-session-check",
+      "method": "GET",
+      "status": 500
+    },
+    {
+      "at": "2026-10-19T03:39:31.481Z",
+      "request": 74,
+      "event": "http",
+      "path": "/sign-in",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:33.605Z",
+      "request": 76,
+      "event": "http",
+      "path": "/auth/start",
+      "method": "POST",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:39:41.894Z",
+      "request": 75,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "error": "TimeoutError"
+    },
+    {
+      "at": "2026-10-19T03:39:41.905Z",
+      "request": 75,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 500
+    },
+    {
+      "at": "2026-10-19T03:39:51.434Z",
+      "request": 77,
+      "event": "upstream",
+      "path": "/auth/v1/token",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:51.844Z",
+      "request": 77,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:51.871Z",
+      "request": 77,
+      "event": "http",
+      "path": "/auth/callback",
+      "method": "GET",
+      "status": 303
+    },
+    {
+      "at": "2026-10-19T03:39:52.376Z",
+      "request": 78,
+      "event": "http",
+      "path": "/content",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:52.457Z",
+      "request": 79,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:52.861Z",
+      "request": 79,
+      "event": "upstream",
+      "path": "/rest/v1/user_profiles",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:39:52.928Z",
+      "request": 79,
+      "event": "http",
+      "path": "/api/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:40:42.672Z",
+      "request": null,
+      "event": "runner_ready",
+      "summary_timeout_probe_enabled": false
+    },
+    {
+      "at": "2026-10-19T03:42:25.981Z",
+      "request": 80,
+      "event": "http",
+      "path": "/__t16-live",
+      "method": "GET",
+      "status": 200
+    }
+  ]
+}

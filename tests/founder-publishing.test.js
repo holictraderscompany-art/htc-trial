@@ -25,10 +25,10 @@ test('LOCAL T15: anonymous, USER and expired sessions cannot release or withdraw
   }
   assert.equal((await f.run({action:'read',id:f.row.id})).data.state,'DRAFT');
 });
-test('LOCAL T15: exact Origin, role claims, lifecycle fields and T16 summary fail closed',async t=>{
+test('LOCAL T15: exact Origin, role claims, lifecycle fields and unknown actions fail closed',async t=>{
   const f=await fixture(t);
   assert.equal((await f.operations(request({action:'release',id:f.row.id},'founder','https://evil.test'))).status,403);
-  for(const p of [{action:'summary'},{action:'release',id:f.row.id,role:'FOUNDER'},{action:'release',id:f.row.id,state:'RELEASED'},
+  for(const p of [{action:'unknown'},{action:'release',id:f.row.id,role:'FOUNDER'},{action:'release',id:f.row.id,state:'RELEASED'},
     {action:'release',id:'invalid'},{action:'release'},{action:'publish',id:f.row.id}])assert.equal((await f.operation(p)).status,400);
   assert.equal((await f.run({action:'read',id:f.row.id})).data.state,'DRAFT');
 });

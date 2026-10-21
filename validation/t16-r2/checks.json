@@ -1,0 +1,37 @@
+[
+  {
+    "name": "t16-focused",
+    "exitCode": 0,
+    "tests": 7,
+    "failures": 0,
+    "log_sha256": "f0c741ae2bcbe941ff87556dc20ff94ad042b7fcd2c2ca90d52a2361d8fea1e5"
+  },
+  {
+    "name": "application",
+    "exitCode": 0,
+    "tests": 223,
+    "failures": 0,
+    "log_sha256": "0763bba6e209b849dc9cafa8142ad5d48e5d722104a1a58a185d6b522464a32f"
+  },
+  {
+    "name": "t13-sqlite",
+    "exitCode": 0,
+    "tests": 12,
+    "failures": 0,
+    "log_sha256": "b833fe8cd499dcd7ff58655491accb2a2d6472fc345bc35ab6a21c975b6da523"
+  },
+  {
+    "name": "t14-sqlite",
+    "exitCode": 0,
+    "tests": 3,
+    "failures": 0,
+    "log_sha256": "06009a87c00a331fa692dd5912d0dc40bbfa77e7f103b075633b9ff11388904f"
+  },
+  {
+    "name": "production-build",
+    "result": "PASS",
+    "exitCode": 0,
+    "tests": null,
+    "log_sha256": "84f6fea3265305c06d6bd831beeee16164c84ae804ebd2f08276da3ca5426c0c"
+  }
+]

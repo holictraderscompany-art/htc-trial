@@ -1,0 +1,19 @@
+{
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "method": "Official Chrome extension DOM read, correlated with server request 19 and independent read-only SQL",
+  "result": "PASS",
+  "url": "http://localhost:3103/founder/operations",
+  "dashboard_status": 200,
+  "api_status": 200,
+  "server_authenticated": true,
+  "server_founder": true,
+  "source": "SUPABASE_DATABASE",
+  "captured_at": "2026-10-19T03:10:38.551091+00:00",
+  "ui_source": "Supabase database snapshot; no service health claim.",
+  "ui_status": "Snapshot loaded.",
+  "content": {"DRAFT":0,"RELEASED":0,"WITHDRAWN":0},
+  "assets": {"PENDING":0,"READY":0,"DELETING":0},
+  "six_counts_match_independent_SQL": true,
+  "test_fixtures_created": 0,
+  "limitations": ["Nonempty LIVE dataset not available; creation of LIVE fixtures prohibited in R2."]
+}

@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "method": "Official Chrome tab-scoped Fetch response stall on localhost summary API with genuine Founder authorization",
+  "started": "2026-10-19T03:32:29.323Z",
+  "finished": "2026-10-19T03:32:50.211Z",
+  "server_original_status": 200,
+  "client_network_error": "net::ERR_ABORTED",
+  "canceled": true,
+  "expected_client_deadline_ms": 20000,
+  "ui_error": "Unavailable. Reload before trying again.",
+  "ui_stale": "Snapshot stale or unavailable. Reload to verify current state.",
+  "previous_timestamp_retained": "2026-10-19T03:31:57.241123+00:00",
+  "reload_enabled_after_timeout": true,
+  "interception_cleared_in_finally": true,
+  "no_credential_export": true,
+  "no_database_or_service_disruption": true,
+  "limitation": "Controlled client deadline evidence, distinct from a real Supabase service timeout or the Foundation 10-second upstream deadline."
+}

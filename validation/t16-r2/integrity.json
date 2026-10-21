@@ -1,0 +1,14 @@
+{
+  "verdict": "PASS",
+  "at": "2026-10-19T03:44:28.037Z",
+  "branch": "codex/t16-r1-reconciliation",
+  "head": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "R1_preserved_files": 19,
+  "original_worktrees_preserved": 6,
+  "original_dirty_files_preserved": 112,
+  "protected_paths_unchanged": true,
+  "files_scanned": 322,
+  "secret_pattern_hits": [],
+  "staged": 0,
+  "status": " M .gitattributes\n M package.json\n M src/components/founder-operation-workspace.js\n M src/components/founder-views.js\n M src/server/founder-operations.js\n M tests/founder-access.test.js\n M tests/founder-assets.test.js\n M tests/founder-content.fixture.mjs\n M tests/founder-publishing.test.js\n M tests/local-sqlite-adapter.js\n?? docs/t16-r1-reconciliation.md\n?? src/app/founder/operations/page.js\n?? tests/founder-overview.test.js\n?? validation/t16-r1/browser-boundaries.js\n?? validation/t16-r1/browser-local.js\n?? validation/t16-r1/browser-results.json\n?? validation/t16-r1/reconciliation-manifest.json\n?? validation/t16-r1/results.json\n?? validation/t16-r1/verify-reconciliation.mjs\n?? validation/t16-r2/REPORT.md\n?? validation/t16-r2/anonymous.json\n?? validation/t16-r2/audit-local.mjs\n?? validation/t16-r2/browser-cleanup.json\n?? validation/t16-r2/bundle-security.json\n?? validation/t16-r2/check-local.mjs\n?? validation/t16-r2/checkpoint.mjs\n?? validation/t16-r2/checks.json\n?? validation/t16-r2/db-after.json\n?? validation/t16-r2/db-before.json\n?? validation/t16-r2/db-resume-final.json\n?? validation/t16-r2/fault-cleanup.json\n?? validation/t16-r2/fault-control-anonymous.json\n?? validation/t16-r2/founder-ui.json\n?? validation/t16-r2/history-sha256-acls.json\n?? validation/t16-r2/integrity.json\n?? validation/t16-r2/live.html\n?? validation/t16-r2/manifest.json\n?? validation/t16-r2/preflight.json\n?? validation/t16-r2/resilience.json\n?? validation/t16-r2/results.json\n?? validation/t16-r2/server-http-snapshot.json\n?? validation/t16-r2/server-http.json\n?? validation/t16-r2/start-live.mjs\n?? validation/t16-r2/t15-b1.json\n?? validation/t16-r2/timeout-live.json\n?? validation/t16-r2/upstream-timeout.json\n?? validation/t16-r2/user-live.json\n?? validation/t16-r2/verify-final.mjs"
+}

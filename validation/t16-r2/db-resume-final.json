@@ -1,0 +1,202 @@
+{
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "tables": [
+    {
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "relname": "trial_assets",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false
+    },
+    {
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "relname": "trial_content",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false
+    },
+    {
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "relname": "trial_content_assets",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false
+    },
+    {
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+      "relname": "user_profiles",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false
+    }
+  ],
+  "totals": {
+    "assets": 0,
+    "content": 0,
+    "relations": 0,
+    "storage_objects": 0
+  },
+  "history": [
+    {
+      "name": "htc_group3_core_auth_content_draft",
+      "version": "20261012061832",
+      "statements_md5": "2d4d5c110b59cd9e637f2e3a263067e5",
+      "statement_count": 1
+    },
+    {
+      "name": "trial_assets",
+      "version": "20261012062050",
+      "statements_md5": "05e7e6ea00afe67c6cfc5da4b4af15fa",
+      "statement_count": 1
+    },
+    {
+      "name": "trial_content_assets",
+      "version": "20261012062052",
+      "statements_md5": "58f333c2192004cb2329d456b830cd1f",
+      "statement_count": 1
+    },
+    {
+      "name": "public_content_discovery",
+      "version": "20261012062053",
+      "statements_md5": "7d5ecf59830c246032de6e9db95dcb17",
+      "statement_count": 1
+    },
+    {
+      "name": "founder_content_list",
+      "version": "20261012062054",
+      "statements_md5": "5d7a21d7e8664c180dce2a33aa69303e",
+      "statement_count": 1
+    },
+    {
+      "name": "founder_operation_workspaces",
+      "version": "20261012062323",
+      "statements_md5": "86d95e67df915ae6c282d8c354f09fa7",
+      "statement_count": 1
+    },
+    {
+      "name": "founder_asset_delete_bridge",
+      "version": "20261012062809",
+      "statements_md5": "af5d43334902d3e687e8d48f83ad6fc7",
+      "statement_count": 1
+    },
+    {
+      "name": "t13_approved_default_acl_hardening",
+      "version": "20261014232339",
+      "statements_md5": "0981b80bc1111962dbdf425ceff02af3",
+      "statement_count": 1
+    },
+    {
+      "name": "t14_signed_direct_upload_policy",
+      "version": "20261015220202",
+      "statements_md5": "3df274f15b5051394b5aa17a1148076b",
+      "statement_count": 1
+    },
+    {
+      "name": "t14_guard_rejection_sqlstate",
+      "version": "20261016084813",
+      "statements_md5": "3ac85a58177d8e5634dc1eb9087cbd79",
+      "statement_count": 1
+    }
+  ],
+  "function": {
+    "body_md5": "385f01984dee2f08f195e3f77aa866e3",
+    "anon_execute": false,
+    "authenticated_execute": true
+  },
+  "policies": [
+    {
+      "cmd": "ALL",
+      "qual": "( SELECT is_founder() AS is_founder)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "trial_assets",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_assets_founder",
+      "schemaname": "public",
+      "with_check": "( SELECT is_founder() AS is_founder)"
+    },
+    {
+      "cmd": "ALL",
+      "qual": "( SELECT is_founder() AS is_founder)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "trial_content",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_content_founder",
+      "schemaname": "public",
+      "with_check": "( SELECT is_founder() AS is_founder)"
+    },
+    {
+      "cmd": "ALL",
+      "qual": "( SELECT is_founder() AS is_founder)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "trial_content_assets",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_content_assets_founder",
+      "schemaname": "public",
+      "with_check": "( SELECT is_founder() AS is_founder)"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "user_profiles",
+      "permissive": "PERMISSIVE",
+      "policyname": "user_profiles_select_own_or_founder",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "user_profiles",
+      "permissive": "PERMISSIVE",
+      "policyname": "user_profiles_update_own_or_founder_display_name",
+      "schemaname": "public",
+      "with_check": "((id = ( SELECT auth.uid() AS uid)) OR ( SELECT is_founder() AS is_founder))"
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "(trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text]))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_assets_delete",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((trial_asset_storage_allowed(bucket_id, name, false) AND storage.allow_any_operation(ARRAY['object.get_authenticated'::text, 'object.get_authenticated_info'::text])) OR (trial_asset_storage_allowed(bucket_id, name, true) AND storage.allow_any_operation(ARRAY['object.delete'::text, 'object.delete_many'::text])))",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_assets_private_read",
+      "schemaname": "storage",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "objects",
+      "permissive": "PERMISSIVE",
+      "policyname": "trial_assets_upload",
+      "schemaname": "storage",
+      "with_check": "(storage.allow_any_operation(ARRAY['object.upload'::text, 'object.sign_upload_url'::text]) AND trial_asset_upload_allowed(bucket_id, name))"
+    }
+  ],
+  "read_only": "on",
+  "captured_at": "2026-10-19T03:36:27.072466+00:00"
+}

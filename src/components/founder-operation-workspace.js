@@ -5,6 +5,7 @@ import {reconcileUploadAttempt,sendSignedUpload} from './founder-direct-upload.j
 export default function FounderOperationWorkspace({kind='assets'}) {
   const [contents,setContents]=useState([]),[assets,setAssets]=useState([]),[relations,setRelations]=useState([]);
   const [contentId,setContentId]=useState(''),[assetId,setAssetId]=useState(''),[role,setRole]=useState('PRIMARY');
+  const [summary,setSummary]=useState(null);
   const [source,setSource]=useState(''),[busy,setBusy]=useState(true),[blocked,setBlocked]=useState(false);
   const [message,setMessage]=useState('Loading snapshot…'),[stale,setStale]=useState(false),[cursor,setCursor]=useState(null),[contentCursor,setContentCursor]=useState(null);
   const pending=useRef(false),mounted=useRef(false);
@@ -14,7 +15,7 @@ export default function FounderOperationWorkspace({kind='assets'}) {
     const response=await fetch(media?'/api/founder/assets':content?'/api/founder/content':'/api/founder/operations',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',cache:'no-store',redirect:'error',body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});
     const result=await response.json();
     if(!response.ok || result.ok!==true) {
-      if([401,403].includes(response.status)){setContents([]);setAssets([]);setRelations([]);setBlocked(true);}
+      if([401,403].includes(response.status)){setContents([]);setAssets([]);setRelations([]);setSummary(null);setBlocked(true);}
       const error=Error(response.status===401?'Session expired. Sign in again.':response.status===403?'Access denied.':response.status===400?'Check the selected fields.':response.status===409?'Operation rejected. Reload current state.':'Unavailable. Reload before trying again.');
       error.status=response.status;throw error;
     }
@@ -27,10 +28,13 @@ export default function FounderOperationWorkspace({kind='assets'}) {
     finally{pending.current=false;setBusy(false);}
   }
   async function load() {
-    const [c,a]=await Promise.all([call({action:'list',cursor:null},true),call({action:'assets',cursor:null})]);
-    const recovered=await reconcileUploadAttempt(attempt.current,id=>call({action:'asset',id}));
-    if(attempt.current && recovered===null){attempt.current=null;setPendingUpload(null);setUploadFile(null);}
-    setSource(a.source);setContents(c.items);setContentCursor(c.next_cursor);setAssets(a.items);setCursor(a.next_cursor);setRelations([]);setContentId('');setAssetId('');
+    if(kind==='summary') {const data=await call({action:'summary'});setSummary(data);setSource(data.source);}
+    else {
+      const [c,a]=await Promise.all([call({action:'list',cursor:null},true),call({action:'assets',cursor:null})]);
+      const recovered=await reconcileUploadAttempt(attempt.current,id=>call({action:'asset',id}));
+      if(attempt.current && recovered===null){attempt.current=null;setPendingUpload(null);setUploadFile(null);}
+      setSource(a.source);setContents(c.items);setContentCursor(c.next_cursor);setAssets(a.items);setCursor(a.next_cursor);setRelations([]);setContentId('');setAssetId('');
+    }
     setBlocked(false);setStale(false);setMessage('Snapshot loaded.');
   }
   useEffect(()=>{if(!mounted.current){mounted.current=true;void run(load);}},[]);
@@ -71,13 +75,16 @@ export default function FounderOperationWorkspace({kind='assets'}) {
   }
   const selector=(id,label,value,onChange,rows,text)=>h('label',{htmlFor:id},label,h('select',{id,value,disabled:busy||blocked,onChange:e=>onChange(e.target.value)},h('option',{value:''},'Select…'),...rows.map(row=>h('option',{key:row.id,value:row.id},text(row)))));
   return h('section',{className:'founder-content','aria-busy':busy},
-    h('h1',null,kind==='publishing'?'Publishing operations':'Media and asset workspace'),
+    h('h1',null,kind==='assets'?'Media and asset workspace':kind==='publishing'?'Publishing operations':'Operations overview'),
     h('p',{className:'notice'},source==='LOCAL_SQLITE_FIXTURE'?'LOCAL SQLite fixture · synthetic auth and asset metadata · no live storage or Supabase validation.':source==='SUPABASE_DATABASE'?'Supabase database snapshot; no service health claim.':'Database source not verified until a snapshot loads. No service health claim.'),
     h('p',{role:'status','aria-live':'polite'},message),stale&&h('p',{className:'notice'},'Snapshot stale or unavailable. Reload to verify current state.'),
     pendingUpload&&h('p',{className:'notice'},`Upload reservation: ${pendingUpload}. Reload, then select it to finalize or delete if recovery is needed.`),
     h('button',{type:'button',className:'button secondary',disabled:busy,onClick:()=>void run(load)},'Reload snapshot'),
-    h('p',null,h('a',{href:'/founder/content'},'Content workspace')),
-    h('div',{className:'workspace-form'},
+    h('p',null,h('a',{href:'/founder/content'},'Content workspace'),' · ',h('a',{href:'/founder/assets'},'Asset workspace'),' · ',h('a',{href:'/founder/publishing'},'Publishing'),' · ',h('a',{href:'/founder/operations'},'Operations overview')),
+    kind==='summary'&&summary&&h('div',null,h('p',null,`Snapshot captured: ${summary.captured_at}`),
+      h('h2',null,'Content lifecycle'),h('ul',null,...Object.entries(summary.content).map(([k,n])=>h('li',{key:k},`${k}: ${n}`))),
+      h('h2',null,'Asset state'),h('ul',null,...Object.entries(summary.assets).map(([k,n])=>h('li',{key:k},`${k}: ${n}`)))),
+    kind!=='summary'&&h('div',{className:'workspace-form'},
       selector('operation-content','Content',contentId,id=>void run(()=>chooseContent(id)),contents,c=>`${c.title} · ${c.state}`),
       contentCursor&&h('button',{disabled:busy||blocked,onClick:()=>void run(async()=>{const c=await call({action:'list',cursor:contentCursor},true);setContents(old=>[...old,...c.items]);setContentCursor(c.next_cursor);setMessage('More content loaded.');})},'Load more content'),
       !contents.length&&!busy&&h('p',null,'No content available in this snapshot.'),

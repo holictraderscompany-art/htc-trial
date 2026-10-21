@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "closed_tab": "1998952223",
+  "method": "Founder manual closure plus independent official Chrome tab inventory",
+  "old_tab_absent": true,
+  "other_session_tabs_preserved": true,
+  "interception_disposed_with_tab": true,
+  "additional_task_tab": "1998952306",
+  "additional_tab_closed_officially": true,
+  "additional_tab_absent_in_inventory": true,
+  "client_timeout_interception_cleared_in_finally": true,
+  "live_session_tabs_preserved": true
+}

@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "session": {
+    "request": 55,
+    "status": 200,
+    "authenticated": true,
+    "founder": false,
+    "upstream_checked": true
+  },
+  "summary": {
+    "request": 56,
+    "status": 403,
+    "ok": false,
+    "no_store": true,
+    "error": "FORBIDDEN",
+    "count_RPC_not_called": true
+  },
+  "dashboard": {
+    "request": 57,
+    "status": 200,
+    "authorization": "Access denied state as defined by FounderBoundary",
+    "count_RPC_not_called": true,
+    "manual_UI_observation": "Akses ditolak — Area ini tidak tersedia untuk akun ini."
+  },
+  "evidence_sources": [
+    "Authoritative TEST auth/user and is_founder results correlated by server request ID",
+    "Founder manual Chrome response and UI observations supplied 2026-10-19"
+  ],
+  "credentials_exposed": false
+}

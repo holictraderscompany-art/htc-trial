@@ -1,0 +1,110 @@
+{
+  "scope": "T16-R1 controlled reconciliation and local validation only",
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "branch": "codex/t16-r1-reconciliation",
+  "verdict": "LOCAL PASS",
+  "tests": [
+    {
+      "name": "t16-focused",
+      "tests": 7,
+      "exitCode": 0,
+      "log_sha256": "c8bd025beb3ec982d8c356b15d2f99ab65ab9297e61a7fd8de3683e66041ad2a"
+    },
+    {
+      "name": "application",
+      "tests": 223,
+      "exitCode": 0,
+      "log_sha256": "6e0cb0671d25e81cae0892589503d9132c6985baf9fc8e6e996fa3287a78e73d"
+    },
+    {
+      "name": "t13-sqlite",
+      "tests": 12,
+      "exitCode": 0,
+      "log_sha256": "7e6108caceae8f107e6bb06b346ae09519f36a140bf2ee78474bb5fcf5a63874"
+    },
+    {
+      "name": "t14-sqlite",
+      "tests": 3,
+      "exitCode": 0,
+      "log_sha256": "d4b4be5550e64d64a71017bf78572e7796c378fd18e3e51b205a68569f7eb0e2"
+    },
+    {
+      "name": "build",
+      "tests": null,
+      "exitCode": 0,
+      "log_sha256": "99d0cbaa81f6195e6056c96e79c42d55fb9d5aa0789c3fd81e916b4b239535fa"
+    }
+  ],
+  "T15_publishing_cases_included": 8,
+  "browser": {
+    "result": "LOCAL PASS",
+    "checks": 36,
+    "widths": [
+      375,
+      768,
+      1440
+    ],
+    "artifact": "browser-results.json"
+  },
+  "security": {
+    "result": "LOCAL PASS",
+    "tracked_and_candidate_files_scanned": 293,
+    "client_bundles_scanned": 48,
+    "secret_pattern_hits": [],
+    "new_dependencies": 0,
+    "new_migrations": 0,
+    "permissions_and_SQL_archives_unchanged": true,
+    "changed_source_syntax_checked": 12,
+    "git_diff_check": "PASS",
+    "T15_publishing_cases_in_full_regression": 8,
+    "profile": "LOCAL synthetic identities and SQLite only; no live DB/OAuth/Storage proof",
+    "notes": [
+      "Exact Origin and server Foundation authorize are retained before summary RPC.",
+      "Summary returns only known source, timestamp and six nonnegative safe-integer counts.",
+      "Existing PostgreSQL counts function/Founder guard/search_path/grants are reused byte-identically; database not accessed.",
+      "Pattern scan is supporting evidence and cannot detect every possible secret format."
+    ],
+    "EOL_policy_verified_files": 19
+  },
+  "original_worktrees_preserved": 6,
+  "original_dirty_files_preserved": 112,
+  "T14_upload_finalize_unchanged": true,
+  "T15_checked_guard_preserved": true,
+  "T15_B1_in_unchanged_worktree": "PASS 23 historical snapshots",
+  "migration_integrity": {
+    "recorded_TEST_SQL": 10,
+    "result": "PASS",
+    "execution": "Local source hash check only; no database inspection"
+  },
+  "database_access": false,
+  "database_mutations": false,
+  "new_migrations": 0,
+  "new_dependencies": 0,
+  "live_acceptance": "NOT TESTED — outside T16-R1",
+  "cleanup": {
+    "task_browser_closed": true,
+    "task_fixture_PID_2396_stopped": true,
+    "port_3104_free": true,
+    "owned_SQLite_file_removed": true,
+    "other_servers_untouched": true,
+    "scope": "Only resources created for this R1 local validation"
+  },
+  "git": {
+    "commit": false,
+    "push": false,
+    "merge": false,
+    "deployment": false,
+    "main_unchanged": true
+  },
+  "remaining": [
+    "LIVE Founder/USER/anonymous authorization against TEST",
+    "LIVE API/UI versus authoritative database counts",
+    "LIVE session expiry/revocation and unavailable/stale behavior",
+    "Founder review of reconciled candidate before any commit or push"
+  ],
+  "limitations": [
+    "LOCAL SQLite identities do not establish live Google OAuth or Supabase authorization.",
+    "No current database permissions or data state were queried; archived SQL and previous live evidence remain unchanged.",
+    "No standalone lint/typecheck script is configured; Node syntax, security/scope checks and Next build were executed."
+  ]
+}

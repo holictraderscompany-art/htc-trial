@@ -1,0 +1,121 @@
+{
+  "scope": "T16-R2 test harness and evidence only",
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "R1_manifest_sha256": "70d1641831632f02a9f19392fb7cd879a2325720945d1673c9957440105a29ae",
+  "files": [
+    {
+      "path": "validation/t16-r2/REPORT.md",
+      "sha256": "04a368e5833bf52591552f26414081818e3ef65f3a2f9b54ff67261a014e7db0"
+    },
+    {
+      "path": "validation/t16-r2/anonymous.json",
+      "sha256": "3b351e802a76adddeb5c753d82f45f8797fe82bb0919f37a2ee0e675923cac8f"
+    },
+    {
+      "path": "validation/t16-r2/audit-local.mjs",
+      "sha256": "b33e06773f9162faccc04cfc0a77809613c13ff89038fc72dd215e9721e946fc"
+    },
+    {
+      "path": "validation/t16-r2/browser-cleanup.json",
+      "sha256": "d916c580d69e271ccf30bf9f68e2d6edb86eda4dec1f6064bd9b3e6c8c454012"
+    },
+    {
+      "path": "validation/t16-r2/bundle-security.json",
+      "sha256": "7c4e02de24dcb659062f21923542f1f87d7668b4830ccc37fafa85b7c23d7042"
+    },
+    {
+      "path": "validation/t16-r2/check-local.mjs",
+      "sha256": "ddc6a5a8a5dd05955e8442c991732d99e2f447d8b155a4097bd1e83eda06a1b4"
+    },
+    {
+      "path": "validation/t16-r2/checkpoint.mjs",
+      "sha256": "b324261674268d1e6a775996e09988cdda98cea9138352c8973c8d843e62c8c3"
+    },
+    {
+      "path": "validation/t16-r2/checks.json",
+      "sha256": "5661134a3a8bf56ac9ed0ba6bb21f8189f0bcc62418fdf6446385b672a3508ac"
+    },
+    {
+      "path": "validation/t16-r2/db-after.json",
+      "sha256": "9734fa59ffa68f3fa79641af9a3ece3f370ce02897153d3d2fac3337edbe5508"
+    },
+    {
+      "path": "validation/t16-r2/db-before.json",
+      "sha256": "45fc5033cbbfdfc9bf808b80768e95ac39cd36454a6e97b82a3ef6be216dc3e5"
+    },
+    {
+      "path": "validation/t16-r2/db-resume-final.json",
+      "sha256": "a8460c874845bd55b215e776706675aac67f2fe5f5c1a79bdcf1b644553e7e97"
+    },
+    {
+      "path": "validation/t16-r2/fault-cleanup.json",
+      "sha256": "d15398d4c1e5fccecb313f7d2fc37ee028ab803dd59ea47d8e58837582b382ed"
+    },
+    {
+      "path": "validation/t16-r2/fault-control-anonymous.json",
+      "sha256": "7e7e41e6fc33e64fd94fc26e66566c374829651b51c59c2240402c32b2167072"
+    },
+    {
+      "path": "validation/t16-r2/founder-ui.json",
+      "sha256": "4dd86390b183296873a86abed7b5fba634feb5d4d2df146d8dd60958afa7df16"
+    },
+    {
+      "path": "validation/t16-r2/history-sha256-acls.json",
+      "sha256": "5aa7ad32169ca5a1fffa0bdd9ab49555e1f84c29df53aaafa3027a619d7d89dc"
+    },
+    {
+      "path": "validation/t16-r2/integrity.json",
+      "sha256": "3fbcfa716e330a75c68efe6c18978fb6965c075ee4b46ccb3c65b56f5ae2ca9c"
+    },
+    {
+      "path": "validation/t16-r2/live.html",
+      "sha256": "061b7712a9931a3935b903c79bccd29f02612fea92ebc18f28dfe28ed6dcf895"
+    },
+    {
+      "path": "validation/t16-r2/preflight.json",
+      "sha256": "74827f1c6e934614b08b9ed33f1b163d13431cfb668a12cefca7f4c4f20d1905"
+    },
+    {
+      "path": "validation/t16-r2/resilience.json",
+      "sha256": "03168528d6b504fe222f3c6af65d12bea5c2d31b930dd58feee104df0ebe3eaf"
+    },
+    {
+      "path": "validation/t16-r2/results.json",
+      "sha256": "56d7ce14f6ada699df9a6fdcd3d62c3a83595ee5ced401e6a41651b2e1e263cb"
+    },
+    {
+      "path": "validation/t16-r2/server-http-snapshot.json",
+      "sha256": "4147cdeb18166b243324725f09054fc0fd6ddb19866760b1fb36890fd9454be4"
+    },
+    {
+      "path": "validation/t16-r2/start-live.mjs",
+      "sha256": "2aea8e56052fc2f503f6e130c07aa344e688e227a274b0bb8187158054f10394"
+    },
+    {
+      "path": "validation/t16-r2/t15-b1.json",
+      "sha256": "5c9de327a1ac1380598c49fcf0cd8b29e3da64e363286bdb8211013a40e5b0e2"
+    },
+    {
+      "path": "validation/t16-r2/timeout-live.json",
+      "sha256": "40f4f08af8e5931afbefbce8b69f9c4473f4c1cd6d41c229ab4cf7742a605771"
+    },
+    {
+      "path": "validation/t16-r2/upstream-timeout.json",
+      "sha256": "d2038a065b75c08e1ac6c58c5f577ee15e2ca8d3309a7e9c5c0950f49db4b8dc"
+    },
+    {
+      "path": "validation/t16-r2/user-live.json",
+      "sha256": "25397cba23bcf88e639740b803d248a576b71f2179bd07ebc6fdfaf7c6518c96"
+    },
+    {
+      "path": "validation/t16-r2/verify-final.mjs",
+      "sha256": "6a27c4c6d0f41664e253e46695bb5e0ee737f378f3901ee006b10b304461493d"
+    }
+  ],
+  "self_excluded": true,
+  "excluded": [
+    "server-http.json: live append-only projection; server-http-snapshot.json is sealed",
+    "*.log: ignored outputs, hashes in checks.json"
+  ],
+  "no_application_source_changes": true
+}

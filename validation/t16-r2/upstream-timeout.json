@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "target": "uzhkzhmncxjplrdtdzgd",
+  "type": "Controlled TEST transport fault with real upstream Founder authorization, not actual Supabase outage",
+  "request": 70,
+  "Founder_verified_before_fault": true,
+  "counts_RPC_forwarded": false,
+  "deadline_started": "2026-10-19T03:35:57.801Z",
+  "deadline_finished": "2026-10-19T03:36:07.809Z",
+  "deadline_elapsed_ms": 10008,
+  "unchanged_Foundation_deadline_ms": 10000,
+  "API_status": 500,
+  "ui_harness": {
+    "status": 500,
+    "elapsed_ms": 12106,
+    "no_store": true,
+    "error": {
+      "code": "INTERNAL_ERROR",
+      "message": "Request could not be completed."
+    }
+  },
+  "recovery_request": 71,
+  "recovery_status": 200,
+  "events": [
+    {
+      "at": "2026-10-19T03:35:57.426Z",
+      "request": 70,
+      "event": "upstream",
+      "path": "/auth/v1/user",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "at": "2026-10-19T03:35:57.786Z",
+      "request": 70,
+      "event": "upstream",
+      "path": "/rest/v1/rpc/is_founder",
+      "method": "POST",
+      "status": 200,
+      "founder": true
+    },
+    {
+      "at": "2026-10-19T03:35:57.801Z",
+      "request": 70,
+      "event": "controlled_fault",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "mode": "summary_upstream_deadline",
+      "forwarded_to_database": false
+    },
+    {
+      "at": "2026-10-19T03:36:07.809Z",
+      "request": 70,
+      "event": "controlled_fault_complete",
+      "path": "/rest/v1/rpc/founder_operation_counts",
+      "error": "TimeoutError"
+    },
+    {
+      "at": "2026-10-19T03:36:07.830Z",
+      "request": 70,
+      "event": "http",
+      "path": "/api/founder/operations",
+      "method": "POST",
+      "status": 500
+    }
+  ]
+}

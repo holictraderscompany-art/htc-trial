@@ -1,0 +1,13 @@
+import fs from 'node:fs';import cp from 'node:child_process';import path from 'node:path';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),git=(root,...args)=>cp.execFileSync('git',args,{cwd:root,encoding:'utf8',env:{...process.env,GIT_OPTIONAL_LOCKS:'0'}}).trimEnd();
+const root=process.cwd(),r1=JSON.parse(fs.readFileSync('validation/t16-r1/reconciliation-manifest.json'));for(const f of r1.files)assert.equal(hash(fs.readFileSync(f.path)),f.sha256,f.path);
+const initial=JSON.parse(fs.readFileSync('C:/Users/ASUS/.codex/visualizations/2026/10/10/01a123df-92ce-7e03-ae21-cbf0a442bf94/t16-r1-20261019/original-worktrees.json'));let dirty=0;
+for(const w of initial.worktrees){assert.equal(git(w.root,'rev-parse','HEAD'),w.head);assert.equal(git(w.root,'branch','--show-current'),w.branch);assert.equal(git(w.root,'status','--porcelain=v1','--untracked-files=all'),w.status);for(const f of w.files){assert.equal(hash(fs.readFileSync(path.join(w.root,f.path))),f.sha256,f.path);dirty++;}}
+assert.equal(git(root,'rev-parse','HEAD'),initial.baseline);assert.equal(git(root,'diff','--cached','--name-only'),'');assert.equal(git(root,'diff','--name-only','--',...r1.protected_paths),'');assert.equal(git(root,'diff','--check'),'');
+const status=git(root,'status','--porcelain=v1','--untracked-files=all'),known=new Set([...r1.files.map(f=>f.path),'validation/t16-r1/reconciliation-manifest.json']);
+for(const line of status.split('\n'))assert(known.has(line.slice(3))||line.slice(3).startsWith('validation/t16-r2/'),'Out-of-scope file');
+const patterns=[/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,/\b(?:sb_secret|sb_publishable)_[A-Za-z0-9_-]{30,}/,/\bgh[pousr]_[A-Za-z0-9]{30,}/,/\bsk-(?:proj-)?[A-Za-z0-9_-]{30,}/,/eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}/];
+const files=[...new Set([...git(root,'ls-files').split('\n'),...status.split('\n').map(l=>l.slice(3))])];let hits=[];
+for(const file of files){const b=fs.readFileSync(file);if(!b.includes(0)&&patterns.some(p=>p.test(b.toString())))hits.push(file);}
+assert.deepEqual(hits,[]);
+const report={verdict:'PASS',at:new Date().toISOString(),branch:git(root,'branch','--show-current'),head:initial.baseline,R1_preserved_files:19,original_worktrees_preserved:initial.worktrees.length,original_dirty_files_preserved:dirty,protected_paths_unchanged:true,files_scanned:files.length,secret_pattern_hits:hits,staged:0,status};fs.writeFileSync('validation/t16-r2/integrity.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

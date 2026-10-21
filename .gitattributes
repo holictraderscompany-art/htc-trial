@@ -66,3 +66,15 @@ validation/t15-r2/** text eol=lf
 validation/t15-master/** text eol=lf
 validation/t15-master/r2c-preserved/** -text
 validation/t15-b1/** text eol=lf
+# T16-only additions retain deterministic validation bytes.
+src/app/founder/operations/page.js text eol=lf
+tests/founder-overview.test.js text eol=lf
+docs/t16-r1-reconciliation.md text eol=lf
+validation/t16-r1/** text eol=lf
+# T16 final audit: preserve raw historical R2 bytes (including mixed EOL).
+validation/t16-r2/** -text
+# Approved input documents remain byte-identical to Founder-supplied files.
+docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md -text
+docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md -text
+docs/group03-baseline-and-t16-closure.md text eol=lf
+validation/t16-final/** text eol=lf

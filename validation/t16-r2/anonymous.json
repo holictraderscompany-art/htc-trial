@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/__t16-session-check",
+    "status": 401,
+    "cache_control": "no-store",
+    "location": "",
+    "json": "{\"status\":401,\"target\":\"uzhkzhmncxjplrdtdzgd\",\"authenticated\":false,\"founder\":false,\"upstream_checked\":false}",
+    "dashboard_count_exposed": false
+  },
+  {
+    "path": "/founder/operations",
+    "status": 307,
+    "cache_control": "no-store, must-revalidate, no-cache, max-age=0, private",
+    "location": "/sign-in",
+    "json": null,
+    "dashboard_count_exposed": false
+  },
+  {
+    "path": "/api/founder/operations",
+    "status": 401,
+    "cache_control": "no-store",
+    "location": "",
+    "json": "{\"ok\":false,\"error\":{\"code\":\"UNAUTHENTICATED\",\"message\":\"Authentication required.\"}}",
+    "dashboard_count_exposed": false
+  }
+]

@@ -1,0 +1,153 @@
+{
+  "scope": "LOCAL SQLite / synthetic identities only; no live PostgreSQL, OAuth or Storage proof",
+  "recovered_existing_checks": 30,
+  "additional_boundary_checks": 6,
+  "results": [
+    {
+      "name": "T15 existing protected publishing route and LOCAL label",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T15 no action without selected content",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "DRAFT release allowed, withdrawal disabled",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Confirmed release readback and buttons",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Released fixture visible through existing public API",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Repeated release rejected by API",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Confirmed withdrawal readback",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Withdrawn fixture absent from public API",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Repeated withdrawal rejected by API",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Ambiguous release blocks blind retry",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Explicit reload recovers committed release",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 known content counts",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 known asset counts",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 truthful source, capture time, read-only UI",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 navigation Content workspace",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 navigation Asset workspace",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 navigation Publishing",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 unavailable displays stale warning, never healthy",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 responsive 375",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 responsive 768",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 responsive 1440",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Expired session removes private summary",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER direct URL denial /founder/publishing",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER direct URL denial /founder/operations",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER API denial summary",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER API denial release",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "USER API denial withdraw",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous redirect /founder/publishing",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "Anonymous redirect /founder/operations",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 genuine empty snapshot has six zeros",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 pending snapshot exposes busy state and disables reload",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 pending source stays unverified without a service health claim",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 dashboard load issues one summary request and no content/asset listing",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 authenticated summary is no-store with only source/time and six counts",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 synthetic USER receives server 403 and prior private snapshot disappears",
+      "result": "LOCAL PASS"
+    },
+    {
+      "name": "T16 anonymous browser request receives server 401",
+      "result": "LOCAL PASS"
+    }
+  ],
+  "additional_boundary_page_errors": [],
+  "console_note": "Expected denied/conflict/unavailable HTTP requests produce browser resource errors. The fixture favicon returns 404; no application page error occurred during the additional boundary checks."
+}

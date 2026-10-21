@@ -21,6 +21,7 @@ export function FounderBoundary({ state, children }) {
         h('a', { href: '/founder/content' }, 'Content workspace'),
         h('a', { href: '/founder/assets' }, 'Asset workspace'),
         h('a', { href: '/founder/publishing' }, 'Publishing'),
+        h('a', { href: '/founder/operations' }, 'Operations overview'),
         h('a', { href: '/content' }, 'Public content'),
         h('form', { method: 'post', action: '/auth/sign-out' }, h('button', { type: 'submit', className: 'text-button' }, 'Sign out'))))),
     h('main', { id: 'main', tabIndex: -1, className: 'page-container' }, children));

@@ -107,7 +107,7 @@ test('T12 actual authorized shell renders semantic navigation and only real dest
   assert.match(html, /<main id="main" tabindex="-1"/);
   const form = html.match(/<form\b[^>]*>/)?.[0] ?? '';
   assert.match(form, /method="post"/); assert.match(form, /action="\/auth\/sign-out"/);
-  assert.deepEqual([...html.matchAll(/href="([^"]+)"/g)].map(m => m[1]), ['#main', '/founder', '/founder', '/founder/content', '/founder/assets', '/founder/publishing', '/content']);
+  assert.deepEqual([...html.matchAll(/href="([^"]+)"/g)].map(m => m[1]), ['#main', '/founder', '/founder', '/founder/content', '/founder/assets', '/founder/publishing', '/founder/operations', '/content']);
   assert.doesNotMatch(html, /<video|<audio|<img|\/api\/|EDITOR|analytics|storage|token|email/i);
 });
 

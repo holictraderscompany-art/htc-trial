@@ -1,0 +1,153 @@
+{
+  "scope": "T16-R1 only; no commit/push/deployment or database mutation",
+  "baseline": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "branch": "codex/t16-r1-reconciliation",
+  "created_at": "2026-10-19T02:48:54.772Z",
+  "source": {
+    "branch": "codex/t15-t16-continuation",
+    "head": "3b3417d8b7b273fb1b60b10c37c2ea437711a0aa",
+    "manifest": "validation/t15-t16/file-manifest.json",
+    "manifest_sha256": "9f5bc2f3483251bd795593c3a80df40f22dcc552942e0475d59d91526df8c2c0",
+    "verified_entries": 64,
+    "verified_ignored_logs": 6
+  },
+  "protected_paths": [
+    "supabase/migrations",
+    "validation/test-db",
+    "validation/t13",
+    "validation/t14",
+    "validation/t15-r1",
+    "validation/t15-master",
+    "validation/t15-b1",
+    "pnpm-lock.yaml",
+    "src/server/api-foundation.js",
+    "src/server/session-token.js",
+    "src/server/trial-session.js",
+    "src/server/founder-content.js",
+    "src/components/founder-content-workspace.js",
+    "src/server/founder-media.js",
+    "src/server/media-assets.js",
+    "src/components/founder-direct-upload.js"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "395e0ad83cc7d9391ae185826348e6f3f62b89d9ebcc5abad862fecadac6ddce",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "package.json",
+      "sha256": "af5ce758e57745d6c3e59d385c3e240c1923b44fbf776e40623ea584419f39fd",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "src/components/founder-operation-workspace.js",
+      "sha256": "3b30f6e4463705ca6e7b91322ca18561f5e72a521a18226d470bedbc02ade766",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "src/components/founder-views.js",
+      "sha256": "fffa2fa1afa46a3c9d8ffef17b6e710bc1ac67960232d202ea79d1b29b251ee8",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "src/server/founder-operations.js",
+      "sha256": "ed014ee62a143c83ea56dda74a27b468acfac852c9b3d4d1fd5c5aff65074e72",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/founder-access.test.js",
+      "sha256": "f49ccde3a02b370190a4a2341ce858cb94b6ac7ac2a28b98b7966869e38674cf",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/founder-assets.test.js",
+      "sha256": "9dd5b37f5c1c988f66ec816a075ed445012c8e336239ecf7f0607673107ebd99",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/founder-content.fixture.mjs",
+      "sha256": "35e1f495c0f1232d21275f1af1e1c9086a6f661695fc068d547926f25db944f7",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/founder-publishing.test.js",
+      "sha256": "60c39df3f4610f0b5b47a036ebfb3dc4de6b9f57a10c545623ab1cd92a5d405b",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/local-sqlite-adapter.js",
+      "sha256": "e35ee44e296174d7fedde10c97a21c1c71c74110d5db0a468ebd94da08e11f6a",
+      "status": " M",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "docs/t16-r1-reconciliation.md",
+      "sha256": "c789a3417343c4c257ab3c3a8551a9d2da845f9fc871238cdc5a93f66bfccfc6",
+      "status": "??",
+      "recovered_from": "New task-specific validation/documentation"
+    },
+    {
+      "path": "src/app/founder/operations/page.js",
+      "sha256": "8745832515a96eda5a92c78509dcfd86060bbc5dc500834439b50c2812efd2e7",
+      "status": "??",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "tests/founder-overview.test.js",
+      "sha256": "9bcf17db960366a82c3b8a7d542fcbad03157e666ccc8dbaca0de38c31f0dda5",
+      "status": "??",
+      "recovered_from": "Existing T16 count/error cases plus focused security/read-only coverage"
+    },
+    {
+      "path": "validation/t16-r1/browser-boundaries.js",
+      "sha256": "f6f84f5d4af884e0751ee406b262ac46286eca42e5a0c665212c6f90bc4238b6",
+      "status": "??",
+      "recovered_from": "New task-specific validation/documentation"
+    },
+    {
+      "path": "validation/t16-r1/browser-local.js",
+      "sha256": "1d0d24ff32b18932f29952843532b6244d2f04365b5fbfd189d30cb37dea91d9",
+      "status": "??",
+      "recovered_from": "Selective extraction recorded from existing T16 work; baseline corrections retained"
+    },
+    {
+      "path": "validation/t16-r1/browser-results.json",
+      "sha256": "c0bde3af3eb746e2359b4cb97a3e05331b1205eaf863b891bf6f6a0ff3dfea4a",
+      "status": "??",
+      "recovered_from": "New task-specific validation/documentation"
+    },
+    {
+      "path": "validation/t16-r1/results.json",
+      "sha256": "0ce89b693c69562ccf091a2f844554c83c4bde7ebf3dfbdc260cfb64e04c3292",
+      "status": "??",
+      "recovered_from": "New task-specific validation/documentation"
+    },
+    {
+      "path": "validation/t16-r1/verify-reconciliation.mjs",
+      "sha256": "9762146ad063c97061d98d5d891eea9ca2e9f1025065300eaa1926b414c7935f",
+      "status": "??",
+      "recovered_from": "New task-specific validation/documentation"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "byte_policy": "Preserve original evidence and SQL; current task hashes apply only to the reviewed T16 candidate. Original T15 manifests are unchanged.",
+  "exclusions": [
+    "node_modules junction (existing dependencies reused)",
+    "generated .next output",
+    "operator/Playwright logs and screenshots outside repository",
+    "disposable SQLite removed",
+    "all original T14/T15/T16 worktrees and historical evidence"
+  ],
+  "SQL": "No new migration. Existing founder_operation_counts() source archived unchanged.",
+  "EOL_policy_verified_files": 19
+}
