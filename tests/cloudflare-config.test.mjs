@@ -27,7 +27,8 @@ test('Workers uses Node compatibility and routes requests through the applicatio
   assert.equal(config.upload_source_maps, false);
   assert.equal(config.observability.enabled, false);
 });
-test('Existing Next workflow is retained; new scripts are local build, preview or dry-run', () => {
+test('Existing Next defaults and workflow are retained; new scripts do not deploy', async () => {
+  assert.deepEqual((await import(new URL('next.config.mjs', root))).default, {});
   assert.equal(pkg.dependencies.next, '16.4.1');
   assert.equal(pkg.scripts.build, 'next build --webpack');
   assert.equal(pkg.scripts['build:workers'], 'opennextjs-cloudflare build');

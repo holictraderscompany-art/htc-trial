@@ -87,3 +87,5 @@ docs/cloudflare-workers-migration.md text eol=lf
 tests/cloudflare-config.test.mjs text eol=lf
 validation/cloudflare/** text eol=lf
 .github/workflows/cloudflare-validation.yml text eol=lf
+next.config.mjs text eol=lf
+pnpm-lock.yaml text eol=lf

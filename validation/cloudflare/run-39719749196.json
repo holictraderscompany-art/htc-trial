@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-22T03:58:27.992Z",
+  "status": "FAIL",
+  "base": "4e8e07b18c1040722169223196add2112751cfeb",
+  "host": {
+    "provider": "GitHub Actions",
+    "run_id": "39719749196",
+    "attempt": "1",
+    "sha": "d24b7f09d8e8f04b7bd6b4793c7f5290e05db0ac",
+    "os": "6.17.0-1022-azure",
+    "platform": "linux",
+    "architecture": "x64",
+    "totalRAMMiB": 15989,
+    "freeRAMMiB": 14892,
+    "CPUs": 4,
+    "node": "v24.21.0",
+    "runner": "GitHub Actions 1000000000",
+    "pnpm": "11.25.0"
+  },
+  "stages": [
+    {
+      "name": "protected-scope",
+      "started": "2026-10-22T03:58:27.993Z",
+      "finished": "2026-10-22T03:58:28.004Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pnpm-version",
+      "started": "2026-10-22T03:58:28.005Z",
+      "finished": "2026-10-22T03:58:28.626Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f"
+    },
+    {
+      "name": "dependency-resolution",
+      "started": "2026-10-22T03:58:28.627Z",
+      "finished": "2026-10-22T03:58:40.091Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c46d15717e3aef34fd865df85882f28582ff1de0cbfd737f08ad89436f934930"
+    },
+    {
+      "name": "frozen-install",
+      "started": "2026-10-22T03:58:40.092Z",
+      "finished": "2026-10-22T03:58:44.075Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "a8dd31f1ecd20e9ee31ff9a49de530383d8d3370ab659b267015f06648c3476f"
+    },
+    {
+      "name": "configuration",
+      "started": "2026-10-22T03:58:44.075Z",
+      "finished": "2026-10-22T03:58:44.622Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "b99b483157942b221868753d563bb68b796b5a382ab3edd13852ad0466497112",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "name": "adapter-typecheck",
+      "started": "2026-10-22T03:58:44.622Z",
+      "finished": "2026-10-22T03:58:45.341Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "production-audit",
+      "started": "2026-10-22T03:58:45.341Z",
+      "finished": "2026-10-22T03:58:45.932Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c1eda066339fe27899f3dd3b54c7349d55d96541d06e607e0c4606d1e235a1cf"
+    },
+    {
+      "name": "application",
+      "started": "2026-10-22T03:58:45.933Z",
+      "finished": "2026-10-22T03:58:48.244Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c89d64f80eeef3902efa0cc9ff3ed65d5a1c86e6626162c1123617813971c4bc",
+      "tests": 223,
+      "passed": 223
+    },
+    {
+      "name": "sqlite-content",
+      "started": "2026-10-22T03:58:48.245Z",
+      "finished": "2026-10-22T03:58:49.281Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "99ebd0dfdcfc76555bfe28bc61f423b231633f76da3d377666f2b7617aac697e",
+      "tests": 12,
+      "passed": 12
+    },
+    {
+      "name": "sqlite-assets",
+      "started": "2026-10-22T03:58:49.281Z",
+      "finished": "2026-10-22T03:58:49.903Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "136fe1e4db78a5302ce3a101c8f6e2975392ab665d0159d1fee1f9da5f7e9e6d",
+      "tests": 3,
+      "passed": 3
+    },
+    {
+      "name": "workers-build",
+      "started": "2026-10-22T03:58:49.903Z",
+      "finished": "2026-10-22T03:58:51.909Z",
+      "exit": 1,
+      "status": "FAIL",
+      "output_sha256": "38d776de19abc45cdb2fe65a2f14c712c67ad642451614da72781c125240d929"
+    }
+  ],
+  "deployment_attempted": false,
+  "database_fixtures": 0,
+  "real_OAuth_tested": false,
+  "authenticated_Worker_integration_tested": false,
+  "authentication_tests": "Existing injected unit fixtures plus actual anonymous Worker HTTP; not LIVE Google OAuth",
+  "failure": "workers-build failed",
+  "finished": "2026-10-22T03:58:51.909Z",
+  "lock_sha256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6"
+}

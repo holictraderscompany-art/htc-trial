@@ -8,6 +8,7 @@ on:
       - pnpm-lock.yaml
       - wrangler.jsonc
       - open-next.config.ts
+      - next.config.mjs
       - tests/cloudflare-config.test.mjs
       - validation/cloudflare/cloud-validate.mjs
       - validation/cloudflare/probe-local-worker.mjs
@@ -43,4 +44,4 @@ jobs:
           version: 11.25.0
           run_install: false
       - name: Cloud-only install, build, security and runtime validation
-        run: node validation/cloudflare/cloud-validate.mjs --bootstrap-lock
+        run: node validation/cloudflare/cloud-validate.mjs --reuse-regressions

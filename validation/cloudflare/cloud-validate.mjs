@@ -65,11 +65,26 @@ try {
   if (process.argv.includes('--bootstrap-lock')) run('dependency-resolution', 'pnpm', ['install', '--no-frozen-lockfile', '--ignore-scripts']);
   run('frozen-install', 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts']);
   run('configuration', 'pnpm', ['test:workers:config']);
-  run('adapter-typecheck', 'pnpm', ['exec', 'tsc', '--noEmit', '--skipLibCheck', '--target', 'es2022', '--module', 'nodenext', '--moduleResolution', 'nodenext', 'open-next.config.ts']);
-  run('production-audit', 'pnpm', ['audit', '--prod', '--json']);
-  run('application', 'pnpm', ['test']);
-  run('sqlite-content', 'pnpm', ['test:local:sqlite']);
-  run('sqlite-assets', 'pnpm', ['test:t14:sqlite']);
+  if (process.argv.includes('--reuse-regressions')) {
+    const bytes = fs.readFileSync('validation/cloudflare/run-39719749196.json');
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), 'a3a1b0a307d4e831482f723eb8393bc84b99f52bed01ce062f6e0d7648985785');
+    const prior = JSON.parse(bytes);
+    assert.equal(prior.host.sha, 'd24b7f09d8e8f04b7bd6b4793c7f5290e05db0ac');
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync('pnpm-lock.yaml')).digest('hex'), prior.lock_sha256);
+    const changed = cp.execFileSync('git', ['diff', '--name-only', prior.host.sha, '--', 'package.json', 'open-next.config.ts', 'tests'], { encoding: 'utf8' });
+    assert.deepEqual(changed.trim().split('\n').filter(Boolean).filter(path => path !== 'tests/cloudflare-config.test.mjs'), []);
+    const names = ['adapter-typecheck', 'production-audit', 'application', 'sqlite-content', 'sqlite-assets'];
+    report.reused_stages = prior.stages.filter(stage => names.includes(stage.name)).map(stage => ({ ...stage, reused_from_run: prior.host.run_id }));
+    assert.equal(report.reused_stages.length, names.length);
+    for (const stage of report.reused_stages) assert.equal(stage.status, 'PASS');
+    console.log('HTC_REUSED_REGRESSIONS ' + JSON.stringify(report.reused_stages));
+  } else {
+    run('adapter-typecheck', 'pnpm', ['exec', 'tsc', '--noEmit', '--skipLibCheck', '--target', 'es2022', '--module', 'nodenext', '--moduleResolution', 'nodenext', 'open-next.config.ts']);
+    run('production-audit', 'pnpm', ['audit', '--prod', '--json']);
+    run('application', 'pnpm', ['test']);
+    run('sqlite-content', 'pnpm', ['test:local:sqlite']);
+    run('sqlite-assets', 'pnpm', ['test:t14:sqlite']);
+  }
   fs.writeFileSync('.dev.vars', 'NEXTJS_ENV=development\nSUPABASE_PUBLISHABLE_KEY=sb_publishable_worker_runtime_fixture\n');
   run('workers-build', 'pnpm', ['build:workers']);
   const dry = run('workers-dry-run', 'pnpm', ['dry-run:workers']);
