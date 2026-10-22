@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-22T05:20:04.377Z",
-  "status": "BLOCKED",
+  "at": "2026-10-22T22:48:54.6181678Z",
+  "status": "PASS — authorized cloud migration validation; no deployment",
   "baseline": "4e8e07b18c1040722169223196add2112751cfeb",
   "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
   "group01": "PRESERVED",
@@ -11,17 +11,17 @@
   "provider": "GitHub-hosted Ubuntu 24.04 (standard public-repository runner)",
   "observedHost": {
     "provider": "GitHub Actions",
-    "run_id": "39719749196",
+    "run_id": "39867242940",
     "attempt": "1",
-    "sha": "d24b7f09d8e8f04b7bd6b4793c7f5290e05db0ac",
+    "sha": "4b4d01fbd3af89ccbc6fcc6d4c7e5f1ac655085f",
     "os": "6.17.0-1022-azure",
     "platform": "linux",
     "architecture": "x64",
-    "totalRAMMiB": 15989,
-    "freeRAMMiB": 14892,
+    "totalRAMMiB": 15990,
+    "freeRAMMiB": 14913,
     "CPUs": 4,
     "node": "v24.21.0",
-    "runner": "GitHub Actions 1000000000",
+    "runner": "GitHub Actions 1000000006",
     "pnpm": "11.25.0"
   },
   "cloudRuns": [
@@ -34,6 +34,21 @@
       "id": "39720220422",
       "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39720220422",
       "conclusion": "FAIL: pnpm minimum release age"
+    },
+    {
+      "id": "39866227218",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39866227218",
+      "conclusion": "Build PASS; runtime harness origin mismatch"
+    },
+    {
+      "id": "39866957030",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39866957030",
+      "conclusion": "Confirmed localhost canonicalization; UI alert selector mismatch"
+    },
+    {
+      "id": "39867242940",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39867242940",
+      "conclusion": "PASS; complete report recovered from ordered base64 annotations"
     }
   ],
   "cloudPassEvidence": [
@@ -128,8 +143,8 @@
   ],
   "lockSHA256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6",
   "lockIntegrity": "PASS; exact cloud bytes",
-  "dependencyPolicyAcceptance": "BLOCKED",
-  "correctedConfig": "next.config.mjs exports empty object; regression assertion added; cloud build remains pending",
+  "dependencyPolicyAcceptance": "PASS; fresh frozen install after 24-hour policy, no override",
+  "correctedConfig": "PASS; empty Next defaults compiled by Next/OpenNext in cloud",
   "rootCause": {
     "code": "ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION",
     "policyMinutes": 1440,
@@ -149,10 +164,10 @@
     "resumeAfterJST": "2026-10-22T22:23:30+09:00",
     "policyWaived": false
   },
-  "workersCompatibility": "BLOCKED",
-  "migrationValidation": "BLOCKED",
-  "finalMigrationPush": "BLOCKED; bootstrap/recovery transfer pushes only",
-  "deploymentReadiness": "NOT READY",
+  "workersCompatibility": "PASS — cloud loopback workerd, 16 HTTP/security checks, 6 UI comparisons",
+  "migrationValidation": "PASS",
+  "finalMigrationPush": "PENDING final evidence commit and remote verification",
+  "deploymentReadiness": "NOT READY FOR PUBLIC DEPLOYMENT; configuration ready for Founder review; account, hostname, TEST secrets, redirects and hosting limits require review",
   "completedLocallyThisDirective": [
     "Read-only repository inspection",
     "Migration configuration/harness edits",
@@ -175,11 +190,8 @@
     "mainChanged": false
   },
   "remaining": [
-    "Resume the same cloud workflow after the release-age gate; keep pnpm verification enabled.",
-    "Validate empty Next config, complete OpenNext/Next build and dry-run bundle size.",
-    "Run loopback workerd HTTP and responsive Playwright comparisons.",
-    "Record remaining regression outcomes; only then create final acceptance commit and verify its normal push.",
-    "Founder review of account/TEST environment/hostname before any deployment."
+    "Final migration evidence commit and normal push verification.",
+    "Separate deployment approval and account/hostname/TEST key/HTTPS OAuth redirect/plan-limit review; no deployment performed."
   ],
   "backgroundRetryScheduled": false,
   "evidence": [
@@ -194,6 +206,160 @@
     {
       "path": "validation/cloudflare/diagnostic-119650409069.json",
       "sha256": "17a352a3af880f48d0c3a1957dfc0a938d2d7c11667e056fc5b9118991f39dcc"
+    },
+    {
+      "path": "validation/cloudflare/run-39866227218.json",
+      "sha256": "659cf48113c6b4e158fb5e12e73fb8fa082060f11b3f4167c706b1d7b8fa71ed"
+    },
+    {
+      "path": "validation/cloudflare/run-39866957030.json",
+      "sha256": "c63040eb2d7488bf4c56566c17cbe0a3191c3c2ef89805bf48c107111f56c865"
+    },
+    {
+      "path": "validation/cloudflare/run-39867242940.json",
+      "sha256": "d765c5b4904c07f969cdefa756f3e4482719d33d541976261fca7bf5cadee2fd"
     }
-  ]
+  ],
+  "closure": {
+    "validatedSHA": "4b4d01fbd3af89ccbc6fcc6d4c7e5f1ac655085f",
+    "run": "39867242940",
+    "runtimeChecks": 16,
+    "responsiveComparisons": 6,
+    "newStages": [
+      {
+        "name": "protected-scope",
+        "started": "2026-10-22T22:45:40.769Z",
+        "finished": "2026-10-22T22:45:40.778Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "pnpm-version",
+        "started": "2026-10-22T22:45:40.779Z",
+        "finished": "2026-10-22T22:45:41.236Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f"
+      },
+      {
+        "name": "frozen-install",
+        "started": "2026-10-22T22:45:41.236Z",
+        "finished": "2026-10-22T22:45:46.454Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "368b257a0ef02ae7f4143991cecc1fae3a8c2c9076e80e32d1b8b59acc464db4"
+      },
+      {
+        "name": "configuration",
+        "started": "2026-10-22T22:45:46.454Z",
+        "finished": "2026-10-22T22:45:46.903Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "a283c82b10c0c288ec5e2e41b55aabc709bdb89e6f8b54b7b7a017ebf22a6eae",
+        "tests": 4,
+        "passed": 4
+      },
+      {
+        "name": "workers-build",
+        "started": "2026-10-22T22:45:46.909Z",
+        "finished": "2026-10-22T22:46:18.092Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "425d84bf3856e53b36b8bc3938ee21e9a8c8849ec002c02c95aa114b1443c037"
+      },
+      {
+        "name": "workers-dry-run",
+        "started": "2026-10-22T22:46:18.092Z",
+        "finished": "2026-10-22T22:46:19.848Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "cf7b819b3e246daa387cc1648f32ab1686c7c40780c746a5a5cdc3438ed0a949"
+      },
+      {
+        "name": "browser-install",
+        "started": "2026-10-22T22:46:19.849Z",
+        "finished": "2026-10-22T22:46:27.906Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "ce4edd74beab732d58188b3d8dfa11bf8909d50b1c66464e9146486924c8a1a8"
+      },
+      {
+        "name": "worker-http",
+        "started": "2026-10-22T22:46:30.129Z",
+        "finished": "2026-10-22T22:46:30.486Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "ece754e759af1d2308419de1e78a5ba631e44ae227e74ae0ed04c31c7903d6de"
+      },
+      {
+        "name": "worker-ui",
+        "started": "2026-10-22T22:46:31.517Z",
+        "finished": "2026-10-22T22:46:40.483Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "8317e4b461e1cdaffd44c234c0cdbe1edac7924e9420ac041d7a1b593735bd7a"
+      }
+    ],
+    "reusedStages": [
+      {
+        "name": "adapter-typecheck",
+        "started": "2026-10-22T03:58:44.622Z",
+        "finished": "2026-10-22T03:58:45.341Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reused_from_run": "39719749196"
+      },
+      {
+        "name": "production-audit",
+        "started": "2026-10-22T03:58:45.341Z",
+        "finished": "2026-10-22T03:58:45.932Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "c1eda066339fe27899f3dd3b54c7349d55d96541d06e607e0c4606d1e235a1cf",
+        "reused_from_run": "39719749196"
+      },
+      {
+        "name": "application",
+        "started": "2026-10-22T03:58:45.933Z",
+        "finished": "2026-10-22T03:58:48.244Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "c89d64f80eeef3902efa0cc9ff3ed65d5a1c86e6626162c1123617813971c4bc",
+        "tests": 223,
+        "passed": 223,
+        "reused_from_run": "39719749196"
+      },
+      {
+        "name": "sqlite-content",
+        "started": "2026-10-22T03:58:48.245Z",
+        "finished": "2026-10-22T03:58:49.281Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "99ebd0dfdcfc76555bfe28bc61f423b231633f76da3d377666f2b7617aac697e",
+        "tests": 12,
+        "passed": 12,
+        "reused_from_run": "39719749196"
+      },
+      {
+        "name": "sqlite-assets",
+        "started": "2026-10-22T03:58:49.281Z",
+        "finished": "2026-10-22T03:58:49.903Z",
+        "exit": 0,
+        "status": "PASS",
+        "output_sha256": "136fe1e4db78a5302ce3a101c8f6e2975392ab665d0159d1fee1f9da5f7e9e6d",
+        "tests": 3,
+        "passed": 3,
+        "reused_from_run": "39719749196"
+      }
+    ],
+    "bundleSummary": [
+      "Total Upload: 5558.03 KiB / gzip: 1115.89 KiB"
+    ],
+    "bundleLimit": "64 MiB uncompressed per official Cloudflare limits; no paid plan enabled",
+    "protectedSourceDiff": "EMPTY",
+    "realOAuthOnNewHost": "NOT TESTED; requires approved hostname deployment",
+    "previousCheckpoint": "4aa753691ff5c86e2cc8f33e9fb1c4dc59d6d04e:validation/cloudflare/cloud-checkpoint.json"
+  }
 }

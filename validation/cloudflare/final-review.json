@@ -1,0 +1,160 @@
+{
+  "at": "2026-10-22T22:49:35.940551Z",
+  "status": "PASS — migration-only final review",
+  "base": "4e8e07b18c1040722169223196add2112751cfeb",
+  "validatedSHA": "4b4d01fbd3af89ccbc6fcc6d4c7e5f1ac655085f",
+  "run": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39867242940",
+  "manifestExcludes": "This manifest itself",
+  "files": [
+    {
+      "path": ".dev.vars.example",
+      "sha256": "b26b1cd5ec1e545ca2d978fc4cb67ea99fd667a51b1bf009e457744151e66119",
+      "workingTreeSHA256": "b26b1cd5ec1e545ca2d978fc4cb67ea99fd667a51b1bf009e457744151e66119",
+      "gitBlobOID": "e7a721e942cb8c5978b052dc9265f1728b5a342f"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "7c8fd726df00640aef481dd99c3cda6322f583062688142c5adeb4cd9adec226",
+      "workingTreeSHA256": "7c8fd726df00640aef481dd99c3cda6322f583062688142c5adeb4cd9adec226",
+      "gitBlobOID": "38aecac879d8bb0504acf56eed3d9518cb4a0ca0"
+    },
+    {
+      "path": ".github/workflows/cloudflare-validation.yml",
+      "sha256": "22af72764345a125e9f0473772072f22a5d5b569a3238c09ff0c3996f1b2b5a8",
+      "workingTreeSHA256": "22af72764345a125e9f0473772072f22a5d5b569a3238c09ff0c3996f1b2b5a8",
+      "gitBlobOID": "377b4f7c65db57d31df269bfcc98fc1061a680d5"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "0f88002cd970838dc8ac04cd49e7d7fbf23457e8931ccd2fb92c7ec1bb892fb1",
+      "workingTreeSHA256": "f4ffc15b05bfbb48a8abe6e95ed6322d289b8d99b3ee60abae61f455a113d489",
+      "gitBlobOID": "d87bdbf1932e69181c92e7d508454f26a199e4f2"
+    },
+    {
+      "path": "docs/cloudflare-workers-migration.md",
+      "sha256": "54ed298036f7b7f7a9105d5bc868bfd82afd2c91848bd0a773474af40e7aafbf",
+      "workingTreeSHA256": "54ed298036f7b7f7a9105d5bc868bfd82afd2c91848bd0a773474af40e7aafbf",
+      "gitBlobOID": "2f28ea2df2336ff164d21a6b5a3286da8bc2596e"
+    },
+    {
+      "path": "next.config.mjs",
+      "sha256": "5200463fee03aff2d54a4e976f1988462aadb214bf363fbe94e36e23852cb3a9",
+      "workingTreeSHA256": "5200463fee03aff2d54a4e976f1988462aadb214bf363fbe94e36e23852cb3a9",
+      "gitBlobOID": "0fefad6f1f77c33f7509f2c3d93b97050ae6bdcb"
+    },
+    {
+      "path": "open-next.config.ts",
+      "sha256": "b6296085a62eb5360d794a0801f8f6250a20100c5e9bdc23676ed6aa551fb673",
+      "workingTreeSHA256": "b6296085a62eb5360d794a0801f8f6250a20100c5e9bdc23676ed6aa551fb673",
+      "gitBlobOID": "bf4a7e5e43429ff93928bfdc9580907d213f6d7e"
+    },
+    {
+      "path": "package.json",
+      "sha256": "e6bba29baca688c7659cb56be7caca7839553aa54f16cb4dc7dab12f31e9666a",
+      "workingTreeSHA256": "e6bba29baca688c7659cb56be7caca7839553aa54f16cb4dc7dab12f31e9666a",
+      "gitBlobOID": "cf94a4a3a424e17041022b1e369a6c2fdc43fc4b"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6",
+      "workingTreeSHA256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6",
+      "gitBlobOID": "b796df4cedb2a761518e967b79221a9095512999"
+    },
+    {
+      "path": "tests/cloudflare-config.test.mjs",
+      "sha256": "b1da69cc76d33b488f4485d023f13614280fe12b62bff354a0576505846ea890",
+      "workingTreeSHA256": "b1da69cc76d33b488f4485d023f13614280fe12b62bff354a0576505846ea890",
+      "gitBlobOID": "65fdfd9d4fead12e2f994d7c2a17f4800e7e5fdd"
+    },
+    {
+      "path": "validation/cloudflare/cloud-checkpoint.json",
+      "sha256": "91837957badbab01457cc8eddc4792a55c398cce279721a8c53251c2d751ca58",
+      "workingTreeSHA256": "91837957badbab01457cc8eddc4792a55c398cce279721a8c53251c2d751ca58",
+      "gitBlobOID": "6262acdfe8f68334a3883a97af5a375afbdd350e"
+    },
+    {
+      "path": "validation/cloudflare/cloud-validate.mjs",
+      "sha256": "b4745d6b3e419d472863a6fb74636715873c7a4dedf0cb4447ea316175238635",
+      "workingTreeSHA256": "b4745d6b3e419d472863a6fb74636715873c7a4dedf0cb4447ea316175238635",
+      "gitBlobOID": "5b01d01b53598659eaf899d983d9672a70d48ab1"
+    },
+    {
+      "path": "validation/cloudflare/diagnostic-119650409069.json",
+      "sha256": "17a352a3af880f48d0c3a1957dfc0a938d2d7c11667e056fc5b9118991f39dcc",
+      "workingTreeSHA256": "17a352a3af880f48d0c3a1957dfc0a938d2d7c11667e056fc5b9118991f39dcc",
+      "gitBlobOID": "0a994a30fc9be184c046d28f2abc29b3d006186e"
+    },
+    {
+      "path": "validation/cloudflare/probe-local-worker.mjs",
+      "sha256": "0e930d9f91d3e74a5e2d8ad991922093254ab8dff9641f3fd64ed5b3900d9297",
+      "workingTreeSHA256": "0e930d9f91d3e74a5e2d8ad991922093254ab8dff9641f3fd64ed5b3900d9297",
+      "gitBlobOID": "811c03e509698b5ed10cae8120242d2ae708d6a3"
+    },
+    {
+      "path": "validation/cloudflare/probe-worker-ui.mjs",
+      "sha256": "d9cf1a80fdf1a8e778678773b3afa020cc4df90f4e3b3e9037d8f3d4275eaebb",
+      "workingTreeSHA256": "d9cf1a80fdf1a8e778678773b3afa020cc4df90f4e3b3e9037d8f3d4275eaebb",
+      "gitBlobOID": "aa66a30316c8d596a34ff8711295d6326659d60f"
+    },
+    {
+      "path": "validation/cloudflare/results.json",
+      "sha256": "3dd361933e91cf338ed9ffff7ca1602cfbb863fd1f7b2840c991b1d1ba8afffe",
+      "workingTreeSHA256": "3dd361933e91cf338ed9ffff7ca1602cfbb863fd1f7b2840c991b1d1ba8afffe",
+      "gitBlobOID": "7cb706d923bb6bc43e2164216f60268a2ae507b3"
+    },
+    {
+      "path": "validation/cloudflare/run-39719749196.json",
+      "sha256": "a3a1b0a307d4e831482f723eb8393bc84b99f52bed01ce062f6e0d7648985785",
+      "workingTreeSHA256": "a3a1b0a307d4e831482f723eb8393bc84b99f52bed01ce062f6e0d7648985785",
+      "gitBlobOID": "53e0f2fc6e19563b4e72a8409410aefb50ebef4e"
+    },
+    {
+      "path": "validation/cloudflare/run-39720220422.json",
+      "sha256": "5634ff1719db20b5539178c8b08890c66376132dde5dcc488f4b46a007584491",
+      "workingTreeSHA256": "5634ff1719db20b5539178c8b08890c66376132dde5dcc488f4b46a007584491",
+      "gitBlobOID": "863a1fc3705c46cf6fb8e51d73db15ee2a804acd"
+    },
+    {
+      "path": "validation/cloudflare/run-39866227218.json",
+      "sha256": "659cf48113c6b4e158fb5e12e73fb8fa082060f11b3f4167c706b1d7b8fa71ed",
+      "workingTreeSHA256": "659cf48113c6b4e158fb5e12e73fb8fa082060f11b3f4167c706b1d7b8fa71ed",
+      "gitBlobOID": "a76082501f6df331c5333003ca30cceff8e6205a"
+    },
+    {
+      "path": "validation/cloudflare/run-39866957030.json",
+      "sha256": "c63040eb2d7488bf4c56566c17cbe0a3191c3c2ef89805bf48c107111f56c865",
+      "workingTreeSHA256": "c63040eb2d7488bf4c56566c17cbe0a3191c3c2ef89805bf48c107111f56c865",
+      "gitBlobOID": "201c1fb90c0bdfd79a4c48ba16c70dde0dbc469e"
+    },
+    {
+      "path": "validation/cloudflare/run-39867242940.json",
+      "sha256": "d765c5b4904c07f969cdefa756f3e4482719d33d541976261fca7bf5cadee2fd",
+      "workingTreeSHA256": "d765c5b4904c07f969cdefa756f3e4482719d33d541976261fca7bf5cadee2fd",
+      "gitBlobOID": "25617f4253896f8547e705e0a8ba26b28182d2f3"
+    },
+    {
+      "path": "wrangler.jsonc",
+      "sha256": "21395071ea0f6f17bdeb1b68c0dba0e0945a418b5523e71adde7a1ae0606fbba",
+      "workingTreeSHA256": "21395071ea0f6f17bdeb1b68c0dba0e0945a418b5523e71adde7a1ae0606fbba",
+      "gitBlobOID": "5975709d3b7a7c4f046096974fac0d1d36a85e24"
+    }
+  ],
+  "expectedFinalFileCount": 23,
+  "protectedSourceChanged": false,
+  "sqlChanged": false,
+  "mainChanged": false,
+  "group03PushRepeated": false,
+  "secretPatternFindings": 0,
+  "deploymentAttempts": 0,
+  "databaseAuthStorageMutations": 0,
+  "heavyWindowsExecution": false,
+  "validationScope": "Cloud Linux workerd loopback, anonymous/synthetic-key security and public/sign-in UI; not LIVE Google on a deployed hostname",
+  "finalChangesSinceValidatedRun": [
+    "docs/cloudflare-workers-migration.md",
+    "validation/cloudflare/cloud-checkpoint.json",
+    "validation/cloudflare/run-39867242940.json",
+    "validation/cloudflare/final-review.json"
+  ],
+  "deploymentGate": "Separate Founder approval, account/hostname/TEST bindings/redirects/plan limits; no automatic deployment",
+  "checksumSemantics": "sha256 hashes exact staged Git blob bytes; workingTreeSHA256 separately records Windows bytes. Git text filters may differ in EOL. Sealed historical report hashes remain independently verified without alteration."
+}

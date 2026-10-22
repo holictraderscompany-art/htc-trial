@@ -253,3 +253,55 @@ and eventual hostname/OAuth redirect plan. No domain is selected and no Worker
 has been published. Netlify and Vercel remain unchanged.
 
 Policy reference: [pnpm 11 release-age defaults](https://github.com/pnpm/pnpm.io/blob/main/blog/releases/11.0.md).
+
+## Final cloud validation — 23 October 2026 JST
+
+This section and `validation/cloudflare/cloud-checkpoint.json` supersede the
+incomplete preparation statuses above. Earlier sections and reports remain as
+historical evidence; `results.json` describes the initial Windows checkpoint.
+
+[Run 39867242940](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39867242940)
+completed successfully on commit `4b4d01fbd3af89ccbc6fcc6d4c7e5f1ac655085f`:
+Linux x64, 4 CPUs, 15,990 MiB RAM, Node 24.21.0, pnpm 11.25.0.
+The fresh frozen install passed with pnpm's release-age policy intact and the
+sealed lockfile unchanged. Configuration 4/4, Next/OpenNext compilation, Wrangler
+local dry-run, workerd HTTP/security 16/16 and Playwright comparisons 6/6 passed.
+Screenshots, visible text and navigation matched the same Next build at widths
+1440 and 390. No horizontal overflow or browser page errors were observed.
+
+Adapter type checking, production dependency audit, application 223/223,
+SQLite content 12/12 and asset 3/3 were reused from run 39719749196 only after
+verifying its sealed proof, identical package/lockfile, unchanged application
+and the identical Node runtime. They were not rerun unnecessarily.
+
+Two harness defects were corrected without changing application source:
+- Next URL handling canonicalized 127.0.0.1 to localhost. Actual callback origin
+  was localhost:3105; that Origin yielded 401 and three other Origins yielded
+  403. The harness now uses localhost consistently; exact Origin guards remain.
+- The UI error locator matched both the actual notice and Next's route announcer.
+  It now targets `p.notice[role="alert"]`. The error text assertion is retained.
+
+The dry-run reports 5,558.03 KiB uncompressed / 1,115.89 KiB gzip. The current
+[Cloudflare size limit](https://developers.cloudflare.com/workers/platform/limits/#worker-size)
+is 64 MiB uncompressed for Free and Paid; the harness asserts this limit and
+rejects missing size output. No subscription was activated. Free-plan CPU,
+startup behavior on the actual service and account-specific limits still need
+review before an approved deployment; loopback tests do not prove those limits.
+
+Complete evidence is `run-39867242940.json` (recovered byte-for-byte from ordered,
+bounded cloud annotations), with SHA-256 in the checkpoint and final review.
+Earlier failed runs remain stored and are not represented as successful.
+
+**Authorized migration preparation: PASS. Public deployment: NOT READY / not
+performed.** A separate approval must select the Cloudflare account and hostname,
+review plan limits and TEST-only environment bindings, configure the TEST OAuth
+redirect allowlist, then validate real HTTPS/Google sign-in on that hostname.
+These loopback tests use a clearly synthetic key, no real authenticated browser
+session, no database/Storage fixtures and no public preview. Closed Group 03 LIVE
+evidence remains intact and is not a claim of new-host OAuth validation.
+
+The only GitHub workflow is branch-scoped, contents-read, hosted validation;
+there are no deployment/upload steps. Founder evidence states that no HTC Worker
+or deployment Git connection exists. Routes, workers.dev and preview URLs remain
+disabled. Netlify and Vercel configuration remain unchanged. The final evidence
+commit changes documentation/reports only, so it does not require another build.
