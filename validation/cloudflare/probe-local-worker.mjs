@@ -2,7 +2,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const origin = 'http://127.0.0.1:3105';
+// Next's URL handling canonicalizes the IPv4 loopback alias to localhost.
+// Use the browser-visible canonical origin; do not relax the application's check.
+const origin = 'http://localhost:3105';
 const results = [];
 const record = (name, passed, status) => {
   results.push({ name, passed, status });

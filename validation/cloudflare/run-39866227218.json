@@ -1,0 +1,43 @@
+{
+  "run": "39866227218",
+  "job": "120128980565",
+  "source": "GitHub check-run annotations",
+  "annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/417ef0ff2f23c2ff1cb6a3498392ffeedbd97d3d/.github",
+      "start_line": 141,
+      "start_column": null,
+      "end_line": 141,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "Process completed with exit code 1.",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/417ef0ff2f23c2ff1cb6a3498392ffeedbd97d3d/.github",
+      "start_line": 140,
+      "start_column": null,
+      "end_line": 140,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "HTC cloud report",
+      "message": "{\"at\":\"2026-10-22T22:37:01.823Z\",\"status\":\"FAIL\",\"base\":\"4e8e07b18c1040722169223196add2112751cfeb\",\"host\":{\"provider\":\"GitHub Actions\",\"run_id\":\"39866227218\",\"attempt\":\"1\",\"sha\":\"417ef0ff2f23c2ff1cb6a3498392ffeedbd97d3d\",\"os\":\"6.17.0-1022-azure\",\"platform\":\"linux\",\"architecture\":\"x64\",\"totalRAMMiB\":15994,\"freeRAMMiB\":14810,\"CPUs\":4,\"node\":\"v24.21.0\",\"runner\":\"GitHub Actions 1000000004\",\"pnpm\":\"11.25.0\"},\"stages\":[{\"name\":\"protected-scope\",\"started\":\"2026-10-22T22:37:01.824Z\",\"finished\":\"2026-10-22T22:37:01.837Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"},{\"name\":\"pnpm-version\",\"started\":\"2026-10-22T22:37:01.838Z\",\"finished\":\"2026-10-22T22:37:02.727Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f\"},{\"name\":\"frozen-install\",\"started\":\"2026-10-22T22:37:02.728Z\",\"finished\":\"2026-10-22T22:37:10.376Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"69ebd665e77d9a1bf3df10ad4706da32874cc176804fc3eac1b2aae592c1e8fa\"},{\"name\":\"configuration\",\"started\":\"2026-10-22T22:37:10.376Z\",\"finished\":\"2026-10-22T22:37:11.106Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"c28cd1bd891b44abb5fa4aae61a75ddc2ffa0a36500ec8ac35f23e6e54efd8f3\",\"tests\":4,\"passed\":4},{\"name\":\"workers-build\",\"started\":\"2026-10-22T22:37:11.115Z\",\"finished\":\"2026-10-22T22:37:59.011Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"ef804d59bbbee41c2c6dd23de84bcd56b6f6cf95d8f46ee9acfbc8010cb1ffa8\"},{\"name\":\"workers-dry-run\",\"started\":\"2026-10-22T22:37:59.011Z\",\"finished\":\"2026-10-22T22:38:01.606Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"fdfb8fb7194fdb4751976a383e7ca003734d3f3f9930162a96cd64209aabb638\"},{\"name\":\"browser-install\",\"started\":\"2026-10-22T22:38:01.606Z\",\"finished\":\"2026-10-22T22:38:15.467Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"ce4edd74beab732d58188b3d8dfa11bf8909d50b1c66464e9146486924c8a1a8\"},{\"name\":\"worker-http\",\"started\":\"2026-10-22T22:38:18.738Z\",\"finished\":\"2026-10-22T22:38:19.196Z\",\"exit\":1,\"status\":\"FAIL\",\"output_sha256\":\"c011d62a7e159cedfb3493eaf32606f41dd22e64efed166a0a695f1bf168e370\"}],\"deployment_attempted\":false,\"database_fixtures\":0,\"real_OAuth_tested\":false,\"authenticated_Worker_integration_tested\":false,\"authentication_tests\":\"Existing injected unit fixtures plus actual anonymous Worker HTTP; not LIVE Google OAuth\",\"releaseAgeGate\":{\"resumeAfterUTC\":\"2026-10-22T13:23:30Z\",\"evidenceRun\":\"39720220422\",\"policyMinutes\":1440,\"packages\":[\"@opennextjs/cloudflare@1.20.13\",\"@opennextjs/aws@4.1.12\"]},\"reused_stages\":[{\"name\":\"adapter-typecheck\",\"started\":\"2026-10-22T03:58:44.622Z\",\"finished\":\"2026-10-22T03:58:45.341Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\"reused_from_run\":\"39719749196\"},{\"name\":\"production-audit\",\"started\":\"2026-10-22T03:58:45.341Z\",\"finished\":\"2026-10-22T03:58:45.932Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"c1eda066339fe27899f3dd3b54c7349d55d96541d06e607e0c4606d1e235a1cf\",\"reused_from_run\":\"39719749196\"},{\"name\":\"application\",\"started\":\"2026-10-22T03:58:45.933Z\",\"finished\":\"2026-10-22T03:58:48.244Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"c89d64f80eeef3902efa0cc9ff3ed65d5a1c86e6626162c1123617813971c4bc\",\"tests\":223,\"passed\":223,\"reused_from_run\":\"39719749196\"},{\"name\":\"sqlite-content\",\"started\":\"2026-10-22T03:58:48.245Z\",\"finished\":\"2026-10-22T03:58:49.281Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"99ebd0dfdcfc76555bfe28bc61f423b231633f76da3d377666f2b7617aac697e\",\"tests\":12,\"passed\":12,\"reused_from_run\":\"39719749196\"},{\"name\":\"sqlite-assets\",\"started\":\"2026-10-22T03:58:49.281Z\",\"finished\":\"2026-10-22T03:58:49.903Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"136fe1e4db78a5302ce3a101c8f6e2975392ab665d0159d1fee1f9da5f7e9e6d\",\"tests\":3,\"passed\":3,\"reused_from_run\":\"39719749196\"}],\"bundleSummary\":[\"Total Upload: 5558.03 KiB / gzip: 1115.88 KiB\"],\"bundleBytes\":5691422.72,\"failure\":\"worker-http failed\",\"finished\":\"2026-10-22T22:38:19.197Z\",\"lock_sha256\":\"f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6\"}",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/417ef0ff2f23c2ff1cb6a3498392ffeedbd97d3d/.github",
+      "start_line": 76,
+      "start_column": null,
+      "end_line": 76,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "HTC failure context",
+      "message": "worker-http\n    {\n      \"name\": \"Anonymous route denial /founder\",\n      \"passed\": true,\n      \"status\": 307\n    },\n    {\n      \"name\": \"Anonymous route denial /founder/content\",\n      \"passed\": true,\n      \"status\": 307\n    },\n    {\n      \"name\": \"Anonymous route denial /founder/assets\",\n      \"passed\": true,\n      \"status\": 307\n    },\n    {\n      \"name\": \"Anonymous route denial /founder/publishing\",\n      \"passed\": true,\n      \"status\": 307\n    },\n    {\n      \"name\": \"Anonymous route denial /founder/operations\",\n      \"passed\": true,\n      \"status\": 307\n    },\n    {\n      \"name\": \"No-cookie privileged API rejected before upstream /api/founder\",\n      \"passed\": true,\n      \"status\": 401\n    },\n    {\n      \"name\": \"No-cookie privileged API rejected before upstream /api/founder/content\",\n      \"passed\": false,\n      \"status\": 403\n    }\n  ],\n  \"failure\": \"Assertion failed: No-cookie privileged API rejected before upstream /api/founder/content\",\n  \"real_Google_OAuth_tested\": false,\n  \"authenticated_Founder_or_USER_tested\": false,\n  \"LIVE_database_or_Storage_validation\": false,\n  \"secrets_exported\": false,\n  \"database_fixtures_created\": 0,\n  \"followed_redirects\": false\n}\n",
+      "raw_details": ""
+    }
+  ]
+}

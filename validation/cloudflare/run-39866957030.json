@@ -1,0 +1,56 @@
+{
+  "run": "39866957030",
+  "job": "120131430310",
+  "source": "GitHub check-run annotations",
+  "note": "Full report annotation truncated by upstream; failure diagnostics intact",
+  "annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/52ab8ef5d46d849f350ff990a3f2e76477b4cdbb/.github",
+      "start_line": 178,
+      "start_column": null,
+      "end_line": 178,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "Process completed with exit code 1.",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/52ab8ef5d46d849f350ff990a3f2e76477b4cdbb/.github",
+      "start_line": 177,
+      "start_column": null,
+      "end_line": 177,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "HTC cloud report",
+      "message": "{\"at\":\"2026-10-22T22:43:16.109Z\",\"status\":\"FAIL\",\"base\":\"4e8e07b18c1040722169223196add2112751cfeb\",\"host\":{\"provider\":\"GitHub Actions\",\"run_id\":\"39866957030\",\"attempt\":\"1\",\"sha\":\"52ab8ef5d46d849f350ff990a3f2e76477b4cdbb\",\"os\":\"6.17.0-1022-azure\",\"platform\":\"linux\",\"architecture\":\"x64\",\"totalRAMMiB\":15990,\"freeRAMMiB\":14496,\"CPUs\":4,\"node\":\"v24.21.0\",\"runner\":\"GitHub Actions 1000000005\",\"pnpm\":\"11.25.0\"},\"stages\":[{\"name\":\"protected-scope\",\"started\":\"2026-10-22T22:43:16.110Z\",\"finished\":\"2026-10-22T22:43:16.121Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"},{\"name\":\"pnpm-version\",\"started\":\"2026-10-22T22:43:16.122Z\",\"finished\":\"2026-10-22T22:43:16.764Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f\"},{\"name\":\"frozen-install\",\"started\":\"2026-10-22T22:43:16.764Z\",\"finished\":\"2026-10-22T22:43:23.383Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"5812cb08d059e1f9fe9786053632e308763fd8eb0e778291a7dc0bf9c1400d68\"},{\"name\":\"configuration\",\"started\":\"2026-10-22T22:43:23.383Z\",\"finished\":\"2026-10-22T22:43:23.994Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"040e9fe0498dc1b9d1a1cfefe17d12ba06491723b8520b4b2f265ef97e1bca49\",\"tests\":4,\"passed\":4},{\"name\":\"workers-build\",\"started\":\"2026-10-22T22:43:24.003Z\",\"finished\":\"2026-10-22T22:44:04.135Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"724872853bc0b541c5ae5d6e08529b4397155be4315e13ac09bbe88e5598ade9\"},{\"name\":\"workers-dry-run\",\"started\":\"2026-10-22T22:44:04.139Z\",\"finished\":\"2026-10-22T22:44:06.361Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"614cd68565edd8266bee69a13e25a45456d1289dd4652cb49899c276027e21c0\"},{\"name\":\"browser-install\",\"started\":\"2026-10-22T22:44:06.362Z\",\"finished\":\"2026-10-22T22:44:16.111Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"ce4edd74beab732d58188b3d8dfa11bf8909d50b1c66464e9146486924c8a1a8\"},{\"name\":\"worker-http\",\"started\":\"2026-10-22T22:44:18.897Z\",\"finished\":\"2026-10-22T22:44:19.348Z\",\"exit\":1,\"status\":\"FAIL\",\"output_sha256\":\"ba2279cba799a0427d709e3682fc2a8ab04223c550109dac3498853349062171\"},{\"name\":\"worker-ui\",\"started\":\"2026-10-22T22:44:20.391Z\",\"finished\":\"2026-10-22T22:44:26.455Z\",\"exit\":1,\"status\":\"FAIL\",\"output_sha256\":\"1f0f2076e9baf46fc25f28b66f5982ea8f1ac5befe95710280ea5131ad481ab8\"}],\"deployment_attempted\":false,\"database_fixtures\":0,\"real_OAuth_tested\":false,\"authenticated_Worker_integration_tested\":false,\"authentication_tests\":\"Existing injected unit fixtures plus actual anonymous Worker HTTP; not LIVE Google OAuth\",\"releaseAgeGate\":{\"resumeAfterUTC\":\"2026-10-22T13:23:30Z\",\"evidenceRun\":\"39720220422\",\"policyMinutes\":1440,\"packages\":[\"@opennextjs/cloudflare@1.20.13\",\"@opennextjs/aws@4.1.12\"]},\"reused_stages\":[{\"name\":\"adapter-typecheck\",\"started\":\"2026-10-22T03:58:44.622Z\",\"finished\":\"2026-10-22T03:58:45.341Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\"reused_from_run\":\"39719749196\"},{\"name\":\"production-audit\",\"started\":\"2026-10-22T03:58:45.341Z\",\"finished\":\"2026-10-22T03:58:45.932Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"c1eda066339fe27899f3dd3b54c7349d55d96541d06e607e0c4606d1e235a1cf\",\"reused_from_run\":\"39719749196\"},{\"name\":\"application\",\"started\":\"2026-10-22T03:58:45.933Z\",\"finished\":\"2026-10-22T03:58:48.244Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"c89d64f80eeef3902efa0cc9ff3ed65d5a1c86e6626162c1123617813971c4bc\",\"tests\":223,\"passed\":223,\"reused_from_run\":\"39719749196\"},{\"name\":\"sqlite-content\",\"started\":\"2026-10-22T03:58:48.245Z\",\"finished\":\"2026-10-22T03:58:49.281Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"99ebd0dfdcfc76555bfe28bc61f423b231633f76da3d377666f2b7617aac697e\",\"tests\":12,\"passed\":12,\"reused_from_run\":\"39719749196\"},{\"name\":\"sqlite-assets\",\"started\":\"2026-10-22T03:58:49.281Z\",\"finished\":\"2026-10-22T03:58:49.903Z\",\"exit\":0,\"status\":\"PASS\",\"output_sha256\":\"136fe1e4db78a5302ce3a101c8f6e2975392ab665d0159d1fee1f9da5f7e9e6d\",\"tests\":3,\"passed\":3,\"reused_from_run\":\"39719749196\"}],\"bundleSummary\":[\"Total Upload: 5558.03 KiB / gzip: 1115.87 KiB\"],\"bundleB",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/52ab8ef5d46d849f350ff990a3f2e76477b4cdbb/.github",
+      "start_line": 141,
+      "start_column": null,
+      "end_line": 141,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "HTC failure context",
+      "message": "worker-ui\nnode:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nlocator.innerText: Error: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"notice\">Sign-in did not complete. Try again in the same b…</p> aka getByText('Sign-in did not complete. Try')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n  - waiting for getByRole('alert')\n\n    at /home/runner/work/htc-trial/htc-trial/validation/cloudflare/probe-worker-ui.mjs:33:81 {\n  log: [ \"  - waiting for getByRole('alert')\" ]\n}\n\nNode.js v24.21.0\n",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/holictraderscompany-art/htc-trial/blob/52ab8ef5d46d849f350ff990a3f2e76477b4cdbb/.github",
+      "start_line": 76,
+      "start_column": null,
+      "end_line": 76,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "HTC failure context",
+      "message": "worker-http\n    },\n    {\n      \"name\": \"No-cookie privileged API rejected before upstream /api/founder\",\n      \"passed\": true,\n      \"status\": 401\n    },\n    {\n      \"name\": \"No-cookie privileged API rejected before upstream /api/founder/content\",\n      \"passed\": false,\n      \"status\": 403\n    }\n  ],\n  \"failure\": \"Assertion failed: No-cookie privileged API rejected before upstream /api/founder/content\",\n  \"diagnostics\": {\n    \"callback\": {\n      \"status\": 303,\n      \"origin\": \"http://localhost:3105\"\n    },\n    \"originMatrix\": [\n      {\n        \"origin\": \"http://127.0.0.1:3105\",\n        \"status\": 403\n      },\n      {\n        \"origin\": \"http://localhost:3105\",\n        \"status\": 401\n      },\n      {\n        \"origin\": \"http://127.0.0.1\",\n        \"status\": 403\n      },\n      {\n        \"origin\": \"https://127.0.0.1:3105\",\n        \"status\": 403\n      }\n    ]\n  },\n  \"real_Google_OAuth_tested\": false,\n  \"authenticated_Founder_or_USER_tested\": false,\n  \"LIVE_database_or_Storage_validation\": false,\n  \"secrets_exported\": false,\n  \"database_fixtures_created\": 0,\n  \"followed_redirects\": false\n}\n",
+      "raw_details": ""
+    }
+  ]
+}

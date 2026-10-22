@@ -139,4 +139,8 @@ try {
   console.log('HTC_CLOUD_REPORT ' + JSON.stringify(report));
   const summary = JSON.stringify(report).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
   console.log('::notice title=HTC cloud report::' + summary);
+  // Keep each annotation bounded: GitHub may truncate the complete report.
+  const encodedReport = Buffer.from(JSON.stringify(report)).toString('base64');
+  const chunks = Math.ceil(encodedReport.length / 3000);
+  for (let i = 0; i < chunks; i++) console.log(`::notice title=HTC report chunk ${i + 1}/${chunks}::` + encodedReport.slice(i * 3000, (i + 1) * 3000));
 }

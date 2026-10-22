@@ -11,14 +11,14 @@ try {
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     await context.route('**/*', route => {
       const u = new URL(route.request().url());
-      return u.hostname === '127.0.0.1' && ['3105', '3106'].includes(u.port) ? route.continue() : route.abort();
+      return u.hostname === 'localhost' && ['3105', '3106'].includes(u.port) ? route.continue() : route.abort();
     });
     for (const path of ['/', '/sign-in', '/sign-in?error=failed']) {
       const snapshots = [];
       for (const port of [3106, 3105]) {
         const page = await context.newPage();
         const failures = []; page.on('pageerror', error => failures.push(error.name));
-        const response = await page.goto(`http://127.0.0.1:${port}${path}`, { waitUntil: 'networkidle' });
+        const response = await page.goto(`http://localhost:${port}${path}`, { waitUntil: 'networkidle' });
         assert.equal(response.status(), 200);
         await page.locator('h1').waitFor();
         assert(await page.locator('.brand').isVisible());
@@ -30,7 +30,7 @@ try {
           assert.equal(await page.locator('form').getAttribute('action'), '/auth/start');
           assert(await page.getByRole('button', { name: 'Continue with Google' }).isVisible());
         }
-        if (path.includes('error=')) assert.match(await page.getByRole('alert').innerText(), /Sign-in did not complete/);
+        if (path.includes('error=')) assert.match(await page.locator('p.notice[role="alert"]').innerText(), /Sign-in did not complete/);
         const text = await page.locator('body').innerText();
         const links = await page.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
         const image = await page.screenshot({ fullPage: true });
