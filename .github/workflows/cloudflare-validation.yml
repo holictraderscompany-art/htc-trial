@@ -20,7 +20,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   validate:
-    if: github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && !startsWith(github.event.head_commit.message, 'chore(cloudflare): diagnose')
+    if: >-
+      github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && !startsWith(github.event.head_commit.message, 'diagnose-cloud-validation')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -46,7 +47,8 @@ jobs:
       - name: Cloud-only install, build, security and runtime validation
         run: node validation/cloudflare/cloud-validate.mjs --reuse-regressions
   diagnose:
-    if: github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && startsWith(github.event.head_commit.message, 'chore(cloudflare): diagnose')
+    if: >-
+      github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && startsWith(github.event.head_commit.message, 'diagnose-cloud-validation')
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     permissions:
