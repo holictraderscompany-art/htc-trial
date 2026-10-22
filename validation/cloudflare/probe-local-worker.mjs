@@ -16,6 +16,7 @@ async function request(path, body, extra = {}) {
   });
 }
 let failure = null;
+const diagnostics = {};
 try {
   const health = await request('/api/health');
   record('Worker health HTTP200 and no-store', health.status === 200 && health.headers.get('cache-control')?.includes('no-store'), health.status);
@@ -36,6 +37,17 @@ try {
     ['/api/founder/operations', { action: 'summary' }],
   ]) {
     const r = await request(path, payload);
+    if (r.status !== 401) {
+      // Anonymous, bounded diagnostics only: no cookies, auth exchange or data mutation.
+      const callback = await request('/auth/callback');
+      diagnostics.callback = { status: callback.status,
+        origin: new URL(callback.headers.get('location') ?? '/', origin).origin };
+      diagnostics.originMatrix = [];
+      for (const candidate of [origin, 'http://localhost:3105', 'http://127.0.0.1', 'https://127.0.0.1:3105']) {
+        const probe = await request(path, payload, { headers: { Origin: candidate, 'Content-Type': 'application/json' } });
+        diagnostics.originMatrix.push({ origin: candidate, status: probe.status });
+      }
+    }
     record('No-cookie privileged API rejected before upstream ' + path, r.status === 401 && r.headers.get('cache-control')?.includes('no-store'), r.status);
   }
   const originDenied = await request('/api/founder/operations', { action: 'summary' }, {
@@ -60,7 +72,7 @@ try {
 }
 const report = {
   at: new Date().toISOString(), label: 'CLOUD LOOPBACK WORKER — synthetic key, anonymous and malformed-flow probes only',
-  status: failure ? 'FAIL' : 'PASS', results, failure,
+  status: failure ? 'FAIL' : 'PASS', results, failure, diagnostics,
   real_Google_OAuth_tested: false, authenticated_Founder_or_USER_tested: false,
   LIVE_database_or_Storage_validation: false, secrets_exported: false,
   database_fixtures_created: 0, followed_redirects: false,

@@ -113,11 +113,14 @@ try {
   assert(report.bundleBytes <= 64 * 1024 ** 2, 'Bundle exceeds the documented Workers size limit');
   run('browser-install', 'pnpm', ['exec', 'playwright', 'install', 'chromium']);
   await server('worker-preview', ['preview:workers'], 3105);
-  run('worker-http', 'node', ['validation/cloudflare/probe-local-worker.mjs']);
+  let httpFailure;
+  try { run('worker-http', 'node', ['validation/cloudflare/probe-local-worker.mjs']); }
+  catch (error) { httpFailure = error; }
   report.runtime = JSON.parse(fs.readFileSync('validation/cloudflare/runtime-local.json', 'utf8'));
   await server('next-reference', ['start', '--port', '3106'], 3106);
   run('worker-ui', 'node', ['validation/cloudflare/probe-worker-ui.mjs']);
   report.ui = JSON.parse(fs.readFileSync('validation/cloudflare/ui-cloud.json', 'utf8'));
+  if (httpFailure) throw httpFailure;
   report.status = 'PASS';
 } catch (error) {
   report.status = error.message.startsWith('BLOCKED_') ? 'BLOCKED' : 'FAIL'; report.failure = error.message; process.exitCode = 1;
