@@ -1,0 +1,130 @@
+{
+  "at": "2026-10-22T02:54:37.847Z",
+  "status": "BLOCKED",
+  "group03": {
+    "branch": "codex/t16-r1-reconciliation",
+    "approvedCommit": "4e8e07b18c1040722169223196add2112751cfeb",
+    "manifestFiles": 54,
+    "verifiedFileDigests": 53,
+    "digestMismatches": [],
+    "manifestExactlyMatchesCommit": true,
+    "candidateFilesUnchanged": true,
+    "manifestSHA256": "cbd86ca9551f20ab280fc67c8be3a68acff6cbcbc5655a1d6bafc3d9fc071e99",
+    "excludedUntrackedFile": "validation/t16-r2/server-http.json",
+    "pushAttempts": 0,
+    "remoteBranchAbsentAtLastRead": true,
+    "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "mainChanged": false
+  },
+  "deploymentGate": {
+    "githubWebhooks": "Founder reports none visible",
+    "netlifyGit": "Founder reports Not linked",
+    "vercelGit": "connector reported link:null",
+    "cloudflareGit": "NOT VERIFIED: new connection branch/build/preview settings unavailable through current tools",
+    "pushAllowed": false
+  },
+  "preparation": {
+    "branch": "codex/cloudflare-workers-preparation",
+    "base": "4e8e07b18c1040722169223196add2112751cfeb",
+    "adapter": "@opennextjs/cloudflare@1.20.13",
+    "proposedNext": "16.4.1",
+    "proposedWrangler": "4.151.3",
+    "applicationSourceChanged": false,
+    "sqlChanged": false,
+    "netlifyConfigChanged": false,
+    "commitCreated": false
+  },
+  "validations": {
+    "configurationTests": {
+      "status": "LOCAL PASS",
+      "passed": 4,
+      "failed": 0
+    },
+    "probeSyntax": {
+      "status": "PASS",
+      "runtimeExecuted": false
+    },
+    "dependencyInstallation": {
+      "status": "BLOCKED",
+      "initialError": "Timeout while installing wrangler -> workerd@1.20261019.1",
+      "recovery": "One cached, single-connection attempt with fetch timeout 600000 ms and fetch retries 0; interrupted via its exec session after available RAM measured 62 MiB",
+      "fullyInstalled": false,
+      "lockfileUpdated": false,
+      "topLevelPackagesLinked": false
+    },
+    "availableRAMMiBAtSafetyStop": 62,
+    "newApplicationRegression": "NOT RUN",
+    "newSQLiteRegression": "NOT RUN",
+    "nextProductionBuild": "NOT RUN",
+    "openNextBuild": "NOT RUN",
+    "wranglerDryRun": "NOT RUN",
+    "workerdHTTP": "NOT RUN",
+    "newHostGoogleOAuth": "NOT RUN"
+  },
+  "safety": {
+    "databaseAccessed": false,
+    "databaseMutations": 0,
+    "productionAccessed": false,
+    "deploymentAttempted": false,
+    "secretCopied": false,
+    "existingPassEvidencePreserved": true,
+    "secretScan": {
+      "scope": "54 Group 03 candidate files plus 9 preparation files; high-confidence private keys, access tokens, JWTs and credential-bearing PostgreSQL URLs",
+      "scannedFiles": 63,
+      "flaggedPaths": []
+    }
+  },
+  "readiness": "NOT READY FOR DEPLOYMENT",
+  "nextActions": [
+    "Verify Cloudflare connected Worker branch/build/preview settings before any Group 03 push.",
+    "Restore sufficient free RAM; finish the pinned pnpm install and regenerate its lockfile normally, without weakening TLS or dependency checks.",
+    "Run fresh regression, Workers build, dry-run and local runtime checks; configure and validate future TEST hostname OAuth only under its explicit gate."
+  ],
+  "fileDigests": [
+    {
+      "path": ".gitattributes",
+      "sha256": "90b6b55c13e4cd24e25d2d3530999ea535e9f3cebcb258b400a3b2c635c060f3"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f4ffc15b05bfbb48a8abe6e95ed6322d289b8d99b3ee60abae61f455a113d489"
+    },
+    {
+      "path": "package.json",
+      "sha256": "5778d14236bc1cc1fdf58e646ccf1de6f4fe5b504911d7c43ce2999dd1d4a5e2"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "ab6e16c6d805afca90cf8de17041ad179c544f8e4b52b1c94a21deed61826db0"
+    },
+    {
+      "path": ".dev.vars.example",
+      "sha256": "b26b1cd5ec1e545ca2d978fc4cb67ea99fd667a51b1bf009e457744151e66119"
+    },
+    {
+      "path": "wrangler.jsonc",
+      "sha256": "21395071ea0f6f17bdeb1b68c0dba0e0945a418b5523e71adde7a1ae0606fbba"
+    },
+    {
+      "path": "open-next.config.ts",
+      "sha256": "b6296085a62eb5360d794a0801f8f6250a20100c5e9bdc23676ed6aa551fb673"
+    },
+    {
+      "path": "tests/cloudflare-config.test.mjs",
+      "sha256": "1a339b1c2a3a00edf54de192ae900133cf2f0084aba61d3750dc072014063654"
+    },
+    {
+      "path": "validation/cloudflare/probe-local-worker.mjs",
+      "sha256": "b1e1df3b322c27fe60d642f93c438402aa6e72b54743359f9e9f2a9409c0a5bb"
+    },
+    {
+      "path": "docs/cloudflare-workers-migration.md",
+      "sha256": "fbc96dc1a0484e8ebda1e9d0eb72a70a32b6ed5881aa67aef1a38d8299cab04c"
+    }
+  ],
+  "installRecoveryLog": {
+    "path": "validation/cloudflare/install-recovery.log",
+    "sha256": "1bf844012479c35721dfc222ddd229a9580c047fa89ba570906ca5ad44176a43",
+    "ignored": true
+  }
+}

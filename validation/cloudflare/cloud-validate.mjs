@@ -1,0 +1,100 @@
+// This orchestrator intentionally refuses heavy execution on the Windows control host.
+import fs from 'node:fs';
+import os from 'node:os';
+import cp from 'node:child_process';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const base = '4e8e07b18c1040722169223196add2112751cfeb';
+assert.equal(process.platform, 'linux', 'Cloud Linux executor required');
+assert.equal(process.env.GITHUB_ACTIONS, 'true', 'GitHub-hosted execution required');
+assert.equal(process.env.RUNNER_ENVIRONMENT, 'github-hosted');
+assert.equal(process.env.GITHUB_REPOSITORY, 'holictraderscompany-art/htc-trial');
+assert.equal(process.env.GITHUB_REF, 'refs/heads/codex/cloudflare-workers-preparation');
+assert(os.totalmem() >= 6 * 1024 ** 3, 'Insufficient cloud RAM');
+assert.equal(process.env.HTC_SUPABASE_TARGET, 'test');
+assert.equal(process.env.SUPABASE_URL, 'https://uzhkzhmncxjplrdtdzgd.supabase.co');
+assert.equal(process.env.SUPABASE_PUBLISHABLE_KEY, 'sb_publishable_worker_runtime_fixture');
+for (const key of ['CLOUDFLARE_API_TOKEN', 'SUPABASE_SERVICE_ROLE_KEY', 'DATABASE_URL']) assert(!process.env[key], 'Privileged credential must not be supplied');
+const report = {
+  at: new Date().toISOString(), status: 'RUNNING', base,
+  host: { provider: 'GitHub Actions', run_id: process.env.GITHUB_RUN_ID, attempt: process.env.GITHUB_RUN_ATTEMPT,
+    sha: process.env.GITHUB_SHA, os: os.release(), platform: process.platform, architecture: os.arch(),
+    totalRAMMiB: Math.round(os.totalmem() / 1024 ** 2), freeRAMMiB: Math.round(os.freemem() / 1024 ** 2),
+    CPUs: os.cpus().length, node: process.version, runner: process.env.RUNNER_NAME },
+  stages: [], deployment_attempted: false, database_fixtures: 0, real_OAuth_tested: false,
+  authenticated_Worker_integration_tested: false, authentication_tests: 'Existing injected unit fixtures plus actual anonymous Worker HTTP; not LIVE Google OAuth',
+};
+const servers = [];
+function run(name, command, args, timeout = 600000) {
+  const started = new Date().toISOString();
+  console.log('HTC_STAGE_START ' + name);
+  const result = cp.spawnSync(command, args, { encoding: 'utf8', timeout, maxBuffer: 32 * 1024 ** 2 });
+  const output = (result.stdout ?? '') + (result.stderr ?? '');
+  fs.writeFileSync(`validation/cloudflare/${name}.log`, output);
+  const stage = { name, started, finished: new Date().toISOString(), exit: result.status,
+    status: result.status === 0 && !result.error ? 'PASS' : 'FAIL',
+    output_sha256: crypto.createHash('sha256').update(output).digest('hex') };
+  const tests = output.match(/(?:# |ℹ )tests (\d+)/);
+  const passed = output.match(/(?:# |ℹ )pass (\d+)/);
+  if (tests) stage.tests = Number(tests[1]);
+  if (passed) stage.passed = Number(passed[1]);
+  report.stages.push(stage);
+  console.log('HTC_STAGE_RESULT ' + JSON.stringify(stage));
+  if (stage.status !== 'PASS') {
+    // No private credentials are supplied to these commands. Never dump environment.
+    console.log(output.split('\n').slice(-45).join('\n'));
+    throw new Error(name + ' failed' + (result.error ? ': ' + result.error.code : ''));
+  }
+  return output;
+}
+async function server(name, args, port) {
+  const stream = fs.openSync(`validation/cloudflare/${name}.log`, 'w');
+  const child = cp.spawn('pnpm', args, { stdio: ['ignore', stream, stream], detached: true });
+  fs.closeSync(stream); servers.push(child);
+  for (let n = 0; n < 90; n++) {
+    if (child.exitCode !== null) throw new Error(name + ' exited before readiness');
+    try { const r = await fetch(`http://127.0.0.1:${port}/api/health`, { signal: AbortSignal.timeout(1500) }); if (r.status === 200) return; } catch {}
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  throw new Error(name + ' readiness timeout');
+}
+try {
+  run('protected-scope', 'git', ['diff', '--exit-code', base, '--', 'src', 'supabase', 'validation/test-db', 'validation/t13',
+    'validation/t14', 'validation/t15-master', 'validation/t16-r1', 'validation/t16-r2', 'validation/t16-final']);
+  report.host.pnpm = run('pnpm-version', 'pnpm', ['--version']).trim();
+  if (process.argv.includes('--bootstrap-lock')) run('dependency-resolution', 'pnpm', ['install', '--no-frozen-lockfile', '--ignore-scripts']);
+  run('frozen-install', 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts']);
+  run('configuration', 'pnpm', ['test:workers:config']);
+  run('adapter-typecheck', 'pnpm', ['exec', 'tsc', '--noEmit', '--skipLibCheck', '--target', 'es2022', '--module', 'nodenext', '--moduleResolution', 'nodenext', 'open-next.config.ts']);
+  run('production-audit', 'pnpm', ['audit', '--prod', '--json']);
+  run('application', 'pnpm', ['test']);
+  run('sqlite-content', 'pnpm', ['test:local:sqlite']);
+  run('sqlite-assets', 'pnpm', ['test:t14:sqlite']);
+  fs.writeFileSync('.dev.vars', 'NEXTJS_ENV=development\nSUPABASE_PUBLISHABLE_KEY=sb_publishable_worker_runtime_fixture\n');
+  run('workers-build', 'pnpm', ['build:workers']);
+  const dry = run('workers-dry-run', 'pnpm', ['dry-run:workers']);
+  report.bundleSummary = dry.split('\n').filter(line => /Total Upload|gzip|Startup Time/.test(line));
+  run('browser-install', 'pnpm', ['exec', 'playwright', 'install', 'chromium']);
+  await server('worker-preview', ['preview:workers'], 3105);
+  run('worker-http', 'node', ['validation/cloudflare/probe-local-worker.mjs']);
+  report.runtime = JSON.parse(fs.readFileSync('validation/cloudflare/runtime-local.json', 'utf8'));
+  await server('next-reference', ['start', '--port', '3106'], 3106);
+  run('worker-ui', 'node', ['validation/cloudflare/probe-worker-ui.mjs']);
+  report.ui = JSON.parse(fs.readFileSync('validation/cloudflare/ui-cloud.json', 'utf8'));
+  report.status = 'PASS';
+} catch (error) {
+  report.status = 'FAIL'; report.failure = error.message; process.exitCode = 1;
+} finally {
+  for (const child of servers) { try { process.kill(-child.pid, 'SIGTERM'); } catch {} }
+  report.finished = new Date().toISOString();
+  if (fs.existsSync('pnpm-lock.yaml')) {
+    const bytes = fs.readFileSync('pnpm-lock.yaml');
+    report.lock_sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+    const encoded = bytes.toString('base64');
+    console.log('HTC_LOCK_BEGIN');
+    for (let i = 0; i < encoded.length; i += 12000) console.log('HTC_LOCK_CHUNK ' + encoded.slice(i, i + 12000));
+    console.log('HTC_LOCK_END');
+  }
+  fs.writeFileSync('validation/cloudflare/cloud-report.json', JSON.stringify(report, null, 2) + '\n');
+  console.log('HTC_CLOUD_REPORT ' + JSON.stringify(report));
+}

@@ -1,0 +1,4 @@
+# Example only. Copy privately to ignored .dev.vars for authenticated TEST preview.
+# Never copy Foundation/production settings or place credentials in Wrangler vars.
+NEXTJS_ENV=development
+SUPABASE_PUBLISHABLE_KEY=sb_publishable_REPLACE_WITH_TEST_KEY

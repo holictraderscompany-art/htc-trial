@@ -12,14 +12,26 @@
     "test": "node --test --test-concurrency=1 tests/api-foundation.test.js tests/content-release.test.js tests/media-assets.test.js tests/content-assets.test.js tests/content-media-foundation.test.js tests/content-discovery.test.js tests/public-experience.test.js tests/public-release-validation.test.js tests/founder-access.test.js tests/content-draft-only.test.js tests/founder-content.test.js tests/t13-target.test.js tests/founder-media.test.js tests/founder-publishing.test.js tests/founder-overview.test.js",
     "test:t14:sqlite": "node --test --test-concurrency=1 tests/founder-assets.test.js",
     "test:t15:sqlite": "node --test --test-concurrency=1 tests/founder-publishing.test.js",
-    "test:t16:sqlite": "node --test --test-concurrency=1 tests/founder-overview.test.js"
+    "test:t16:sqlite": "node --test --test-concurrency=1 tests/founder-overview.test.js",
+    "build:workers": "opennextjs-cloudflare build",
+    "preview:workers": "wrangler dev --local --ip 127.0.0.1 --port 3105",
+    "dry-run:workers": "wrangler deploy --dry-run --outdir .cloudflare-dry-run",
+    "test:workers:config": "node --test tests/cloudflare-config.test.mjs",
+    "test:workers:ui": "node validation/cloudflare/probe-worker-ui.mjs"
   },
   "engines": {
     "node": ">=20.9.0"
   },
   "dependencies": {
-    "next": "16.3.8",
+    "next": "16.4.1",
     "react": "19.3.0",
     "react-dom": "19.3.0"
-  }
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "1.20.13",
+    "wrangler": "4.151.3",
+    "@playwright/test": "1.64.1",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "pnpm@11.25.0"
 }
