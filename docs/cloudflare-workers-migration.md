@@ -201,3 +201,55 @@ Group 03 was pushed once and will not be pushed again.
 Primary cloud references:
 - [GitHub standard hosted runner specifications and public-repository pricing](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)
 - [Push workflow events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#push)
+
+## Verified cloud results and remaining gate
+
+Run [39719749196](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39719749196)
+used Linux x64, 4 CPUs, 15,989 MiB RAM, Node 24.21.0 and pnpm 11.25.0.
+Dependency resolution, cached frozen replay, 4 configuration tests, adapter type
+check, production audit, 223 application tests, 12 SQLite content tests and 3
+SQLite asset tests passed there. OpenNext stopped before compilation because
+the baseline had no `next.config` file. The added `next.config.mjs` exports an
+empty object, preserving the prior framework defaults. A regression assertion
+checks that contract. It still requires a successful subsequent cloud build.
+
+The generated lockfile was transferred without installation on Windows and its
+SHA-256 is `f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6`.
+Explicit LF prevents checkout conversion. Historical evidence was not rewritten.
+
+Fresh-host run [39720220422](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39720220422)
+then rejected that lockfile under pnpm 11's default 1,440-minute release-age
+verification. The earlier replay had reused pnpm's verification cache and does
+not override this fresh-host failure. Actual rejected publication times were:
+
+| Package | Published UTC | Eligible after 24 hours UTC |
+| --- | --- | --- |
+| `@opennextjs/aws@4.1.12` | 2026-10-21 12:21:38 | 2026-10-22 12:21:38 |
+| `@opennextjs/cloudflare@1.20.13` | 2026-10-21 13:22:30 | 2026-10-22 13:22:30 |
+
+No age exclusion, policy override, downgrade, manual integrity edit or security
+waiver was applied. The runner stops before installation until **2026-10-22
+13:23:30 UTC / 22:23:30 JST**, including a one-minute margin. That time is only
+the earliest resume point, not a prediction of installation/build PASS.
+Re-run the existing branch workflow after it; do not rerun the closed Group 03
+push. No delayed or background retry has been scheduled.
+
+The connector transport failure was diagnosed using a one-time hosted job that
+read only the already-failed job's logs with a short-lived `actions: read` token.
+It did not repeat the failed install/build. Its annotations are preserved in
+`diagnostic-119650409069.json`; the temporary diagnostic job/permission is now
+removed. Future sanitized reports/errors use standard job annotations, requiring
+only `contents: read`.
+
+Cloud execution is PASS. Final dependency-policy acceptance, the empty-config
+regression, framework/adapter compilation, dry-run size, loopback HTTP and
+responsive screenshot comparisons remain BLOCKED. Existing LIVE Group 03
+evidence remains valid; none was repeated. All pushed migration commits so far
+are explicitly bootstrap/recovery checkpoints, not a final validated migration.
+
+Before any deployment approval, review the unassigned Cloudflare account,
+TEST-only publishable-key binding, disabled automatic deployment/preview/routes,
+and eventual hostname/OAuth redirect plan. No domain is selected and no Worker
+has been published. Netlify and Vercel remain unchanged.
+
+Policy reference: [pnpm 11 release-age defaults](https://github.com/pnpm/pnpm.io/blob/main/blog/releases/11.0.md).

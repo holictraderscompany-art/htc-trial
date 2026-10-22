@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-22T04:03:33.51Z",
+  "status": "FAIL",
+  "base": "4e8e07b18c1040722169223196add2112751cfeb",
+  "host": {
+    "provider": "GitHub Actions",
+    "run_id": "39720220422",
+    "attempt": "1",
+    "sha": "3766c8f04f117f6d77574f64d8f86312ff157c24",
+    "os": "7.0.0-1017-azure",
+    "platform": "linux",
+    "architecture": "x64",
+    "totalRAMMiB": 15984,
+    "freeRAMMiB": 14486,
+    "CPUs": 4,
+    "node": "v24.22.0",
+    "runner": "GitHub Actions 1000000001",
+    "pnpm": "11.25.0"
+  },
+  "stages": [
+    {
+      "name": "protected-scope",
+      "started": "2026-10-22T04:03:33.51Z",
+      "finished": "2026-10-22T04:03:33.52Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pnpm-version",
+      "started": "2026-10-22T04:03:33.52Z",
+      "finished": "2026-10-22T04:03:34.017Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f"
+    },
+    {
+      "name": "frozen-install",
+      "started": "2026-10-22T04:03:34.017Z",
+      "finished": "2026-10-22T04:03:41.106Z",
+      "exit": 1,
+      "status": "FAIL",
+      "output_sha256": "4f1e3d6cda88cb80a0a24ea8d8fab11e2c3d093d5f616ae5962e808c198ca825"
+    }
+  ],
+  "deployment_attempted": false,
+  "database_fixtures": 0,
+  "real_OAuth_tested": false,
+  "authenticated_Worker_integration_tested": false,
+  "authentication_tests": "Existing injected unit fixtures plus actual anonymous Worker HTTP; not LIVE Google OAuth",
+  "failure": "frozen-install failed",
+  "finished": "2026-10-22T04:03:41.106Z",
+  "lock_sha256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6"
+}

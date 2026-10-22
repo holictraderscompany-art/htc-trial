@@ -1,0 +1,199 @@
+{
+  "at": "2026-10-22T05:20:04.377Z",
+  "status": "BLOCKED",
+  "baseline": "4e8e07b18c1040722169223196add2112751cfeb",
+  "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "group01": "PRESERVED",
+  "group02": "PRESERVED",
+  "group03": "CLOSED; preserved; push not repeated",
+  "branch": "codex/cloudflare-workers-preparation",
+  "cloudEnvironment": "PASS",
+  "provider": "GitHub-hosted Ubuntu 24.04 (standard public-repository runner)",
+  "observedHost": {
+    "provider": "GitHub Actions",
+    "run_id": "39719749196",
+    "attempt": "1",
+    "sha": "d24b7f09d8e8f04b7bd6b4793c7f5290e05db0ac",
+    "os": "6.17.0-1022-azure",
+    "platform": "linux",
+    "architecture": "x64",
+    "totalRAMMiB": 15989,
+    "freeRAMMiB": 14892,
+    "CPUs": 4,
+    "node": "v24.21.0",
+    "runner": "GitHub Actions 1000000000",
+    "pnpm": "11.25.0"
+  },
+  "cloudRuns": [
+    {
+      "id": "39719749196",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39719749196",
+      "conclusion": "FAIL: missing Next config before compilation"
+    },
+    {
+      "id": "39720220422",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39720220422",
+      "conclusion": "FAIL: pnpm minimum release age"
+    }
+  ],
+  "cloudPassEvidence": [
+    {
+      "name": "protected-scope",
+      "started": "2026-10-22T03:58:27.993Z",
+      "finished": "2026-10-22T03:58:28.004Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pnpm-version",
+      "started": "2026-10-22T03:58:28.005Z",
+      "finished": "2026-10-22T03:58:28.626Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "1acf35ba7a81d53e41971d981bc25c487856729fd68651de3222c1a2f856ec0f"
+    },
+    {
+      "name": "dependency-resolution",
+      "started": "2026-10-22T03:58:28.627Z",
+      "finished": "2026-10-22T03:58:40.091Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c46d15717e3aef34fd865df85882f28582ff1de0cbfd737f08ad89436f934930"
+    },
+    {
+      "name": "frozen-install",
+      "started": "2026-10-22T03:58:40.092Z",
+      "finished": "2026-10-22T03:58:44.075Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "a8dd31f1ecd20e9ee31ff9a49de530383d8d3370ab659b267015f06648c3476f"
+    },
+    {
+      "name": "configuration",
+      "started": "2026-10-22T03:58:44.075Z",
+      "finished": "2026-10-22T03:58:44.622Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "b99b483157942b221868753d563bb68b796b5a382ab3edd13852ad0466497112",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "name": "adapter-typecheck",
+      "started": "2026-10-22T03:58:44.622Z",
+      "finished": "2026-10-22T03:58:45.341Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "production-audit",
+      "started": "2026-10-22T03:58:45.341Z",
+      "finished": "2026-10-22T03:58:45.932Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c1eda066339fe27899f3dd3b54c7349d55d96541d06e607e0c4606d1e235a1cf"
+    },
+    {
+      "name": "application",
+      "started": "2026-10-22T03:58:45.933Z",
+      "finished": "2026-10-22T03:58:48.244Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "c89d64f80eeef3902efa0cc9ff3ed65d5a1c86e6626162c1123617813971c4bc",
+      "tests": 223,
+      "passed": 223
+    },
+    {
+      "name": "sqlite-content",
+      "started": "2026-10-22T03:58:48.245Z",
+      "finished": "2026-10-22T03:58:49.281Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "99ebd0dfdcfc76555bfe28bc61f423b231633f76da3d377666f2b7617aac697e",
+      "tests": 12,
+      "passed": 12
+    },
+    {
+      "name": "sqlite-assets",
+      "started": "2026-10-22T03:58:49.281Z",
+      "finished": "2026-10-22T03:58:49.903Z",
+      "exit": 0,
+      "status": "PASS",
+      "output_sha256": "136fe1e4db78a5302ce3a101c8f6e2975392ab665d0159d1fee1f9da5f7e9e6d",
+      "tests": 3,
+      "passed": 3
+    }
+  ],
+  "lockSHA256": "f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6",
+  "lockIntegrity": "PASS; exact cloud bytes",
+  "dependencyPolicyAcceptance": "BLOCKED",
+  "correctedConfig": "next.config.mjs exports empty object; regression assertion added; cloud build remains pending",
+  "rootCause": {
+    "code": "ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION",
+    "policyMinutes": 1440,
+    "packages": [
+      {
+        "name": "@opennextjs/aws",
+        "version": "4.1.12",
+        "publishedUTC": "2026-10-21T12:21:38Z"
+      },
+      {
+        "name": "@opennextjs/cloudflare",
+        "version": "1.20.13",
+        "publishedUTC": "2026-10-21T13:22:30Z"
+      }
+    ],
+    "resumeAfterUTC": "2026-10-22T13:23:30Z",
+    "resumeAfterJST": "2026-10-22T22:23:30+09:00",
+    "policyWaived": false
+  },
+  "workersCompatibility": "BLOCKED",
+  "migrationValidation": "BLOCKED",
+  "finalMigrationPush": "BLOCKED; bootstrap/recovery transfer pushes only",
+  "deploymentReadiness": "NOT READY",
+  "completedLocallyThisDirective": [
+    "Read-only repository inspection",
+    "Migration configuration/harness edits",
+    "Checksums and secret-pattern inspection",
+    "Lightweight Git commit/transfer"
+  ],
+  "heavyWindowsExecution": false,
+  "security": {
+    "protectedApplicationSourceChanged": false,
+    "sqlChanged": false,
+    "productionAccessed": false,
+    "databaseMutations": 0,
+    "AuthOrStorageMutations": 0,
+    "realCredentialsSupplied": 0,
+    "realOAuthAutomated": false,
+    "deploymentAttempts": 0,
+    "publicPreviewCreated": false,
+    "paidServiceActivated": false,
+    "temporaryActionsReadPermissionRemoved": true,
+    "mainChanged": false
+  },
+  "remaining": [
+    "Resume the same cloud workflow after the release-age gate; keep pnpm verification enabled.",
+    "Validate empty Next config, complete OpenNext/Next build and dry-run bundle size.",
+    "Run loopback workerd HTTP and responsive Playwright comparisons.",
+    "Record remaining regression outcomes; only then create final acceptance commit and verify its normal push.",
+    "Founder review of account/TEST environment/hostname before any deployment."
+  ],
+  "backgroundRetryScheduled": false,
+  "evidence": [
+    {
+      "path": "validation/cloudflare/run-39719749196.json",
+      "sha256": "a3a1b0a307d4e831482f723eb8393bc84b99f52bed01ce062f6e0d7648985785"
+    },
+    {
+      "path": "validation/cloudflare/run-39720220422.json",
+      "sha256": "5634ff1719db20b5539178c8b08890c66376132dde5dcc488f4b46a007584491"
+    },
+    {
+      "path": "validation/cloudflare/diagnostic-119650409069.json",
+      "sha256": "17a352a3af880f48d0c3a1957dfc0a938d2d7c11667e056fc5b9118991f39dcc"
+    }
+  ]
+}

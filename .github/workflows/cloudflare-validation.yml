@@ -20,8 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   validate:
-    if: >-
-      github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && !startsWith(github.event.head_commit.message, 'diagnose-cloud-validation')
+    if: github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -46,36 +45,3 @@ jobs:
           run_install: false
       - name: Cloud-only install, build, security and runtime validation
         run: node validation/cloudflare/cloud-validate.mjs --reuse-regressions
-  diagnose:
-    if: >-
-      github.repository == 'holictraderscompany-art/htc-trial' && github.ref == 'refs/heads/codex/cloudflare-workers-preparation' && startsWith(github.event.head_commit.message, 'diagnose-cloud-validation')
-    runs-on: ubuntu-24.04
-    timeout-minutes: 3
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: '24'
-      - name: Read prior failure only; do not rerun validation
-        env:
-          GH_READ_TOKEN: ${{ github.token }}
-        run: |
-          node --input-type=module <<'NODE'
-          const r = await fetch('https://api.github.com/repos/holictraderscompany-art/htc-trial/actions/jobs/119631723700/logs', {
-            headers: { Authorization: 'Bearer ' + process.env.GH_READ_TOKEN, 'X-GitHub-Api-Version': '2022-11-28' }
-          });
-          if (!r.ok) throw new Error('Prior job log HTTP ' + r.status);
-          const lines = (await r.text()).split('\n');
-          const line = lines.find(l => l.includes('HTC_CLOUD_REPORT '));
-          if (!line) throw new Error('Prior cloud report absent');
-          const report = JSON.parse(line.split('HTC_CLOUD_REPORT ')[1]);
-          if (report.host.sha !== '3766c8f04f117f6d77574f64d8f86312ff157c24') throw new Error('Prior SHA mismatch');
-          const failed = report.stages.find(s => s.status === 'FAIL');
-          const index = lines.findIndex(l => l.includes('HTC_STAGE_START ' + failed?.name));
-          const excerpt = lines.slice(index, index + 65).filter(l => !l.includes('HTC_LOCK_CHUNK') && !l.includes('HTC_CLOUD_REPORT')).join('\n');
-          const escape = s => s.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
-          console.log('::notice title=HTC previous cloud report::' + escape(JSON.stringify(report)));
-          console.log('::notice title=HTC exact failure context::' + escape(excerpt));
-          NODE

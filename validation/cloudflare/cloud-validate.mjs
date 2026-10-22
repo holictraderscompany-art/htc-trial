@@ -43,6 +43,8 @@ function run(name, command, args, timeout = 600000) {
   if (stage.status !== 'PASS') {
     // No private credentials are supplied to these commands. Never dump environment.
     console.log(output.split('\n').slice(-45).join('\n'));
+    const detail = (name + '\n' + output.split('\n').slice(-45).join('\n')).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+    console.log('::notice title=HTC failure context::' + detail);
     throw new Error(name + ' failed' + (result.error ? ': ' + result.error.code : ''));
   }
   return output;
@@ -58,10 +60,23 @@ async function server(name, args, port) {
   }
   throw new Error(name + ' readiness timeout');
 }
+function regressions() {
+  run('adapter-typecheck', 'pnpm', ['exec', 'tsc', '--noEmit', '--skipLibCheck', '--target', 'es2022', '--module', 'nodenext', '--moduleResolution', 'nodenext', 'open-next.config.ts']);
+  run('production-audit', 'pnpm', ['audit', '--prod', '--json']);
+  run('application', 'pnpm', ['test']);
+  run('sqlite-content', 'pnpm', ['test:local:sqlite']);
+  run('sqlite-assets', 'pnpm', ['test:t14:sqlite']);
+}
 try {
   run('protected-scope', 'git', ['diff', '--exit-code', base, '--', 'src', 'supabase', 'validation/test-db', 'validation/t13',
     'validation/t14', 'validation/t15-master', 'validation/t16-r1', 'validation/t16-r2', 'validation/t16-final']);
   report.host.pnpm = run('pnpm-version', 'pnpm', ['--version']).trim();
+  // Actual run 39720220422 rejected these two exact pins under pnpm's default
+  // 24-hour release-age policy. Do not reinstall prematurely or waive the policy.
+  report.releaseAgeGate = { resumeAfterUTC: '2026-10-22T13:23:30Z',
+    evidenceRun: '39720220422', policyMinutes: 1440,
+    packages: ['@opennextjs/cloudflare@1.20.13', '@opennextjs/aws@4.1.12'] };
+  if (Date.now() < Date.parse(report.releaseAgeGate.resumeAfterUTC)) throw new Error('BLOCKED_RELEASE_AGE: resume after 2026-10-22T13:23:30Z; pnpm policy remains enforced');
   if (process.argv.includes('--bootstrap-lock')) run('dependency-resolution', 'pnpm', ['install', '--no-frozen-lockfile', '--ignore-scripts']);
   run('frozen-install', 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts']);
   run('configuration', 'pnpm', ['test:workers:config']);
@@ -74,16 +89,17 @@ try {
     const changed = cp.execFileSync('git', ['diff', '--name-only', prior.host.sha, '--', 'package.json', 'open-next.config.ts', 'tests'], { encoding: 'utf8' });
     assert.deepEqual(changed.trim().split('\n').filter(Boolean).filter(path => path !== 'tests/cloudflare-config.test.mjs'), []);
     const names = ['adapter-typecheck', 'production-audit', 'application', 'sqlite-content', 'sqlite-assets'];
-    report.reused_stages = prior.stages.filter(stage => names.includes(stage.name)).map(stage => ({ ...stage, reused_from_run: prior.host.run_id }));
-    assert.equal(report.reused_stages.length, names.length);
-    for (const stage of report.reused_stages) assert.equal(stage.status, 'PASS');
-    console.log('HTC_REUSED_REGRESSIONS ' + JSON.stringify(report.reused_stages));
+    if (process.version === prior.host.node) {
+      report.reused_stages = prior.stages.filter(stage => names.includes(stage.name)).map(stage => ({ ...stage, reused_from_run: prior.host.run_id }));
+      assert.equal(report.reused_stages.length, names.length);
+      for (const stage of report.reused_stages) assert.equal(stage.status, 'PASS');
+      console.log('HTC_REUSED_REGRESSIONS ' + JSON.stringify(report.reused_stages));
+    } else {
+      report.freshRegressionReason = 'Hosted Node version differs from the prior validated runtime';
+      regressions();
+    }
   } else {
-    run('adapter-typecheck', 'pnpm', ['exec', 'tsc', '--noEmit', '--skipLibCheck', '--target', 'es2022', '--module', 'nodenext', '--moduleResolution', 'nodenext', 'open-next.config.ts']);
-    run('production-audit', 'pnpm', ['audit', '--prod', '--json']);
-    run('application', 'pnpm', ['test']);
-    run('sqlite-content', 'pnpm', ['test:local:sqlite']);
-    run('sqlite-assets', 'pnpm', ['test:t14:sqlite']);
+    regressions();
   }
   fs.writeFileSync('.dev.vars', 'NEXTJS_ENV=development\nSUPABASE_PUBLISHABLE_KEY=sb_publishable_worker_runtime_fixture\n');
   run('workers-build', 'pnpm', ['build:workers']);
@@ -98,7 +114,7 @@ try {
   report.ui = JSON.parse(fs.readFileSync('validation/cloudflare/ui-cloud.json', 'utf8'));
   report.status = 'PASS';
 } catch (error) {
-  report.status = 'FAIL'; report.failure = error.message; process.exitCode = 1;
+  report.status = error.message.startsWith('BLOCKED_') ? 'BLOCKED' : 'FAIL'; report.failure = error.message; process.exitCode = 1;
 } finally {
   for (const child of servers) { try { process.kill(-child.pid, 'SIGTERM'); } catch {} }
   report.finished = new Date().toISOString();
@@ -112,4 +128,6 @@ try {
   }
   fs.writeFileSync('validation/cloudflare/cloud-report.json', JSON.stringify(report, null, 2) + '\n');
   console.log('HTC_CLOUD_REPORT ' + JSON.stringify(report));
+  const summary = JSON.stringify(report).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+  console.log('::notice title=HTC cloud report::' + summary);
 }
