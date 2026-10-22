@@ -105,6 +105,12 @@ try {
   run('workers-build', 'pnpm', ['build:workers']);
   const dry = run('workers-dry-run', 'pnpm', ['dry-run:workers']);
   report.bundleSummary = dry.split('\n').filter(line => /Total Upload|gzip|Startup Time/.test(line));
+  // Cloudflare's current Free and Paid limit is 64 MiB uncompressed, not gzip.
+  // https://developers.cloudflare.com/workers/platform/limits/#worker-size
+  const upload = dry.match(/Total Upload:\s*([\d.]+)\s*(KiB|MiB|B)\b/);
+  assert(upload, 'Wrangler dry-run did not report a verifiable bundle size');
+  report.bundleBytes = Number(upload[1]) * ({ B: 1, KiB: 1024, MiB: 1024 ** 2 }[upload[2]]);
+  assert(report.bundleBytes <= 64 * 1024 ** 2, 'Bundle exceeds the documented Workers size limit');
   run('browser-install', 'pnpm', ['exec', 'playwright', 'install', 'chromium']);
   await server('worker-preview', ['preview:workers'], 3105);
   run('worker-http', 'node', ['validation/cloudflare/probe-local-worker.mjs']);
