@@ -1,6 +1,11 @@
 {
-  "recordedAt": "2026-10-23T03:06:24.1112642Z",
-  "status": "CI_ACCESS_PROVISIONED_CALLBACK_CONFIRMED_DEPLOYMENT_PENDING",
+  "recordedAt": "2026-10-23T22:23:08Z",
+  "auditDateJST": "2026-10-24",
+  "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
+  "initialProvisioning": {
+    "recordedAt": "2026-10-23T03:06:24.1112642Z",
+    "status": "CI_ACCESS_PROVISIONED_CALLBACK_CONFIRMED_DEPLOYMENT_PENDING"
+  },
   "repository": "holictraderscompany-art/htc-trial",
   "branch": "codex/cloudflare-workers-preparation",
   "migrationBaseline": "3967a520a330577d8b1f5931361839dfeb28a46c",
@@ -41,7 +46,9 @@
   "cloudflare": {
     "account": "2e93ece77ccb74920f7b995f6d48996b",
     "worker": "htc-trial-workers-test",
-    "proposedURLNotYetDeployed": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+    "initialProposedURL": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+    "verifiedDeploymentURL": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+    "verifiedVersion": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
     "tokenIdMetadataOnly": "0e790bc024ce9fe627d0d358aa20c7f4",
     "tokenExpiryUTC": "2026-10-23T14:31:40Z",
     "tokenPermissions": [
@@ -49,7 +56,8 @@
       "Account Settings Read"
     ],
     "tokenResource": "com.cloudflare.api.account.2e93ece77ccb74920f7b995f6d48996b",
-    "tokenRuntimeVerification": "PASS",
+    "tokenRuntimeVerificationAtProvisioning": "PASS",
+    "tokenStatusAtCurrentAudit": "EXPIRED: original expiry retained; not permanent CI authority",
     "encryptedRelay": "PASS",
     "secretWriteAttempts": 1,
     "subscriptionChanges": 0,
@@ -63,33 +71,223 @@
     "publishableKeyAcceptedByExactTESTGateway": true,
     "googleProviderEnabled": true,
     "deployedHostnameRedirectAllowlist": "VERIFIED_BY_EXPLICIT_FOUNDER_CONFIRMATION: requested exact TEST callback entry saved",
-    "newHostnameGoogleLogin": "NOT_TESTED",
+    "newHostnameGoogleLogin": "PASS_FOUNDER_NORMAL_CHROME_OWNER_EVIDENCE_CORROBORATED_BY_TEST_GATEWAY_LOGS",
     "authVersion": "v2.197.0",
     "healthHTTP": 200
   },
   "security": {
+    "scope": "Read-only recovery audit and preserved application-security boundaries; earlier cloud deployment used its documented temporary 0600 runtime-secret file",
     "credentialValuesReturnedInReport": false,
-    "newPlaintextCredentialFiles": false,
+    "newPlaintextCredentialFilesDuringRecovery": false,
     "privateRSAKeyPersisted": false,
     "browserSessionTransfer": false,
     "applicationSourceChanges": false,
     "SQLChanges": false,
     "databaseMutations": 0,
-    "AuthOrStorageMutations": 0,
+    "AuthOrStorageConfigurationMutations": 0,
+    "legitimateOwnerOAuthFlowObserved": true,
     "productionAccessed": false,
     "paidServiceActivated": false,
     "heavyWindowsExecution": false,
     "globalClientInstallation": false,
     "mainChanged": false
   },
+  "latestHostedValidation": {
+    "run": "39900017186",
+    "job": "120239201999",
+    "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39900017186",
+    "sha": "946c4e7ac17ff9fef2c82a69995c58f17b93a0e1",
+    "conclusion": "success",
+    "attempt": 1,
+    "startedAt": "2026-10-23T04:23:04Z",
+    "completedAt": "2026-10-23T04:24:23Z",
+    "controllerGuards": "9/9 PASS",
+    "redirectAdapter": "14/14 PASS",
+    "sealedPreflight": "PASS",
+    "nativeWorkerdProof": {
+      "status": "PASS",
+      "mode": "CLOUD_LOCAL_WORKERD_TEST_PUBLIC_JWKS_GET_ONLY",
+      "legacyRedirectErrorRejected": true,
+      "compatibilityReadHTTP": 200,
+      "manualKeySetShape": true,
+      "adaptedKeySetShape": true,
+      "adaptedCalls": 1,
+      "secretInputs": false,
+      "fixtures": 0
+    },
+    "frozenInstallAndOpenNextBuild": "PASS",
+    "deploymentExitCode": 0,
+    "version": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+    "deployedHTTPChecks": "17/17 PASS",
+    "publicResponsiveViews": "8/8 PASS (6 baseline and 2 public discovery views)",
+    "fixturesCreated": 0,
+    "newerRunsAtRecoveryAudit": 0,
+    "queuedRunsAtRecoveryAudit": 0,
+    "inProgressRunsAtRecoveryAudit": 0,
+    "evidence": "Actual GitHub run/job/log summaries and sanitized job annotations recovered read-only; no build/test replay"
+  },
+  "currentReadOnlyAudit": {
+    "auditDateJST": "2026-10-24",
+    "project": "uzhkzhmncxjplrdtdzgd",
+    "projectStatus": "ACTIVE_HEALTHY",
+    "authSettingsHTTP": 200,
+    "googleProviderEnabled": true,
+    "workerPublicContentHTTP": 200,
+    "publicContentItems": 0,
+    "databaseCounters": {
+      "contentDRAFT": 0,
+      "contentRELEASED": 0,
+      "contentWITHDRAWN": 0,
+      "assetPENDING": 0,
+      "assetREADY": 0,
+      "assetDELETING": 0
+    },
+    "contentAssetRelations": 0,
+    "storageObjects": 0,
+    "migrationRecords": 10,
+    "fixtureMutations": 0
+  },
+  "founderBrowserValidation": {
+    "status": "PASS_WITH_STATED_EVIDENCE_LIMITATIONS",
+    "source": "Owner legitimate normal-Chrome Google FOUNDER login and dashboard result, corroborated by sanitized TEST gateway logs",
+    "dashboardPath": "/founder/operations",
+    "ownerReportedSnapshotLoaded": true,
+    "ownerReportedSnapshotSource": "Supabase database snapshot",
+    "ownerReportedSixCountersZero": true,
+    "authCodeExchange": {
+      "atUTC": "2026-10-23T22:00:03.092Z",
+      "status": 200
+    },
+    "userVerificationHTTP": 200,
+    "founderRPCs": {
+      "timesUTC": [
+        "2026-10-23T22:03:16Z",
+        "2026-10-23T22:03:18Z",
+        "2026-10-23T22:03:24Z"
+      ],
+      "status": 200
+    },
+    "evidenceFileOutsideGit": "cloudflare-founder-oauth-20261024.json",
+    "evidenceSHA256": "854bbd749475e547b3d50f19846385458391fa377d8c2bc190a9802211a89ef9",
+    "limitations": "No browser cookie inspection or session transfer. HTTP 200 RPC logs alone do not prove the returned Founder boolean; role and rendered dashboard are owner browser evidence. No app POST count or unseen response payload is inferred."
+  },
+  "userAndLogoutValidation": {
+    "userGoogleLogin": "PASS_OWNER_NORMAL_CHROME_EVIDENCE",
+    "userOperationsPage": "PASS_OWNER_OBSERVED_SERVER_RENDERED_ACCESS_DENIED",
+    "serverBoundarySource": [
+      "src/server/founder-access.js",
+      "src/app/founder/layout.js",
+      "src/app/founder/operations/page.js"
+    ],
+    "officialSignoutAndVisualNavigation": "PASS_OWNER_PERFORMED_SIGN_OUT_AND_REPORTED_SIGN_IN_AND_HOME_VISIBLE",
+    "signoutSource": "src/server/trial-session.js: official POST logout?scope=local and browser session/flow cookie clearing",
+    "userProtectedAPIHTTP403": "PENDING_RUNTIME_MEASUREMENT",
+    "postLogoutBrowserAuthenticatedFalse": "PENDING_RUNTIME_MEASUREMENT",
+    "postLogoutProtectedAPIHTTP401": "PENDING_RUNTIME_MEASUREMENT",
+    "sanitizedUpstreamWindowUTC": [
+      "2026-10-23T22:06:16Z",
+      "2026-10-23T22:19:06Z"
+    ],
+    "sanitizedUpstreamEvents": [
+      {
+        "endpoint": "auth_code_exchange",
+        "method": "POST",
+        "atUTC": "2026-10-23T22:11:49.885Z",
+        "status": 200
+      },
+      {
+        "endpoint": "user",
+        "method": "GET",
+        "atUTC": "2026-10-23T22:12:22.220Z",
+        "status": 200
+      },
+      {
+        "endpoint": "is_founder",
+        "method": "POST",
+        "atUTC": "2026-10-23T22:12:22.422Z",
+        "status": 200
+      },
+      {
+        "endpoint": "official_logout",
+        "method": "POST",
+        "atUTC": "2026-10-23T22:16:33.438Z",
+        "status": 204
+      }
+    ],
+    "evidenceFileOutsideGit": "cloudflare-user-logout-correlations-20261024.json",
+    "evidenceSHA256": "dfa75cf44834811840b79382e3c708341115778af5beae3acad6c538c7e29c0d",
+    "limitations": "Multiple logins/logouts occurred in the window; sanitized statuses do not uniquely identify an account/session. is_founder HTTP 200 does not prove its boolean. Owner server-rendered denial and visual navigation are not evidence of protected API 403 or post-logout API 401/authenticated=false. No cookie/token was inspected or transferred."
+  },
+  "historicalWorkerAPIStatusAvailability": {
+    "observability": null,
+    "logpush": false,
+    "readOnlyEventCountQueryHTTP": 200,
+    "eventCount": 0,
+    "configurationChanged": false,
+    "conclusion": "No historical application API status evidence is available from these Worker logs"
+  },
+  "malformedSessionValidation": {
+    "atUTC": "2026-10-23T22:10:15.737Z",
+    "result": "3/3 PASS",
+    "sessionAPI": {
+      "status": 200,
+      "authenticated": false,
+      "noStore": true
+    },
+    "summaryAPI": {
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "noStore": true
+    },
+    "operationsPage": {
+      "status": 307,
+      "target": "same-origin /sign-in",
+      "noStore": true
+    },
+    "source": "Synthetic malformed cookie only; no legitimate session read, export or fixture mutation",
+    "evidenceFileOutsideGit": "cloudflare-invalid-session-20261024.json",
+    "evidenceSHA256": "fbef254e84bfc2ecd63cb5e589324b3504922dd3df94436dc5833f0df010b6c7",
+    "limitation": "Not evidence of natural JWT expiry on the new hostname; prior Auth R2B natural-expiry evidence remains preserved"
+  },
+  "preservedHistoricalFailures": [
+    {
+      "run": "39894081617",
+      "result": "Initial TEST upload exit 0; immediate health HTTP 404 stopped the run; historical failure preserved without upload retry"
+    },
+    {
+      "run": "39895394918",
+      "result": "16 HTTPS checks passed; public discovery HTTP 500 before the targeted redirect compatibility correction; no successful UI/OAuth claim for this run"
+    },
+    {
+      "run": "39899047131",
+      "result": "9 controller and 14 adapter tests passed; keyless Auth health proof failed before build/upload; historical failure preserved and later proof corrected to public JWKS"
+    }
+  ],
   "remaining": [
-    "Review one-shot exact-SHA deployment controller and new cloud guard tests",
-    "Run frozen build and TEST-only upload on GitHub-hosted Linux",
-    "Prove actual HTTPS and new-host security/UI behavior",
-    "Verify new-host redirect allowlist and legitimate Founder/USER Google OAuth"
+    "Measure protected API HTTP 403 within the legitimate USER browser session on the deployed TEST hostname",
+    "Measure post-logout browser authenticated=false and protected API HTTP 401; do not infer these from visual navigation, sanitized upstream events or the malformed-session probe"
   ],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Requested callback entry confirmed saved by Founder; genuine new-host Google login remains pending",
-  "packageOnlyGate": "Superseded by Founder callback confirmation: exact-SHA cloud tests/build must pass before the authorized single TEST upload"
+  "ownerAction": "Existing one-shot private USER/post-logout browser measurement request is pending; do not repeat questions, Founder login or transfer browser credentials",
+  "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
+  "consoleFreePreparation": {
+    "status": "IMPLEMENTED_AWAITING_CLOUD_REGRESSION_AND_AUTHENTICATED_TEST_UPLOAD",
+    "path": "/__htc-test-access-check",
+    "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
+    "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
+    "automaticRequests": false,
+    "cookieOrTokenInspection": false,
+    "newAuthOrDatabasePermissions": false,
+    "changesToApplicationSource": false,
+    "oldDeployedVersion": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+    "newPageDeployed": false,
+    "cloudValidation": "PENDING",
+    "officialCloudflareConnector": {
+      "status": "BLOCKED_OAUTH_REFRESH",
+      "error": "invalid_client: Client not found",
+      "nativeRecovery": "Default native login failed owner-observed client metadata temporarily_unavailable; official public discovery HTTP200 supports DCR and S256. One explicit native DCR login registered a non-metadata client and opened normal Chrome; owner approval pending, no API token created."
+    },
+    "ciCredential": "Existing 12-hour token expired; new exact-account TEST-only credential remains unprovisioned"
+  }
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { extractDeployedURL, generatedConfig, origin, privateBuildEnv, repairBaseVersion, requireCredentials, verifyApproval, verifyDeploymentChanges, verifyRepairBaseline } from './deploy-test.mjs';
+import { accessCheckBaseDeployments, accessCheckBaseVersion, extractDeployedURL, generatedConfig, origin, privateBuildEnv, repairBaseVersion, requireCredentials, verifyAccessCheckBaseline, verifyAccessCheckBrowserProof, verifyApproval, verifyDeploymentChanges, verifyRepairBaseline } from './deploy-test.mjs';
 import { target } from './test-deployment-preflight.mjs';
 
 const env = () => ({ RUNNER_OS:'Linux', RUNNER_ENVIRONMENT:'github-hosted', GITHUB_ACTIONS:'true', GITHUB_RUN_ID:'1', GITHUB_REPOSITORY:target.repository, GITHUB_REF:target.ref, GITHUB_RUN_ATTEMPT:'1', GITHUB_SHA:'a'.repeat(40), APPROVED_WORKFLOW_SHA:'a'.repeat(40), DEPLOYMENT_ENABLED:'true', TEST_EXECUTION_MODE:'deploy', REDIRECT_ALLOWLIST_VERIFIED:'true', CONFIG_CF_ACCOUNT:target.account, CONFIG_WORKER:target.worker, CONFIG_PROJECT:target.project, HTC_SUPABASE_TARGET:'test', SUPABASE_URL:`https://${target.project}.supabase.co` });
@@ -75,4 +75,93 @@ test('repair baseline refuses drift, split deployments, additional bindings and 
   assert.throws(() => verifyRepairBaseline(foreign,deployments,endpoint),/STOP_REPAIR_TARGET/);
   assert.throws(() => verifyRepairBaseline({...settings,bindings:[...settings.bindings,{name:'EXTRA',type:'kv_namespace'}]},deployments,endpoint),/STOP_REPAIR_BINDINGS/);
   assert.throws(() => verifyRepairBaseline({...settings,compatibility_flags:['nodejs_compat']},deployments,endpoint),/STOP_REPAIR_FLAGS/);
+});
+
+test('access-check continuation requires its own exact approved version without changing repair approval', () => {
+  const approved={...env(),TEST_EXECUTION_MODE:'accesscheck',APPROVED_ACCESSCHECK_BASE_VERSION:accessCheckBaseVersion};
+  assert.doesNotThrow(()=>verifyApproval(approved,'linux','v24.21.0'));
+  for(const patch of [
+    {APPROVED_ACCESSCHECK_BASE_VERSION:undefined}, {APPROVED_ACCESSCHECK_BASE_VERSION:repairBaseVersion},
+    {APPROVED_WORKFLOW_SHA:'b'.repeat(40)}, {DEPLOYMENT_ENABLED:'false'},
+    {REDIRECT_ALLOWLIST_VERIFIED:'false'}, {GITHUB_RUN_ATTEMPT:'2'}, {CONFIG_PROJECT:'different'},
+  ]) assert.throws(()=>verifyApproval({...approved,...patch},'linux','v24.21.0'),/STOP_/);
+  assert.throws(()=>verifyApproval({...approved,TEST_EXECUTION_MODE:'repair',APPROVED_REPAIR_BASE_VERSION:accessCheckBaseVersion},'linux','v24.21.0'),/STOP_REPAIR_VERSION_APPROVAL/);
+  const rows=['.github/workflows/cloudflare-test-preflight.yml','validation/cloudflare/test-deployment-preflight.mjs','validation/cloudflare/test-deployment-preflight.test.mjs','docs/cloudflare-test-deployment.md','.github/workflows/cloudflare-test-deploy.yml','validation/cloudflare/deploy-test.mjs','validation/cloudflare/deploy-test.test.mjs','cloudflare/test-access-check.mjs','tests/cloudflare-test-access-check.test.mjs'].map(name=>`A\t${name}`).join('\n');
+  assert.doesNotThrow(()=>verifyDeploymentChanges(rows));
+  assert.throws(()=>verifyDeploymentChanges(rows.replace('cloudflare/test-access-check.mjs','src/app/api/founder/operations/route.js')),/STOP_CHANGE_SCOPE/);
+  const generated=generatedConfig(base(),true);
+  assert.equal(generated.main,'cloudflare/worker-entry.mjs');
+  assert.deepEqual(generated.routes,[]); assert.equal(generated.preview_urls,false);
+});
+
+const accessCheckFixture=()=>({
+  settings:{compatibility_date:'2026-10-22',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],bindings:[
+    {name:'ASSETS',type:'assets'}, {name:'HTC_SUPABASE_TARGET',type:'plain_text',text:'test'},
+    {name:'SUPABASE_URL',type:'plain_text',text:`https://${target.project}.supabase.co`},
+    {name:'SUPABASE_PUBLISHABLE_KEY',type:'secret_text'}, {name:'WORKER_SELF_REFERENCE',type:'service',service:target.worker},
+  ]},
+  deployments:{deployments:accessCheckBaseDeployments.map(({id,version})=>({id,versions:[{version_id:version,percentage:100}]}))},
+  endpoint:{enabled:true,previews_enabled:false},
+});
+
+test('access-check baseline pins both historical IDs and versions and the current 100-percent deployment',()=>{
+  const {settings,deployments,endpoint}=accessCheckFixture();
+  assert.doesNotThrow(()=>verifyAccessCheckBaseline(settings,deployments,endpoint));
+  const mutate=change=>{const value=structuredClone(deployments);change(value.deployments);return value;};
+  for(const altered of [
+    {deployments:[]}, {deployments:[deployments.deployments[0]]},
+    {deployments:[...deployments.deployments,deployments.deployments[0]]},
+    mutate(rows=>rows.reverse()), mutate(rows=>{rows[0].id='unapproved';}),
+    mutate(rows=>{rows[1].id=rows[0].id;}),
+    mutate(rows=>{rows[0].versions[0].version_id=repairBaseVersion;}),
+    mutate(rows=>{rows[1].versions[0].version_id=accessCheckBaseVersion;}),
+    mutate(rows=>{rows[0].versions[0].percentage=50;}),
+    mutate(rows=>{rows[1].versions[0].percentage=0;}),
+    mutate(rows=>{rows[0].versions.push({...rows[0].versions[0]});}),
+  ]) assert.throws(()=>verifyAccessCheckBaseline(settings,altered,endpoint),/STOP_ACCESSCHECK_BASELINE/);
+  // The historical repair mode continues to reject this two-deployment state.
+  assert.throws(()=>verifyRepairBaseline(settings,deployments,endpoint),/STOP_REPAIR_BASELINE/);
+});
+
+test('access-check keeps the same five bindings, exact TEST target, flags and private routing guards',()=>{
+  const {settings,deployments,endpoint}=accessCheckFixture();
+  for(const altered of [{...endpoint,enabled:false},{...endpoint,previews_enabled:true}])
+    assert.throws(()=>verifyAccessCheckBaseline(settings,deployments,altered),/STOP_ACCESSCHECK_ROUTING/);
+  const mutate=change=>{const value=structuredClone(settings);change(value);return value;};
+  for(const altered of [
+    mutate(value=>{value.bindings.pop();}),
+    mutate(value=>{value.bindings.push({name:'EXTRA',type:'kv_namespace'});}),
+    mutate(value=>{value.bindings[3].type='plain_text';}),
+    mutate(value=>{value.bindings[2].text='https://unapproved.invalid';}),
+    mutate(value=>{value.bindings[1].text='production';}),
+    mutate(value=>{value.bindings[4].service='other-worker';}),
+    mutate(value=>{value.compatibility_date='2026-10-23';}),
+    mutate(value=>{value.compatibility_flags=['nodejs_compat'];}),
+  ]) assert.throws(()=>verifyAccessCheckBaseline(altered,deployments,endpoint),/STOP_ACCESSCHECK_(?:BINDINGS|TARGET|FLAGS)/);
+});
+
+test('access-check browser evidence is exact-source synthetic proof with both view and fail-closed cases',()=>{
+  const proof={
+    status:'PASS', mode:'LOCAL_SYNTHETIC_BROWSER_REGRESSION_NOT_LIVE_AUTH',sha:env().GITHUB_SHA,run:env().GITHUB_RUN_ID,
+    externalNetworkRequests:0,credentialsUsed:false,cookiesTransferred:false,AuthDatabaseStorageMutations:0,
+    deployments:0,liveSupabaseRequests:0,realGoogleOAuth:false,screenshotArtifacts:0,
+    views:[1440,390].map(width=>({width,passed:true,cspScriptExecuted:true,initialNetworkInert:true,
+      summaryOriginSame:true,nativeSignOutOriginSame:true,noHorizontalOverflow:true,USER403:'SYNTHETIC_PASS',
+      postLogout401:'SYNTHETIC_PASS',originalReceiptPreserved:true})),
+    failures:['anonymous','founder'].map(name=>({case:name,passed:true,failedClosed:true,AuthOperations:0})),
+  };
+  assert.doesNotThrow(()=>verifyAccessCheckBrowserProof(proof,env()));
+  const mutate=change=>{const value=structuredClone(proof);change(value);return value;};
+  for(const altered of [
+    undefined, {...proof,status:'FAIL_NO_RETRY'}, {...proof,mode:'LIVE_AUTH_PASS'},
+    {...proof,sha:'b'.repeat(40)}, {...proof,run:'2'},
+    {...proof,views:[]}, {...proof,failures:[]},
+    mutate(value=>{value.views[1].width=1440;}),
+    mutate(value=>{value.views[0].initialNetworkInert=false;}),
+    mutate(value=>{value.views[0].originalReceiptPreserved=false;}),
+    mutate(value=>{value.failures[1].failedClosed=false;}),
+    mutate(value=>{value.failures[1].AuthOperations=1;}),
+    ...['externalNetworkRequests','AuthDatabaseStorageMutations','deployments','liveSupabaseRequests','screenshotArtifacts'].map(key=>({...proof,[key]:1})),
+    ...['credentialsUsed','cookiesTransferred','realGoogleOAuth'].map(key=>({...proof,[key]:true})),
+  ]) assert.throws(()=>verifyAccessCheckBrowserProof(altered,env()),/STOP_ACCESSCHECK_BROWSER_PROOF/);
 });

@@ -8,6 +8,11 @@ import { target, verifyHost, verifyWrangler } from './test-deployment-preflight.
 
 export const origin = 'https://htc-trial-workers-test.holictraderscompany.workers.dev';
 export const repairBaseVersion = 'a101e9e0-d84f-4473-9867-1475126b0c9e';
+export const accessCheckBaseVersion = 'f2897ae4-6133-4614-aaa8-257e3f5c6216';
+export const accessCheckBaseDeployments = Object.freeze([
+  Object.freeze({ id: 'dc9ab7b3-a452-4b94-8dce-2372fa57de00', version: accessCheckBaseVersion }),
+  Object.freeze({ id: '1a1e13ea-f92a-4ce7-b247-0e11287d7fe8', version: repairBaseVersion }),
+]);
 const callback = `${origin}/auth/callback`;
 const configPath = 'wrangler.test.generated.jsonc';
 const statePath = '.wrangler/htc-test-deployment/state.json';
@@ -31,6 +36,10 @@ const optionalChanges = new Set([
   'validation/cloudflare/redirect-error-workerd-worker.mjs',
   'validation/cloudflare/redirect-error-workerd.wrangler.jsonc',
   'validation/cloudflare/probe-redirect-error-workerd.mjs',
+  'cloudflare/test-access-check.mjs',
+  'tests/cloudflare-test-access-check.test.mjs',
+  '.github/workflows/cloudflare-test-access-validation.yml',
+  'validation/cloudflare/probe-test-access-check.mjs',
 ]);
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 const guard = (condition, code) => { if (!condition) throw new Error(code); };
@@ -41,10 +50,11 @@ export function verifyApproval(env, platform = process.platform, version = proce
   verifyHost(env, platform, version);
   guard(env.RUNNER_ENVIRONMENT === 'github-hosted', 'STOP_RUNNER_OWNERSHIP');
   guard(/^[0-9]+$/.test(env.GITHUB_RUN_ID ?? ''), 'STOP_RUN_ID');
-  guard((env.TEST_EXECUTION_MODE === 'package' && env.DEPLOYMENT_ENABLED === 'false') || (['deploy','repair'].includes(env.TEST_EXECUTION_MODE) && env.DEPLOYMENT_ENABLED === 'true'), 'STOP_DISABLED_OR_MODE');
+  guard((env.TEST_EXECUTION_MODE === 'package' && env.DEPLOYMENT_ENABLED === 'false') || (['deploy','repair','accesscheck'].includes(env.TEST_EXECUTION_MODE) && env.DEPLOYMENT_ENABLED === 'true'), 'STOP_DISABLED_OR_MODE');
   guard(env.APPROVED_WORKFLOW_SHA === env.GITHUB_SHA, 'STOP_UNAPPROVED_SHA');
-  if (['deploy','repair'].includes(env.TEST_EXECUTION_MODE)) guard(env.REDIRECT_ALLOWLIST_VERIFIED === 'true', 'STOP_OAUTH_CALLBACK_GATE');
+  if (['deploy','repair','accesscheck'].includes(env.TEST_EXECUTION_MODE)) guard(env.REDIRECT_ALLOWLIST_VERIFIED === 'true', 'STOP_OAUTH_CALLBACK_GATE');
   if (env.TEST_EXECUTION_MODE === 'repair') guard(env.APPROVED_REPAIR_BASE_VERSION === repairBaseVersion, 'STOP_REPAIR_VERSION_APPROVAL');
+  if (env.TEST_EXECUTION_MODE === 'accesscheck') guard(env.APPROVED_ACCESSCHECK_BASE_VERSION === accessCheckBaseVersion, 'STOP_ACCESSCHECK_VERSION_APPROVAL');
   guard(env.CONFIG_CF_ACCOUNT === target.account && env.CONFIG_WORKER === target.worker && env.CONFIG_PROJECT === target.project, 'STOP_CONFIG_BINDINGS');
   guard(env.HTC_SUPABASE_TARGET === 'test' && env.SUPABASE_URL === `https://${target.project}.supabase.co`, 'STOP_ENV_TARGET');
 }
@@ -92,6 +102,10 @@ function verifySource(allowGenerated = false) {
   guard(dirty === '' || (allowGenerated && dirty === `?? ${configPath}`), 'STOP_DIRTY');
   git('merge-base', '--is-ancestor', target.migration, 'HEAD');
   git('merge-base', '--is-ancestor', target.group03, 'HEAD');
+  if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+    git('merge-base', '--is-ancestor', '946c4e7ac17ff9fef2c82a69995c58f17b93a0e1', 'HEAD');
+    guard(existsSync('cloudflare/test-access-check.mjs') && existsSync('tests/cloudflare-test-access-check.test.mjs'), 'STOP_ACCESSCHECK_SOURCE_ABSENT');
+  }
   verifyDeploymentChanges(git('diff', '--name-status', target.migration, 'HEAD'));
   const bytes = gitBytes('validation/cloudflare/final-review.json');
   guard(sha256(bytes) === target.manifestSHA256, 'STOP_MANIFEST');
@@ -101,7 +115,7 @@ function verifySource(allowGenerated = false) {
     guard(sha256(gitBytes(file.path)) === file.sha256 && git('rev-parse', `HEAD:${file.path}`) === file.gitBlobOID, 'STOP_SEALED_BYTES');
   }
   guard(sha256(gitBytes('pnpm-lock.yaml')) === target.lockSHA256, 'STOP_LOCKFILE');
-  return generatedConfig(JSON.parse(readFileSync('wrangler.jsonc', 'utf8')), process.env.TEST_EXECUTION_MODE === 'repair');
+  return generatedConfig(JSON.parse(readFileSync('wrangler.jsonc', 'utf8')), ['repair','accesscheck'].includes(process.env.TEST_EXECUTION_MODE));
 }
 
 async function getJSON(url, headers, code, accepted = [200]) {
@@ -122,15 +136,49 @@ async function cfGet(suffix, code, accepted) {
   return result;
 }
 
+function verifyExistingWorkerSettings(settings, endpoint, prefix) {
+  guard(endpoint?.enabled === true && endpoint.previews_enabled === false, `${prefix}_ROUTING`);
+  const bindings = settings?.bindings;
+  guard(Array.isArray(bindings) && bindings.length === 5 && new Set(bindings.map(b => b.name)).size === 5, `${prefix}_BINDINGS`);
+  for (const [name,type] of [['ASSETS','assets'],['HTC_SUPABASE_TARGET','plain_text'],['SUPABASE_URL','plain_text'],['SUPABASE_PUBLISHABLE_KEY','secret_text'],['WORKER_SELF_REFERENCE','service']]) guard(bindings.some(b => b.name === name && b.type === type), `${prefix}_BINDINGS`);
+  guard(bindings.find(b => b.name === 'HTC_SUPABASE_TARGET').text === 'test' && bindings.find(b => b.name === 'SUPABASE_URL').text === `https://${target.project}.supabase.co` && bindings.find(b => b.name === 'WORKER_SELF_REFERENCE').service === target.worker, `${prefix}_TARGET`);
+  guard(settings.compatibility_date === '2026-10-22' && JSON.stringify([...(settings.compatibility_flags ?? [])].sort()) === JSON.stringify(['global_fetch_strictly_public','nodejs_compat']), `${prefix}_FLAGS`);
+}
+
 export function verifyRepairBaseline(settings, deployments, endpoint) {
   const active = deployments?.deployments;
   guard(Array.isArray(active) && active.length === 1 && active[0].versions?.length === 1 && active[0].versions[0].version_id === repairBaseVersion && active[0].versions[0].percentage === 100, 'STOP_REPAIR_BASELINE');
-  guard(endpoint?.enabled === true && endpoint.previews_enabled === false, 'STOP_REPAIR_ROUTING');
-  const bindings = settings?.bindings;
-  guard(Array.isArray(bindings) && bindings.length === 5 && new Set(bindings.map(b => b.name)).size === 5, 'STOP_REPAIR_BINDINGS');
-  for (const [name,type] of [['ASSETS','assets'],['HTC_SUPABASE_TARGET','plain_text'],['SUPABASE_URL','plain_text'],['SUPABASE_PUBLISHABLE_KEY','secret_text'],['WORKER_SELF_REFERENCE','service']]) guard(bindings.some(b => b.name === name && b.type === type), 'STOP_REPAIR_BINDINGS');
-  guard(bindings.find(b => b.name === 'HTC_SUPABASE_TARGET').text === 'test' && bindings.find(b => b.name === 'SUPABASE_URL').text === `https://${target.project}.supabase.co` && bindings.find(b => b.name === 'WORKER_SELF_REFERENCE').service === target.worker, 'STOP_REPAIR_TARGET');
-  guard(settings.compatibility_date === '2026-10-22' && JSON.stringify([...(settings.compatibility_flags ?? [])].sort()) === JSON.stringify(['global_fetch_strictly_public','nodejs_compat']), 'STOP_REPAIR_FLAGS');
+  verifyExistingWorkerSettings(settings, endpoint, 'STOP_REPAIR');
+}
+
+export function verifyAccessCheckBaseline(settings, deployments, endpoint) {
+  const history = deployments?.deployments;
+  // This is a distinct reviewed continuation, not a relaxation of repair's old
+  // single-deployment assertion. Every historical ID/version remains pinned.
+  guard(Array.isArray(history) && history.length === accessCheckBaseDeployments.length &&
+    accessCheckBaseDeployments.every((expected, index) => {
+      const row = history[index];
+      return row?.id === expected.id && row.versions?.length === 1 &&
+        row.versions[0].version_id === expected.version && row.versions[0].percentage === 100;
+    }), 'STOP_ACCESSCHECK_BASELINE');
+  verifyExistingWorkerSettings(settings, endpoint, 'STOP_ACCESSCHECK');
+}
+
+export function verifyAccessCheckBrowserProof(proof, env) {
+  guard(proof?.status === 'PASS' && proof.mode === 'LOCAL_SYNTHETIC_BROWSER_REGRESSION_NOT_LIVE_AUTH' &&
+    /^[a-f0-9]{40}$/.test(proof.sha ?? '') && proof.sha === env.GITHUB_SHA &&
+    /^[0-9]+$/.test(proof.run ?? '') && proof.run === env.GITHUB_RUN_ID &&
+    proof.externalNetworkRequests === 0 && proof.credentialsUsed === false && proof.cookiesTransferred === false &&
+    proof.AuthDatabaseStorageMutations === 0 && proof.deployments === 0 && proof.liveSupabaseRequests === 0 &&
+    proof.realGoogleOAuth === false && proof.screenshotArtifacts === 0 &&
+    Array.isArray(proof.views) && proof.views.length === 2 &&
+    [1440,390].every(width => proof.views.some(view => view?.width === width && view.passed === true &&
+      view.cspScriptExecuted === true && view.initialNetworkInert === true && view.summaryOriginSame === true &&
+      view.nativeSignOutOriginSame === true && view.noHorizontalOverflow === true &&
+      view.USER403 === 'SYNTHETIC_PASS' && view.postLogout401 === 'SYNTHETIC_PASS' && view.originalReceiptPreserved === true)) &&
+    Array.isArray(proof.failures) && proof.failures.length === 2 &&
+    ['anonymous','founder'].every(name => proof.failures.some(item => item?.case === name && item.passed === true &&
+      item.failedClosed === true && item.AuthOperations === 0)), 'STOP_ACCESSCHECK_BROWSER_PROOF');
 }
 
 async function accessPreflight(report) {
@@ -140,11 +188,14 @@ async function accessPreflight(report) {
   const subdomain = await cfGet('/workers/subdomain', 'STOP_SUBDOMAIN');
   guard(subdomain.body.result?.subdomain === 'holictraderscompany', 'STOP_SUBDOMAIN_ID');
   const repair = process.env.TEST_EXECUTION_MODE === 'repair';
-  if (repair) {
-    const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, 'STOP_REPAIR_SETTINGS');
-    const deployments = await cfGet(`/workers/scripts/${target.worker}/deployments`, 'STOP_REPAIR_DEPLOYMENTS');
-    const endpoint = await cfGet(`/workers/scripts/${target.worker}/subdomain`, 'STOP_REPAIR_ENDPOINT');
-    verifyRepairBaseline(worker.body.result, deployments.body.result, endpoint.body.result);
+  const accesscheck = process.env.TEST_EXECUTION_MODE === 'accesscheck';
+  if (repair || accesscheck) {
+    const prefix = accesscheck ? 'STOP_ACCESSCHECK' : 'STOP_REPAIR';
+    const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, `${prefix}_SETTINGS`);
+    const deployments = await cfGet(`/workers/scripts/${target.worker}/deployments`, `${prefix}_DEPLOYMENTS`);
+    const endpoint = await cfGet(`/workers/scripts/${target.worker}/subdomain`, `${prefix}_ENDPOINT`);
+    if (accesscheck) verifyAccessCheckBaseline(worker.body.result, deployments.body.result, endpoint.body.result);
+    else verifyRepairBaseline(worker.body.result, deployments.body.result, endpoint.body.result);
   } else {
     const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, 'STOP_WORKER_EXISTENCE', [404]);
     guard(worker.body.success === false && Array.isArray(worker.body.errors) && worker.body.errors.some(error => error.code === 10007), 'STOP_WORKER_ABSENCE_AMBIGUOUS');
@@ -153,7 +204,7 @@ async function accessPreflight(report) {
     apikey: process.env.HTC_SUPABASE_TEST_PUBLISHABLE_KEY,
   }, 'STOP_TEST_AUTH');
   guard(settings.body.external?.google === true, 'STOP_GOOGLE_PROVIDER');
-  report.preflight = { account: 'PASS', ...(repair ? { existingSingleVersionVerified: repairBaseVersion } : { workerAbsent: 'PASS' }), hostname: origin, TESTKeyAccepted: true, GoogleProviderEnabled: true, callbackTarget: callback, callbackGate: process.env.REDIRECT_ALLOWLIST_VERIFIED === 'true' ? 'VERIFIED_BY_APPROVED_ENVIRONMENT_GATE' : 'BLOCKED_NOT_REQUIRED_FOR_PACKAGE', planChangeRequested: false };
+  report.preflight = { account: 'PASS', ...(accesscheck ? { existingVersionVerified: accessCheckBaseVersion, exactHistoricalDeploymentsVerified: 2 } : repair ? { existingSingleVersionVerified: repairBaseVersion } : { workerAbsent: 'PASS' }), hostname: origin, TESTKeyAccepted: true, GoogleProviderEnabled: true, callbackTarget: callback, callbackGate: process.env.REDIRECT_ALLOWLIST_VERIFIED === 'true' ? 'VERIFIED_BY_APPROVED_ENVIRONMENT_GATE' : 'BLOCKED_NOT_REQUIRED_FOR_PACKAGE', planChangeRequested: false };
 }
 
 function loadState(phase) {
@@ -175,6 +226,13 @@ function run(stage, args, env, report, timeout = 900000) {
     const proof = JSON.parse(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json', 'utf8'));
     report.redirectRuntime = Object.fromEntries(['status','sha','run','mode','legacyRedirectErrorRejected','compatibilityReadHTTP','secretInputs','fixtures','failedGuard'].filter(key => Object.hasOwn(proof,key)).map(key => [key,proof[key]]));
     if (proof.result) report.redirectRuntime.result = Object.fromEntries(['ok','nativeErrorName','unsupportedRedirectReported','manualStatus','adaptedStatus','manualKeySetShape','adaptedKeySetShape','adaptedCalls','observedMode'].map(key => [key,proof.result[key]]));
+  }
+  if (stage === 'access-check-browser' && existsSync('.wrangler/htc-test-deployment/access-check-browser-report.json')) {
+    const proof = JSON.parse(readFileSync('.wrangler/htc-test-deployment/access-check-browser-report.json', 'utf8'));
+    report.accessCheckBrowser = Object.fromEntries(['status','mode','sha','run','externalNetworkRequests','credentialsUsed','cookiesTransferred','AuthDatabaseStorageMutations','deployments','liveSupabaseRequests','realGoogleOAuth','screenshotArtifacts'].filter(key => Object.hasOwn(proof,key)).map(key => [key,proof[key]]));
+    report.accessCheckBrowser.passedViews = Array.isArray(proof.views) ? proof.views.filter(view => view.passed === true).length : 0;
+    report.accessCheckBrowser.passedFailureCases = Array.isArray(proof.failures) ? proof.failures.filter(item => item.passed === true).length : 0;
+    if (/^STOP_[A-Z0-9_]+$/.test(proof.failedGuard ?? '')) report.accessCheckBrowser.failedGuard = proof.failedGuard;
   }
   guard(!result.error && result.status === 0, stage === 'deploy' ? 'STOP_DEPLOY_RESULT_AMBIGUOUS_NO_RETRY' : `STOP_${stage.toUpperCase().replaceAll('-','_')}`);
   return output;
@@ -223,6 +281,22 @@ async function runtimeChecks(report) {
   const invalid = await request('/auth/callback');
   const invalidLocation = new URL(invalid.headers.get('location') ?? '/', report.url);
   check('Invalid callback fails closed', invalid.status === 303 && invalidLocation.origin === report.url && invalidLocation.pathname === '/sign-in', invalid);
+  if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+    const diagnostic = await request('/__htc-test-access-check');
+    const html = await diagnostic.text();
+    const csp = diagnostic.headers.get('content-security-policy') ?? '';
+    check('TEST diagnostic READY with restrictive CSP and no cookie', diagnostic.status === 200 &&
+      diagnostic.headers.get('content-type')?.includes('text/html') && diagnostic.headers.get('cache-control')?.includes('no-store') &&
+      !diagnostic.headers.has('set-cookie') && csp.includes("connect-src 'self'") && csp.includes("form-action 'self'") &&
+      csp.includes("default-src 'none'") && csp.includes("script-src 'sha256-") && !csp.includes("'unsafe-inline'") &&
+      html.includes('READY_NOT_STARTED') && html.includes('Nothing runs automatically.') && !/<meta[^>]+http-equiv\s*=\s*["']?refresh/i.test(html), diagnostic);
+    const head = await request('/__htc-test-access-check', undefined, { method: 'HEAD' });
+    check('TEST diagnostic HEAD is read-only and empty', head.status === 200 && (await head.text()) === '' &&
+      head.headers.get('cache-control')?.includes('no-store') && !head.headers.has('set-cookie'), head);
+    const post = await request('/__htc-test-access-check', undefined, { method: 'POST' });
+    check('TEST diagnostic POST is rejected without Auth action', post.status === 405 && post.headers.get('allow') === 'GET, HEAD' &&
+      post.headers.get('cache-control')?.includes('no-store') && !post.headers.has('set-cookie'), post);
+  }
 }
 
 async function main(mode) {
@@ -239,9 +313,18 @@ async function main(mode) {
       report.status = 'PREFLIGHT_PASS';
     } else if (mode === 'build') {
       const state = loadState('PREFLIGHT_PASS');
+      if (process.env.TEST_EXECUTION_MODE === 'accesscheck') await accessPreflight(report);
       run('install', ['install', '--frozen-lockfile', '--ignore-scripts'], privateBuildEnv(process.env), report);
       guard(sha256(readFileSync('pnpm-lock.yaml')) === target.lockSHA256, 'STOP_LOCK_CHANGED');
-      if (process.env.TEST_EXECUTION_MODE === 'repair') {
+      if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+        run('access-check-chromium', ['exec','playwright','install','chromium'], privateBuildEnv(process.env), report, 180000);
+        run('access-check-browser', ['exec','node','validation/cloudflare/probe-test-access-check.mjs'], privateBuildEnv(process.env), report, 180000);
+        const proofPath = '.wrangler/htc-test-deployment/access-check-browser-report.json';
+        verifyAccessCheckBrowserProof(JSON.parse(readFileSync(proofPath, 'utf8')), process.env);
+        state.accessCheckBrowserProofSHA256 = sha256(readFileSync(proofPath));
+        state.accessCheckBrowserSourceSHA256 = sha256(readFileSync('validation/cloudflare/probe-test-access-check.mjs'));
+      }
+      if (['repair','accesscheck'].includes(process.env.TEST_EXECUTION_MODE)) {
         run('redirect-runtime', ['exec', 'node', 'validation/cloudflare/probe-redirect-error-workerd.mjs'], privateBuildEnv(process.env), report, 180000);
         const proof = JSON.parse(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json', 'utf8'));
         guard(proof.status === 'PASS' && proof.sha === process.env.GITHUB_SHA && proof.run === process.env.GITHUB_RUN_ID && proof.legacyRedirectErrorRejected === true && proof.compatibilityReadHTTP === 200 && proof.secretInputs === false && proof.fixtures === 0, 'STOP_RUNTIME_REPAIR_PROOF');
@@ -249,23 +332,38 @@ async function main(mode) {
         state.adapterSHA256 = sha256(readFileSync('cloudflare/redirect-error-fetch.mjs'));
         state.installerSHA256 = sha256(readFileSync('cloudflare/install-redirect-error-fetch.mjs'));
         state.entrySHA256 = sha256(readFileSync('cloudflare/worker-entry.mjs'));
+        if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+          state.accessCheckSHA256 = sha256(readFileSync('cloudflare/test-access-check.mjs'));
+          state.accessCheckTestsSHA256 = sha256(readFileSync('tests/cloudflare-test-access-check.test.mjs'));
+        }
       }
       writeFileSync(configPath, JSON.stringify(expected, null, 2) + '\n', { flag: 'wx', mode: 0o600 });
       const clean = privateBuildEnv(process.env);
       run('build', ['exec', 'opennextjs-cloudflare', 'build', `--config=${configPath}`], clean, report);
       guard(existsSync('.open-next/worker.js') && statSync('.open-next/worker.js').size > 0 && existsSync('.open-next/assets'), 'STOP_ARTIFACTS');
+      if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+        verifySource(true);
+        await accessPreflight(report);
+        report.accessCheckBaselineVerifiedBeforeAndAfterBuild = true;
+      }
       state.phase = 'BUILD_PASS'; state.configSHA256 = sha256(readFileSync(configPath));
       state.workerSHA256 = sha256(readFileSync('.open-next/worker.js')); saveState(state);
       report.status = process.env.TEST_EXECUTION_MODE === 'package' ? 'TEST_PACKAGE_PASS_DEPLOYMENT_DISABLED' : 'BUILD_PASS';
     } else {
-      guard(['deploy','repair'].includes(process.env.TEST_EXECUTION_MODE) && process.env.DEPLOYMENT_ENABLED === 'true', 'STOP_NO_UPLOAD_IN_PACKAGE_MODE');
+      guard(['deploy','repair','accesscheck'].includes(process.env.TEST_EXECUTION_MODE) && process.env.DEPLOYMENT_ENABLED === 'true', 'STOP_NO_UPLOAD_IN_PACKAGE_MODE');
       const state = loadState('BUILD_PASS');
       guard(sha256(readFileSync(configPath)) === state.configSHA256 && JSON.stringify(JSON.parse(readFileSync(configPath))) === JSON.stringify(expected), 'STOP_GENERATED_CONFIG');
       guard(sha256(readFileSync('.open-next/worker.js')) === state.workerSHA256, 'STOP_WORKER_BYTES');
-      if (process.env.TEST_EXECUTION_MODE === 'repair') {
+      if (['repair','accesscheck'].includes(process.env.TEST_EXECUTION_MODE)) {
         guard(sha256(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json')) === state.redirectRuntimeProofSHA256 && sha256(readFileSync('cloudflare/redirect-error-fetch.mjs')) === state.adapterSHA256 && sha256(readFileSync('cloudflare/install-redirect-error-fetch.mjs')) === state.installerSHA256 && sha256(readFileSync('cloudflare/worker-entry.mjs')) === state.entrySHA256, 'STOP_REPAIR_BYTES');
+        if (process.env.TEST_EXECUTION_MODE === 'accesscheck') {
+          guard(sha256(readFileSync('cloudflare/test-access-check.mjs')) === state.accessCheckSHA256 && sha256(readFileSync('tests/cloudflare-test-access-check.test.mjs')) === state.accessCheckTestsSHA256, 'STOP_ACCESSCHECK_BYTES');
+          const proofPath = '.wrangler/htc-test-deployment/access-check-browser-report.json';
+          verifyAccessCheckBrowserProof(JSON.parse(readFileSync(proofPath, 'utf8')), process.env);
+          guard(sha256(readFileSync(proofPath)) === state.accessCheckBrowserProofSHA256 && sha256(readFileSync('validation/cloudflare/probe-test-access-check.mjs')) === state.accessCheckBrowserSourceSHA256, 'STOP_ACCESSCHECK_BROWSER_BYTES');
+        }
       }
-      await accessPreflight(report); // Re-check absence immediately before the only mutation.
+      await accessPreflight(report); // Re-check the exact approved baseline immediately before the only mutation.
       guard(typeof process.env.RUNNER_TEMP === 'string' && /^\/[A-Za-z0-9_./-]+$/.test(process.env.RUNNER_TEMP), 'STOP_PRIVATE_PATH');
       secretFile = path.join(process.env.RUNNER_TEMP, `htc-runtime-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}.json`);
       writeFileSync(secretFile, JSON.stringify({ SUPABASE_PUBLISHABLE_KEY: process.env.HTC_SUPABASE_TEST_PUBLISHABLE_KEY }) + '\n', { flag: 'wx', mode: 0o600 });

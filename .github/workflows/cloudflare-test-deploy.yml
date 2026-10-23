@@ -10,6 +10,7 @@ on:
       - validation/cloudflare/deploy-test.test.mjs
       - cloudflare/**
       - tests/cloudflare-redirect-error.test.mjs
+      - tests/cloudflare-test-access-check.test.mjs
       - validation/cloudflare/*redirect*workerd*
 permissions:
   contents: read
@@ -24,7 +25,8 @@ jobs:
       github.run_attempt == 1 &&
       (contains(github.event.head_commit.message, '[HTC-TEST-DEPLOY]') ||
        contains(github.event.head_commit.message, '[HTC-TEST-PACKAGE]') ||
-       contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]'))
+       contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]') ||
+       contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]'))
     environment: cloudflare-test
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -37,8 +39,9 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
       HTC_SUPABASE_TARGET: test
       SUPABASE_URL: https://uzhkzhmncxjplrdtdzgd.supabase.co
-      TEST_EXECUTION_MODE: ${{ contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]') && 'repair' || contains(github.event.head_commit.message, '[HTC-TEST-DEPLOY]') && 'deploy' || 'package' }}
+      TEST_EXECUTION_MODE: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && 'accesscheck' || contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]') && 'repair' || contains(github.event.head_commit.message, '[HTC-TEST-DEPLOY]') && 'deploy' || 'package' }}
       APPROVED_REPAIR_BASE_VERSION: a101e9e0-d84f-4473-9867-1475126b0c9e
+      APPROVED_ACCESSCHECK_BASE_VERSION: f2897ae4-6133-4614-aaa8-257e3f5c6216
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -56,6 +59,7 @@ jobs:
         run: |
           node --test validation/cloudflare/deploy-test.test.mjs
           if [ "$TEST_EXECUTION_MODE" = repair ]; then node --test tests/cloudflare-redirect-error.test.mjs; fi
+          if [ "$TEST_EXECUTION_MODE" = accesscheck ]; then node --test tests/cloudflare-redirect-error.test.mjs tests/cloudflare-test-access-check.test.mjs; fi
       - name: Read-only access and sealed-source preflight
         env:
           APPROVED_WORKFLOW_SHA: ${{ vars.HTC_TEST_APPROVED_WORKFLOW_SHA }}
@@ -64,7 +68,7 @@ jobs:
           CONFIG_CF_ACCOUNT: ${{ vars.CLOUDFLARE_TEST_ACCOUNT_ID }}
           CONFIG_WORKER: ${{ vars.CLOUDFLARE_TEST_WORKER_NAME }}
           CONFIG_PROJECT: ${{ vars.HTC_SUPABASE_TEST_PROJECT_REF }}
-          CLOUDFLARE_TEST_API_TOKEN: ${{ secrets.CLOUDFLARE_TEST_API_TOKEN }}
+          CLOUDFLARE_TEST_API_TOKEN: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && (secrets.CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN || 'UNAVAILABLE') || secrets.CLOUDFLARE_TEST_API_TOKEN }}
           HTC_SUPABASE_TEST_PUBLISHABLE_KEY: ${{ secrets.HTC_SUPABASE_TEST_PUBLISHABLE_KEY }}
         run: node validation/cloudflare/deploy-test.mjs preflight
       - name: Frozen install and OpenNext build without live credentials
@@ -75,9 +79,11 @@ jobs:
           CONFIG_CF_ACCOUNT: ${{ vars.CLOUDFLARE_TEST_ACCOUNT_ID }}
           CONFIG_WORKER: ${{ vars.CLOUDFLARE_TEST_WORKER_NAME }}
           CONFIG_PROJECT: ${{ vars.HTC_SUPABASE_TEST_PROJECT_REF }}
+          CLOUDFLARE_TEST_API_TOKEN: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && secrets.CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN || '' }}
+          HTC_SUPABASE_TEST_PUBLISHABLE_KEY: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && secrets.HTC_SUPABASE_TEST_PUBLISHABLE_KEY || '' }}
         run: node validation/cloudflare/deploy-test.mjs build
       - name: One TEST deployment followed by non-mutating HTTPS checks
-        if: contains(github.event.head_commit.message, '[HTC-TEST-DEPLOY]') || contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]')
+        if: contains(github.event.head_commit.message, '[HTC-TEST-DEPLOY]') || contains(github.event.head_commit.message, '[HTC-TEST-REDIRECT-FIX]') || contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]')
         env:
           APPROVED_WORKFLOW_SHA: ${{ vars.HTC_TEST_APPROVED_WORKFLOW_SHA }}
           DEPLOYMENT_ENABLED: ${{ vars.HTC_TEST_DEPLOYMENT_ENABLED }}
@@ -85,7 +91,7 @@ jobs:
           CONFIG_CF_ACCOUNT: ${{ vars.CLOUDFLARE_TEST_ACCOUNT_ID }}
           CONFIG_WORKER: ${{ vars.CLOUDFLARE_TEST_WORKER_NAME }}
           CONFIG_PROJECT: ${{ vars.HTC_SUPABASE_TEST_PROJECT_REF }}
-          CLOUDFLARE_TEST_API_TOKEN: ${{ secrets.CLOUDFLARE_TEST_API_TOKEN }}
+          CLOUDFLARE_TEST_API_TOKEN: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && (secrets.CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN || 'UNAVAILABLE') || secrets.CLOUDFLARE_TEST_API_TOKEN }}
           HTC_SUPABASE_TEST_PUBLISHABLE_KEY: ${{ secrets.HTC_SUPABASE_TEST_PUBLISHABLE_KEY }}
         shell: bash
         run: |

@@ -6,6 +6,81 @@ remain immutable historical evidence; their previous approval gates do not
 cancel this later authorization. Production and paid-service activation remain
 outside scope.
 
+## Current verified checkpoint — 24 October 2026 JST
+
+TEST is deployed at the HTTPS URL below. Hosted run
+[39900017186](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39900017186)
+completed successfully at `946c4e7ac17ff9fef2c82a69995c58f17b93a0e1`, version
+`f2897ae4-6133-4614-aaa8-257e3f5c6216`. Its 9 controller guards, 14 adapter
+tests, native workerd proof, frozen build, 17 HTTPS checks and 8 public
+desktop/mobile views passed. The earlier failed runs below remain failed.
+
+The owner completed genuine Google FOUNDER login in normal Chrome and reported
+`/founder/operations` loaded a Supabase database snapshot with all six counts
+zero. Sanitized TEST gateway logs corroborate the callback code exchange
+(HTTP 200 at `2026-10-23T22:00:03.092Z`), successful user verification and
+`is_founder` RPC requests (HTTP 200 at 22:03:16, 22:03:18 and 22:03:24 UTC).
+The FOUNDER role and visible dashboard result are owner browser evidence;
+HTTP 200 RPC logs alone do not establish the returned role boolean.
+
+The 24 October JST read-only audit found TEST `ACTIVE_HEALTHY`, Google Provider
+enabled (settings HTTP 200), public Worker content HTTP 200 with zero items,
+all six database counters zero, zero relations, zero Storage objects and ten
+migration records. No fixture or migration was created for this audit.
+The targeted malformed-session probe passed 3/3 at
+`2026-10-23T22:10:15.737Z`: session HTTP 200 with `authenticated=false`,
+summary API HTTP 401 `UNAUTHENTICATED` and operations route HTTP 307 to the
+same-origin sign-in page, all with no-store. This uses only a synthetic
+malformed cookie and does not prove natural token expiry on the new hostname.
+
+The owner also completed real USER Google login and observed Access denied at
+`/founder/operations`. This is a server-rendered denial, consistent with the
+unchanged server `founderAccess` authorization check and Founder layout/page
+boundaries, not merely hidden client controls. The owner then used official
+Sign out and reported the sign-in page and home visible. Sanitized gateway
+logs in the 22:06:16–22:19:06 UTC window include a code exchange HTTP 200 at
+22:11:49.885, user verification HTTP 200 at 22:12:22.220, `is_founder` HTTP 200
+at 22:12:22.422 and official logout HTTP 204 at 22:16:33.438 on 23 October.
+Multiple logins/logouts occurred in that window: these status-only events do
+not uniquely identify an account/session, prove a role boolean or reveal
+the protected application's HTTP responses.
+
+**USER server-rendered access denial and official logout/visual navigation are
+PASS with those evidence limits. USER API HTTP 403 and post-logout browser
+`authenticated=false`/API HTTP 401 remain pending. Overall deployment acceptance
+is PARTIAL, not FULL PASS.** Historical Worker observability is unset, logpush
+is disabled and a read-only event-count query returned zero events; no missing
+application HTTP status is inferred from those logs. The earlier
+Auth R2B natural-expiry evidence remains preserved; no passed build or LIVE test
+was repeated during recovery. Sections below retain dated provisioning,
+failure and correction history.
+
+## Console-free TEST verification preparation
+
+Chrome's Console paste warning remains enabled. Network inspection alone cannot
+create the missing authenticated summary request: denied USER pages never mount
+the dashboard. A small diagnostic document is therefore prepared at
+`/__htc-test-access-check`, restricted in the migration wrapper to the exact
+HTTPS TEST hostname and TEST Supabase bindings. It has no automatic requests.
+Explicit buttons read the existing session and POST only the existing summary
+read operation. A standard existing sign-out form is enabled only after genuine
+USER API denial passes. The page displays only HTTP status, booleans, approved
+error codes and no-store evidence; it never reads cookies or browser storage.
+
+Focused tests and an isolated cloud browser regression must pass before its
+single guarded TEST upload. Synthetic browser results are not LIVE USER proof.
+The new `accesscheck` deployment mode pins the existing two deployment IDs and
+current version `f2897ae4-6133-4614-aaa8-257e3f5c6216`; it does not relax or replay
+the previous one-shot repair mode. Application source, Auth, SQL and security
+policies remain unchanged. No diagnostic page is claimed deployed yet.
+
+At preparation, the official Cloudflare connector rejected refresh with
+`invalid_client: Client not found`. Its official native OAuth reconnection is
+separate from HTC Google sign-in. A credential-free cloud validation workflow
+can run independently; TEST upload remains blocked until authenticated account,
+version and binding checks are again available. The expired earlier CI token
+is not reused. No browser protection is disabled.
+
 ## Verified source and target
 
 - Migration baseline: `3967a520a330577d8b1f5931361839dfeb28a46c`.
@@ -14,11 +89,11 @@ outside scope.
 - Protected main: `6df86a0e630f38b933d5e269c54ef20906d6bcf5`.
 - Cloudflare account: `2e93ece77ccb74920f7b995f6d48996b`.
 - Worker: `htc-trial-workers-test`.
-- Proposed HTTPS URL: `https://htc-trial-workers-test.holictraderscompany.workers.dev`.
-  This is a derived target, **not evidence of a deployed service**.
+- Verified deployed TEST URL: `https://htc-trial-workers-test.holictraderscompany.workers.dev`.
+  Current deployment evidence is run `39900017186` above.
 - Supabase TEST: `uzhkzhmncxjplrdtdzgd` only.
 
-Official authenticated Cloudflare MCP GET requests confirmed the account, empty
+Initial authenticated Cloudflare MCP GET requests confirmed the account, then-empty
 Worker inventory, workers.dev subdomain and account Workers settings. The
 settings value `default_usage_model=standard` does not prove a billing plan.
 The subscriptions endpoint rejects OAuth connections (403/code 10000); do not
@@ -46,7 +121,7 @@ prove validity, correct scope, Supabase provenance or deployment readiness.
 The OAuth authorization available to Codex is distinct from a GitHub runner's
 credential binding; do not extract or transfer its OAuth token.
 
-## Future deployment gate
+## Historical deployment preparation gate
 
 Reuse cloud run [39867242940](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39867242940)
 for the unchanged application, dependencies and protected evidence. Runtime
@@ -62,7 +137,7 @@ plaintext key variables. Keep the original `wrangler.jsonc` intact.
 
 Pinned OpenNext 1.20.13 forwards unknown CLI options through its deploy wrapper
 to the repository's pinned Wrangler 4.151.3 and sets `OPEN_NEXT_DEPLOY=true`.
-The cloud commands, **not executed by this preflight**, are:
+The cloud commands used by the later hosted build/deployment are:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -116,6 +191,8 @@ account initially had no Workers; this account-level creation permission is
 needed to create the absent TEST Worker. No zone, DNS, billing, token-management
 or user-management permission was granted to CI. The token expires at
 `2026-10-23T14:31:40Z`; it must not be treated as a permanent CI credential.
+That CI credential is now expired; provisioning verification below is historical,
+not a claim of current deployment authority.
 
 The token was RSA-OAEP SHA-256 encrypted inside the official Cloudflare MCP
 sandbox and returned only as ciphertext. Its one-use private key stayed in local
@@ -132,12 +209,13 @@ The official portable GitHub CLI 2.103.0 control client was verified against the
 upstream release asset SHA-256
 `80c846a5b8432672ca6373b34ce9de998c9686aaa1885c845f2e1ee81f713726`.
 No application dependency installation or build ran on Windows. Account, Auth
-and API keys are not evidence of actual Google login on the future Worker host.
+and API keys alone are not evidence of actual Google login on the Worker host.
 
 ## Exact-SHA cloud packaging and deployment gate
 
-`cloudflare-test-deploy.yml` accepts `[HTC-TEST-PACKAGE]` or
-`[HTC-TEST-DEPLOY]` only on the migration branch and first run attempt. The
+`cloudflare-test-deploy.yml` accepts `[HTC-TEST-PACKAGE]`,
+`[HTC-TEST-DEPLOY]` or `[HTC-TEST-REDIRECT-FIX]` only on the migration branch
+and first run attempt. The
 environment variable `HTC_TEST_APPROVED_WORKFLOW_SHA` must match the checkout.
 Package mode requires `HTC_TEST_DEPLOYMENT_ENABLED=false` and cannot schedule
 the upload step. Deploy mode additionally requires both enablement and
@@ -145,13 +223,15 @@ the upload step. Deploy mode additionally requires both enablement and
 steps after the protected environment is available.
 
 The controller verifies the sealed source and lockfile, exact account and
-subdomain, absence of an existing Worker, TEST key and Google Provider. It builds
+subdomain, absence of an existing Worker for initial deployment (or the exact
+approved existing version for the corrective upload), TEST key and Google Provider. It builds
 on GitHub-hosted Linux with all live credentials removed from subprocess
 environments. An actual deployment writes the runtime key only to a 0600 file
 under runner temporary storage, removes it on exit, and records its one-shot
 submission before invoking OpenNext. A failed/ambiguous result never causes a
 deployment retry. Sixteen HTTPS/anonymous security probes follow a successful
-upload; genuine Google/Founder/User checks stay explicitly pending.
+upload; genuine Google/Founder/User checks were separate pending gates at that
+stage. The current checkpoint above records subsequent owner FOUNDER evidence.
 
 No artifact storage is enabled: its shared account quota was not verified.
 Package-only execution validates the new complete TEST configuration, but a
@@ -165,7 +245,8 @@ so merely following a Google redirect cannot prove the requested callback was
 allowlisted. No authorize request was sent as part of the read-only inspection.
 The available Supabase connector lacks Auth URL configuration endpoints; the
 Supabase CLI, native management-token environment bindings and legacy CLI token
-file are absent. Current callback allowlisting remains **NOT VERIFIED**.
+file were absent. At that initial inspection, callback allowlisting was
+**NOT VERIFIED**; later owner confirmation is preserved below.
 
 The sole required owner configuration action is in the authorized TEST project's
 [Auth URL Configuration](https://supabase.com/dashboard/project/uzhkzhmncxjplrdtdzgd/auth/url-configuration):
@@ -182,8 +263,8 @@ nonce and HttpOnly flow cookie. The Google provider redirect URI remains the
 existing `https://uzhkzhmncxjplrdtdzgd.supabase.co/auth/v1/callback`; changing
 Google Cloud configuration is not established as necessary.
 
-Deployment stays disabled until that configuration gate is verified. A later
-normal-browser login by the account owner is still required to prove real
+Deployment stayed disabled until that configuration gate was verified. A later
+normal-browser login by the account owner was still required at that stage to prove real
 Google OAuth on the new HTTPS hostname; automated Google login is not retried.
 
 Founder subsequently confirmed that the exact requested TEST callback entry
@@ -191,7 +272,7 @@ was saved. This satisfies the configuration gate using direct owner evidence;
 it is not represented as a Management API verification or an actual login.
 The next exact-SHA workflow may therefore run its cloud guard tests, build and
 one TEST deployment under the existing authorization. Genuine new-host Google
-and Founder/User validation remains pending after deployment.
+and Founder/User validation was still pending at that checkpoint.
 
 ## Actual TEST deployment and targeted compatibility correction
 
@@ -240,5 +321,7 @@ Independent requests established that `/auth/v1/health` requires a key (401),
 while `/auth/v1/.well-known/jwks.json` is public (200 with a key-set JSON shape).
 The probe now uses that existing public endpoint and reports only booleans and
 statuses, never public-key contents or credentials. Failed native proof remains
-failed; no corrective upload has yet been attempted. Safe native-proof fields
+failed; no corrective upload was attempted by that failed preparation run.
+Run `39900017186` subsequently passed the corrected proof and uploaded the
+verified version recorded at the top of this report. Safe native-proof fields
 are retained in the parent report even when the child exits unsuccessfully.
