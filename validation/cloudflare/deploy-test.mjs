@@ -171,7 +171,12 @@ function run(stage, args, env, report, timeout = 900000) {
   const result = spawnSync('pnpm', args, { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024, timeout, killSignal: 'SIGTERM' });
   const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`;
   report.stages.push({ name: stage, started, finished: new Date().toISOString(), exit: result.status, outputSHA256: sha256(output) });
-  guard(!result.error && result.status === 0, stage === 'deploy' ? 'STOP_DEPLOY_RESULT_AMBIGUOUS_NO_RETRY' : `STOP_${stage.toUpperCase()}`);
+  if (stage === 'redirect-runtime' && existsSync('.wrangler/htc-test-deployment/redirect-runtime-report.json')) {
+    const proof = JSON.parse(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json', 'utf8'));
+    report.redirectRuntime = Object.fromEntries(['status','sha','run','mode','legacyRedirectErrorRejected','compatibilityReadHTTP','secretInputs','fixtures','failedGuard'].filter(key => Object.hasOwn(proof,key)).map(key => [key,proof[key]]));
+    if (proof.result) report.redirectRuntime.result = Object.fromEntries(['ok','nativeErrorName','unsupportedRedirectReported','manualStatus','adaptedStatus','manualKeySetShape','adaptedKeySetShape','adaptedCalls','observedMode'].map(key => [key,proof.result[key]]));
+  }
+  guard(!result.error && result.status === 0, stage === 'deploy' ? 'STOP_DEPLOY_RESULT_AMBIGUOUS_NO_RETRY' : `STOP_${stage.toUpperCase().replaceAll('-','_')}`);
   return output;
 }
 

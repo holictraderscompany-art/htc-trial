@@ -2,7 +2,7 @@
 import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
-const report={status:'BLOCKED',at:new Date().toISOString(),sha:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,mode:'CLOUD_LOCAL_WORKERD_TEST_HEALTH_GET_ONLY',deployments:0,credentialsUsed:false,secretInputs:false,fixtures:0};
+const report={status:'BLOCKED',at:new Date().toISOString(),sha:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,mode:'CLOUD_LOCAL_WORKERD_TEST_PUBLIC_JWKS_GET_ONLY',deployments:0,credentialsUsed:false,secretInputs:false,fixtures:0};
 let server, output='';
 try {
   if(process.platform!=='linux' || process.env.GITHUB_ACTIONS!=='true' || process.env.RUNNER_ENVIRONMENT!=='github-hosted' || process.env.GITHUB_REPOSITORY!=='holictraderscompany-art/htc-trial' || process.env.GITHUB_REF!=='refs/heads/codex/cloudflare-workers-preparation' || process.env.GITHUB_RUN_ATTEMPT!=='1') throw new Error('STOP_CLOUD_SCOPE');
@@ -22,8 +22,8 @@ try {
   const response=await fetch('http://127.0.0.1:3107/probe',{redirect:'manual',signal:AbortSignal.timeout(50000)});
   const result=await response.json();
   // Copy only the fixture's fixed safe contract; never print raw errors or logs.
-  report.result={ok:result.ok,nativeErrorName:result.nativeErrorName,unsupportedRedirectReported:result.unsupportedRedirectReported,manualStatus:result.manualStatus,adaptedStatus:result.adaptedStatus,adaptedCalls:result.adaptedCalls,observedMode:result.observedMode};
-  if(response.status!==200 || result.ok!==true || result.nativeErrorName!=='TypeError' || result.unsupportedRedirectReported!==true || result.manualStatus!==200 || result.adaptedStatus!==200 || result.adaptedCalls!==1 || result.observedMode!=='manual') throw new Error('STOP_WORKERD_PROOF');
+  report.result={ok:result.ok,nativeErrorName:result.nativeErrorName,unsupportedRedirectReported:result.unsupportedRedirectReported,manualStatus:result.manualStatus,adaptedStatus:result.adaptedStatus,manualKeySetShape:result.manualKeySetShape,adaptedKeySetShape:result.adaptedKeySetShape,adaptedCalls:result.adaptedCalls,observedMode:result.observedMode};
+  if(response.status!==200 || result.ok!==true || result.nativeErrorName!=='TypeError' || result.unsupportedRedirectReported!==true || result.manualStatus!==200 || result.adaptedStatus!==200 || result.manualKeySetShape!==true || result.adaptedKeySetShape!==true || result.adaptedCalls!==1 || result.observedMode!=='manual') throw new Error('STOP_WORKERD_PROOF');
   report.legacyRedirectErrorRejected=true;
   report.compatibilityReadHTTP=200;
   report.status='PASS';

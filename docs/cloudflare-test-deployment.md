@@ -226,10 +226,19 @@ The dedicated `[HTC-TEST-REDIRECT-FIX]` cloud job requires the exact approved SH
 existing sole active version above, original TEST bindings and routing, and
 the original sealed 23-file manifest. Before the single corrective upload,
 14 adapter tests, controller guards and a real local workerd reproduction must
-pass. The reproduction uses only public TEST Auth health GETs and no credential
+pass. The reproduction uses only public TEST JWKS GETs and no credential
 or fixture. The generated configuration changes main to the approved custom
 entrypoint; all generated default/named exports remain preserved.
 
 A submitted repair is never retried automatically. Passed same-job HTTP probes
 are reused by the public database/UI probe. Real normal-browser Google OAuth
 and authenticated Founder/USER checks remain separate final gates.
+
+The first repair preparation run `39899047131` passed 9 controller and 14 adapter
+tests, then stopped before build/upload because its keyless health probe failed.
+Independent requests established that `/auth/v1/health` requires a key (401),
+while `/auth/v1/.well-known/jwks.json` is public (200 with a key-set JSON shape).
+The probe now uses that existing public endpoint and reports only booleans and
+statuses, never public-key contents or credentials. Failed native proof remains
+failed; no corrective upload has yet been attempted. Safe native-proof fields
+are retained in the parent report even when the child exits unsuccessfully.
