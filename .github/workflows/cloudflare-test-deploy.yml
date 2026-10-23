@@ -1,4 +1,6 @@
 name: HTC one-shot Cloudflare TEST deployment
+# Founder confirmed the narrow TEST callback entry saved on 23 October 2026.
+# Exact-SHA enablement and all cloud tests still precede any Worker upload.
 on:
   push:
     branches: [codex/cloudflare-workers-preparation]

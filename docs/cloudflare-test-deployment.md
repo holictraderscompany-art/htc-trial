@@ -185,3 +185,10 @@ Google Cloud configuration is not established as necessary.
 Deployment stays disabled until that configuration gate is verified. A later
 normal-browser login by the account owner is still required to prove real
 Google OAuth on the new HTTPS hostname; automated Google login is not retried.
+
+Founder subsequently confirmed that the exact requested TEST callback entry
+was saved. This satisfies the configuration gate using direct owner evidence;
+it is not represented as a Management API verification or an actual login.
+The next exact-SHA workflow may therefore run its cloud guard tests, build and
+one TEST deployment under the existing authorization. Genuine new-host Google
+and Founder/User validation remains pending after deployment.

@@ -1,6 +1,6 @@
 {
-  "recordedAt": "2026-10-23T02:59:10.7137424Z",
-  "status": "CI_ACCESS_PROVISIONED_DEPLOYMENT_PENDING",
+  "recordedAt": "2026-10-23T03:06:24.1112642Z",
+  "status": "CI_ACCESS_PROVISIONED_CALLBACK_CONFIRMED_DEPLOYMENT_PENDING",
   "repository": "holictraderscompany-art/htc-trial",
   "branch": "codex/cloudflare-workers-preparation",
   "migrationBaseline": "3967a520a330577d8b1f5931361839dfeb28a46c",
@@ -62,7 +62,7 @@
     "authSettingsHTTP": 200,
     "publishableKeyAcceptedByExactTESTGateway": true,
     "googleProviderEnabled": true,
-    "deployedHostnameRedirectAllowlist": "BLOCKED: no available Auth URL configuration API/session",
+    "deployedHostnameRedirectAllowlist": "VERIFIED_BY_EXPLICIT_FOUNDER_CONFIRMATION: requested exact TEST callback entry saved",
     "newHostnameGoogleLogin": "NOT_TESTED",
     "authVersion": "v2.197.0",
     "healthHTTP": 200
@@ -90,6 +90,6 @@
   ],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Save the scoped Worker callback entry in TEST Auth URL Configuration, preserving Site URL/existing entries. Owner question pending; no approval inferred.",
-  "packageOnlyGate": "Deployment remains disabled; exact-SHA hosted packaging permitted independently."
+  "ownerAction": "Requested callback entry confirmed saved by Founder; genuine new-host Google login remains pending",
+  "packageOnlyGate": "Superseded by Founder callback confirmation: exact-SHA cloud tests/build must pass before the authorized single TEST upload"
 }
