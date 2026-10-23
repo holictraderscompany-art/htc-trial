@@ -1,0 +1,60 @@
+name: HTC deployed TEST read-only HTTPS and UI validation
+on:
+  push:
+    branches: [codex/cloudflare-workers-preparation]
+    paths:
+      - .github/workflows/cloudflare-test-ui.yml
+      - validation/cloudflare/probe-deployed-ui.mjs
+permissions:
+  contents: read
+concurrency:
+  group: htc-cloudflare-test-ui-readonly
+  cancel-in-progress: false
+jobs:
+  public-readonly:
+    if: >-
+      github.repository == 'holictraderscompany-art/htc-trial' &&
+      github.ref == 'refs/heads/codex/cloudflare-workers-preparation' &&
+      github.run_attempt == 1 &&
+      contains(github.event.head_commit.message, '[HTC-TEST-UI]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.21.0'
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 11.25.0
+          run_install: false
+      - name: Verify hosted identity and preserve deployed application bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$RUNNER_OS" = Linux
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test "$GITHUB_REPOSITORY" = holictraderscompany-art/htc-trial
+          test "$GITHUB_REF" = refs/heads/codex/cloudflare-workers-preparation
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain=v1)"
+          test "$(node --version)" = v24.21.0
+          test "$(pnpm --version)" = 11.25.0
+          git merge-base --is-ancestor 8203ce62ce4a3859270cd3736d9c0b62cb02be51 HEAD
+          git diff --exit-code 8203ce62ce4a3859270cd3736d9c0b62cb02be51 HEAD -- src supabase package.json pnpm-lock.yaml wrangler.jsonc open-next.config.ts next.config.mjs netlify.toml
+          printf '%s\n' 'f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6  pnpm-lock.yaml' | sha256sum --check --status
+      - name: Frozen cloud dependencies without policy exceptions
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Install isolated cloud Chromium
+        run: pnpm exec playwright install chromium
+      - name: Public TEST HTTPS security and responsive UI only
+        run: node validation/cloudflare/probe-deployed-ui.mjs
