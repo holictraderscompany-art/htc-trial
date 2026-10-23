@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { extractDeployedURL, generatedConfig, origin, privateBuildEnv, requireCredentials, verifyApproval, verifyDeploymentChanges } from './deploy-test.mjs';
+import { extractDeployedURL, generatedConfig, origin, privateBuildEnv, repairBaseVersion, requireCredentials, verifyApproval, verifyDeploymentChanges, verifyRepairBaseline } from './deploy-test.mjs';
 import { target } from './test-deployment-preflight.mjs';
 
 const env = () => ({ RUNNER_OS:'Linux', RUNNER_ENVIRONMENT:'github-hosted', GITHUB_ACTIONS:'true', GITHUB_RUN_ID:'1', GITHUB_REPOSITORY:target.repository, GITHUB_REF:target.ref, GITHUB_RUN_ATTEMPT:'1', GITHUB_SHA:'a'.repeat(40), APPROVED_WORKFLOW_SHA:'a'.repeat(40), DEPLOYMENT_ENABLED:'true', TEST_EXECUTION_MODE:'deploy', REDIRECT_ALLOWLIST_VERIFIED:'true', CONFIG_CF_ACCOUNT:target.account, CONFIG_WORKER:target.worker, CONFIG_PROJECT:target.project, HTC_SUPABASE_TARGET:'test', SUPABASE_URL:`https://${target.project}.supabase.co` });
@@ -49,4 +49,30 @@ test('deployment URL must be emitted by CLI and match only the fixed TEST hostna
   assert.equal(extractDeployedURL(`Deployed triggers\n  ${origin}\nCurrent Version ID: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa`),origin);
   assert.throws(()=>extractDeployedURL('Succeeded but no URL was returned'),/STOP_DEPLOY_URL_UNPROVEN/);
   assert.throws(()=>extractDeployedURL(`${origin}\nhttps://other.example.workers.dev`),/STOP_UNEXPECTED_DEPLOY_URL/);
+});
+
+test('repair approval requires the exact previously deployed version and only changes generated entrypoint', () => {
+  const approved = {...env(),TEST_EXECUTION_MODE:'repair',APPROVED_REPAIR_BASE_VERSION:repairBaseVersion};
+  assert.doesNotThrow(() => verifyApproval(approved,'linux','v24.21.0'));
+  for (const patch of [{APPROVED_REPAIR_BASE_VERSION:undefined},{APPROVED_REPAIR_BASE_VERSION:'different'},{DEPLOYMENT_ENABLED:'false'},{REDIRECT_ALLOWLIST_VERIFIED:'false'}]) assert.throws(() => verifyApproval({...approved,...patch},'linux','v24.21.0'),/STOP_/);
+  const initial = generatedConfig(base()), repair = generatedConfig(base(),true);
+  assert.equal(repair.main,'cloudflare/worker-entry.mjs');
+  assert.deepEqual({...repair,main:initial.main},initial);
+});
+
+test('repair baseline refuses drift, split deployments, additional bindings and wrong targets', () => {
+  const settings = {compatibility_date:'2026-10-22',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],bindings:[
+    {name:'ASSETS',type:'assets'}, {name:'HTC_SUPABASE_TARGET',type:'plain_text',text:'test'},
+    {name:'SUPABASE_URL',type:'plain_text',text:`https://${target.project}.supabase.co`},
+    {name:'SUPABASE_PUBLISHABLE_KEY',type:'secret_text'}, {name:'WORKER_SELF_REFERENCE',type:'service',service:target.worker},
+  ]};
+  const deployments = {deployments:[{versions:[{version_id:repairBaseVersion,percentage:100}]}]};
+  const endpoint = {enabled:true,previews_enabled:false};
+  assert.doesNotThrow(() => verifyRepairBaseline(settings,deployments,endpoint));
+  for (const altered of [{deployments:[]},{deployments:[...deployments.deployments,...deployments.deployments]},{deployments:[{versions:[{version_id:'different',percentage:100}]}]},{deployments:[{versions:[{version_id:repairBaseVersion,percentage:50}]}]}]) assert.throws(() => verifyRepairBaseline(settings,altered,endpoint),/STOP_REPAIR_BASELINE/);
+  for (const altered of [{...endpoint,previews_enabled:true},{...endpoint,enabled:false}]) assert.throws(() => verifyRepairBaseline(settings,deployments,altered),/STOP_REPAIR_ROUTING/);
+  const foreign = structuredClone(settings); foreign.bindings[2].text='https://unapproved.invalid';
+  assert.throws(() => verifyRepairBaseline(foreign,deployments,endpoint),/STOP_REPAIR_TARGET/);
+  assert.throws(() => verifyRepairBaseline({...settings,bindings:[...settings.bindings,{name:'EXTRA',type:'kv_namespace'}]},deployments,endpoint),/STOP_REPAIR_BINDINGS/);
+  assert.throws(() => verifyRepairBaseline({...settings,compatibility_flags:['nodejs_compat']},deployments,endpoint),/STOP_REPAIR_FLAGS/);
 });

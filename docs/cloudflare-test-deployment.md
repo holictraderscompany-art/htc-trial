@@ -192,3 +192,44 @@ it is not represented as a Management API verification or an actual login.
 The next exact-SHA workflow may therefore run its cloud guard tests, build and
 one TEST deployment under the existing authorization. Genuine new-host Google
 and Founder/User validation remains pending after deployment.
+
+## Actual TEST deployment and targeted compatibility correction
+
+Run [39894081617](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39894081617)
+at `8203ce62ce4a3859270cd3736d9c0b62cb02be51` passed seven controller tests,
+read-only preflight, frozen installation and the OpenNext build. The upload
+exited zero and created version `a101e9e0-d84f-4473-9867-1475126b0c9e` at the
+exact TEST hostname. Its immediate health check returned 404, so the historical
+workflow remains failed. An independent later health GET returned 200/no-store;
+no upload was retried. Cloudflare confirmed one 100% deployment, exact TEST
+bindings and disabled preview URLs.
+
+Read-only cloud run
+[39895394918](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39895394918)
+then passed all 16 HTTPS/security checks, but public discovery returned 500.
+No UI result or real OAuth success is claimed. The owner subsequently reported
+Google returning to `error=failed`. TEST read-only SQL and a private direct
+gateway request proved the existing anonymous page RPC returns an empty page
+with HTTP 200. Sanitized TEST logs showed no Worker page RPC or token exchange
+reaching the gateway during these failures.
+
+The [official Workers Request contract](https://developers.cloudflare.com/workers/runtime-apis/request/)
+and [pinned workerd implementation](https://github.com/cloudflare/workerd/blob/7caf6dee5bfe9af1b7710ddf66222900007af080/src/workerd/api/http.c%2B%2B#L481)
+confirm that `redirect: 'error'` throws before outbound I/O. Both HTC upstream
+paths use that Fetch option. The correction is restricted to the Workers
+entrypoint: opt in to a compatibility adapter before evaluating OpenNext,
+translate only error mode to manual, and reject 301/302/303/307/308 without
+following or exposing Location. No application, SQL, Auth, RLS, grants,
+historical migration, package lock or original Wrangler configuration changes.
+
+The dedicated `[HTC-TEST-REDIRECT-FIX]` cloud job requires the exact approved SHA,
+existing sole active version above, original TEST bindings and routing, and
+the original sealed 23-file manifest. Before the single corrective upload,
+14 adapter tests, controller guards and a real local workerd reproduction must
+pass. The reproduction uses only public TEST Auth health GETs and no credential
+or fixture. The generated configuration changes main to the approved custom
+entrypoint; all generated default/named exports remain preserved.
+
+A submitted repair is never retried automatically. Passed same-job HTTP probes
+are reused by the public database/UI probe. Real normal-browser Google OAuth
+and authenticated Founder/USER checks remain separate final gates.

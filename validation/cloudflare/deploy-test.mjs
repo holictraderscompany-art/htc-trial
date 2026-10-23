@@ -7,6 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { target, verifyHost, verifyWrangler } from './test-deployment-preflight.mjs';
 
 export const origin = 'https://htc-trial-workers-test.holictraderscompany.workers.dev';
+export const repairBaseVersion = 'a101e9e0-d84f-4473-9867-1475126b0c9e';
 const callback = `${origin}/auth/callback`;
 const configPath = 'wrangler.test.generated.jsonc';
 const statePath = '.wrangler/htc-test-deployment/state.json';
@@ -19,7 +20,18 @@ const requiredChanges = new Set([
   'validation/cloudflare/deploy-test.mjs',
   'validation/cloudflare/deploy-test.test.mjs',
 ]);
-const optionalChange = 'validation/cloudflare/test-deployment-checkpoint.json';
+const optionalChanges = new Set([
+  'validation/cloudflare/test-deployment-checkpoint.json',
+  '.github/workflows/cloudflare-test-ui.yml',
+  'validation/cloudflare/probe-deployed-ui.mjs',
+  'cloudflare/redirect-error-fetch.mjs',
+  'cloudflare/worker-entry.mjs',
+  'cloudflare/install-redirect-error-fetch.mjs',
+  'tests/cloudflare-redirect-error.test.mjs',
+  'validation/cloudflare/redirect-error-workerd-worker.mjs',
+  'validation/cloudflare/redirect-error-workerd.wrangler.jsonc',
+  'validation/cloudflare/probe-redirect-error-workerd.mjs',
+]);
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 const guard = (condition, code) => { if (!condition) throw new Error(code); };
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
@@ -29,31 +41,34 @@ export function verifyApproval(env, platform = process.platform, version = proce
   verifyHost(env, platform, version);
   guard(env.RUNNER_ENVIRONMENT === 'github-hosted', 'STOP_RUNNER_OWNERSHIP');
   guard(/^[0-9]+$/.test(env.GITHUB_RUN_ID ?? ''), 'STOP_RUN_ID');
-  guard((env.TEST_EXECUTION_MODE === 'package' && env.DEPLOYMENT_ENABLED === 'false') || (env.TEST_EXECUTION_MODE === 'deploy' && env.DEPLOYMENT_ENABLED === 'true'), 'STOP_DISABLED_OR_MODE');
+  guard((env.TEST_EXECUTION_MODE === 'package' && env.DEPLOYMENT_ENABLED === 'false') || (['deploy','repair'].includes(env.TEST_EXECUTION_MODE) && env.DEPLOYMENT_ENABLED === 'true'), 'STOP_DISABLED_OR_MODE');
   guard(env.APPROVED_WORKFLOW_SHA === env.GITHUB_SHA, 'STOP_UNAPPROVED_SHA');
-  if (env.TEST_EXECUTION_MODE === 'deploy') guard(env.REDIRECT_ALLOWLIST_VERIFIED === 'true', 'STOP_OAUTH_CALLBACK_GATE');
+  if (['deploy','repair'].includes(env.TEST_EXECUTION_MODE)) guard(env.REDIRECT_ALLOWLIST_VERIFIED === 'true', 'STOP_OAUTH_CALLBACK_GATE');
+  if (env.TEST_EXECUTION_MODE === 'repair') guard(env.APPROVED_REPAIR_BASE_VERSION === repairBaseVersion, 'STOP_REPAIR_VERSION_APPROVAL');
   guard(env.CONFIG_CF_ACCOUNT === target.account && env.CONFIG_WORKER === target.worker && env.CONFIG_PROJECT === target.project, 'STOP_CONFIG_BINDINGS');
   guard(env.HTC_SUPABASE_TARGET === 'test' && env.SUPABASE_URL === `https://${target.project}.supabase.co`, 'STOP_ENV_TARGET');
 }
 
 export function verifyDeploymentChanges(lines) {
   const rows = lines.trim().split('\n').filter(Boolean).map(line => line.split('\t'));
-  guard(rows.length >= requiredChanges.size && rows.length <= requiredChanges.size + 1, 'STOP_CHANGE_COUNT');
+  guard(rows.length >= requiredChanges.size && rows.length <= requiredChanges.size + optionalChanges.size, 'STOP_CHANGE_COUNT');
   const names = new Set();
   for (const [status, file, extra] of rows) {
-    guard(status === 'A' && !extra && (requiredChanges.has(file) || file === optionalChange) && !names.has(file), 'STOP_CHANGE_SCOPE');
+    guard(status === 'A' && !extra && (requiredChanges.has(file) || optionalChanges.has(file)) && !names.has(file), 'STOP_CHANGE_SCOPE');
     names.add(file);
   }
   guard([...requiredChanges].every(file => names.has(file)), 'STOP_REQUIRED_SOURCE');
 }
 
-export function generatedConfig(base) {
+export function generatedConfig(base, repair = false) {
   verifyWrangler(base);
   const generated = { ...structuredClone(base), account_id: target.account, workers_dev: true, secrets: { required: ['SUPABASE_PUBLISHABLE_KEY'] } };
+  if (repair) generated.main = 'cloudflare/worker-entry.mjs';
   const reverse = structuredClone(generated);
   delete reverse.account_id;
   delete reverse.secrets;
   reverse.workers_dev = false;
+  if (repair) reverse.main = base.main;
   guard(JSON.stringify(reverse) === JSON.stringify(base), 'STOP_CONFIG_DELTA');
   return generated;
 }
@@ -86,7 +101,7 @@ function verifySource(allowGenerated = false) {
     guard(sha256(gitBytes(file.path)) === file.sha256 && git('rev-parse', `HEAD:${file.path}`) === file.gitBlobOID, 'STOP_SEALED_BYTES');
   }
   guard(sha256(gitBytes('pnpm-lock.yaml')) === target.lockSHA256, 'STOP_LOCKFILE');
-  return generatedConfig(JSON.parse(readFileSync('wrangler.jsonc', 'utf8')));
+  return generatedConfig(JSON.parse(readFileSync('wrangler.jsonc', 'utf8')), process.env.TEST_EXECUTION_MODE === 'repair');
 }
 
 async function getJSON(url, headers, code, accepted = [200]) {
@@ -107,19 +122,38 @@ async function cfGet(suffix, code, accepted) {
   return result;
 }
 
+export function verifyRepairBaseline(settings, deployments, endpoint) {
+  const active = deployments?.deployments;
+  guard(Array.isArray(active) && active.length === 1 && active[0].versions?.length === 1 && active[0].versions[0].version_id === repairBaseVersion && active[0].versions[0].percentage === 100, 'STOP_REPAIR_BASELINE');
+  guard(endpoint?.enabled === true && endpoint.previews_enabled === false, 'STOP_REPAIR_ROUTING');
+  const bindings = settings?.bindings;
+  guard(Array.isArray(bindings) && bindings.length === 5 && new Set(bindings.map(b => b.name)).size === 5, 'STOP_REPAIR_BINDINGS');
+  for (const [name,type] of [['ASSETS','assets'],['HTC_SUPABASE_TARGET','plain_text'],['SUPABASE_URL','plain_text'],['SUPABASE_PUBLISHABLE_KEY','secret_text'],['WORKER_SELF_REFERENCE','service']]) guard(bindings.some(b => b.name === name && b.type === type), 'STOP_REPAIR_BINDINGS');
+  guard(bindings.find(b => b.name === 'HTC_SUPABASE_TARGET').text === 'test' && bindings.find(b => b.name === 'SUPABASE_URL').text === `https://${target.project}.supabase.co` && bindings.find(b => b.name === 'WORKER_SELF_REFERENCE').service === target.worker, 'STOP_REPAIR_TARGET');
+  guard(settings.compatibility_date === '2026-10-22' && JSON.stringify([...(settings.compatibility_flags ?? [])].sort()) === JSON.stringify(['global_fetch_strictly_public','nodejs_compat']), 'STOP_REPAIR_FLAGS');
+}
+
 async function accessPreflight(report) {
   requireCredentials(process.env);
   const account = await cfGet('', 'STOP_ACCOUNT');
   guard(account.body.result?.id === target.account, 'STOP_ACCOUNT_ID');
   const subdomain = await cfGet('/workers/subdomain', 'STOP_SUBDOMAIN');
   guard(subdomain.body.result?.subdomain === 'holictraderscompany', 'STOP_SUBDOMAIN_ID');
-  const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, 'STOP_WORKER_EXISTENCE', [404]);
-  guard(worker.body.success === false && Array.isArray(worker.body.errors) && worker.body.errors.some(error => error.code === 10007), 'STOP_WORKER_ABSENCE_AMBIGUOUS');
+  const repair = process.env.TEST_EXECUTION_MODE === 'repair';
+  if (repair) {
+    const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, 'STOP_REPAIR_SETTINGS');
+    const deployments = await cfGet(`/workers/scripts/${target.worker}/deployments`, 'STOP_REPAIR_DEPLOYMENTS');
+    const endpoint = await cfGet(`/workers/scripts/${target.worker}/subdomain`, 'STOP_REPAIR_ENDPOINT');
+    verifyRepairBaseline(worker.body.result, deployments.body.result, endpoint.body.result);
+  } else {
+    const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, 'STOP_WORKER_EXISTENCE', [404]);
+    guard(worker.body.success === false && Array.isArray(worker.body.errors) && worker.body.errors.some(error => error.code === 10007), 'STOP_WORKER_ABSENCE_AMBIGUOUS');
+  }
   const settings = await getJSON(`https://${target.project}.supabase.co/auth/v1/settings`, {
     apikey: process.env.HTC_SUPABASE_TEST_PUBLISHABLE_KEY,
   }, 'STOP_TEST_AUTH');
   guard(settings.body.external?.google === true, 'STOP_GOOGLE_PROVIDER');
-  report.preflight = { account: 'PASS', workerAbsent: 'PASS', hostname: origin, TESTKeyAccepted: true, GoogleProviderEnabled: true, callbackTarget: callback, callbackGate: process.env.REDIRECT_ALLOWLIST_VERIFIED === 'true' ? 'VERIFIED_BY_APPROVED_ENVIRONMENT_GATE' : 'BLOCKED_NOT_REQUIRED_FOR_PACKAGE', planChangeRequested: false };
+  report.preflight = { account: 'PASS', ...(repair ? { existingSingleVersionVerified: repairBaseVersion } : { workerAbsent: 'PASS' }), hostname: origin, TESTKeyAccepted: true, GoogleProviderEnabled: true, callbackTarget: callback, callbackGate: process.env.REDIRECT_ALLOWLIST_VERIFIED === 'true' ? 'VERIFIED_BY_APPROVED_ENVIRONMENT_GATE' : 'BLOCKED_NOT_REQUIRED_FOR_PACKAGE', planChangeRequested: false };
 }
 
 function loadState(phase) {
@@ -202,6 +236,15 @@ async function main(mode) {
       const state = loadState('PREFLIGHT_PASS');
       run('install', ['install', '--frozen-lockfile', '--ignore-scripts'], privateBuildEnv(process.env), report);
       guard(sha256(readFileSync('pnpm-lock.yaml')) === target.lockSHA256, 'STOP_LOCK_CHANGED');
+      if (process.env.TEST_EXECUTION_MODE === 'repair') {
+        run('redirect-runtime', ['exec', 'node', 'validation/cloudflare/probe-redirect-error-workerd.mjs'], privateBuildEnv(process.env), report, 180000);
+        const proof = JSON.parse(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json', 'utf8'));
+        guard(proof.status === 'PASS' && proof.sha === process.env.GITHUB_SHA && proof.run === process.env.GITHUB_RUN_ID && proof.legacyRedirectErrorRejected === true && proof.compatibilityReadHTTP === 200 && proof.secretInputs === false && proof.fixtures === 0, 'STOP_RUNTIME_REPAIR_PROOF');
+        state.redirectRuntimeProofSHA256 = sha256(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json'));
+        state.adapterSHA256 = sha256(readFileSync('cloudflare/redirect-error-fetch.mjs'));
+        state.installerSHA256 = sha256(readFileSync('cloudflare/install-redirect-error-fetch.mjs'));
+        state.entrySHA256 = sha256(readFileSync('cloudflare/worker-entry.mjs'));
+      }
       writeFileSync(configPath, JSON.stringify(expected, null, 2) + '\n', { flag: 'wx', mode: 0o600 });
       const clean = privateBuildEnv(process.env);
       run('build', ['exec', 'opennextjs-cloudflare', 'build', `--config=${configPath}`], clean, report);
@@ -210,10 +253,13 @@ async function main(mode) {
       state.workerSHA256 = sha256(readFileSync('.open-next/worker.js')); saveState(state);
       report.status = process.env.TEST_EXECUTION_MODE === 'package' ? 'TEST_PACKAGE_PASS_DEPLOYMENT_DISABLED' : 'BUILD_PASS';
     } else {
-      guard(process.env.TEST_EXECUTION_MODE === 'deploy' && process.env.DEPLOYMENT_ENABLED === 'true', 'STOP_NO_UPLOAD_IN_PACKAGE_MODE');
+      guard(['deploy','repair'].includes(process.env.TEST_EXECUTION_MODE) && process.env.DEPLOYMENT_ENABLED === 'true', 'STOP_NO_UPLOAD_IN_PACKAGE_MODE');
       const state = loadState('BUILD_PASS');
       guard(sha256(readFileSync(configPath)) === state.configSHA256 && JSON.stringify(JSON.parse(readFileSync(configPath))) === JSON.stringify(expected), 'STOP_GENERATED_CONFIG');
       guard(sha256(readFileSync('.open-next/worker.js')) === state.workerSHA256, 'STOP_WORKER_BYTES');
+      if (process.env.TEST_EXECUTION_MODE === 'repair') {
+        guard(sha256(readFileSync('.wrangler/htc-test-deployment/redirect-runtime-report.json')) === state.redirectRuntimeProofSHA256 && sha256(readFileSync('cloudflare/redirect-error-fetch.mjs')) === state.adapterSHA256 && sha256(readFileSync('cloudflare/install-redirect-error-fetch.mjs')) === state.installerSHA256 && sha256(readFileSync('cloudflare/worker-entry.mjs')) === state.entrySHA256, 'STOP_REPAIR_BYTES');
+      }
       await accessPreflight(report); // Re-check absence immediately before the only mutation.
       guard(typeof process.env.RUNNER_TEMP === 'string' && /^\/[A-Za-z0-9_./-]+$/.test(process.env.RUNNER_TEMP), 'STOP_PRIVATE_PATH');
       secretFile = path.join(process.env.RUNNER_TEMP, `htc-runtime-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}.json`);

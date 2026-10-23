@@ -1,7 +1,7 @@
 // New post-propagation READ-ONLY validation. Never uploads/redeploys a Worker.
 import { chromium } from '@playwright/test';
 import { createHash } from 'node:crypto';
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 
 const origin = 'https://htc-trial-workers-test.holictraderscompany.workers.dev';
 const TEST = 'https://uzhkzhmncxjplrdtdzgd.supabase.co';
@@ -28,6 +28,13 @@ try {
   guard(process.env.GITHUB_REPOSITORY === 'holictraderscompany-art/htc-trial' && process.env.GITHUB_REF === 'refs/heads/codex/cloudflare-workers-preparation' && process.env.GITHUB_RUN_ATTEMPT === '1', 'STOP_SCOPE');
   guard(process.version === 'v24.21.0', 'STOP_NODE');
   guard(!process.env.CLOUDFLARE_API_TOKEN && !process.env.CLOUDFLARE_TEST_API_TOKEN && !process.env.HTC_SUPABASE_TEST_PUBLISHABLE_KEY && !process.env.SUPABASE_SERVICE_ROLE_KEY, 'STOP_UNEXPECTED_CREDENTIAL_INPUT');
+  if (process.env.HTC_DEPLOY_REPORT) {
+    guard(process.env.HTC_DEPLOY_REPORT === '.wrangler/htc-test-deployment/deploy-report.json', 'STOP_DEPLOY_REPORT_PATH');
+    const proof = JSON.parse(readFileSync(process.env.HTC_DEPLOY_REPORT, 'utf8'));
+    guard(proof.sha === process.env.GITHUB_SHA && proof.status === 'TEST_DEPLOYMENT_AND_ANONYMOUS_SECURITY_PASS_AUTHENTICATED_GATES_PENDING' && proof.url === origin && proof.runtime?.length === 16 && proof.runtime.every(check => check.passed === true) && /^[a-f0-9-]{36}$/.test(proof.version ?? ''), 'STOP_DEPLOY_REPORT');
+    report.http = proof.runtime.map(check => ({...check, reusedFromSameJob: true}));
+    report.deploymentEvidence = {sha: proof.sha, version: proof.version, run: process.env.GITHUB_RUN_ID, source: 'Same hosted job verified deployment result and 16 completed HTTP probes'};
+  } else {
   const health = await request('/api/health');
   record('HTTPS health and no-store', health.status === 200 && health.headers.get('cache-control')?.includes('no-store'), health);
   const session = await request('/api/session');
@@ -56,6 +63,7 @@ try {
   const location = new URL(invalid.headers.get('location') ?? '/', origin);
   record('Invalid callback fails closed', invalid.status === 303 && location.origin === origin && location.pathname === '/sign-in', invalid);
   guard(report.http.length === 16, 'STOP_SECURITY_CHECK_COUNT');
+  }
 
   // GET is the existing anonymous public-read contract. No bearer token is sent.
   const publicAPI = await request('/api/content?paged=1&limit=12&assets=1');
