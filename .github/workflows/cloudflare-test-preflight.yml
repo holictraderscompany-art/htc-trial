@@ -1,0 +1,39 @@
+name: HTC Cloudflare TEST access preflight (no deploy)
+on:
+  push:
+    branches: [codex/cloudflare-workers-preparation]
+    paths:
+      - .github/workflows/cloudflare-test-preflight.yml
+      - validation/cloudflare/test-deployment-preflight.mjs
+      - validation/cloudflare/test-deployment-preflight.test.mjs
+permissions:
+  contents: read
+concurrency:
+  group: htc-cloudflare-test-preflight
+  cancel-in-progress: false
+jobs:
+  preflight:
+    if: >-
+      github.repository == 'holictraderscompany-art/htc-trial' &&
+      github.ref == 'refs/heads/codex/cloudflare-workers-preparation' &&
+      github.run_attempt == 1 &&
+      contains(github.event.head_commit.message, '[HTC-TEST-PREFLIGHT]')
+    environment: cloudflare-test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.21.0'
+      - name: Test fail-closed preflight and credential redaction
+        run: node --test validation/cloudflare/test-deployment-preflight.test.mjs
+      - name: Check sealed source and encrypted TEST credential presence only
+        env:
+          CLOUDFLARE_TEST_API_TOKEN: ${{ secrets.CLOUDFLARE_TEST_API_TOKEN }}
+          HTC_SUPABASE_TEST_PUBLISHABLE_KEY: ${{ secrets.HTC_SUPABASE_TEST_PUBLISHABLE_KEY }}
+        run: node validation/cloudflare/test-deployment-preflight.mjs
