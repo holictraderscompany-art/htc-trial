@@ -89,3 +89,99 @@ OAuth evidence does not establish Google login on a new hostname.
 
 No application source, SQL, Auth, Storage, Production resource or Group 03
 evidence is changed by this access bootstrap. No background retry is scheduled.
+
+## Authorized access provisioning — 23 October 2026 UTC
+
+The bootstrap commit `001df12f705d0ece520f3aa73b711f223da9780c` was pushed
+normally and verified remotely. [Run 39885303269](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39885303269)
+passed all four new guard tests and all 23 sealed-file checks, then deliberately
+failed before installation because both environment-secret bindings were absent.
+This is a successful fail-closed access check, not a successful deployment run.
+
+The environment now permits only the exact migration branch. Four non-secret
+variables bind its Cloudflare account, Worker name, Supabase TEST project and
+deployment enable switch. Git Credential Manager's documented noninteractive
+API verified the authorized GitHub identity and repository administration;
+credential output remained in process memory. No browser session was transferred.
+
+Both encrypted environment secrets were subsequently provisioned. The existing
+TEST-designated T16 runner configuration was verified against the exact TEST Auth
+gateway (HTTP 200); Google Provider was enabled. Its publishable key was supplied
+privately through stdin to the official GitHub CLI. The key was never placed in
+a command argument, repository, report or new plaintext file.
+
+A separate account-owned Cloudflare CI token permits only Workers Scripts Write
+and Account Settings Read in the verified account, with a 12-hour expiry. The
+account initially had no Workers; this account-level creation permission is
+needed to create the absent TEST Worker. No zone, DNS, billing, token-management
+or user-management permission was granted to CI. The token expires at
+`2026-10-23T14:31:40Z`; it must not be treated as a permanent CI credential.
+
+The token was RSA-OAEP SHA-256 encrypted inside the official Cloudflare MCP
+sandbox and returned only as ciphertext. Its one-use private key stayed in local
+process memory. After synthetic round-trip validation, the relay verified token
+identity, scope metadata and account access, then used GitHub CLI stdin to store
+the encrypted environment secret once. Private keys and plaintext token values
+were never written to disk or returned to model output. The relay then exited.
+
+Cloudflare initially rejected a millisecond-form expiry with HTTP 400. An exact
+name lookup proved that no token had been created before correcting the date to
+the documented seconds-only format. No ambiguous creation request was replayed.
+
+The official portable GitHub CLI 2.103.0 control client was verified against the
+upstream release asset SHA-256
+`80c846a5b8432672ca6373b34ce9de998c9686aaa1885c845f2e1ee81f713726`.
+No application dependency installation or build ran on Windows. Account, Auth
+and API keys are not evidence of actual Google login on the future Worker host.
+
+## Exact-SHA cloud packaging and deployment gate
+
+`cloudflare-test-deploy.yml` accepts `[HTC-TEST-PACKAGE]` or
+`[HTC-TEST-DEPLOY]` only on the migration branch and first run attempt. The
+environment variable `HTC_TEST_APPROVED_WORKFLOW_SHA` must match the checkout.
+Package mode requires `HTC_TEST_DEPLOYMENT_ENABLED=false` and cannot schedule
+the upload step. Deploy mode additionally requires both enablement and
+`HTC_TEST_REDIRECT_ALLOWLIST_VERIFIED=true`. Those variables are evaluated inside
+steps after the protected environment is available.
+
+The controller verifies the sealed source and lockfile, exact account and
+subdomain, absence of an existing Worker, TEST key and Google Provider. It builds
+on GitHub-hosted Linux with all live credentials removed from subprocess
+environments. An actual deployment writes the runtime key only to a 0600 file
+under runner temporary storage, removes it on exit, and records its one-shot
+submission before invoking OpenNext. A failed/ambiguous result never causes a
+deployment retry. Sixteen HTTPS/anonymous security probes follow a successful
+upload; genuine Google/Founder/User checks stay explicitly pending.
+
+No artifact storage is enabled: its shared account quota was not verified.
+Package-only execution validates the new complete TEST configuration, but a
+later upload requires fresh cloud packaging because no transferable build
+artifact was retained. Existing application, SQLite, security and UI test proof
+is reused where source and dependencies are unchanged.
+
+The deployed TEST Auth health endpoint reports version **v2.197.0** (HTTP 200).
+Its exact tagged source shows `/authorize` creates flow state and uses a UUID,
+so merely following a Google redirect cannot prove the requested callback was
+allowlisted. No authorize request was sent as part of the read-only inspection.
+The available Supabase connector lacks Auth URL configuration endpoints; the
+Supabase CLI, native management-token environment bindings and legacy CLI token
+file are absent. Current callback allowlisting remains **NOT VERIFIED**.
+
+The sole required owner configuration action is in the authorized TEST project's
+[Auth URL Configuration](https://supabase.com/dashboard/project/uzhkzhmncxjplrdtdzgd/auth/url-configuration):
+preserve Site URL and existing entries, and save this narrowly scoped entry if
+not already covered:
+
+```text
+https://htc-trial-workers-test.holictraderscompany.workers.dev/auth/callback\?attempt=????????????????????????????????
+```
+
+This is glob syntax: the escaped question mark is literal and the remaining 32
+question marks match the nonce length. HTC independently verifies its 32-hex
+nonce and HttpOnly flow cookie. The Google provider redirect URI remains the
+existing `https://uzhkzhmncxjplrdtdzgd.supabase.co/auth/v1/callback`; changing
+Google Cloud configuration is not established as necessary.
+
+Deployment stays disabled until that configuration gate is verified. A later
+normal-browser login by the account owner is still required to prove real
+Google OAuth on the new HTTPS hostname; automated Google login is not retried.

@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-10-23T02:59:10.7137424Z",
+  "status": "CI_ACCESS_PROVISIONED_DEPLOYMENT_PENDING",
+  "repository": "holictraderscompany-art/htc-trial",
+  "branch": "codex/cloudflare-workers-preparation",
+  "migrationBaseline": "3967a520a330577d8b1f5931361839dfeb28a46c",
+  "bootstrapCommit": "001df12f705d0ece520f3aa73b711f223da9780c",
+  "protectedGroup03": "4e8e07b18c1040722169223196add2112751cfeb",
+  "protectedMain": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+  "previousCloudValidation": {
+    "run": "39867242940",
+    "status": "PASS",
+    "workerHTTPChecks": "16/16",
+    "UIComparisons": "6/6",
+    "configChecks": "4/4",
+    "applicationRegression": "223/223 (sealed reused evidence)",
+    "scope": "Loopback workerd with synthetic key; not deployed OAuth"
+  },
+  "accessBootstrap": {
+    "run": "39885303269",
+    "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39885303269",
+    "conclusion": "failure",
+    "reason": "BLOCKED_MISSING_CI_CREDENTIALS before any dependency install/build",
+    "newGuardTests": "4/4 PASS",
+    "sealedMigrationFiles": "23/23 PASS",
+    "lockfile": "PASS",
+    "expectedFailClosed": true
+  },
+  "environment": {
+    "name": "cloudflare-test",
+    "allowedBranchOnly": "codex/cloudflare-workers-preparation",
+    "customBranchPolicies": true,
+    "repositoryAdminVerified": true,
+    "secretsProvisioned": [
+      "CLOUDFLARE_TEST_API_TOKEN",
+      "HTC_SUPABASE_TEST_PUBLISHABLE_KEY"
+    ],
+    "secretMetadataHTTP": 200,
+    "deploymentEnabledAtProvisioning": false
+  },
+  "cloudflare": {
+    "account": "2e93ece77ccb74920f7b995f6d48996b",
+    "worker": "htc-trial-workers-test",
+    "proposedURLNotYetDeployed": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+    "tokenIdMetadataOnly": "0e790bc024ce9fe627d0d358aa20c7f4",
+    "tokenExpiryUTC": "2026-10-23T14:31:40Z",
+    "tokenPermissions": [
+      "Workers Scripts Write",
+      "Account Settings Read"
+    ],
+    "tokenResource": "com.cloudflare.api.account.2e93ece77ccb74920f7b995f6d48996b",
+    "tokenRuntimeVerification": "PASS",
+    "encryptedRelay": "PASS",
+    "secretWriteAttempts": 1,
+    "subscriptionChanges": 0,
+    "billingPlan": "Not proven by OAuth; unsupported subscriptions GET was not replayed",
+    "existingWorkerInventoryBeforeDeployment": []
+  },
+  "supabase": {
+    "project": "uzhkzhmncxjplrdtdzgd",
+    "existingApprovedTESTConfiguration": "Validated T16 runner source outside Git",
+    "authSettingsHTTP": 200,
+    "publishableKeyAcceptedByExactTESTGateway": true,
+    "googleProviderEnabled": true,
+    "deployedHostnameRedirectAllowlist": "BLOCKED: no available Auth URL configuration API/session",
+    "newHostnameGoogleLogin": "NOT_TESTED",
+    "authVersion": "v2.197.0",
+    "healthHTTP": 200
+  },
+  "security": {
+    "credentialValuesReturnedInReport": false,
+    "newPlaintextCredentialFiles": false,
+    "privateRSAKeyPersisted": false,
+    "browserSessionTransfer": false,
+    "applicationSourceChanges": false,
+    "SQLChanges": false,
+    "databaseMutations": 0,
+    "AuthOrStorageMutations": 0,
+    "productionAccessed": false,
+    "paidServiceActivated": false,
+    "heavyWindowsExecution": false,
+    "globalClientInstallation": false,
+    "mainChanged": false
+  },
+  "remaining": [
+    "Review one-shot exact-SHA deployment controller and new cloud guard tests",
+    "Run frozen build and TEST-only upload on GitHub-hosted Linux",
+    "Prove actual HTTPS and new-host security/UI behavior",
+    "Verify new-host redirect allowlist and legitimate Founder/USER Google OAuth"
+  ],
+  "automaticDeploymentRetry": false,
+  "backgroundWorkClaimed": false,
+  "ownerAction": "Save the scoped Worker callback entry in TEST Auth URL Configuration, preserving Site URL/existing entries. Owner question pending; no approval inferred.",
+  "packageOnlyGate": "Deployment remains disabled; exact-SHA hosted packaging permitted independently."
+}
