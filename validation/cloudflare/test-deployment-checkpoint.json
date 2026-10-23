@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-23T22:23:08Z",
+  "recordedAt": "2026-10-23T23:10:15.388Z",
   "auditDateJST": "2026-10-24",
   "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
   "initialProvisioning": {
@@ -269,10 +269,10 @@
   ],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Existing one-shot private USER/post-logout browser measurement request is pending; do not repeat questions, Founder login or transfer browser credentials",
+  "ownerAction": "Reload/reconnect the existing htc-cloudflare-api MCP client after successful native DCR authorization; do not repeat Google HTC login or Console pasting. No new API token has been created.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "IMPLEMENTED_AWAITING_CLOUD_REGRESSION_AND_AUTHENTICATED_TEST_UPLOAD",
+    "status": "CLOUD_REGRESSION_PASS_TEST_UPLOAD_BLOCKED_ACTIVE_MCP_CONNECTION",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -282,12 +282,70 @@
     "changesToApplicationSource": false,
     "oldDeployedVersion": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
     "newPageDeployed": false,
-    "cloudValidation": "PENDING",
-    "officialCloudflareConnector": {
-      "status": "BLOCKED_OAUTH_REFRESH",
-      "error": "invalid_client: Client not found",
-      "nativeRecovery": "Default native login failed owner-observed client metadata temporarily_unavailable; official public discovery HTTP200 supports DCR and S256. One explicit native DCR login registered a non-metadata client and opened normal Chrome; owner approval pending, no API token created."
+    "cloudValidation": {
+      "status": "PASS",
+      "run": "40036957197",
+      "job": "120698706117",
+      "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/40036957197",
+      "startedAt": "2026-10-23T22:58:54Z",
+      "completedAt": "2026-10-23T22:59:19Z",
+      "focusedTests": {
+        "passed": 42,
+        "failed": 0,
+        "controller": 13,
+        "adapter": 14,
+        "diagnostic": 15
+      },
+      "sealedFiles": 23,
+      "frozenInstall": "PASS_WITH_EXISTING_SECURITY_POLICY",
+      "syntheticBrowser": {
+        "mode": "LOCAL_SYNTHETIC_BROWSER_REGRESSION_NOT_LIVE_AUTH",
+        "status": "PASS",
+        "views": 2,
+        "failureCases": 2,
+        "sameOriginSummaryPOST": true,
+        "sameOriginNativeSignoutPOST": true,
+        "cspExecuted": true,
+        "externalRequests": 0,
+        "credentialsUsed": false,
+        "liveAuthOperations": 0
+      },
+      "newOpenNextBuild": "NOT_RUN_IN_VALIDATION_ONLY_JOB",
+      "deployments": 0
     },
-    "ciCredential": "Existing 12-hour token expired; new exact-account TEST-only credential remains unprovisioned"
+    "officialCloudflareConnector": {
+      "status": "BLOCKED_CURRENT_CHAT_TRANSPORT_RECONNECT_REQUIRED",
+      "earlierRefreshError": "invalid_client: Client not found",
+      "earlierDefaultLoginError": "temporarily_unavailable: Client metadata is temporarily unavailable",
+      "publicDiscoveryHTTP": 200,
+      "endpoint": "https://mcp.cloudflare.com/mcp",
+      "dcrAdvertised": true,
+      "pkceS256Advertised": true,
+      "nativeDCRLogin": {
+        "exit": 0,
+        "ownerConfirmed": true,
+        "clientIdIsMetadataURL": false,
+        "pkceMethod": "S256",
+        "credentialValuesReturned": false
+      },
+      "currentToolResponse": "MCP authentication required. Reconnect to continue using this server.",
+      "freshNativeClientMetadata": "NOT_OBTAINED",
+      "automaticRetry": false,
+      "newAPITokensCreated": 0,
+      "credentialStoreManuallyRead": false
+    },
+    "ciCredential": "Existing 12-hour token expired; new exact-account TEST-only credential remains unprovisioned",
+    "candidateSHA": "97850a7c4a7677b7a8bc6d28b89941a72608bf3d",
+    "deploymentWorkflowForCandidate": {
+      "run": "40036957106",
+      "conclusion": "skipped",
+      "expected": true
+    },
+    "independentPublicChecks": {
+      "workerHealthHTTP": 200,
+      "workerHealthNoStore": true,
+      "diagnosticPathHTTP": 404,
+      "newPageDeployed": false
+    }
   }
 }

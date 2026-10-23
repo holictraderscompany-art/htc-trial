@@ -67,19 +67,42 @@ read operation. A standard existing sign-out form is enabled only after genuine
 USER API denial passes. The page displays only HTTP status, booleans, approved
 error codes and no-store evidence; it never reads cookies or browser storage.
 
-Focused tests and an isolated cloud browser regression must pass before its
-single guarded TEST upload. Synthetic browser results are not LIVE USER proof.
+Hosted validation run
+[40036957197](https://github.com/holictraderscompany-art/htc-trial/actions/runs/40036957197)
+at `97850a7c4a7677b7a8bc6d28b89941a72608bf3d` passed **42/42** focused tests
+(13 controller, 14 adapter and 15 diagnostic tests), frozen installation and
+**4/4** synthetic browser cases (desktop/mobile and two failure cases).
+The browser confirmed CSP execution, strict same-origin headers for summary
+and native sign-out, preserved proof and fail-closed behavior. Synthetic
+results are not LIVE USER proof. The deployment workflow for that commit was
+skipped; this validation workflow has no deployment step or live credentials.
+The single guarded TEST upload remains pending.
 The new `accesscheck` deployment mode pins the existing two deployment IDs and
 current version `f2897ae4-6133-4614-aaa8-257e3f5c6216`; it does not relax or replay
 the previous one-shot repair mode. Application source, Auth, SQL and security
 policies remain unchanged. No diagnostic page is claimed deployed yet.
 
 At preparation, the official Cloudflare connector rejected refresh with
-`invalid_client: Client not found`. Its official native OAuth reconnection is
-separate from HTC Google sign-in. A credential-free cloud validation workflow
-can run independently; TEST upload remains blocked until authenticated account,
-version and binding checks are again available. The expired earlier CI token
-is not reused. No browser protection is disabled.
+`invalid_client: Client not found`; the default login then showed client metadata
+temporarily unavailable. Read-only inspection confirmed the configured official
+`https://mcp.cloudflare.com/mcp` endpoint. Its public authorization-server
+discovery returned 200 and advertised DCR and PKCE S256. The explicitly selected
+native DCR flow registered a non-metadata client and completed successfully
+(CLI exit 0 and owner confirmation), without changing the MCP endpoint or
+requesting custom scope overrides.
+No API token was created. This connection recovery is separate from HTC login.
+
+The current chat's MCP transport still reports **MCP authentication required;
+reconnect to continue** after that successful native authorization. A fresh
+native client did not produce account metadata either. No credential store was
+manually read or copied to work around the connection. TEST upload is held until the
+official client connection is reloaded and fresh account/version/binding guards
+pass. The previous CI token is expired and is not reused.
+
+Independent public checks found existing Worker health 200/no-store and the new
+diagnostic path 404, consistent with no new upload. After connection recovery,
+reuse the cloud PASS evidence when source is unchanged; do not replay deployment
+or require Console pasting. No browser protection is disabled.
 
 ## Verified source and target
 
