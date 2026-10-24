@@ -6,7 +6,61 @@ remain immutable historical evidence; their previous approval gates do not
 cancel this later authorization. Production and paid-service activation remain
 outside scope.
 
-## Current verified checkpoint — 24 October 2026 JST
+## Current verified checkpoint — successful access-check deployment
+
+Hosted run [40061274032](https://github.com/holictraderscompany-art/htc-trial/actions/runs/40061274032),
+job `120775110139`, deployed commit `0ab768906c6fcebba9e0794eeac9fb158cd38ed0`
+successfully on 24 October 2026 at 04:11 UTC. Current TEST Worker version is
+`3629a579-703c-49b2-a291-7be066ef94ca`. The exact-SHA environment approval
+returned PATCH 204 and matched on readback before the normal branch push.
+Main and the closed Group 03 branch remained unchanged.
+
+The replacement credential passed active/remaining-expiry verification and
+the account-token-management operation was denied with HTTP 403. The exact
+account, previous two deployment records, five TEST bindings and existing
+Supabase TEST Google provider passed preflight before/after build and before
+upload. No wider permission set or billing tier is inferred. The bounded,
+credential-free wait had zero delay because its time window had already opened;
+no token TTL or credential guard was changed.
+
+This run passed 58 focused tests, frozen installation, Next.js/OpenNext build,
+the native workerd redirect proof, four synthetic browser cases and all 19
+postdeployment HTTPS/security checks. The diagnostic page is now deployed at
+`/__htc-test-access-check` with HTTP 200, restrictive CSP and no automatic
+requests. Exactly one upload occurred. No database fixture, SQL, application
+source, Auth/Storage configuration, Production resource or paid service changed.
+Actual sanitized controller reports are in
+`validation/cloudflare/accesscheck-deployment-20261024.json`.
+
+Overall TEST deployment acceptance is now **FULL PASS**. The owner subsequently
+completed the deployed console-free helper in the legitimate normal-Chrome USER
+profile and reported these actual runtime results:
+
+| Gate | Session | Founder summary API | Result |
+| --- | --- | --- | --- |
+| USER before sign-out | HTTP 200, authenticated=true | HTTP 403, FORBIDDEN, no_store=true | USER_API_DENIAL_PASS |
+| Same browser after official sign-out | HTTP 200, authenticated=false | HTTP 401, UNAUTHENTICATED, no_store=true | POST_LOGOUT_ACCESS_DENIAL_PASS |
+
+Both helper results reported `passed=true`. These are explicit owner browser
+runtime results, not an independent new capture of private Worker requests.
+The official native sign-out form was used; its raw HTTP status was not reported
+and is not inferred. No Console protection was disabled and no cookie/token was
+read or transferred. This proves same-browser denial after logout, not immediate
+global revocation of every JWT. Existing natural JWT expiry evidence remains
+separate. Prior genuine Founder OAuth/dashboard, USER page-denial, responsive
+public UI and Group 01–03 regression evidence remain valid for the unchanged
+hostname/application source. Synthetic browser cases remain labeled synthetic.
+
+The final evidence file and checkpoint record these sources and limitations.
+Only the three reviewed documentation/evidence paths are finalized afterward;
+their marker-free commit does not match deployment workflow path filters and
+requires no additional upload, database mutation or repeated LIVE test.
+
+## Historical checkpoint before the access-check upload — 24 October 2026 JST
+
+All sections below preserve historical preparation and checkpoints. Their
+pending, absent or blocked statements describe those earlier checkpoints;
+the Current verified checkpoint above is authoritative for final status.
 
 TEST is deployed at the HTTPS URL below. Hosted run
 [39900017186](https://github.com/holictraderscompany-art/htc-trial/actions/runs/39900017186)

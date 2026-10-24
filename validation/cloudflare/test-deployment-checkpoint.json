@@ -1,7 +1,7 @@
 {
-  "recordedAt": "2026-10-24T02:41:20.097Z",
+  "recordedAt": "2026-10-24T04:20:24Z",
   "auditDateJST": "2026-10-24",
-  "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
+  "status": "FULL_PASS_CLOUDFLARE_TEST_DEPLOYMENT_WITH_DECLARED_EVIDENCE_SOURCES",
   "initialProvisioning": {
     "recordedAt": "2026-10-23T03:06:24.1112642Z",
     "status": "CI_ACCESS_PROVISIONED_CALLBACK_CONFIRMED_DEPLOYMENT_PENDING"
@@ -48,7 +48,8 @@
     "worker": "htc-trial-workers-test",
     "initialProposedURL": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
     "verifiedDeploymentURL": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
-    "verifiedVersion": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+    "verifiedVersion": "3629a579-703c-49b2-a291-7be066ef94ca",
+    "tokenMetadataScope": "Historical original provisioning credential; replacement credential verification is in consoleFreePreparation.ciCredentialRecovery and finalEvidence",
     "tokenIdMetadataOnly": "0e790bc024ce9fe627d0d358aa20c7f4",
     "tokenExpiryUTC": "2026-10-23T14:31:40Z",
     "tokenPermissions": [
@@ -93,38 +94,59 @@
     "mainChanged": false
   },
   "latestHostedValidation": {
-    "run": "39900017186",
-    "job": "120239201999",
-    "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39900017186",
-    "sha": "946c4e7ac17ff9fef2c82a69995c58f17b93a0e1",
-    "conclusion": "success",
-    "attempt": 1,
-    "startedAt": "2026-10-23T04:23:04Z",
-    "completedAt": "2026-10-23T04:24:23Z",
-    "controllerGuards": "9/9 PASS",
-    "redirectAdapter": "14/14 PASS",
     "sealedPreflight": "PASS",
+    "run": "40061274032",
+    "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/40061274032",
+    "fixturesCreated": 0,
+    "evidence": "validation/cloudflare/accesscheck-deployment-20261024.json",
+    "deploymentExitCode": 0,
+    "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+    "version": "3629a579-703c-49b2-a291-7be066ef94ca",
+    "attempt": 1,
+    "conclusion": "success",
+    "limitations": "CI reports preserve their original authenticated-gates-pending status. Those gates subsequently passed via actual owner browser runtime results recorded in the same evidence file.",
+    "controllerGuards": "29/29 PASS",
     "nativeWorkerdProof": {
       "status": "PASS",
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "run": "40061274032",
       "mode": "CLOUD_LOCAL_WORKERD_TEST_PUBLIC_JWKS_GET_ONLY",
       "legacyRedirectErrorRejected": true,
       "compatibilityReadHTTP": 200,
-      "manualKeySetShape": true,
-      "adaptedKeySetShape": true,
-      "adaptedCalls": 1,
       "secretInputs": false,
-      "fixtures": 0
+      "fixtures": 0,
+      "result": {
+        "ok": true,
+        "nativeErrorName": "TypeError",
+        "unsupportedRedirectReported": true,
+        "manualStatus": 200,
+        "adaptedStatus": 200,
+        "manualKeySetShape": true,
+        "adaptedKeySetShape": true,
+        "adaptedCalls": 1,
+        "observedMode": "manual"
+      }
     },
-    "frozenInstallAndOpenNextBuild": "PASS",
-    "deploymentExitCode": 0,
-    "version": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
-    "deployedHTTPChecks": "17/17 PASS",
-    "publicResponsiveViews": "8/8 PASS (6 baseline and 2 public discovery views)",
-    "fixturesCreated": 0,
-    "newerRunsAtRecoveryAudit": 0,
-    "queuedRunsAtRecoveryAudit": 0,
-    "inProgressRunsAtRecoveryAudit": 0,
-    "evidence": "Actual GitHub run/job/log summaries and sanitized job annotations recovered read-only; no build/test replay"
+    "job": "120775110139",
+    "adapterAndDiagnostic": "29/29 PASS",
+    "syntheticBrowser": {
+      "status": "PASS",
+      "mode": "LOCAL_SYNTHETIC_BROWSER_REGRESSION_NOT_LIVE_AUTH",
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "run": "40061274032",
+      "externalNetworkRequests": 0,
+      "credentialsUsed": false,
+      "cookiesTransferred": false,
+      "AuthDatabaseStorageMutations": 0,
+      "deployments": 0,
+      "liveSupabaseRequests": 0,
+      "realGoogleOAuth": false,
+      "screenshotArtifacts": 0,
+      "passedViews": 2,
+      "passedFailureCases": 2
+    },
+    "deployedHTTPChecks": "19/19 PASS",
+    "frozenInstallAndOpenNextBuild": "PASS"
   },
   "currentReadOnlyAudit": {
     "auditDateJST": "2026-10-24",
@@ -181,9 +203,9 @@
     ],
     "officialSignoutAndVisualNavigation": "PASS_OWNER_PERFORMED_SIGN_OUT_AND_REPORTED_SIGN_IN_AND_HOME_VISIBLE",
     "signoutSource": "src/server/trial-session.js: official POST logout?scope=local and browser session/flow cookie clearing",
-    "userProtectedAPIHTTP403": "PENDING_RUNTIME_MEASUREMENT",
-    "postLogoutBrowserAuthenticatedFalse": "PENDING_RUNTIME_MEASUREMENT",
-    "postLogoutProtectedAPIHTTP401": "PENDING_RUNTIME_MEASUREMENT",
+    "userProtectedAPIHTTP403": "PASS_OWNER_BROWSER_RUNTIME_403_FORBIDDEN_NO_STORE",
+    "postLogoutBrowserAuthenticatedFalse": "PASS_OWNER_BROWSER_RUNTIME_SESSION200_AUTHENTICATED_FALSE",
+    "postLogoutProtectedAPIHTTP401": "PASS_OWNER_BROWSER_RUNTIME_401_UNAUTHENTICATED_NO_STORE",
     "sanitizedUpstreamWindowUTC": [
       "2026-10-23T22:06:16Z",
       "2026-10-23T22:19:06Z"
@@ -216,7 +238,38 @@
     ],
     "evidenceFileOutsideGit": "cloudflare-user-logout-correlations-20261024.json",
     "evidenceSHA256": "dfa75cf44834811840b79382e3c708341115778af5beae3acad6c538c7e29c0d",
-    "limitations": "Multiple logins/logouts occurred in the window; sanitized statuses do not uniquely identify an account/session. is_founder HTTP 200 does not prove its boolean. Owner server-rendered denial and visual navigation are not evidence of protected API 403 or post-logout API 401/authenticated=false. No cookie/token was inspected or transferred."
+    "limitations": "Final API statuses are explicit owner browser runtime evidence via the deployed console-free helper. Historical gateway logs remain corroboration only. Post-logout denial does not imply immediate invalidation of every previously issued JWT.",
+    "currentBrowserEvidence": {
+      "source": "Founder-provided actual results from the legitimate normal-Chrome USER profile using the deployed console-free helper; no browser session transfer",
+      "receivedAtUTC": "2026-10-24T04:20:24Z",
+      "hostname": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+      "path": "/__htc-test-access-check",
+      "userCheck": {
+        "passed": true,
+        "code": "USER_API_DENIAL_PASS",
+        "sessionHTTP": 200,
+        "authenticated": true,
+        "founderAPIHTTP": 403,
+        "error": "FORBIDDEN",
+        "no_store": true
+      },
+      "postLogoutCheck": {
+        "passed": true,
+        "code": "POST_LOGOUT_ACCESS_DENIAL_PASS",
+        "sessionHTTP": 200,
+        "authenticated": false,
+        "founderAPIHTTP": 401,
+        "error": "UNAUTHENTICATED",
+        "no_store": true
+      },
+      "officialSignout": "Performed through the helper's enabled existing native sign-out form in that USER profile",
+      "rawLogoutHTTP": "NOT_REPORTED_NOT_INFERRED",
+      "consoleProtectionUnchanged": true,
+      "cookiesOrTokensReadOrTransferred": false,
+      "automatedGoogleLogin": false,
+      "limitations": "These runtime values are direct owner browser evidence, not a new independent Worker log capture. They prove same-browser denial after official logout, not immediate global JWT revocation."
+    },
+    "historicalLogLimitations": "Multiple logins/logouts occurred in the window; sanitized statuses do not uniquely identify an account/session. is_founder HTTP 200 does not prove its boolean. Owner server-rendered denial and visual navigation are not evidence of protected API 403 or post-logout API 401/authenticated=false. No cookie/token was inspected or transferred."
   },
   "historicalWorkerAPIStatusAvailability": {
     "observability": null,
@@ -263,17 +316,13 @@
       "result": "9 controller and 14 adapter tests passed; keyless Auth health proof failed before build/upload; historical failure preserved and later proof corrected to public JWKS"
     }
   ],
-  "remaining": [
-    "Provision and verify the protected short-lived TEST CI credential; complete exact account/version/binding preflight before a new upload",
-    "Measure protected API HTTP 403 within the legitimate USER browser session on the deployed TEST hostname",
-    "Measure post-logout browser authenticated=false and protected API HTTP 401; do not infer these from visual navigation, sanitized upstream events or the malformed-session probe"
-  ],
+  "remaining": [],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Owner confirmed the narrow CI secret was saved privately. No further owner action established; exact-SHA TEST approval and hosted preflight remain controlled.",
+  "ownerAction": "NONE: real USER403 and post-logout sessionfalse/API401 are now proven by owner browser runtime evidence; no further login or test replay required.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "VERIFIED_EXPIRY_WINDOW_CONTINUATION_PREPARATION_NO_UPLOAD",
+    "status": "FULL_PASS_REAL_USER_AND_POST_LOGOUT_BROWSER_GATES_COMPLETE",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -282,7 +331,7 @@
     "newAuthOrDatabasePermissions": false,
     "changesToApplicationSource": false,
     "oldDeployedVersion": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
-    "newPageDeployed": false,
+    "newPageDeployed": true,
     "cloudValidation": {
       "status": "PASS",
       "run": "40036957197",
@@ -389,7 +438,7 @@
       },
       "toolAvailabilityAtCheckpoint": "Connector subsequently absent from current deferred tool catalog; no additional call or OAuth retry"
     },
-    "ciCredential": "Owner confirmed the replacement account-owned TEST token was saved directly in GitHub Environment. Value not read. Hosted credential/resource preflight is pending.",
+    "ciCredential": "Replacement token active, within unchanged remaining-lifetime limits, account/Worker/TEST bindings verified; management listing denied HTTP403. Hosted build and one TEST upload succeeded.",
     "candidateSHA": "97850a7c4a7677b7a8bc6d28b89941a72608bf3d",
     "deploymentWorkflowForCandidate": {
       "run": "40036957106",
@@ -400,10 +449,12 @@
       "workerHealthHTTP": 200,
       "workerHealthNoStore": true,
       "diagnosticPathHTTP": 404,
-      "newPageDeployed": false
+      "newPageDeployed": false,
+      "historical": true,
+      "limitation": "Pre-upload check preserved; the current deployed helper HTTP200 is recorded in the new hosted runtime evidence."
     },
     "ciCredentialRecovery": {
-      "status": "ACTIVE_CREDENTIAL_REMAINING_LIFETIME_WINDOW_PENDING",
+      "status": "LIVE_CREDENTIAL_RESOURCE_AND_UPLOAD_PASS",
       "secretName": "CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN",
       "ownerOnlyPrivateProvisioning": true,
       "credentialValueRequestedInChat": false,
@@ -418,9 +469,9 @@
       "requiredTokenManagementProbeHTTP": 403,
       "actualTokenManagementProbe": "HTTP403_DENIED",
       "actualTokenVerify": "HTTP200_ACTIVE_IDENTIFIER_SHAPE_PASS",
-      "actualResourcePreflight": "NOT_REACHED_EXPIRY_GUARD_STOPPED_BEFORE_ACCOUNT_WORKER_READS",
+      "actualResourcePreflight": "PASS_BEFORE_AND_AFTER_BUILD_AND_BEFORE_UPLOAD",
       "newTokensCreated": 0,
-      "newDeployments": 0,
+      "newDeployments": 1,
       "cloudValidation": {
         "sha": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
         "run": "40046284640",
@@ -524,15 +575,91 @@
         "TTLChanged": false,
         "remainingLifetimePolicyChanged": false,
         "subsequentLivePreflightRequired": true,
-        "newDeploymentAttempted": false
+        "newDeploymentAttempted": true,
+        "actualDelayMilliseconds": 0
+      },
+      "currentExactSHAEnablement": {
+        "repositoryGETsHTTP200": 5,
+        "PATCHAttempts": 1,
+        "PATCHHTTP": 204,
+        "readback": "PASS",
+        "otherVariablesUnchanged": 5,
+        "secretNamesPresent": true,
+        "secretValuesRead": false,
+        "candidate": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0"
       }
     },
     "accessCheckUploadGate": {
-      "status": "BOUNDED_WINDOW_WORKFLOW_PREPARATION_NO_UPLOAD",
-      "parentSHA": "fecad4b1fbf3d6904f98108216ec3221c63f7df2",
-      "coreValidatedCodeSHA": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
-      "newDeployments": 0,
-      "credentialValueRead": false
-    }
+      "version": "3629a579-703c-49b2-a291-7be066ef94ca",
+      "databaseFixtures": 0,
+      "newDeployments": 1,
+      "nativeWorkerd": "PASS",
+      "status": "TEST_UPLOAD_19_HTTPS_AND_REAL_USER_BROWSER_GATES_PASS",
+      "job": "120775110139",
+      "evidence": "validation/cloudflare/accesscheck-deployment-20261024.json",
+      "focusedTests": "58/58 PASS",
+      "preUploadHistoryRecordsVerified": 2,
+      "uploadAttempts": 1,
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "credentialValueReadByModel": false,
+      "run": "40061274032",
+      "syntheticBrowser": "4/4 PASS; not LIVE auth"
+    },
+    "currentVersion": "3629a579-703c-49b2-a291-7be066ef94ca"
+  },
+  "previousHostedValidation": {
+    "run": "39900017186",
+    "job": "120239201999",
+    "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/39900017186",
+    "sha": "946c4e7ac17ff9fef2c82a69995c58f17b93a0e1",
+    "conclusion": "success",
+    "attempt": 1,
+    "startedAt": "2026-10-23T04:23:04Z",
+    "completedAt": "2026-10-23T04:24:23Z",
+    "controllerGuards": "9/9 PASS",
+    "redirectAdapter": "14/14 PASS",
+    "sealedPreflight": "PASS",
+    "nativeWorkerdProof": {
+      "status": "PASS",
+      "mode": "CLOUD_LOCAL_WORKERD_TEST_PUBLIC_JWKS_GET_ONLY",
+      "legacyRedirectErrorRejected": true,
+      "compatibilityReadHTTP": 200,
+      "manualKeySetShape": true,
+      "adaptedKeySetShape": true,
+      "adaptedCalls": 1,
+      "secretInputs": false,
+      "fixtures": 0
+    },
+    "frozenInstallAndOpenNextBuild": "PASS",
+    "deploymentExitCode": 0,
+    "version": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+    "deployedHTTPChecks": "17/17 PASS",
+    "publicResponsiveViews": "8/8 PASS (6 baseline and 2 public discovery views)",
+    "fixturesCreated": 0,
+    "newerRunsAtRecoveryAudit": 0,
+    "queuedRunsAtRecoveryAudit": 0,
+    "inProgressRunsAtRecoveryAudit": 0,
+    "evidence": "Actual GitHub run/job/log summaries and sanitized job annotations recovered read-only; no build/test replay"
+  },
+  "finalAcceptance": {
+    "cloudBuildWorkflow": "PASS_RUN_40061274032",
+    "WorkerHTTPS": "PASS_HTTP200_AND_19_RUNTIME_CHECKS",
+    "SupabaseTESTConfiguration": "PASS_EXACT_HOST_BINDINGS_KEY_AND_GOOGLE_PROVIDER",
+    "realGoogleOAuth": "PASS_PRIOR_OWNER_FOUNDER_AND_USER_NORMAL_CHROME_EVIDENCE_SAME_HOSTNAME_UNCHANGED_APP",
+    "FounderAuthorization": "PASS_PRIOR_GENUINE_FOUNDER_DASHBOARD_AND_TEST_GATEWAY_CORRELATION",
+    "USERAuthorization": "PASS_REAL_USER_HTTP403_FORBIDDEN",
+    "postLogoutBrowserDenial": "PASS_AUTHENTICATED_FALSE_HTTP401_UNAUTHENTICATED",
+    "securityRegression": "PASS_58_FOCUSED_AND_4_SYNTHETIC_BROWSER_CASES",
+    "Group01to03Regression": "PASS_PRESERVED_SEALED_UNCHANGED_BASELINE",
+    "productionBoundary": "PASS_TEST_ONLY_ACTIONS_AND_BINDINGS_NO_PRODUCTION_ACCESS_OR_CHANGES",
+    "paidServiceActivation": "NONE_REQUESTED_OR_EXECUTED_BILLING_TIER_NOT_INFERRED",
+    "secrets": "NO_VALUES_REPORTED_OR_COMMITTED",
+    "GitSynchronization": "EVIDENCE_ONLY_COMMIT_AND_REMOTE_HEAD_VERIFICATION_RECORDED_SEPARATELY_AFTER_COMMIT"
+  },
+  "finalEvidence": {
+    "sha256": "e24bec99fe357f08dc06dc2bbbaa4e5033c505a3f13c9e451a79f837375bd8c0",
+    "browserSource": "Owner legitimate USER profile; no cookie/token transfer",
+    "path": "validation/cloudflare/accesscheck-deployment-20261024.json",
+    "scope": "TEST deployment only; protected Group01-03 preserved"
   }
 }

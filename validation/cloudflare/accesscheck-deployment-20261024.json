@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-24T04:20:24Z",
+  "status": "FULL_PASS_TEST_DEPLOYMENT_WITH_DECLARED_EVIDENCE_SOURCES",
+  "repository": "holictraderscompany-art/htc-trial",
+  "branch": "codex/cloudflare-workers-preparation",
+  "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+  "run": "40061274032",
+  "job": "120775110139",
+  "attempt": 1,
+  "runURL": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/40061274032",
+  "evidenceSource": "Sanitized controller JSON recovered from the successful GitHub-hosted Linux job logs; unfiltered logs are not stored",
+  "focusedTests": {
+    "controller": 29,
+    "adapterAndDiagnostic": 29,
+    "passed": 58,
+    "failed": 0
+  },
+  "exactSHAEnablement": {
+    "repositoryGETsHTTP200": 5,
+    "PATCHAttempts": 1,
+    "PATCHHTTP": 204,
+    "readback": "PASS",
+    "otherVariablesUnchanged": 5,
+    "secretNamesPresent": true,
+    "secretValuesRead": false
+  },
+  "reports": [
+    {
+      "mode": "preflight",
+      "executionMode": "accesscheck",
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "at": "2026-10-24T04:10:22.799Z",
+      "status": "PREFLIGHT_PASS",
+      "stages": [],
+      "deploymentAttempted": false,
+      "databaseFixtures": 0,
+      "realGoogleOAuth": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "authenticatedFounderUSER": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "accessCheckCredential": {
+        "status": "active",
+        "expiresOn": "2026-10-24T14:59:59.000Z",
+        "accountTokenManagement": "DENIED_HTTP403"
+      },
+      "preflight": {
+        "account": "PASS",
+        "existingVersionVerified": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+        "exactHistoricalDeploymentsVerified": 2,
+        "hostname": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+        "TESTKeyAccepted": true,
+        "GoogleProviderEnabled": true,
+        "callbackTarget": "https://htc-trial-workers-test.holictraderscompany.workers.dev/auth/callback",
+        "callbackGate": "VERIFIED_BY_APPROVED_ENVIRONMENT_GATE",
+        "planChangeRequested": false
+      },
+      "finished": "2026-10-24T04:10:25.908Z"
+    },
+    {
+      "mode": "build",
+      "executionMode": "accesscheck",
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "at": "2026-10-24T04:10:25.955Z",
+      "status": "BUILD_PASS",
+      "stages": [
+        {
+          "name": "install",
+          "started": "2026-10-24T04:10:28.520Z",
+          "finished": "2026-10-24T04:10:33.241Z",
+          "exit": 0,
+          "outputSHA256": "cb76602ecf2fd0eb6fac3104806721ef9837ad44dd43b516b405dc4c6a2c2ecc"
+        },
+        {
+          "name": "access-check-chromium",
+          "started": "2026-10-24T04:10:33.241Z",
+          "finished": "2026-10-24T04:10:40.395Z",
+          "exit": 0,
+          "outputSHA256": "dd4f125ee29e9c2b37ac74411ab0bfaeb87cfad213909daa091f384c31334657"
+        },
+        {
+          "name": "access-check-browser",
+          "started": "2026-10-24T04:10:40.395Z",
+          "finished": "2026-10-24T04:10:41.890Z",
+          "exit": 0,
+          "outputSHA256": "d643d9163082b41c4e394df7bf5f6d74fcc5082d561ce4c30fe893e839efd5c8"
+        },
+        {
+          "name": "redirect-runtime",
+          "started": "2026-10-24T04:10:41.891Z",
+          "finished": "2026-10-24T04:10:47.794Z",
+          "exit": 0,
+          "outputSHA256": "1cea2e5b3dd03fb30d29b70a8da71f010781d8c8af8deba00fc2573290211f66"
+        },
+        {
+          "name": "build",
+          "started": "2026-10-24T04:10:47.795Z",
+          "finished": "2026-10-24T04:11:13.405Z",
+          "exit": 0,
+          "outputSHA256": "6738435207a2ce59e6fb2124fd84901020fb92853957c07ea789989139c8fb82"
+        }
+      ],
+      "deploymentAttempted": false,
+      "databaseFixtures": 0,
+      "realGoogleOAuth": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "authenticatedFounderUSER": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "accessCheckCredential": {
+        "status": "active",
+        "expiresOn": "2026-10-24T14:59:59.000Z",
+        "accountTokenManagement": "DENIED_HTTP403"
+      },
+      "preflight": {
+        "account": "PASS",
+        "existingVersionVerified": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+        "exactHistoricalDeploymentsVerified": 2,
+        "hostname": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+        "TESTKeyAccepted": true,
+        "GoogleProviderEnabled": true,
+        "callbackTarget": "https://htc-trial-workers-test.holictraderscompany.workers.dev/auth/callback",
+        "callbackGate": "VERIFIED_BY_APPROVED_ENVIRONMENT_GATE",
+        "planChangeRequested": false
+      },
+      "accessCheckBrowser": {
+        "status": "PASS",
+        "mode": "LOCAL_SYNTHETIC_BROWSER_REGRESSION_NOT_LIVE_AUTH",
+        "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+        "run": "40061274032",
+        "externalNetworkRequests": 0,
+        "credentialsUsed": false,
+        "cookiesTransferred": false,
+        "AuthDatabaseStorageMutations": 0,
+        "deployments": 0,
+        "liveSupabaseRequests": 0,
+        "realGoogleOAuth": false,
+        "screenshotArtifacts": 0,
+        "passedViews": 2,
+        "passedFailureCases": 2
+      },
+      "redirectRuntime": {
+        "status": "PASS",
+        "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+        "run": "40061274032",
+        "mode": "CLOUD_LOCAL_WORKERD_TEST_PUBLIC_JWKS_GET_ONLY",
+        "legacyRedirectErrorRejected": true,
+        "compatibilityReadHTTP": 200,
+        "secretInputs": false,
+        "fixtures": 0,
+        "result": {
+          "ok": true,
+          "nativeErrorName": "TypeError",
+          "unsupportedRedirectReported": true,
+          "manualStatus": 200,
+          "adaptedStatus": 200,
+          "manualKeySetShape": true,
+          "adaptedKeySetShape": true,
+          "adaptedCalls": 1,
+          "observedMode": "manual"
+        }
+      },
+      "accessCheckBaselineVerifiedBeforeAndAfterBuild": true,
+      "finished": "2026-10-24T04:11:15.682Z"
+    },
+    {
+      "mode": "deploy",
+      "executionMode": "accesscheck",
+      "sha": "0ab768906c6fcebba9e0794eeac9fb158cd38ed0",
+      "at": "2026-10-24T04:11:15.733Z",
+      "status": "TEST_DEPLOYMENT_AND_ANONYMOUS_SECURITY_PASS_AUTHENTICATED_GATES_PENDING",
+      "stages": [
+        {
+          "name": "deploy",
+          "started": "2026-10-24T04:11:17.557Z",
+          "finished": "2026-10-24T04:11:25.978Z",
+          "exit": 0,
+          "outputSHA256": "b2cb54f6c962ee062795fb18ec4a0ebd5ad47cbfd75a756bd570d8acdadd2c70"
+        }
+      ],
+      "deploymentAttempted": true,
+      "databaseFixtures": 0,
+      "realGoogleOAuth": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "authenticatedFounderUSER": "BLOCKED_PENDING_LEGITIMATE_BROWSER_LOGIN",
+      "accessCheckCredential": {
+        "status": "active",
+        "expiresOn": "2026-10-24T14:59:59.000Z",
+        "accountTokenManagement": "DENIED_HTTP403"
+      },
+      "preflight": {
+        "account": "PASS",
+        "existingVersionVerified": "f2897ae4-6133-4614-aaa8-257e3f5c6216",
+        "exactHistoricalDeploymentsVerified": 2,
+        "hostname": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+        "TESTKeyAccepted": true,
+        "GoogleProviderEnabled": true,
+        "callbackTarget": "https://htc-trial-workers-test.holictraderscompany.workers.dev/auth/callback",
+        "callbackGate": "VERIFIED_BY_APPROVED_ENVIRONMENT_GATE",
+        "planChangeRequested": false
+      },
+      "url": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+      "version": "3629a579-703c-49b2-a291-7be066ef94ca",
+      "runtime": [
+        {
+          "name": "HTTPS health and no-store",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "Anonymous session",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "Static SVG",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "Anonymous route /founder",
+          "status": 307,
+          "passed": true
+        },
+        {
+          "name": "Anonymous route /founder/content",
+          "status": 307,
+          "passed": true
+        },
+        {
+          "name": "Anonymous route /founder/assets",
+          "status": 307,
+          "passed": true
+        },
+        {
+          "name": "Anonymous route /founder/publishing",
+          "status": 307,
+          "passed": true
+        },
+        {
+          "name": "Anonymous route /founder/operations",
+          "status": 307,
+          "passed": true
+        },
+        {
+          "name": "Anonymous API /api/founder",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "Anonymous API /api/founder/content",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "Anonymous API /api/founder/assets",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "Anonymous API /api/founder/operations",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "name": "Cross-origin rejection",
+          "status": 403,
+          "passed": true
+        },
+        {
+          "name": "PKCE targets exact TEST and HTTPS callback",
+          "status": 303,
+          "passed": true
+        },
+        {
+          "name": "PKCE HttpOnly Secure SameSite cookie",
+          "status": 303,
+          "passed": true
+        },
+        {
+          "name": "Invalid callback fails closed",
+          "status": 303,
+          "passed": true
+        },
+        {
+          "name": "TEST diagnostic READY with restrictive CSP and no cookie",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "TEST diagnostic HEAD is read-only and empty",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "name": "TEST diagnostic POST is rejected without Auth action",
+          "status": 405,
+          "passed": true
+        }
+      ],
+      "finished": "2026-10-24T04:11:28.508Z"
+    }
+  ],
+  "remaining": [],
+  "preservedEvidence": [
+    "Genuine Founder Google OAuth and operations dashboard on this TEST hostname",
+    "USER server-rendered Access denied and historical official logout",
+    "Unchanged Group01-03 regression and natural Auth expiry evidence"
+  ],
+  "scope": {
+    "applicationSourceChanged": false,
+    "SQLChanged": false,
+    "securityPolicyChanged": false,
+    "databaseFixturesCreated": 0,
+    "productionAccessed": false,
+    "paidServicesActivated": false,
+    "mainChanged": false,
+    "Group03Changed": false,
+    "additionalCloudflareMCPRecovery": false
+  },
+  "limitations": [
+    "Synthetic browser cases are not genuine Google OAuth or authenticated USER proof",
+    "Denied account token-list HTTP403 proves that operation is denied; no broader effective permission set is inferred",
+    "No billing plan tier is inferred",
+    "Historical Founder and USER page/OAuth evidence is reused for the unchanged application source and hostname",
+    "CI controller reports below retain their original authenticated-gates-pending values because the subsequent real-browser gate completed afterward"
+  ],
+  "browserUserEvidence": {
+    "source": "Founder-provided actual results from the legitimate normal-Chrome USER profile using the deployed console-free helper; no browser session transfer",
+    "receivedAtUTC": "2026-10-24T04:20:24Z",
+    "hostname": "https://htc-trial-workers-test.holictraderscompany.workers.dev",
+    "path": "/__htc-test-access-check",
+    "userCheck": {
+      "passed": true,
+      "code": "USER_API_DENIAL_PASS",
+      "sessionHTTP": 200,
+      "authenticated": true,
+      "founderAPIHTTP": 403,
+      "error": "FORBIDDEN",
+      "no_store": true
+    },
+    "postLogoutCheck": {
+      "passed": true,
+      "code": "POST_LOGOUT_ACCESS_DENIAL_PASS",
+      "sessionHTTP": 200,
+      "authenticated": false,
+      "founderAPIHTTP": 401,
+      "error": "UNAUTHENTICATED",
+      "no_store": true
+    },
+    "officialSignout": "Performed through the helper's enabled existing native sign-out form in that USER profile",
+    "rawLogoutHTTP": "NOT_REPORTED_NOT_INFERRED",
+    "consoleProtectionUnchanged": true,
+    "cookiesOrTokensReadOrTransferred": false,
+    "automatedGoogleLogin": false,
+    "limitations": "These runtime values are direct owner browser evidence, not a new independent Worker log capture. They prove same-browser denial after official logout, not immediate global JWT revocation."
+  },
+  "acceptance": {
+    "cloudBuildWorkflow": "PASS_RUN_40061274032",
+    "WorkerHTTPS": "PASS_HTTP200_AND_19_RUNTIME_CHECKS",
+    "SupabaseTESTConfiguration": "PASS_EXACT_HOST_BINDINGS_KEY_AND_GOOGLE_PROVIDER",
+    "realGoogleOAuth": "PASS_PRIOR_OWNER_FOUNDER_AND_USER_NORMAL_CHROME_EVIDENCE_SAME_HOSTNAME_UNCHANGED_APP",
+    "FounderAuthorization": "PASS_PRIOR_GENUINE_FOUNDER_DASHBOARD_AND_TEST_GATEWAY_CORRELATION",
+    "USERAuthorization": "PASS_REAL_USER_HTTP403_FORBIDDEN",
+    "postLogoutBrowserDenial": "PASS_AUTHENTICATED_FALSE_HTTP401_UNAUTHENTICATED",
+    "securityRegression": "PASS_58_FOCUSED_AND_4_SYNTHETIC_BROWSER_CASES",
+    "Group01to03Regression": "PASS_PRESERVED_SEALED_UNCHANGED_BASELINE",
+    "productionBoundary": "PASS_TEST_ONLY_ACTIONS_AND_BINDINGS_NO_PRODUCTION_ACCESS_OR_CHANGES",
+    "paidServiceActivation": "NONE_REQUESTED_OR_EXECUTED_BILLING_TIER_NOT_INFERRED",
+    "secrets": "NO_VALUES_REPORTED_OR_COMMITTED",
+    "GitSynchronization": "EVIDENCE_ONLY_COMMIT_AND_REMOTE_HEAD_VERIFICATION_RECORDED_SEPARATELY_AFTER_COMMIT"
+  }
+}
