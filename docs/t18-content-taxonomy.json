@@ -1,0 +1,84 @@
+{
+  "definition_version": 1,
+  "scope": "Editorial reference only; no runtime consumer, persistence, approval or publication authority",
+  "category_source": "src/server/content-release.js#contentCategories",
+  "category_purpose": {
+    "INTRODUCTION": "Orient readers to HTC, its identity and Trial boundaries",
+    "INFORMATION": "Explain an introductory concept with clear sources and limitations",
+    "EDITORIAL": "Offer clearly distinguished educational context or reflection",
+    "DISCOVERY": "Help readers find genuinely available released introductory resources",
+    "FUTURE_JOURNEY": "Describe future direction without presenting curriculum as available during Trial",
+    "VALIDATION": "Explain Trial scope or evidence-backed status without exposing internal operations"
+  },
+  "pillars": {
+    "Education": "Accessible introductions that help the public understand a concept",
+    "Learning": "Informal reflection and independent reading without lessons, sequence or progress tracking",
+    "Knowledge": "Definitions, context, evidence and uncertainty explained in plain language",
+    "Community": "Shared values and respectful participation without implementing membership or moderation tools"
+  },
+  "classifications": {
+    "htc-orientation": "HTC identity, Trial positioning and truthful availability",
+    "market-vocabulary": "Introductory terminology without signals or executable trading instruction",
+    "risk-awareness": "Uncertainty and responsible expectations without outcome guarantees",
+    "information-literacy": "Distinguishing sources, evidence and opinion",
+    "community-principles": "Respectful discussion and shared educational purpose"
+  },
+  "audiences": {
+    "general-public": "Readers seeking an accessible educational introduction",
+    "new-to-htc": "People discovering HTC and the Trial for the first time",
+    "community-interested": "People interested in HTC values and public discussion"
+  },
+  "editorial_fields": {
+    "topic_key": "Stable editorial identifier shared by a topic and its derivatives; never a database UUID",
+    "pillar": "Exactly one primary HTC pillar; does not replace category",
+    "classification": "Exactly one primary topic classification from this reference",
+    "audience": "One or more intended audience keys; never a permission or skill-level gate",
+    "source_language": "Actual BCP 47 language tag of the source, selected by the Founder",
+    "source_references": "Sources supporting claims; private references stay outside public content",
+    "trial_eligible": "Human review result: null means unreviewed; true or false is editorial only",
+    "language": "Actual BCP 47 language tag of a derivative, including caption and narration alignment",
+    "source_topic_key": "Derivative-to-source topic link; invariant across translations",
+    "recipe": "One approved platform/format mapping from platform_recipes",
+    "content_id": "Existing trial_content UUID when a real CMS record exists; null before creation",
+    "asset_ids": "Existing trial_assets UUIDs when real assets exist; no invented reservations",
+    "sequence": "Editorial slide or shot order for future production; not ATTACHMENT ordering"
+  },
+  "platform_recipes": [
+    { "key": "instagram-carousel", "platform": "Instagram", "formats": ["CAROUSEL"], "slides": { "min": 1, "max": 8 } },
+    { "key": "instagram-reel", "platform": "Instagram", "formats": ["REEL"], "style": "CINEMATIC_STYLIZED_3D" },
+    { "key": "facebook-static", "platform": "Facebook", "formats": ["CAROUSEL", "ALBUM"] },
+    { "key": "facebook-reel", "platform": "Facebook", "formats": ["REEL"], "style": "CINEMATIC_STYLIZED_3D" },
+    { "key": "tiktok-photo-carousel", "platform": "TikTok", "formats": ["PHOTO_CAROUSEL"], "slides": { "min": 1, "max": 8 } },
+    { "key": "tiktok-animated-video", "platform": "TikTok", "formats": ["ANIMATED_VIDEO"], "style": "CINEMATIC_STYLIZED_3D" },
+    { "key": "youtube-explainer", "platform": "YouTube", "formats": ["LONG_FORM_VIDEO"], "duration_seconds": { "min": 600, "max": 900 }, "style": "CINEMATIC_STYLIZED_3D" },
+    { "key": "youtube-short", "platform": "YouTube", "formats": ["SHORT"], "style": "CINEMATIC_STYLIZED_3D" },
+    { "key": "website-article", "platform": "HTC Website", "formats": ["ARTICLE"] }
+  ],
+  "example_bundle": {
+    "illustrative_only": true,
+    "topic_key": "trial-orientation",
+    "pillar": "Education",
+    "classification": "htc-orientation",
+    "audience": ["new-to-htc", "general-public"],
+    "source_language": "en",
+    "source_references": ["docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md", "DESIGN.md"],
+    "trial_eligible": null,
+    "article": {
+      "content_id": null,
+      "category": "INTRODUCTION",
+      "title": "Understanding the HTC Trial",
+      "body": "The HTC Trial introduces Holic Traders Company through introductory educational content. Trial content does not provide curriculum, lessons, enrollment or progress tracking."
+    },
+    "derivatives": [
+      { "recipe": "instagram-carousel", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "instagram-reel", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "facebook-static", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "facebook-reel", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "tiktok-photo-carousel", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "tiktok-animated-video", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "youtube-explainer", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "youtube-short", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] },
+      { "recipe": "website-article", "source_topic_key": "trial-orientation", "language": "en", "content_id": null, "asset_ids": [], "sequence": [] }
+    ]
+  }
+}
