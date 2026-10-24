@@ -1,0 +1,343 @@
+{
+  "at": "2026-10-22T00:14:57.471Z",
+  "scope": "T17 final evidence reconciliation and read-only release gate",
+  "baseline": "PRD v3.0 + approved implementation contract + scoped Founder amendments; MASTER v2 historical",
+  "repository": "holictraderscompany-art/htc-trial",
+  "branch": "codex/t16-r1-reconciliation",
+  "HEAD": "4e8e07b18c1040722169223196add2112751cfeb",
+  "parent": "510d94473d9ddd42f774472f6ebd2423764a66b1",
+  "task_status": {
+    "T12": "PASS",
+    "T13": "PASS",
+    "T14": "PASS",
+    "T15": "PASS",
+    "T16": "PASS",
+    "T17": "FULL PASS"
+  },
+  "decision": "GROUP 03 READY",
+  "acceptance": [
+    {
+      "area": "Authorization / T12",
+      "status": "PASS",
+      "evidence": [
+        "docs/founder-application.md",
+        "validation/t13/evidence/live-oauth.json",
+        "validation/t16-r2/user-live.json",
+        "validation/t16-final/closure.json#auth"
+      ],
+      "finding": "Server authorize validates provider identity and strict is_founder() before privileged data. Genuine Founder allow, USER/anonymous API denial, HttpOnly OAuth callback/logout and natural expiry/revocation are recorded. HTML denial can be a controlled 200 page; no page HTTP403 claim."
+    },
+    {
+      "area": "Content / T13",
+      "status": "PASS",
+      "evidence": [
+        "validation/t13/reconciliation-results.json",
+        "validation/t13/evidence/original-final-acceptance.json",
+        "validation/t13/evidence/postgres-concurrency.json",
+        "validation/t15-master/r3-runtime.json"
+      ],
+      "finding": "DRAFT create/read/update, pagination, payload guards, conflicts and ambiguous-save protection; non-DRAFT edit rejection remains enforced atomically. No content DELETE feature is introduced by generic CRUD wording."
+    },
+    {
+      "area": "Media / T14",
+      "status": "PASS",
+      "evidence": [
+        "docs/t14-final-acceptance-20261018.md",
+        "validation/t14/final-blocker/token-expiry-live-pass-20261018.json",
+        "validation/t14/final-blocker/private-storage-user-live.json"
+      ],
+      "finding": "Actual signed PNG upload, verified finalize, READY-only relationships, uniqueness/linked-delete protection, MIME/signature/size/path rejection, private Storage and cleanup. Same valid object Founder206 versus USER400/NoSuchKey/internal404; generic400 is not sole proof. Original7200s capability expiry genuinely denied."
+    },
+    {
+      "area": "Publishing / T15",
+      "status": "PASS",
+      "evidence": [
+        "validation/t15-master/r2c-preserved/content-concurrency-evidence.json",
+        "validation/t15-master/r2d-runtime.json",
+        "validation/t15-master/r3-runtime.json",
+        "validation/t15-master/live-http-evidence.json"
+      ],
+      "finding": "10 content +7 asset native concurrent cases with distinct backends, overlapping transactions/locks/rollback; 18 actual TEST API/browser cases cover release/withdraw, readiness, denial, duplicate operations, public visibility and non-DRAFT edit boundaries."
+    },
+    {
+      "area": "Dashboard / T16",
+      "status": "PASS",
+      "evidence": [
+        "validation/t16-r2/founder-ui.json",
+        "validation/t16-r1/browser-results.json",
+        "validation/t16-final/closure.json#nonempty",
+        "validation/t16-final/closure.json#content_cleanup"
+      ],
+      "finding": "Actual six-counter empty and1/1/1 PostgreSQL/API/UI agreement and refresh, truthful snapshot source, no private-data enumeration, loading/stale/error/timeout handling. Official guarded successor completed; failed/STOP/receipt history remains preserved."
+    },
+    {
+      "area": "Database",
+      "status": "PASS",
+      "evidence": [
+        "validation/t13/evidence/db1-provenance.json",
+        "validation/t13/evidence/original-final-acceptance.json",
+        "validation/test-db/history.json",
+        "validation/t16-final/closure.json#content_cleanup"
+      ],
+      "finding": "Approved combined foundation provenance and DB1/DB2 checks preserved. Ten later approved migration source seals match. Final exact-three-content cleanup was separately approved, one atomic corrected batch; all content/assets/relations/private Storage catalog counts0 and security/history fingerprints unchanged."
+    },
+    {
+      "area": "UI",
+      "status": "PASS",
+      "evidence": [
+        "docs/founder-application.md",
+        "validation/t13/reconciliation-results.json",
+        "validation/t14/browser-local-results.json",
+        "validation/t15-r1/browser-publishing-results.json",
+        "validation/t16-r1/browser-results.json",
+        "validation/t15-master/r3-runtime.json",
+        "validation/t16-final/closure.json#nonempty"
+      ],
+      "finding": "Existing local keyboard skip navigation/labels/focusable native controls,375/768/1440 responsive checks, workspace navigation, loading/empty/error states and no relevant uncaught JS errors. Real authenticated TEST workflows separately corroborate integration; LOCAL results are not relabeled LIVE."
+    },
+    {
+      "area": "Regression / Foundation-Public isolation",
+      "status": "PASS",
+      "evidence": [
+        "validation/t16-r2/results.json",
+        "validation/t15-master/r3-runtime.json",
+        "src/server/api-foundation.js",
+        "src/server/founder-content.js",
+        "src/server/founder-operations.js"
+      ],
+      "finding": "Latest223 tests include Foundation/Public/T12-T16 and eight T15 cases. Foundation has no UI import; T16 reuses read model. T13 editing, T15 publication and private media boundaries retained."
+    },
+    {
+      "area": "Delivery / Git-security",
+      "status": "PASS",
+      "evidence": [
+        "validation/t16-final/commit-manifest.json",
+        "validation/t16-final/closure.json",
+        "validation/t16-r2/bundle-security.json"
+      ],
+      "finding": "Final local commit contains exactly54 approved paths; ancestry includes completedT12-T15, protected code/SQL/dependencies unchanged by finalization, secret pattern scan clean. No production access, new commit, push, merge or deployment in T17. Deployment result is not applicable because none was authorized/performed."
+    }
+  ],
+  "verification_performed_now": {
+    "T16_consolidated_readonly_verifier": "PASS: R1=19,R2=28,candidate=54,SQL=10,Git raw filters30 under each autocrlf setting",
+    "T13_preserved_candidate_verifier": "PASS",
+    "T14_historical_product_byte_checks": "14/14 PASS",
+    "T15_B1_preserved_worktree_verifier": "PASS: R1 snapshots23, masterfiles59, preservedR2Cfiles5,SQL10",
+    "Git_fsck": "PASS exit0",
+    "regression_logs_verified": 5,
+    "external_closure_source_hashes": 13,
+    "manifest_and_commit_path_match": "54/54 PASS",
+    "tracked_files_secret_scanned": 328,
+    "secret_findings": [],
+    "read_only_code_boundary_review": "PASS",
+    "new_LIVE_tests": 0,
+    "new_application_tests_or_build": 0,
+    "database_requests": 0
+  },
+  "retained_results": {
+    "latest_application": "223/223 PASS",
+    "focused_T16": "7/7 LOCAL PASS",
+    "SQLite": "T13 12/12;T14 3/3 LOCAL PASS",
+    "latest_production_build": "PASS; original raw log SHA256 verified; includes all Founder routes",
+    "latest_local_browser": "36/36 LOCAL PASS",
+    "native_T13_concurrency": "8/8 PASS",
+    "native_T15_concurrency": "17/17 PASS",
+    "T15_actual_TEST_HTTP_UI": "18/18 PASS",
+    "local_audit_validator": "7/7 PASS from approved finalization; source unchanged"
+  },
+  "cleanup": {
+    "proof_type": "Preserved independent final PostgreSQL/Storage catalog snapshot",
+    "captured_at": "2026-10-21T22:57:00.723003+00:00",
+    "content": {
+      "DRAFT": 0,
+      "RELEASED": 0,
+      "WITHDRAWN": 0
+    },
+    "assets": {
+      "READY": 0,
+      "PENDING": 0,
+      "DELETING": 0
+    },
+    "relations": 0,
+    "storage_objects": 0,
+    "history_count": 10,
+    "no_new_database_query": true
+  },
+  "limitations": [
+    "Readiness is for the verified local commit and existing TEST evidence; no production or new hosted-release validation is claimed.",
+    "T13 concurrent valid DRAFT saves retain approved last-writer-wins; pagination is not a cross-page snapshot.",
+    "T14 scoped signed capabilities last7200s and are not immediately revoked by HTC logout; reservation/state/path protections remain.",
+    "Dashboard is a database snapshot, not service-health monitoring; fault injection is controlled, not a real Supabase outage.",
+    "Final cleanup zero proof is independent PostgreSQL/Storage catalog evidence; no fresh post-cleanup browser/API zero request is claimed.",
+    "Git EOL checked under Windows autocrlf true/false; no actual Linux OS run claimed.",
+    "Original R1 raw logs are not present in the repository R1 directory. Later R2 raw223-test/build and focused regression logs are present, hash-verified, and cover the unchanged validated application source; no missing-log claim is converted into a test PASS."
+  ],
+  "remaining_mandatory_blockers": [],
+  "git": {
+    "status": "?? validation/t16-r2/server-http.json",
+    "staged": 0,
+    "tracked_modified": 0,
+    "excluded_untracked": [
+      "validation/t16-r2/server-http.json"
+    ],
+    "main": "6df86a0e630f38b933d5e269c54ef20906d6bcf5",
+    "main_unchanged": true,
+    "no_source_changes": true,
+    "no_database_Auth_Storage_security_migration_changes": true,
+    "new_commits": 0,
+    "push": false,
+    "merge": false,
+    "deployment": false,
+    "Group04_started": false
+  },
+  "sources": [
+    {
+      "file": "docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+      "sha256": "c2b3bddad0ec34e4de96c8c9641da78c3e670b14440604010e6836ffeb819995"
+    },
+    {
+      "file": "docs/HTC-GROUP3-IMPLEMENTATION-CONTRACT.md",
+      "sha256": "a74fd929920d61f2167cdaf20fc259bc8419661f1661ece6091e8436012d0730"
+    },
+    {
+      "file": "docs/group03-baseline-and-t16-closure.md",
+      "sha256": "0caee714e98d7d07f81dd59df35469a1d95a78db46cc2d18c8f6fc3b19d7c979"
+    },
+    {
+      "file": "docs/founder-application.md",
+      "sha256": "f49fe265e2de3c5949ff71731aa382de125dc5746d9560f50ede0e6ea75cf5ec"
+    },
+    {
+      "file": "validation/t13/reconciliation-results.json",
+      "sha256": "4c71cdee5b002bab9a2157096bad52a3417e07098cb695e2541d3ac291a135d7"
+    },
+    {
+      "file": "validation/t13/evidence/original-final-acceptance.json",
+      "sha256": "22249db30f67494997ffc57418959906d9dd334b50cf1e09c7ab54eee08509ed"
+    },
+    {
+      "file": "validation/t13/evidence/live-oauth.json",
+      "sha256": "2d5b9b37ce1a7e4a84aed46bed7ddeb1f1359b590030df422fbffc9c81e0871e"
+    },
+    {
+      "file": "validation/t13/evidence/postgres-concurrency.json",
+      "sha256": "74ca0b6a4820cf74944f53e2c34d78e70bb1f22892c1e9617afc04e6e5dff6fc"
+    },
+    {
+      "file": "validation/t13/evidence/db1-provenance.json",
+      "sha256": "d5d9a76e49b21e5148b53eeb28892f7939718072262a452806894ef8f8505eec"
+    },
+    {
+      "file": "docs/t14-final-acceptance-20261018.md",
+      "sha256": "f7ada14e1e475f5aabba1101ec6d009cbb95b2ef32b8495943b57c774dbd0533"
+    },
+    {
+      "file": "validation/t14/final-validation-20261018.json",
+      "sha256": "aeac3ca8ae49352eabaa1467fd90d7a16cb753cd55d882afd722901ba412ba5e"
+    },
+    {
+      "file": "validation/t14/final-blocker/token-expiry-live-pass-20261018.json",
+      "sha256": "b6e32c860b5c4bf094b47b90aabcf0b96b736c9b590bfa7264f832a8d88bc5d5"
+    },
+    {
+      "file": "validation/t14/final-blocker/private-storage-user-live.json",
+      "sha256": "35950778bf5edd4e584f15e4d9da076da5492f45b1465beb430db81251a43108"
+    },
+    {
+      "file": "validation/t14/final-blocker/upload-ready-live.json",
+      "sha256": "e40519106e28a7527dddae49048a3b9cd7b739d50c068c56c33b2561600c74a9"
+    },
+    {
+      "file": "validation/t14/final-blocker/relationship-live.json",
+      "sha256": "9ba9f0588d0bc0c7c46f6883a87e66d30baba6635e63f64d90d1dc96f52ed8f4"
+    },
+    {
+      "file": "validation/t14/final-blocker/duplicate-attach-live.json",
+      "sha256": "3520ca6b1adeee0d97b38bbe7122451549660b240a61dfbfab64990932759fef"
+    },
+    {
+      "file": "validation/t14/final-blocker/linked-delete-conflict.json",
+      "sha256": "29acb0fbaf86d119e72d6f2521603924aac26cd680e473762c8317de9f62127a"
+    },
+    {
+      "file": "validation/t14/relations-runtime-result.json",
+      "sha256": "f3696d908ccdc0d53da2229238fa53a2c1c2b14a721f512b5b329820025c37d2"
+    },
+    {
+      "file": "validation/t14/policy-runtime-result.json",
+      "sha256": "b65482aa89078518b26996b4eb87e7eefadc1c61eae2e50c1a4e76921e2df0f2"
+    },
+    {
+      "file": "docs/t15-master-validation.md",
+      "sha256": "dae62421eaa5796cf7b42b0681b89957c7ff94c8ee30166d26701c74d4ae94f6"
+    },
+    {
+      "file": "validation/t15-master/completion-checkpoint.json",
+      "sha256": "3e776cebc31c722967aff166dda33eb284fe96dfd7c82f70d0b0fa39ba05e0e5"
+    },
+    {
+      "file": "validation/t15-master/regression-and-security.json",
+      "sha256": "20907d9e1c49ec1664049033db235dac3745245d7c75c6115815f4800d149e20"
+    },
+    {
+      "file": "validation/t15-master/build-evidence.json",
+      "sha256": "5db8b55e194b6f63d9338f81ff3a0e1d08e38c698c2780aafb2bd7fa2e7fa076"
+    },
+    {
+      "file": "validation/t15-master/r2c-preserved/content-concurrency-evidence.json",
+      "sha256": "57ed55303d7b5e9abe44623b0e604dfae067fc301f71dfd99ec4f1d7a6785d94"
+    },
+    {
+      "file": "validation/t15-master/r2d-runtime.json",
+      "sha256": "33649fce5e67c7a7470c387966f33deaef302bf289a7f64496bcffc3ff4f52fd"
+    },
+    {
+      "file": "validation/t15-master/r3-runtime.json",
+      "sha256": "5db9d860452e8ded393670a3ef233aed081a5a61954e55c89325c21e7d03ee87"
+    },
+    {
+      "file": "validation/t15-master/live-http-evidence.json",
+      "sha256": "95c29baf99d7913470c4dc36087795cee86df6ce705e92a15204b0b7c00da041"
+    },
+    {
+      "file": "validation/t16-r1/results.json",
+      "sha256": "0ce89b693c69562ccf091a2f844554c83c4bde7ebf3dfbdc260cfb64e04c3292"
+    },
+    {
+      "file": "validation/t16-r1/reconciliation-manifest.json",
+      "sha256": "70d1641831632f02a9f19392fb7cd879a2325720945d1673c9957440105a29ae"
+    },
+    {
+      "file": "validation/t16-r1/browser-results.json",
+      "sha256": "c0bde3af3eb746e2359b4cb97a3e05331b1205eaf863b891bf6f6a0ff3dfea4a"
+    },
+    {
+      "file": "validation/t16-r2/results.json",
+      "sha256": "56d7ce14f6ada699df9a6fdcd3d62c3a83595ee5ced401e6a41651b2e1e263cb"
+    },
+    {
+      "file": "validation/t16-r2/founder-ui.json",
+      "sha256": "4dd86390b183296873a86abed7b5fba634feb5d4d2df146d8dd60958afa7df16"
+    },
+    {
+      "file": "validation/t16-r2/user-live.json",
+      "sha256": "25397cba23bcf88e639740b803d248a576b71f2179bd07ebc6fdfaf7c6518c96"
+    },
+    {
+      "file": "validation/t16-r2/anonymous.json",
+      "sha256": "3b351e802a76adddeb5c753d82f45f8797fe82bb0919f37a2ee0e675923cac8f"
+    },
+    {
+      "file": "validation/t16-r2/bundle-security.json",
+      "sha256": "7c4e02de24dcb659062f21923542f1f87d7668b4830ccc37fafa85b7c23d7042"
+    },
+    {
+      "file": "validation/t16-final/closure.json",
+      "sha256": "5a71b4b5ca5253179692e86ae7c826ba295c5fa8e97d0732c69fb67b2a5abde0"
+    },
+    {
+      "file": "validation/t16-final/commit-manifest.json",
+      "sha256": "cbd86ca9551f20ab280fc67c8be3a68acff6cbcbc5655a1d6bafc3d9fc071e99"
+    }
+  ]
+}
