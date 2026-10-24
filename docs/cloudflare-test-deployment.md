@@ -173,6 +173,32 @@ browser post-logout API401 remain pending until the helper is deployed.
 
 ## Verified source and target
 
+### Verified expiry blocker and bounded cloud continuation
+
+The first access-check deployment run
+[40053819380](https://github.com/holictraderscompany-art/htc-trial/actions/runs/40053819380)
+at `b1a1cb47605fc21c29ec7d6efa9b2c28cac19d45` passed 58 controller/adapter tests,
+then stopped at `STOP_ACCESSCHECK_CI_TOKEN_EXPIRY`. Build and upload were skipped.
+The earlier local launcher failure occurred before credentials or HTTP; its
+two-Git-executable selection bug was corrected outside the repository and tested.
+The protected environment update then returned 204 and exact-SHA readback passed.
+
+The separate read-only diagnostic run
+[40054712533](https://github.com/holictraderscompany-art/htc-trial/actions/runs/40054712533)
+made one token-verification GET and no mutation. At `2026-10-24T02:34:19.810Z`,
+the active token had a valid canonical expiration of `2026-10-24T14:59:59Z`,
+leaving 44,738 seconds, above the controller's 43,200-second maximum remaining
+lifetime. Format and calendar checks passed. Original total token lifetime is
+not established; this verification endpoint does not provide issuance time.
+
+The approved TEST continuation therefore waits once in the hosted runner until
+`2026-10-24T03:00:00Z` (12:00 JST). This changes neither token expiry nor the
+unchanged five-minute/12-hour credential guards. The secret-free timer is bounded
+to 30 minutes and requires exact-SHA approval. Access-check mode alone receives
+a 60-minute job budget; other modes retain 30 minutes. The original live
+preflight must still pass after waiting and before/after build and before upload.
+No failed upload is replayed: the stopped run never submitted an upload.
+
 On 24 October JST the owner confirmed the new account-owned CI token was saved
 directly to the protected environment secret requested above. Its value was not
 sent to the agent. The subsequent metadata-only repository request timed out

@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-24T02:04:59.175Z",
+  "recordedAt": "2026-10-24T02:41:20.097Z",
   "auditDateJST": "2026-10-24",
   "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
   "initialProvisioning": {
@@ -273,7 +273,7 @@
   "ownerAction": "Owner confirmed the narrow CI secret was saved privately. No further owner action established; exact-SHA TEST approval and hosted preflight remain controlled.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "OWNER_SECRET_SAVED_EXACT_SHA_APPROVAL_AND_HOSTED_PREFLIGHT_PENDING",
+    "status": "VERIFIED_EXPIRY_WINDOW_CONTINUATION_PREPARATION_NO_UPLOAD",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -403,7 +403,7 @@
       "newPageDeployed": false
     },
     "ciCredentialRecovery": {
-      "status": "OWNER_SECRET_SAVED_HOSTED_VERIFICATION_PENDING",
+      "status": "ACTIVE_CREDENTIAL_REMAINING_LIFETIME_WINDOW_PENDING",
       "secretName": "CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN",
       "ownerOnlyPrivateProvisioning": true,
       "credentialValueRequestedInChat": false,
@@ -416,9 +416,9 @@
       "maxRemainingLifetimeSeconds": 43200,
       "minRemainingLifetimeSeconds": 300,
       "requiredTokenManagementProbeHTTP": 403,
-      "actualTokenManagementProbe": "NOT_RUN",
-      "actualTokenVerify": "NOT_RUN",
-      "actualResourcePreflight": "NOT_RUN",
+      "actualTokenManagementProbe": "HTTP403_DENIED",
+      "actualTokenVerify": "HTTP200_ACTIVE_IDENTIFIER_SHAPE_PASS",
+      "actualResourcePreflight": "NOT_REACHED_EXPIRY_GUARD_STOPPED_BEFORE_ACCOUNT_WORKER_READS",
       "newTokensCreated": 0,
       "newDeployments": 0,
       "cloudValidation": {
@@ -477,13 +477,60 @@
         "automaticRetries": 0,
         "fileOutsideGit": "github-environment-curl-ipv4-owner-secret-metadata-20261024-5df5301.json",
         "sha256": "311cfa60cab1c9b62234cbffba38e2411a6dcaaa46e33c4ed1bc471f11571032"
+      },
+      "githubExactSHAEnablement": {
+        "candidate": "b1a1cb47605fc21c29ec7d6efa9b2c28cac19d45",
+        "repositoryGETsHTTP200": 5,
+        "secretNamesPresent": true,
+        "PATCHAttempts": 1,
+        "PATCHHTTP": 204,
+        "readback": "PASS",
+        "credentialsReturned": false
+      },
+      "failedAccessCheckRun": {
+        "run": "40053819380",
+        "job": "120752203653",
+        "sha": "b1a1cb47605fc21c29ec7d6efa9b2c28cac19d45",
+        "testsPassed": 58,
+        "failedGuard": "STOP_ACCESSCHECK_CI_TOKEN_EXPIRY",
+        "build": "SKIPPED",
+        "upload": "SKIPPED",
+        "deploymentAttempted": false
+      },
+      "expiryDiagnostic": {
+        "run": "40054712533",
+        "job": "120755018903",
+        "sha": "fecad4b1fbf3d6904f98108216ec3221c63f7df2",
+        "at": "2026-10-24T02:34:19.810Z",
+        "HTTP": 200,
+        "tokenActive": true,
+        "canonicalFormat": true,
+        "calendarRoundTrip": true,
+        "expiryUTC": "2026-10-24T14:59:59.000Z",
+        "remainingSeconds": 44738,
+        "withinTwelveHours": false,
+        "requests": 1,
+        "mutations": 0,
+        "deployments": 0,
+        "originalTotalLifetime": "NOT_PROVEN_NO_ISSUED_ON"
+      },
+      "boundedWindowContinuation": {
+        "notBeforeUTC": "2026-10-24T03:00:00.000Z",
+        "notBeforeJST": "2026-10-24T12:00:00+09:00",
+        "maximumWaitMilliseconds": 1800000,
+        "timers": 1,
+        "retryLoop": false,
+        "credentialsInWait": false,
+        "TTLChanged": false,
+        "remainingLifetimePolicyChanged": false,
+        "subsequentLivePreflightRequired": true,
+        "newDeploymentAttempted": false
       }
     },
     "accessCheckUploadGate": {
-      "status": "LOCAL_MARKER_PREPARATION_NO_UPLOAD",
-      "parentSHA": "5df5301dcf7c669b22038fca499aef26335a3312",
-      "validatedCodeSHA": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
-      "workflowDelta": "One literal comment only; behavior unchanged",
+      "status": "BOUNDED_WINDOW_WORKFLOW_PREPARATION_NO_UPLOAD",
+      "parentSHA": "fecad4b1fbf3d6904f98108216ec3221c63f7df2",
+      "coreValidatedCodeSHA": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
       "newDeployments": 0,
       "credentialValueRead": false
     }

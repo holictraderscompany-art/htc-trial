@@ -30,7 +30,7 @@ jobs:
        contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]'))
     environment: cloudflare-test
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: ${{ contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]') && 60 || 30 }}
     env:
       CI: 'true'
       NEXT_TELEMETRY_DISABLED: '1'
@@ -61,6 +61,24 @@ jobs:
           node --test validation/cloudflare/deploy-test.test.mjs
           if [ "$TEST_EXECUTION_MODE" = repair ]; then node --test tests/cloudflare-redirect-error.test.mjs; fi
           if [ "$TEST_EXECUTION_MODE" = accesscheck ]; then node --test tests/cloudflare-redirect-error.test.mjs tests/cloudflare-test-access-check.test.mjs; fi
+      - name: Wait once for the verified remaining-lifetime window without credentials
+        if: contains(github.event.head_commit.message, '[HTC-TEST-ACCESS-CHECK]')
+        env:
+          APPROVED_WORKFLOW_SHA: ${{ vars.HTC_TEST_APPROVED_WORKFLOW_SHA }}
+        run: |
+          node --input-type=module <<'NODE'
+          const guard=(ok,code)=>{if(!ok)throw Error(code);};
+          guard(process.env.GITHUB_ACTIONS==='true'&&process.env.RUNNER_OS==='Linux'&&process.env.RUNNER_ENVIRONMENT==='github-hosted'&&process.version==='v24.21.0','STOP_WINDOW_RUNNER');
+          guard(process.env.GITHUB_REPOSITORY==='holictraderscompany-art/htc-trial'&&process.env.GITHUB_REF==='refs/heads/codex/cloudflare-workers-preparation'&&process.env.GITHUB_RUN_ATTEMPT==='1'&&/^[a-f0-9]{40}$/.test(process.env.GITHUB_SHA??'')&&process.env.APPROVED_WORKFLOW_SHA===process.env.GITHUB_SHA,'STOP_WINDOW_APPROVAL');
+          for(const key of ['CLOUDFLARE_TEST_API_TOKEN','CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN','HTC_SUPABASE_TEST_PUBLISHABLE_KEY'])guard(process.env[key]===undefined,'STOP_WINDOW_CREDENTIAL');
+          const started=new Date().toISOString(),notBefore=Date.parse('2026-10-24T03:00:00Z');
+          const delay=Math.max(0,notBefore-Date.now());
+          guard(Number.isFinite(delay)&&delay<=1800000,'STOP_WINDOW_DELAY');
+          console.log(JSON.stringify({status:'WAIT_ONCE_NO_CREDENTIALS',started,notBeforeUTC:new Date(notBefore).toISOString(),delayMilliseconds:delay,requests:0,mutations:0,deployments:0}));
+          if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));
+          guard(Date.now()>=notBefore,'STOP_WINDOW_CLOCK');
+          console.log(JSON.stringify({status:'WINDOW_OPEN_PREFLIGHT_STILL_REQUIRED',sha:process.env.GITHUB_SHA,finished:new Date().toISOString(),requests:0,mutations:0,deployments:0}));
+          NODE
       - name: Read-only access and sealed-source preflight
         env:
           APPROVED_WORKFLOW_SHA: ${{ vars.HTC_TEST_APPROVED_WORKFLOW_SHA }}
