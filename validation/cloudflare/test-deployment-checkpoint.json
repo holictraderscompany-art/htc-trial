@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-24T00:38:07.159Z",
+  "recordedAt": "2026-10-24T01:22:14.682Z",
   "auditDateJST": "2026-10-24",
   "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
   "initialProvisioning": {
@@ -273,7 +273,7 @@
   "ownerAction": "Privately provision one short-lived account-owned TEST CI token with only Workers Scripts Write and Account Settings Read, then save it directly to existing GitHub environment cloudflare-test as CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN. Never send its value to chat or copy an MCP OAuth credential. No further OAuth loop.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "CI_CREDENTIAL_GUARD_PREPARATION_CLOUD_VALIDATION_PENDING",
+    "status": "CLOUD_CI_GUARDS_PASS_AWAITING_OWNER_PRIVATE_CI_SECRET",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -386,7 +386,8 @@
             "sha256": "f9ed5f7dcab1716c8ca28b8e81937856b50f28887d37418ddc87403527165ab5"
           }
         ]
-      }
+      },
+      "toolAvailabilityAtCheckpoint": "Connector subsequently absent from current deferred tool catalog; no additional call or OAuth retry"
     },
     "ciCredential": "Original CI token expired. New exact-account credential remains unprovisioned. Owner may save it directly to the protected GitHub environment; controller read-only checks precede build/upload.",
     "candidateSHA": "97850a7c4a7677b7a8bc6d28b89941a72608bf3d",
@@ -402,7 +403,7 @@
       "newPageDeployed": false
     },
     "ciCredentialRecovery": {
-      "status": "IMPLEMENTED_CLOUD_VALIDATION_PENDING",
+      "status": "CLOUD_VALIDATION_PASS_OWNER_SECRET_REQUIRED",
       "secretName": "CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN",
       "ownerOnlyPrivateProvisioning": true,
       "credentialValueRequestedInChat": false,
@@ -419,7 +420,55 @@
       "actualTokenVerify": "NOT_RUN",
       "actualResourcePreflight": "NOT_RUN",
       "newTokensCreated": 0,
-      "newDeployments": 0
+      "newDeployments": 0,
+      "cloudValidation": {
+        "sha": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
+        "run": "40046284640",
+        "job": "120728643827",
+        "url": "https://github.com/holictraderscompany-art/htc-trial/actions/runs/40046284640",
+        "status": "PASS",
+        "attempt": 1,
+        "focusedTests": {
+          "tests": 58,
+          "pass": 58,
+          "fail": 0
+        },
+        "sealedFiles": 23,
+        "lockfile": "PASS",
+        "frozenInstall": "PASS_WITH_EXISTING_SECURITY_POLICY",
+        "syntheticBrowser": {
+          "status": "PASS",
+          "views": 2,
+          "failureCases": 2,
+          "credentialsUsed": false,
+          "realGoogleOAuth": false,
+          "liveSupabaseRequests": 0,
+          "deployments": 0
+        },
+        "newOpenNextBuild": "NOT_RUN_IN_VALIDATION_ONLY_JOB",
+        "deploymentWorkflow": {
+          "run": "40046284646",
+          "conclusion": "skipped",
+          "expected": true
+        }
+      },
+      "githubEnvironmentReadOnly": {
+        "at": "2026-10-24T01:17:02.878Z",
+        "status": "PASS",
+        "calls": 5,
+        "HTTP200": 5,
+        "repositoryAdmin": true,
+        "exactMigrationBranchOnly": true,
+        "allSixVariablesMatched": true,
+        "approvedWorkflowSHA": "946c4e7ac17ff9fef2c82a69995c58f17b93a0e1",
+        "newSecretPresent": false,
+        "existingSecretValuesRead": false,
+        "mutations": 0,
+        "credentialPrinted": false,
+        "credentialPersisted": false,
+        "fileOutsideGit": "github-environment-curl-ipv4-repository-only-20261024-c6fa148.json",
+        "sha256": "75a2006e14ad3e6c096355d72a9a0bb4a9763a4f39ef1858130498b0f8174b02"
+      }
     }
   }
 }

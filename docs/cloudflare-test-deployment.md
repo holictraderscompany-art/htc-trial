@@ -144,6 +144,33 @@ Until the new credential exists and these LIVE preflight checks pass, no new
 upload or real USER API proof is claimed. Controller changes receive a fresh
 GitHub-hosted validation run; unchanged LIVE OAuth results remain preserved.
 
+## CI credential guard validation — 24 October 2026 JST
+
+Hosted run [40046284640](https://github.com/holictraderscompany-art/htc-trial/actions/runs/40046284640)
+at `c6fa1486aa3a10f93a57d8582c1c81161794c560` passed **58/58** focused
+controller/adapter/diagnostic tests, sealed 23-file and lockfile verification,
+frozen installation with the existing dependency policy, and **4/4** synthetic
+browser cases. The associated deployment workflow `40046284646` was skipped.
+No live credentials, Supabase requests, Auth operations, fixture mutations,
+OpenNext build or Worker upload occurred in this validation-only run.
+
+A repository-scoped official Windows curl read, using normal certificate
+verification, returned **5/5 HTTP 200** for repository administration and the
+exact GitHub environment metadata. The environment allows only the migration
+branch; all six expected variables match, and exact-SHA deployment approval
+remains pinned to the previously deployed `946c4e7...`. The new
+`CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN` secret is absent. Existing secret names
+were present; no secret values were read. Earlier identity-endpoint timeouts
+are preserved and are not classified as permission denial or proven IPv6 failure.
+
+The narrow CI credential is the remaining owner provisioning step. Its private
+creation and direct GitHub storage do not require another HTC Google login,
+MCP credential extraction, Console pasting or changes to application security.
+After provisioning, exact-SHA approval and normal branch push remain controlled;
+fresh account-token, TEST Worker/version/binding preflight must pass before
+the next cloud build and one authorized upload. Genuine USER API403 and
+browser post-logout API401 remain pending until the helper is deployed.
+
 ## Verified source and target
 
 - Migration baseline: `3967a520a330577d8b1f5931361839dfeb28a46c`.
