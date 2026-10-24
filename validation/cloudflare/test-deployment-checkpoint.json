@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-24T01:22:14.682Z",
+  "recordedAt": "2026-10-24T02:04:59.175Z",
   "auditDateJST": "2026-10-24",
   "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
   "initialProvisioning": {
@@ -270,10 +270,10 @@
   ],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Privately provision one short-lived account-owned TEST CI token with only Workers Scripts Write and Account Settings Read, then save it directly to existing GitHub environment cloudflare-test as CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN. Never send its value to chat or copy an MCP OAuth credential. No further OAuth loop.",
+  "ownerAction": "Owner confirmed the narrow CI secret was saved privately. No further owner action established; exact-SHA TEST approval and hosted preflight remain controlled.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "CLOUD_CI_GUARDS_PASS_AWAITING_OWNER_PRIVATE_CI_SECRET",
+    "status": "OWNER_SECRET_SAVED_EXACT_SHA_APPROVAL_AND_HOSTED_PREFLIGHT_PENDING",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -389,7 +389,7 @@
       },
       "toolAvailabilityAtCheckpoint": "Connector subsequently absent from current deferred tool catalog; no additional call or OAuth retry"
     },
-    "ciCredential": "Original CI token expired. New exact-account credential remains unprovisioned. Owner may save it directly to the protected GitHub environment; controller read-only checks precede build/upload.",
+    "ciCredential": "Owner confirmed the replacement account-owned TEST token was saved directly in GitHub Environment. Value not read. Hosted credential/resource preflight is pending.",
     "candidateSHA": "97850a7c4a7677b7a8bc6d28b89941a72608bf3d",
     "deploymentWorkflowForCandidate": {
       "run": "40036957106",
@@ -403,7 +403,7 @@
       "newPageDeployed": false
     },
     "ciCredentialRecovery": {
-      "status": "CLOUD_VALIDATION_PASS_OWNER_SECRET_REQUIRED",
+      "status": "OWNER_SECRET_SAVED_HOSTED_VERIFICATION_PENDING",
       "secretName": "CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN",
       "ownerOnlyPrivateProvisioning": true,
       "credentialValueRequestedInChat": false,
@@ -468,7 +468,24 @@
         "credentialPersisted": false,
         "fileOutsideGit": "github-environment-curl-ipv4-repository-only-20261024-c6fa148.json",
         "sha256": "75a2006e14ad3e6c096355d72a9a0bb4a9763a4f39ef1858130498b0f8174b02"
+      },
+      "ownerConfirmedSaved": true,
+      "independentMetadataFollowup": {
+        "status": "TRANSPORT_TIMEOUT_BEFORE_HTTP",
+        "secretPresence": "NOT_VERIFIED",
+        "mutations": 0,
+        "automaticRetries": 0,
+        "fileOutsideGit": "github-environment-curl-ipv4-owner-secret-metadata-20261024-5df5301.json",
+        "sha256": "311cfa60cab1c9b62234cbffba38e2411a6dcaaa46e33c4ed1bc471f11571032"
       }
+    },
+    "accessCheckUploadGate": {
+      "status": "LOCAL_MARKER_PREPARATION_NO_UPLOAD",
+      "parentSHA": "5df5301dcf7c669b22038fca499aef26335a3312",
+      "validatedCodeSHA": "c6fa1486aa3a10f93a57d8582c1c81161794c560",
+      "workflowDelta": "One literal comment only; behavior unchanged",
+      "newDeployments": 0,
+      "credentialValueRead": false
     }
   }
 }

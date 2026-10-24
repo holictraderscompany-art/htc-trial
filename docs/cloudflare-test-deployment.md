@@ -173,6 +173,20 @@ browser post-logout API401 remain pending until the helper is deployed.
 
 ## Verified source and target
 
+On 24 October JST the owner confirmed the new account-owned CI token was saved
+directly to the protected environment secret requested above. Its value was not
+sent to the agent. The subsequent metadata-only repository request timed out
+before any HTTP response; it does not prove either a permission rejection or
+successful secret provisioning independently of the owner's confirmation.
+The new token's validity, expiry and lack of account-token-management permission
+remain mandatory hosted preflight checks before build/upload.
+
+The next access-check marker changes only this report, its checkpoint and one
+literal comment in the existing deployment workflow. No workflow behavior or
+validated controller/application bytes change. Exact-SHA approval must be
+updated and verified before the normal branch push; upload is not submitted by
+local commit creation. Real USER HTTP403 and post-logout HTTP401 remain pending.
+
 - Migration baseline: `3967a520a330577d8b1f5931361839dfeb28a46c`.
 - Branch: `codex/cloudflare-workers-preparation`.
 - Preserved Group 03: `4e8e07b18c1040722169223196add2112751cfeb`.
