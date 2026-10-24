@@ -92,17 +92,57 @@ native DCR flow registered a non-metadata client and completed successfully
 requesting custom scope overrides.
 No API token was created. This connection recovery is separate from HTC login.
 
-The current chat's MCP transport still reports **MCP authentication required;
-reconnect to continue** after that successful native authorization. A fresh
-native client did not produce account metadata either. No credential store was
-manually read or copied to work around the connection. TEST upload is held until the
-official client connection is reloaded and fresh account/version/binding guards
-pass. The previous CI token is expired and is not reused.
+At that checkpoint, the chat's MCP transport reported **MCP authentication
+required; reconnect to continue** after successful native authorization. No
+credential store was manually read or copied. The previous CI token expired
+at `2026-10-23T14:31:40Z` and is not reused.
+
+Subsequent permission reviews on 24 October JST completed through official DCR
+and PKCE S256. A fresh native client initialized OAuth and four tools, but its
+isolated read-only TEST deployment query returned HTTP 403 `INSUFFICIENT_SCOPE`.
+After the owner completed a further Requested-scopes review, a new nonpersisted
+native context stopped with `AUTHENTICATION_REQUIRED` before any Cloudflare HTTP
+response. Its final catalog-only check timed out. These results do not prove the
+latest effective scope set or a specific client/provider defect. Source review
+ruled out a scopes-versus-config credential-key mismatch; a possible stale-client
+write path was not established as the runtime cause. No global reload, existing
+Desktop-thread resume, credential extraction or further OAuth retry is used.
 
 Independent public checks found existing Worker health 200/no-store and the new
 diagnostic path 404, consistent with no new upload. After connection recovery,
 reuse the cloud PASS evidence when source is unchanged; do not replay deployment
 or require Console pasting. No browser protection is disabled.
+
+## Narrow CI credential recovery while MCP is blocked
+
+The supported alternative is an account-owned CI token provisioned privately by
+the owner in Cloudflare and saved directly into the existing GitHub environment
+`cloudflare-test` as `CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN`. The token belongs only
+to account `2e93ece77ccb74920f7b995f6d48996b` and has exactly **Workers Scripts
+Write** and **Account Settings Read**, with an expiration within 12 hours. It
+has no API-token-management, billing, DNS or other resource permissions. Do not
+replace the expired historical secret, copy an MCP OAuth credential, send a token
+through chat, or persist a plaintext token locally.
+
+Cloudflare's documented account-token template can prefill the two permissions:
+`workers_scripts` / `edit` and `account_settings` / `read`. The owner still checks
+the account, permissions and expiry before creating it, then pastes its value
+directly into GitHub's environment-secret field. Account API tokens are intended
+for CI/CD; see [Cloudflare's account-token documentation](https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/)
+and [GitHub environment secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
+
+The access-check controller verifies account-token metadata and a remaining
+validity greater than five minutes and no longer than 12 hours. A separate
+read-only token-list authorization probe must return exactly HTTP 403; a 200,
+400, 404 or ambiguous result stops execution before build/upload. This checks
+that the CI credential cannot manage account tokens. Existing exact-SHA,
+first-attempt, TEST target, two historical deployments, five bindings, private
+build environment and one-upload safeguards remain mandatory. No fixture,
+application authorization or database security changes are introduced.
+
+Until the new credential exists and these LIVE preflight checks pass, no new
+upload or real USER API proof is claimed. Controller changes receive a fresh
+GitHub-hosted validation run; unchanged LIVE OAuth results remain preserved.
 
 ## Verified source and target
 

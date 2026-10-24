@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { accessCheckBaseDeployments, accessCheckBaseVersion, extractDeployedURL, generatedConfig, origin, privateBuildEnv, repairBaseVersion, requireCredentials, verifyAccessCheckBaseline, verifyAccessCheckBrowserProof, verifyApproval, verifyDeploymentChanges, verifyRepairBaseline } from './deploy-test.mjs';
+import { accessCheckBaseDeployments, accessCheckBaseVersion, accessPreflight, extractDeployedURL, generatedConfig, origin, privateBuildEnv, repairBaseVersion, requireCredentials, verifyAccessCheckBaseline, verifyAccessCheckBrowserProof, verifyAccessCheckCredential, verifyApproval, verifyDeploymentChanges, verifyRepairBaseline } from './deploy-test.mjs';
 import { target } from './test-deployment-preflight.mjs';
 
 const env = () => ({ RUNNER_OS:'Linux', RUNNER_ENVIRONMENT:'github-hosted', GITHUB_ACTIONS:'true', GITHUB_RUN_ID:'1', GITHUB_REPOSITORY:target.repository, GITHUB_REF:target.ref, GITHUB_RUN_ATTEMPT:'1', GITHUB_SHA:'a'.repeat(40), APPROVED_WORKFLOW_SHA:'a'.repeat(40), DEPLOYMENT_ENABLED:'true', TEST_EXECUTION_MODE:'deploy', REDIRECT_ALLOWLIST_VERIFIED:'true', CONFIG_CF_ACCOUNT:target.account, CONFIG_WORKER:target.worker, CONFIG_PROJECT:target.project, HTC_SUPABASE_TARGET:'test', SUPABASE_URL:`https://${target.project}.supabase.co` });
@@ -164,4 +164,101 @@ test('access-check browser evidence is exact-source synthetic proof with both vi
     ...['externalNetworkRequests','AuthDatabaseStorageMutations','deployments','liveSupabaseRequests','screenshotArtifacts'].map(key=>({...proof,[key]:1})),
     ...['credentialsUsed','cookiesTransferred','realGoogleOAuth'].map(key=>({...proof,[key]:true})),
   ]) assert.throws(()=>verifyAccessCheckBrowserProof(altered,env()),/STOP_ACCESSCHECK_BROWSER_PROOF/);
+});
+
+const credentialFixture = now => ({ id:'a'.repeat(32), status:'active', expires_on:new Date(now + 60 * 60 * 1000).toISOString() });
+
+test('access-check credential requires active canonical metadata, bounded expiry and token-management denial',()=>{
+  const now=Date.parse('2026-10-24T00:00:00Z'), metadata=credentialFixture(now);
+  assert.deepEqual(verifyAccessCheckCredential({...metadata,value:'sensitive-sentinel',name:'private-name'},403,now),{
+    status:'active',expiresOn:metadata.expires_on,accountTokenManagement:'DENIED_HTTP403',
+  });
+  for(const duration of [5 * 60 * 1000 + 1,12 * 60 * 60 * 1000])
+    assert.doesNotThrow(()=>verifyAccessCheckCredential({...metadata,expires_on:new Date(now+duration).toISOString()},403,now));
+  for(const altered of [undefined,null,{}, {...metadata,id:undefined},{...metadata,id:'A'.repeat(32)},
+    {...metadata,id:'a'.repeat(31)},{...metadata,status:'disabled'},{...metadata,status:'expired'}])
+    assert.throws(()=>verifyAccessCheckCredential(altered,403,now),/^Error: STOP_ACCESSCHECK_CI_TOKEN_METADATA$/);
+  for(const expires_on of [undefined,null,now,'invalid','2026-10-24','2026-02-30T01:00:00Z',
+    ...[-1,0,5 * 60 * 1000,12 * 60 * 60 * 1000 + 1].map(duration=>new Date(now+duration).toISOString())])
+    assert.throws(()=>verifyAccessCheckCredential({...metadata,expires_on},403,now),/^Error: STOP_ACCESSCHECK_CI_TOKEN_EXPIRY$/);
+  assert.throws(()=>verifyAccessCheckCredential(metadata,403,NaN),/STOP_ACCESSCHECK_CI_TOKEN_EXPIRY/);
+  for(const status of [200,201,400,401,404,429,500,undefined,'403'])
+    assert.throws(()=>verifyAccessCheckCredential(metadata,status,now),/^Error: STOP_ACCESSCHECK_CI_TOKEN_MANAGEMENT_SCOPE$/);
+});
+
+function accessCheckEnvironment(t, mode='accesscheck') {
+  const values={TEST_EXECUTION_MODE:mode,CLOUDFLARE_TEST_API_TOKEN:'t'.repeat(40),HTC_SUPABASE_TEST_PUBLISHABLE_KEY:'sb_publishable_ValidTestShape'};
+  const previous=Object.fromEntries(Object.keys(values).map(key=>[key,process.env[key]]));
+  Object.assign(process.env,values);
+  t.after(()=>{for(const [key,value] of Object.entries(previous)) {
+    if(value===undefined) delete process.env[key]; else process.env[key]=value;
+  }});
+}
+
+test('access-check preflight verifies the account credential and discards token-list bodies before baseline reads',async t=>{
+  accessCheckEnvironment(t);
+  const {settings,deployments,endpoint}=accessCheckFixture(), requests=[];
+  let cancelled=0, managementJSONReads=0;
+  const metadata=credentialFixture(Date.now());
+  t.mock.method(globalThis,'fetch',async (url,options)=>{
+    const parsed=new URL(url), suffix=parsed.pathname.replace(`/client/v4/accounts/${target.account}`,'')+parsed.search;
+    requests.push(suffix);
+    assert.equal(options.method,undefined);
+    assert.equal(options.redirect,'error');
+    if(suffix==='/tokens?per_page=5') return {status:403,body:{async cancel(){cancelled++;}},async json(){managementJSONReads++;throw new Error('unread-token-metadata');}};
+    const results={
+      '/tokens/verify':metadata,'':{id:target.account},'/workers/subdomain':{subdomain:'holictraderscompany'},
+      [`/workers/scripts/${target.worker}/settings`]:settings,
+      [`/workers/scripts/${target.worker}/deployments`]:deployments,
+      [`/workers/scripts/${target.worker}/subdomain`]:endpoint,
+    };
+    if(parsed.origin===`https://${target.project}.supabase.co`) return {status:200,async json(){return {external:{google:true}};}};
+    assert.equal(Object.hasOwn(results,suffix),true,'unexpected request');
+    return {status:200,async json(){return {success:true,result:results[suffix]};}};
+  });
+  const report={};
+  await accessPreflight(report);
+  assert.deepEqual(requests.slice(0,3),['/tokens/verify','/tokens?per_page=5','']);
+  assert.equal(cancelled,1); assert.equal(managementJSONReads,0);
+  assert.deepEqual(report.accessCheckCredential,{status:'active',expiresOn:metadata.expires_on,accountTokenManagement:'DENIED_HTTP403'});
+  assert.equal(JSON.stringify(report).includes(metadata.id),false);
+});
+
+test('access-check preflight stops before build or upload on unsafe metadata or any ambiguous management response',async t=>{
+  accessCheckEnvironment(t);
+  const now=Date.now(), metadata=credentialFixture(now);
+  for(const {result=metadata,status=403,guard} of [
+    {result:{...metadata,status:'disabled'},guard:'STOP_ACCESSCHECK_CI_TOKEN_METADATA'},
+    {result:{...metadata,expires_on:new Date(now-1).toISOString()},guard:'STOP_ACCESSCHECK_CI_TOKEN_EXPIRY'},
+    {result:{...metadata,expires_on:new Date(now+13 * 60 * 60 * 1000).toISOString()},guard:'STOP_ACCESSCHECK_CI_TOKEN_EXPIRY'},
+    ...[200,400,401,404,429,500].map(status=>({status,guard:`STOP_ACCESSCHECK_CI_TOKEN_MANAGEMENT_HTTP${status}`})),
+  ]) await t.test(guard,async child=>{
+    const requests=[]; let cancelled=0, managementJSONReads=0;
+    child.mock.method(globalThis,'fetch',async (url,options)=>{
+      requests.push(new URL(url).pathname+new URL(url).search);
+      assert.equal(options.method,undefined);
+      if(url.endsWith('/tokens/verify')) return {status:200,async json(){return {success:true,result};}};
+      assert.equal(url,`https://api.cloudflare.com/client/v4/accounts/${target.account}/tokens?per_page=5`);
+      return {status,body:{async cancel(){cancelled++;}},async json(){managementJSONReads++;throw new Error('unread-token-metadata');}};
+    });
+    const report={};
+    await assert.rejects(accessPreflight(report),{message:guard});
+    assert.equal(requests.length,2);
+    assert.equal(cancelled,1); assert.equal(managementJSONReads,0);
+    assert.equal(report.accessCheckCredential,undefined);
+    assert.equal(report.preflight,undefined);
+  });
+});
+
+test('historical package, deploy and repair preflights do not request account-token metadata',async t=>{
+  for(const mode of ['package','deploy','repair']) await t.test(mode,async child=>{
+    accessCheckEnvironment(child,mode);
+    const requests=[];
+    child.mock.method(globalThis,'fetch',async url=>{
+      requests.push(url);
+      return {status:403,async json(){throw new Error('unexpected body read');}};
+    });
+    await assert.rejects(accessPreflight({}),{message:'STOP_ACCOUNT_HTTP403'});
+    assert.deepEqual(requests,[`https://api.cloudflare.com/client/v4/accounts/${target.account}`]);
+  });
 });

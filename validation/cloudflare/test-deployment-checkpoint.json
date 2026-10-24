@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-23T23:10:15.388Z",
+  "recordedAt": "2026-10-24T00:38:07.159Z",
   "auditDateJST": "2026-10-24",
   "status": "PARTIAL_TEST_TECHNICAL_FOUNDER_USER_ROUTE_LOGOUT_PASS_API_MEASUREMENTS_PENDING",
   "initialProvisioning": {
@@ -264,15 +264,16 @@
     }
   ],
   "remaining": [
+    "Provision and verify the protected short-lived TEST CI credential; complete exact account/version/binding preflight before a new upload",
     "Measure protected API HTTP 403 within the legitimate USER browser session on the deployed TEST hostname",
     "Measure post-logout browser authenticated=false and protected API HTTP 401; do not infer these from visual navigation, sanitized upstream events or the malformed-session probe"
   ],
   "automaticDeploymentRetry": false,
   "backgroundWorkClaimed": false,
-  "ownerAction": "Reload/reconnect the existing htc-cloudflare-api MCP client after successful native DCR authorization; do not repeat Google HTC login or Console pasting. No new API token has been created.",
+  "ownerAction": "Privately provision one short-lived account-owned TEST CI token with only Workers Scripts Write and Account Settings Read, then save it directly to existing GitHub environment cloudflare-test as CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN. Never send its value to chat or copy an MCP OAuth credential. No further OAuth loop.",
   "packageOnlyGate": "Historical gate satisfied: exact-SHA hosted validation and authorized corrective TEST deployment completed in run 39900017186; no further upload is required for evidence-only updates",
   "consoleFreePreparation": {
-    "status": "CLOUD_REGRESSION_PASS_TEST_UPLOAD_BLOCKED_ACTIVE_MCP_CONNECTION",
+    "status": "CI_CREDENTIAL_GUARD_PREPARATION_CLOUD_VALIDATION_PENDING",
     "path": "/__htc-test-access-check",
     "scope": "Migration wrapper diagnostic only; existing application APIs remain authoritative",
     "userInteraction": "Explicit once-only normal buttons and existing sign-out form; Console protections unchanged",
@@ -314,7 +315,7 @@
       "deployments": 0
     },
     "officialCloudflareConnector": {
-      "status": "BLOCKED_CURRENT_CHAT_TRANSPORT_RECONNECT_REQUIRED",
+      "status": "BLOCKED_NATIVE_MCP_AUTHENTICATION_CONSISTENCY",
       "earlierRefreshError": "invalid_client: Client not found",
       "earlierDefaultLoginError": "temporarily_unavailable: Client metadata is temporarily unavailable",
       "publicDiscoveryHTTP": 200,
@@ -328,13 +329,66 @@
         "pkceMethod": "S256",
         "credentialValuesReturned": false
       },
-      "currentToolResponse": "MCP authentication required. Reconnect to continue using this server.",
+      "currentToolResponse": "Latest fresh native execute: AUTHENTICATION_REQUIRED before Cloudflare HTTP response; previous isolated query: HTTP403 INSUFFICIENT_SCOPE.",
       "freshNativeClientMetadata": "NOT_OBTAINED",
       "automaticRetry": false,
       "newAPITokensCreated": 0,
-      "credentialStoreManuallyRead": false
+      "credentialStoreManuallyRead": false,
+      "recoveryFollowup": {
+        "ownerCompletedScopedConsent": true,
+        "ownerCompletedRequestedScopesReview": true,
+        "scopesRequested": [
+          "user:read",
+          "offline_access",
+          "account:read",
+          "workers-scripts.write",
+          "account-settings.read",
+          "account-api-tokens.write"
+        ],
+        "effectiveLatestScopes": "NOT_VERIFIED",
+        "freshNativeCatalog": {
+          "authStatus": "oAuth",
+          "toolCount": 4,
+          "limitation": "Bootstrap/catalog only, not proof of accepted Workers scope"
+        },
+        "firstIsolatedQuery": {
+          "http": 403,
+          "result": "INSUFFICIENT_SCOPE"
+        },
+        "postRequestedScopesQuery": {
+          "http": null,
+          "result": "AUTHENTICATION_REQUIRED"
+        },
+        "lastCatalog": "TIMED_OUT_55_SECONDS",
+        "provenConfigKeyMismatch": false,
+        "staleClientOverwrite": "NOT_PROVEN",
+        "credentialStoreManuallyRead": false,
+        "globalReload": false,
+        "desktopThreadResumed": false,
+        "LLMTurns": 0,
+        "nonpersistedContextsDisposed": true,
+        "additionalOAuthRetries": false,
+        "evidence": [
+          {
+            "fileOutsideGit": "cloudflare-native-fresh-status-corrected-result.json",
+            "sha256": "67e4a732320065014d47d5076e13a54eb14e63c10c4af6cd14a8b8373403a0c8"
+          },
+          {
+            "fileOutsideGit": "cloudflare-native-ephemeral-deployments-once-result.json",
+            "sha256": "be6e528d51395f524f6a27db0e1c0d46bcae18e89690b1bd61559b67263c9a56"
+          },
+          {
+            "fileOutsideGit": "cloudflare-native-ephemeral-deployments-after-requested-scopes-20261024-result.json",
+            "sha256": "4ea7a28f0fa3e70d763e1317342337d59d9701b3c43bf5f13ccf1f0d8e6f1330"
+          },
+          {
+            "fileOutsideGit": "cloudflare-native-status-after-requested-scopes-20261024.json",
+            "sha256": "f9ed5f7dcab1716c8ca28b8e81937856b50f28887d37418ddc87403527165ab5"
+          }
+        ]
+      }
     },
-    "ciCredential": "Existing 12-hour token expired; new exact-account TEST-only credential remains unprovisioned",
+    "ciCredential": "Original CI token expired. New exact-account credential remains unprovisioned. Owner may save it directly to the protected GitHub environment; controller read-only checks precede build/upload.",
     "candidateSHA": "97850a7c4a7677b7a8bc6d28b89941a72608bf3d",
     "deploymentWorkflowForCandidate": {
       "run": "40036957106",
@@ -346,6 +400,26 @@
       "workerHealthNoStore": true,
       "diagnosticPathHTTP": 404,
       "newPageDeployed": false
+    },
+    "ciCredentialRecovery": {
+      "status": "IMPLEMENTED_CLOUD_VALIDATION_PENDING",
+      "secretName": "CLOUDFLARE_TEST_ACCESSCHECK_API_TOKEN",
+      "ownerOnlyPrivateProvisioning": true,
+      "credentialValueRequestedInChat": false,
+      "credentialValueCopiedFromMCP": false,
+      "requiredPermissions": [
+        "Workers Scripts Write",
+        "Account Settings Read"
+      ],
+      "APIManagementPermissionRequiredByCI": false,
+      "maxRemainingLifetimeSeconds": 43200,
+      "minRemainingLifetimeSeconds": 300,
+      "requiredTokenManagementProbeHTTP": 403,
+      "actualTokenManagementProbe": "NOT_RUN",
+      "actualTokenVerify": "NOT_RUN",
+      "actualResourcePreflight": "NOT_RUN",
+      "newTokensCreated": 0,
+      "newDeployments": 0
     }
   }
 }

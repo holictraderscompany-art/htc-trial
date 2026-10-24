@@ -95,6 +95,17 @@ export function requireCredentials(env) {
   guard(typeof key === 'string' && /^sb_publishable_[A-Za-z0-9_-]+$/.test(key) && !/fixture|replace|synthetic|example/i.test(key), 'STOP_TEST_KEY');
 }
 
+export function verifyAccessCheckCredential(metadata, managementStatus, now = Date.now()) {
+  guard(typeof metadata?.id === 'string' && /^[a-f0-9]{32}$/.test(metadata.id) && metadata.status === 'active', 'STOP_ACCESSCHECK_CI_TOKEN_METADATA');
+  const expiry = metadata.expires_on;
+  const expiresAt = typeof expiry === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(expiry) ? Date.parse(expiry) : NaN;
+  guard(Number.isFinite(now) && Number.isFinite(expiresAt) &&
+    new Date(expiresAt).toISOString().slice(0,19) === expiry.slice(0,19) &&
+    expiresAt > now + 5 * 60 * 1000 && expiresAt <= now + 12 * 60 * 60 * 1000, 'STOP_ACCESSCHECK_CI_TOKEN_EXPIRY');
+  guard(managementStatus === 403, 'STOP_ACCESSCHECK_CI_TOKEN_MANAGEMENT_SCOPE');
+  return { status: 'active', expiresOn: new Date(expiresAt).toISOString(), accountTokenManagement: 'DENIED_HTTP403' };
+}
+
 function verifySource(allowGenerated = false) {
   guard(git('rev-parse', 'HEAD') === process.env.GITHUB_SHA, 'STOP_CHECKOUT_SHA');
   guard([`https://github.com/${target.repository}`, `https://github.com/${target.repository}.git`].includes(git('remote', 'get-url', 'origin')), 'STOP_ORIGIN');
@@ -118,20 +129,25 @@ function verifySource(allowGenerated = false) {
   return generatedConfig(JSON.parse(readFileSync('wrangler.jsonc', 'utf8')), ['repair','accesscheck'].includes(process.env.TEST_EXECUTION_MODE));
 }
 
-async function getJSON(url, headers, code, accepted = [200]) {
+async function getJSON(url, headers, code, accepted = [200], discardBody = false) {
   let response;
   try { response = await fetch(url, { headers, redirect: 'error', signal: AbortSignal.timeout(20000) }); }
   catch { throw new Error(`${code}_TRANSPORT`); }
+  if (discardBody) {
+    try { await response.body?.cancel(); } catch { throw new Error(`${code}_BODY_CANCEL`); }
+    guard(accepted.includes(response.status), `${code}_HTTP${response.status}`);
+    return { status: response.status };
+  }
   guard(accepted.includes(response.status), `${code}_HTTP${response.status}`);
   let body;
   try { body = await response.json(); } catch { throw new Error(`${code}_JSON`); }
   return { status: response.status, body };
 }
 
-async function cfGet(suffix, code, accepted) {
+async function cfGet(suffix, code, accepted, discardBody = false) {
   const result = await getJSON(`https://api.cloudflare.com/client/v4/accounts/${target.account}${suffix}`, {
     Authorization: `Bearer ${process.env.CLOUDFLARE_TEST_API_TOKEN}`,
-  }, code, accepted);
+  }, code, accepted, discardBody);
   if (result.status === 200) guard(result.body.success === true, `${code}_API`);
   return result;
 }
@@ -181,14 +197,21 @@ export function verifyAccessCheckBrowserProof(proof, env) {
       item.failedClosed === true && item.AuthOperations === 0)), 'STOP_ACCESSCHECK_BROWSER_PROOF');
 }
 
-async function accessPreflight(report) {
+export async function accessPreflight(report) {
   requireCredentials(process.env);
+  const accesscheck = process.env.TEST_EXECUTION_MODE === 'accesscheck';
+  if (accesscheck) {
+    const verified = await cfGet('/tokens/verify', 'STOP_ACCESSCHECK_CI_TOKEN_VERIFY');
+    // Token listing requires Account API Tokens Read or Write. Discard every
+    // response body, including an unexpected success, without parsing metadata.
+    const management = await cfGet('/tokens?per_page=5', 'STOP_ACCESSCHECK_CI_TOKEN_MANAGEMENT', [403], true);
+    report.accessCheckCredential = verifyAccessCheckCredential(verified.body.result, management.status);
+  }
   const account = await cfGet('', 'STOP_ACCOUNT');
   guard(account.body.result?.id === target.account, 'STOP_ACCOUNT_ID');
   const subdomain = await cfGet('/workers/subdomain', 'STOP_SUBDOMAIN');
   guard(subdomain.body.result?.subdomain === 'holictraderscompany', 'STOP_SUBDOMAIN_ID');
   const repair = process.env.TEST_EXECUTION_MODE === 'repair';
-  const accesscheck = process.env.TEST_EXECUTION_MODE === 'accesscheck';
   if (repair || accesscheck) {
     const prefix = accesscheck ? 'STOP_ACCESSCHECK' : 'STOP_REPAIR';
     const worker = await cfGet(`/workers/scripts/${target.worker}/settings`, `${prefix}_SETTINGS`);
