@@ -1,0 +1,611 @@
+{
+  "contract_version": 1,
+  "package_id": "bundle-6e7072c5ce14e6c2a759da828c3b572450773cc92936fc64099ae62553f38e86",
+  "source": {
+    "topic_key": "trial-orientation",
+    "editorial_revision": 1,
+    "package_digest": "f1060c7d28aab4be02f881e950d5576169d227d882f8451ee1e4922acdcbcec8",
+    "source_language": "en"
+  },
+  "variant": "primary",
+  "trial": {
+    "eligible": null,
+    "content_kind": "EDUCATIONAL_AWARENESS",
+    "features": []
+  },
+  "brand_requirements": {
+    "logo": "official-logo",
+    "watermark": "official-watermark",
+    "character_master": "character-master"
+  },
+  "items": [
+    {
+      "distribution_id": "dist-267fbe77bcd9bfff356eb3d1a00d315f77632348c33a988313a19c5d854c8f35",
+      "platform": "Instagram",
+      "recipe": "instagram-carousel",
+      "format": "CAROUSEL",
+      "language": "en",
+      "content_ref": "/derivatives/0",
+      "caption_description_ref": "/derivatives/0/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": null,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "IMAGE",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "PER_IMAGE_ALT_TEXT",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-b5432a67497194ff5eaef9828ef12f54097089770e15803ed8f42eb6557ad7b8",
+      "platform": "Instagram",
+      "recipe": "instagram-reel",
+      "format": "REEL",
+      "language": "en",
+      "content_ref": "/derivatives/1",
+      "caption_description_ref": "/derivatives/1/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": 20,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "VIDEO",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "CAPTIONS_AND_TRANSCRIPT_REVIEW",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-a48121484f015e672dc843654fc6e61d72718641f92a5bdc0260d7f185b90fc7",
+      "platform": "Facebook",
+      "recipe": "facebook-static",
+      "format": "CAROUSEL",
+      "language": "en",
+      "content_ref": "/derivatives/2",
+      "caption_description_ref": "/derivatives/2/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": null,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "IMAGE",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "PER_IMAGE_ALT_TEXT",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-58c06fcead3a489d0122bc13f52ec722d6454adfa4de9b6343edc4b5cd81796a",
+      "platform": "Facebook",
+      "recipe": "facebook-reel",
+      "format": "REEL",
+      "language": "en",
+      "content_ref": "/derivatives/3",
+      "caption_description_ref": "/derivatives/3/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": 20,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "VIDEO",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "CAPTIONS_AND_TRANSCRIPT_REVIEW",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-a11f10c71066a0aa9dc2133388099a8d449f31a75fe0d953f81f575c30f36f37",
+      "platform": "TikTok",
+      "recipe": "tiktok-photo-carousel",
+      "format": "PHOTO_CAROUSEL",
+      "language": "en",
+      "content_ref": "/derivatives/4",
+      "caption_description_ref": "/derivatives/4/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": null,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "IMAGE",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "PER_IMAGE_ALT_TEXT",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-3c39214485103da4263cd924e47665b61291d41abda4fc741aa4fcc5f04dd4d8",
+      "platform": "TikTok",
+      "recipe": "tiktok-animated-video",
+      "format": "ANIMATED_VIDEO",
+      "language": "en",
+      "content_ref": "/derivatives/5",
+      "caption_description_ref": "/derivatives/5/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": 20,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "VIDEO",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "caption": null
+      },
+      "accessibility": {
+        "requirement": "CAPTIONS_AND_TRANSCRIPT_REVIEW",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-19b0a150c815ae585625d8640a8329f4f8e0fad85f553dfa4efaffc3c392f9bb",
+      "platform": "YouTube",
+      "recipe": "youtube-explainer",
+      "format": "LONG_FORM_VIDEO",
+      "language": "en",
+      "content_ref": "/derivatives/6",
+      "caption_description_ref": "/derivatives/6/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": 600,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1,
+            2,
+            3
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "VIDEO",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "title": null,
+        "description": null
+      },
+      "accessibility": {
+        "requirement": "CAPTIONS_AND_TRANSCRIPT_REVIEW",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": {
+        "asset_id": null,
+        "readiness_evidence_ref": null
+      },
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-1e8a5f5ad1012a0f37dda22481688a04683e14db96252fa9975349dde2c94bc3",
+      "platform": "YouTube",
+      "recipe": "youtube-short",
+      "format": "SHORT",
+      "language": "en",
+      "content_ref": "/derivatives/7",
+      "caption_description_ref": "/derivatives/7/script",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": 20,
+      "media_sequence": [
+        {
+          "order": 1,
+          "source_units": [
+            1
+          ],
+          "source_asset_keys": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "kind": "VIDEO",
+          "asset_id": null,
+          "readiness_evidence_ref": null,
+          "alt_text": null
+        }
+      ],
+      "metadata": {
+        "title": null,
+        "description": null
+      },
+      "accessibility": {
+        "requirement": "CAPTIONS_AND_TRANSCRIPT_REVIEW",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": {
+        "asset_id": null,
+        "readiness_evidence_ref": null
+      },
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    },
+    {
+      "distribution_id": "dist-b57ebf8fc6d43d0b7a0375755c56fb12af65a5cfb6fe02dc4a3c57e575218584",
+      "platform": "HTC Website",
+      "recipe": "website-article",
+      "format": "ARTICLE",
+      "language": "en",
+      "content_ref": "/derivatives/8",
+      "caption_description_ref": "/derivatives/8/article",
+      "claim_refs": [
+        "trial-scope"
+      ],
+      "qualification_claim_refs": [
+        "trial-scope"
+      ],
+      "attribution": [
+        {
+          "claim_ref": "trial-scope",
+          "source_refs": [
+            "prd-v3"
+          ],
+          "public_text": null
+        }
+      ],
+      "duration_seconds": null,
+      "media_sequence": [],
+      "metadata": {
+        "title": null
+      },
+      "accessibility": {
+        "requirement": "ARTICLE_READABILITY",
+        "subtitle_ref": null,
+        "review_ref": null
+      },
+      "thumbnail": null,
+      "cta": "NONE",
+      "destination": {
+        "account_ref": null,
+        "public_destination_ref": null,
+        "delivery_contract_ref": null
+      },
+      "cms_content_id": null,
+      "approval_requirement": "AUTHENTICATED_FOUNDER_DISTRIBUTION_APPROVAL",
+      "tracking": {
+        "status": "PREPARED_OFFLINE",
+        "attempt_id": null,
+        "external_result_ref": null,
+        "error_class": null
+      }
+    }
+  ],
+  "approval_evidence": null
+}
