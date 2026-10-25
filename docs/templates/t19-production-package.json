@@ -1,0 +1,709 @@
+{
+  "contract_version": 1,
+  "illustrative_only": true,
+  "topic_key": "trial-orientation",
+  "revision": 1,
+  "category": "INTRODUCTION",
+  "pillar": "Education",
+  "classification": "htc-orientation",
+  "audience": [
+    "new-to-htc",
+    "general-public"
+  ],
+  "central_message": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+  "sources": [
+    {
+      "key": "prd-v3",
+      "reference": "repo:docs/HTC-TRIAL-PRD-TASK-MAP-v3.0.md",
+      "revision": "sha256:c2b3bddad0ec34e4de96c8c9641da78c3e670b14440604010e6836ffeb819995",
+      "locator": "Sections 1-2: product definition and Trial hard boundaries"
+    }
+  ],
+  "claims": [
+    {
+      "key": "trial-scope",
+      "statement": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+      "source_refs": [
+        "prd-v3"
+      ]
+    }
+  ],
+  "source_language": "en",
+  "target_languages": [
+    "en"
+  ],
+  "trial": {
+    "eligible": null,
+    "content_kind": "EDUCATIONAL_AWARENESS",
+    "features": []
+  },
+  "shared_script": [
+    {
+      "key": "trial-scope",
+      "narrative_purpose": "Explain current Trial availability",
+      "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+      "claim_refs": [
+        "trial-scope"
+      ]
+    }
+  ],
+  "characters": {
+    "founder": {
+      "name": "Muhammad Devry Handoyo",
+      "master_reference": "character-master"
+    },
+    "learner": {
+      "name": "Ahmad Muhammad Aries Fathul Ilmi",
+      "master_reference": "character-master"
+    }
+  },
+  "chapters": [
+    {
+      "key": "orientation",
+      "wardrobe": {
+        "founder": "White shirt, consistent throughout the orientation chapter",
+        "learner": "Black jacket, consistent throughout the orientation chapter"
+      }
+    }
+  ],
+  "brand_references": {
+    "logo": "official-logo",
+    "watermark": "official-watermark",
+    "character_master": "character-master"
+  },
+  "assets": [
+    {
+      "key": "logo-overlay",
+      "purpose": "LOGO",
+      "reference": "official-logo",
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    },
+    {
+      "key": "watermark-overlay",
+      "purpose": "WATERMARK",
+      "reference": "official-watermark",
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    },
+    {
+      "key": "character-reference",
+      "purpose": "CHARACTER_MASTER",
+      "reference": "character-master",
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    },
+    {
+      "key": "scene-art",
+      "purpose": "SCENE",
+      "reference": null,
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    }
+  ],
+  "derivatives": [
+    {
+      "recipe": "instagram-carousel",
+      "format": "CAROUSEL",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": null,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": null
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "instagram-reel",
+      "format": "REEL",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": 20,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 20
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "facebook-static",
+      "format": "CAROUSEL",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": null,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": null
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "facebook-reel",
+      "format": "REEL",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": 20,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 20
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "tiktok-photo-carousel",
+      "format": "PHOTO_CAROUSEL",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": null,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": null
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "tiktok-animated-video",
+      "format": "ANIMATED_VIDEO",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": 20,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 20
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "youtube-explainer",
+      "format": "LONG_FORM_VIDEO",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": 600,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        },
+        {
+          "key": "beat-2",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        },
+        {
+          "key": "beat-3",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 180
+        },
+        {
+          "order": 2,
+          "script_ref": "beat-2",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 240
+        },
+        {
+          "order": 3,
+          "script_ref": "beat-3",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 180
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "youtube-short",
+      "format": "SHORT",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": 20,
+      "script": [
+        {
+          "key": "beat-1",
+          "source_segment_ref": "trial-scope",
+          "narrative_purpose": "Introduce the Trial scope without promising a course or outcome",
+          "narration": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+          "dialogue": [
+            {
+              "character": "founder",
+              "text": "Welcome to HTC. We begin with clear introductions."
+            },
+            {
+              "character": "learner",
+              "text": "We can explore an idea without enrolling in a course."
+            }
+          ],
+          "caption": "HTC Trial: introductory educational awareness",
+          "claim_refs": [
+            "trial-scope"
+          ]
+        }
+      ],
+      "storyboard": [
+        {
+          "order": 1,
+          "script_ref": "beat-1",
+          "chapter": "orientation",
+          "characters": [
+            "founder",
+            "learner"
+          ],
+          "wardrobe": {
+            "founder": "White shirt, consistent throughout the orientation chapter",
+            "learner": "Black jacket, consistent throughout the orientation chapter"
+          },
+          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "camera": "Eye-level establishing shot; measured movement that supports the explanation",
+          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "claim_refs": [
+            "trial-scope"
+          ],
+          "asset_requirements": [
+            "logo-overlay",
+            "watermark-overlay",
+            "character-reference",
+            "scene-art"
+          ],
+          "duration_seconds": 20
+        }
+      ],
+      "article": null
+    },
+    {
+      "recipe": "website-article",
+      "format": "ARTICLE",
+      "language": "en",
+      "source_topic_key": "trial-orientation",
+      "source_revision": 1,
+      "translation_review_ref": null,
+      "duration_seconds": null,
+      "script": [],
+      "storyboard": [],
+      "article": {
+        "title": "Understanding the HTC Trial",
+        "body": "The HTC Trial provides introductory educational awareness without curriculum, enrollment or progress tracking.",
+        "claim_refs": [
+          "trial-scope"
+        ]
+      }
+    }
+  ],
+  "reviews": {
+    "factual_accuracy": null,
+    "trial_eligibility": null,
+    "brand_authenticity": null,
+    "visual_continuity": null,
+    "localization": null,
+    "accessibility": null
+  },
+  "approval_evidence": null,
+  "cms": {
+    "content_id": null,
+    "observed_state": null
+  }
+}
