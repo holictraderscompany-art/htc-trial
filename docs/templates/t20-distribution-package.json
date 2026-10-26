@@ -1,10 +1,10 @@
 {
   "contract_version": 1,
-  "package_id": "bundle-6e7072c5ce14e6c2a759da828c3b572450773cc92936fc64099ae62553f38e86",
+  "package_id": "bundle-6ab757a73e6bb2f7cc19e076f349274eb6c9d7baef86906d31d2852dd8497693",
   "source": {
     "topic_key": "trial-orientation",
-    "editorial_revision": 1,
-    "package_digest": "f1060c7d28aab4be02f881e950d5576169d227d882f8451ee1e4922acdcbcec8",
+    "editorial_revision": 2,
+    "package_digest": "584dc83646694212580564bd255b86d1fa283bd48c73a4446c3b595b436a75e8",
     "source_language": "en"
   },
   "variant": "primary",
@@ -16,11 +16,13 @@
   "brand_requirements": {
     "logo": "official-logo",
     "watermark": "official-watermark",
-    "character_master": "character-master"
+    "founder": "face-founder",
+    "host": "face-wildan",
+    "learner": "face-yordani"
   },
   "items": [
     {
-      "distribution_id": "dist-267fbe77bcd9bfff356eb3d1a00d315f77632348c33a988313a19c5d854c8f35",
+      "distribution_id": "dist-8dd01eb296c6f92c8a5a50545d9cca27d11dd2aecaeb90e76d04ddde584e507a",
       "platform": "Instagram",
       "recipe": "instagram-carousel",
       "format": "CAROUSEL",
@@ -52,7 +54,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "IMAGE",
@@ -86,7 +90,7 @@
       }
     },
     {
-      "distribution_id": "dist-b5432a67497194ff5eaef9828ef12f54097089770e15803ed8f42eb6557ad7b8",
+      "distribution_id": "dist-a122a069f5f2543b07c4f0d78eea1ddc8420474814a0dd413228d9110cceb3d8",
       "platform": "Instagram",
       "recipe": "instagram-reel",
       "format": "REEL",
@@ -118,7 +122,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "VIDEO",
@@ -152,7 +158,7 @@
       }
     },
     {
-      "distribution_id": "dist-a48121484f015e672dc843654fc6e61d72718641f92a5bdc0260d7f185b90fc7",
+      "distribution_id": "dist-3f5f20476afd9204c994a78226d7642976ec93c0a6f2ccb1201ba1d6b9361cc6",
       "platform": "Facebook",
       "recipe": "facebook-static",
       "format": "CAROUSEL",
@@ -184,7 +190,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "IMAGE",
@@ -218,7 +226,7 @@
       }
     },
     {
-      "distribution_id": "dist-58c06fcead3a489d0122bc13f52ec722d6454adfa4de9b6343edc4b5cd81796a",
+      "distribution_id": "dist-d996ae19f3013bab6f9e982b1927ca424b6e73d3d5299e3855f404d158c94ea9",
       "platform": "Facebook",
       "recipe": "facebook-reel",
       "format": "REEL",
@@ -250,7 +258,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "VIDEO",
@@ -284,7 +294,7 @@
       }
     },
     {
-      "distribution_id": "dist-a11f10c71066a0aa9dc2133388099a8d449f31a75fe0d953f81f575c30f36f37",
+      "distribution_id": "dist-342bff650fecb019108bc96c844d68d7923d273e74f79323a2491fd5768e832f",
       "platform": "TikTok",
       "recipe": "tiktok-photo-carousel",
       "format": "PHOTO_CAROUSEL",
@@ -316,7 +326,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "IMAGE",
@@ -350,7 +362,7 @@
       }
     },
     {
-      "distribution_id": "dist-3c39214485103da4263cd924e47665b61291d41abda4fc741aa4fcc5f04dd4d8",
+      "distribution_id": "dist-7ed36e324be98d80c73a3c1290373a08269b8a4007d419928244db85e71e578c",
       "platform": "TikTok",
       "recipe": "tiktok-animated-video",
       "format": "ANIMATED_VIDEO",
@@ -382,7 +394,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "VIDEO",
@@ -416,7 +430,7 @@
       }
     },
     {
-      "distribution_id": "dist-19b0a150c815ae585625d8640a8329f4f8e0fad85f553dfa4efaffc3c392f9bb",
+      "distribution_id": "dist-edab4ee4a92161179778cd01a00de63398c33d256af23ca8fc3a3abbcb951804",
       "platform": "YouTube",
       "recipe": "youtube-explainer",
       "format": "LONG_FORM_VIDEO",
@@ -450,7 +464,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "VIDEO",
@@ -488,7 +504,7 @@
       }
     },
     {
-      "distribution_id": "dist-1e8a5f5ad1012a0f37dda22481688a04683e14db96252fa9975349dde2c94bc3",
+      "distribution_id": "dist-b98d0a877e0a1aef480f0beaf5ac4b68513d2a4d797f2d7b21588655dd8c300a",
       "platform": "YouTube",
       "recipe": "youtube-short",
       "format": "SHORT",
@@ -520,7 +536,9 @@
           "source_asset_keys": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "kind": "VIDEO",
@@ -558,7 +576,7 @@
       }
     },
     {
-      "distribution_id": "dist-b57ebf8fc6d43d0b7a0375755c56fb12af65a5cfb6fe02dc4a3c57e575218584",
+      "distribution_id": "dist-147d57da1378584f0fced6e25f85b0b9ab558c7ddb71e90738d9413395504d30",
       "platform": "HTC Website",
       "recipe": "website-article",
       "format": "ARTICLE",

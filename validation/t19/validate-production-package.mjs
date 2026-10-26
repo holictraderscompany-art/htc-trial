@@ -8,7 +8,10 @@ const inventory = JSON.parse(readFileSync(new URL('../../docs/t19-brand-referenc
 const slug = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 const digest = /^[a-f0-9]{64}$/;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
-const characters = { founder: 'Muhammad Devry Handoyo', learner: 'Ahmad Muhammad Aries Fathul Ilmi' };
+const characters = Object.fromEntries(Object.entries(inventory.current_characters).map(([role, c]) => [role, c.name]));
+const masterReferences = { logo: 'official-logo', watermark: 'official-watermark',
+  ...Object.fromEntries(Object.entries(inventory.current_characters).map(([role, c]) => [role, c.master_reference])) };
+const brandPurpose = role => ['logo', 'watermark'].includes(role) ? role.toUpperCase() : 'CHARACTER_MASTER';
 const reviewKeys = ['factual_accuracy', 'trial_eligibility', 'brand_authenticity', 'visual_continuity', 'localization', 'accessibility'];
 const forbidden = new Set(['ACTUAL_LESSON', 'OPEN_CURRICULUM', 'LEARNING_MODULE', 'QUIZ', 'ASSESSMENT', 'ENROLLMENT', 'LEARNING_PROGRESS', 'PUBLIC_LMS_DASHBOARD', 'TRADING_SIGNAL', 'GUARANTEED_PROFIT']);
 const text = v => typeof v === 'string' && v.trim().length > 0;
@@ -58,7 +61,7 @@ export function validateProductionPackage(value, brandInventory = inventory) {
   });
   if (!shape(value, ['contract_version', 'illustrative_only', 'topic_key', 'revision', 'category', 'pillar', 'classification', 'audience', 'central_message', 'sources', 'claims', 'source_language', 'target_languages', 'trial', 'shared_script', 'characters', 'chapters', 'brand_references', 'assets', 'derivatives', 'reviews', 'approval_evidence', 'cms'], 'package')) return finish();
   const p = value;
-  check(p.contract_version === 1 && typeof p.illustrative_only === 'boolean', 'contract_version', 'INVALID_CONTRACT');
+  check(p.contract_version === 2 && typeof p.illustrative_only === 'boolean', 'contract_version', 'INVALID_CONTRACT');
   if (p.illustrative_only) visualBlockers.push('ILLUSTRATIVE_PACKAGE_NOT_AUTHORIZED_FOR_PRODUCTION');
   check(text(p.topic_key) && slug.test(p.topic_key), 'topic_key', 'INVALID_TOPIC_KEY');
   check(Number.isSafeInteger(p.revision) && p.revision > 0, 'revision', 'INVALID_REVISION');
@@ -103,29 +106,33 @@ export function validateProductionPackage(value, brandInventory = inventory) {
     references(s.claim_refs, claimKeys, `shared_script.${i}.claim_refs`);
   }
 
-  const brandKeys = ['logo', 'watermark', 'character_master'];
+  const brandKeys = Object.keys(masterReferences);
   const rawEntries = Array.isArray(brandInventory?.references) ? brandInventory.references : [];
   check(rawEntries.length > 0 && rawEntries.every(record), 'brand_inventory', 'INVALID_BRAND_INVENTORY');
   const entries = rawEntries.filter(record);
-  check(unique(entries.map(e => e.key)) && entries.every(e => text(e.key) && ['VERIFIED', 'UNVERIFIED', 'NOT FOUND', 'INACCESSIBLE'].includes(e.status)), 'brand_inventory', 'INVALID_BRAND_INVENTORY');
+  check(unique(entries.map(e => e.key)) && entries.every(e => text(e.key) && ['INTEGRITY_VERIFIED', 'VERIFIED', 'UNVERIFIED', 'NOT FOUND', 'INACCESSIBLE'].includes(e.status)), 'brand_inventory', 'INVALID_BRAND_INVENTORY');
   const entryMap = new Map(entries.map(e => [e.key, e]));
   if (shape(p.brand_references, brandKeys, 'brand_references')) for (const role of brandKeys) {
     const entry = entryMap.get(p.brand_references[role]);
-    check(Boolean(entry) && entry.role === role, `brand_references.${role}`, 'BRAND_REFERENCE_REQUIRED');
-    if (!entry || entry.status !== 'VERIFIED' || !validReference(entry.location) || typeof entry.sha256 !== 'string' || !digest.test(entry.sha256) || !validReference(entry.approval_evidence_ref)) visualBlockers.push(`BRAND_UNVERIFIED:${role}`);
-    // Even a well-formed VERIFIED declaration is not authenticated approval.
+    check(Boolean(entry) && entry.role === role && p.brand_references[role] === masterReferences[role], `brand_references.${role}`, 'BRAND_REFERENCE_REQUIRED');
+    const observed = inventory.references.find(e => e.key === masterReferences[role]);
+    if (!entry || entry.status !== 'INTEGRITY_VERIFIED' || !validReference(entry.location)
+      || typeof entry.sha256 !== 'string' || !digest.test(entry.sha256) || entry.sha256 !== observed?.sha256
+      || entry.mime_type !== 'image/jpeg' || entry.byte_size !== observed?.byte_size) visualBlockers.push(`BRAND_UNVERIFIED:${role}`);
+    // Local file integrity and Founder designation never establish current cloud
+    // READY, human production QC or authenticated production/publishing approval.
   }
-  if (shape(p.characters, ['founder', 'learner'], 'characters')) for (const [key, name] of Object.entries(characters)) {
+  if (shape(p.characters, Object.keys(characters), 'characters')) for (const [key, name] of Object.entries(characters)) {
     const c = p.characters[key];
     if (!shape(c, ['name', 'master_reference'], `characters.${key}`)) continue;
-    check(c.name === name && c.master_reference === p.brand_references?.character_master, `characters.${key}`, 'LOCKED_CHARACTER_REFERENCE_REQUIRED');
+    check(c.name === name && c.master_reference === masterReferences[key] && c.master_reference === p.brand_references?.[key], `characters.${key}`, 'LOCKED_CHARACTER_REFERENCE_REQUIRED');
   }
   const chapterMap = new Map();
   for (const [i, c] of list(p.chapters, 'chapters').entries()) {
     if (!shape(c, ['key', 'wardrobe'], `chapters.${i}`)) continue;
     check(text(c.key) && slug.test(c.key) && !chapterMap.has(c.key), `chapters.${i}.key`, 'INVALID_CHAPTER');
     chapterMap.set(c.key, c);
-    if (shape(c.wardrobe, ['founder', 'learner'], `chapters.${i}.wardrobe`)) check(Object.values(c.wardrobe).every(text), `chapters.${i}.wardrobe`, 'WARDROBE_REQUIRED');
+    if (shape(c.wardrobe, Object.keys(characters), `chapters.${i}.wardrobe`)) check(Object.values(c.wardrobe).every(text), `chapters.${i}.wardrobe`, 'WARDROBE_REQUIRED');
   }
   const assetKeys = new Set();
   for (const [i, a] of list(p.assets, 'assets').entries()) {
@@ -137,7 +144,8 @@ export function validateProductionPackage(value, brandInventory = inventory) {
     check(a.readiness_evidence_ref === null || validReference(a.readiness_evidence_ref), `assets.${i}.readiness_evidence_ref`, 'INVALID_ASSET_EVIDENCE');
     if (!a.reference || !a.readiness_evidence_ref) visualBlockers.push('ASSET_READINESS_UNVERIFIED');
   }
-  for (const [role, purpose] of [['logo', 'LOGO'], ['watermark', 'WATERMARK'], ['character_master', 'CHARACTER_MASTER']]) {
+  for (const role of brandKeys) {
+    const purpose = brandPurpose(role);
     check(Array.isArray(p.assets) && p.assets.some(a => a?.purpose === purpose && a.reference === p.brand_references?.[role]), `assets.${role}`, 'REQUIRED_BRAND_ASSET_PLAN_MISSING');
   }
 
@@ -190,7 +198,8 @@ export function validateProductionPackage(value, brandInventory = inventory) {
       check(Boolean(script) && !covered.has(b.script_ref), `${bp}.script_ref`, 'INVALID_STORYBOARD_SCRIPT_LINK'); covered.add(b.script_ref);
       check(Boolean(chapter), `${bp}.chapter`, 'UNKNOWN_CHAPTER');
       check([b.composition, b.camera, b.continuity_notes].every(text), bp, 'INCOMPLETE_STORYBOARD');
-      const participating = references(b.characters, new Set(Object.keys(characters)), `${bp}.characters`, 0);
+      const participating = references(b.characters, new Set(Object.keys(characters)), `${bp}.characters`, 0)
+        .filter(key => typeof key === 'string' && Object.hasOwn(characters, key));
       if (record(b.wardrobe)) {
         check(Object.keys(b.wardrobe).length === participating.length && participating.every(key => b.wardrobe[key] === chapter?.wardrobe?.[key]), `${bp}.wardrobe`, 'CHAPTER_WARDROBE_DRIFT');
       } else error(`${bp}.wardrobe`, 'WARDROBE_REQUIRED');
@@ -198,8 +207,8 @@ export function validateProductionPackage(value, brandInventory = inventory) {
       const claimRefs = references(b.claim_refs, claimKeys, `${bp}.claim_refs`);
       if (script) check(Array.isArray(script.claim_refs) && script.claim_refs.every(key => claimRefs.includes(key)), `${bp}.claim_refs`, 'SCRIPT_CLAIM_NOT_STORYBOARDED');
       const assets = references(b.asset_requirements, assetKeys, `${bp}.asset_requirements`);
-      for (const role of ['logo', 'watermark', ...(participating.length ? ['character_master'] : [])]) {
-        const purpose = { logo: 'LOGO', watermark: 'WATERMARK', character_master: 'CHARACTER_MASTER' }[role];
+      for (const role of ['logo', 'watermark', ...participating]) {
+        const purpose = brandPurpose(role);
         check(Array.isArray(p.assets) && p.assets.some(a => a && a.purpose === purpose && a.reference === p.brand_references?.[role] && assets.includes(a.key)), `${bp}.asset_requirements`, 'REQUIRED_VISUAL_BRAND_REFERENCE_MISSING');
       }
       check(video ? Number.isFinite(b.duration_seconds) && b.duration_seconds > 0 : b.duration_seconds === null, `${bp}.duration_seconds`, 'INVALID_SCENE_TIMING');

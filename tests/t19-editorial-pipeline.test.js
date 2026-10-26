@@ -59,7 +59,7 @@ test('T19 sources require safe references, hash revisions and claim locators', (
 test('T19 missing/stale source revision and orphan derivative fail traceability', () => {
   invalid(p => { p.revision = 0; }, 'INVALID_REVISION');
   invalid(p => { delete p.derivatives[0].source_revision; }, 'EXACT_FIELDS_REQUIRED');
-  invalid(p => { p.derivatives[0].source_revision = 2; }, 'STALE_OR_MISSING_REVISION');
+  invalid(p => { p.derivatives[0].source_revision = p.revision + 1; }, 'STALE_OR_MISSING_REVISION');
   invalid(p => { p.derivatives[0].source_topic_key = 'another-topic'; }, 'ORPHAN_DERIVATIVE');
 });
 
@@ -113,16 +113,18 @@ test('T19 character names/master references and chapter wardrobe cannot drift', 
 test('T19 missing watermark/logo/character master requirements reject visual plans', () => {
   invalid(p => { p.brand_references.watermark = null; }, 'BRAND_REFERENCE_REQUIRED');
   invalid(p => { p.assets = p.assets.filter(a => a.purpose !== 'LOGO'); }, 'REQUIRED_BRAND_ASSET_PLAN_MISSING');
-  for (const key of ['logo-overlay', 'watermark-overlay', 'character-reference']) {
+  for (const key of ['logo-overlay', 'watermark-overlay', 'founder-reference', 'host-reference', 'learner-reference']) {
     invalid(p => { p.derivatives[0].storyboard[0].asset_requirements = p.derivatives[0].storyboard[0].asset_requirements.filter(a => a !== key); }, 'REQUIRED_VISUAL_BRAND_REFERENCE_MISSING');
   }
 });
 
-test('T19 unavailable brand references block visuals without blocking structurally valid editorial work', () => {
-  const result = validateProductionPackage(clone());
+test('T19 missing integrity evidence blocks visuals without blocking structural editorial work', () => {
+  const unavailable = structuredClone(inventory);
+  unavailable.references.forEach(e => { e.status = 'NOT FOUND'; e.location = null; e.sha256 = null; });
+  const result = validateProductionPackage(clone(), unavailable);
   assert.equal(result.structural_valid, true);
-  for (const role of ['logo', 'watermark', 'character_master']) assert.ok(result.visual_blockers.includes(`BRAND_UNVERIFIED:${role}`));
-  assert.equal(inventory.verified_master_count, 0);
+  for (const role of ['logo', 'watermark', 'founder', 'host', 'learner']) assert.ok(result.visual_blockers.includes(`BRAND_UNVERIFIED:${role}`));
+  assert.equal(inventory.local_integrity_verified_master_count, 5);
 });
 
 test('T19 a locally edited VERIFIED inventory is not authenticated brand approval', () => {
@@ -138,7 +140,7 @@ test('T19 approval evidence rejects booleans, wrong scope, stale revision and in
   invalid(p => { p.approval_evidence = true; }, 'EXACT_FIELDS_REQUIRED');
   const approval = p => ({ reference: 'private:founder/review-1', scope: 'PRODUCTION_HANDOFF', topic_key: p.topic_key, revision: p.revision, package_digest: packageDigest(p) });
   invalid(p => { p.approval_evidence = { ...approval(p), scope: 'RELEASE' }; }, 'INVALID_OR_STALE_APPROVAL_EVIDENCE');
-  invalid(p => { p.approval_evidence = { ...approval(p), revision: 2 }; }, 'INVALID_OR_STALE_APPROVAL_EVIDENCE');
+  invalid(p => { p.approval_evidence = { ...approval(p), revision: p.revision + 1 }; }, 'INVALID_OR_STALE_APPROVAL_EVIDENCE');
   invalid(p => { p.approval_evidence = { ...approval(p), package_digest: 'a'.repeat(64) }; }, 'INVALID_OR_STALE_APPROVAL_EVIDENCE');
   const p = clone(); p.approval_evidence = approval(p);
   assert.equal(validateProductionPackage(p).structural_valid, true);
@@ -245,10 +247,73 @@ test('T19 taxonomy fields require scalar strings without JavaScript key coercion
 });
 
 test('T19 storyboard brand references must match the required asset purpose', () => {
-  for (const [role, key] of [['logo', 'logo-overlay'], ['watermark', 'watermark-overlay'], ['character_master', 'character-reference']]) {
+  for (const [role, key] of [['logo', 'logo-overlay'], ['watermark', 'watermark-overlay'], ['founder', 'founder-reference'], ['host', 'host-reference'], ['learner', 'learner-reference']]) {
     invalid(p => {
       p.assets.push({ key: 'wrong-purpose-alias', purpose: 'SCENE', reference: p.brand_references[role], asset_id: null, readiness_evidence_ref: null });
       p.derivatives[0].storyboard[0].asset_requirements = p.derivatives[0].storyboard[0].asset_requirements.map(k => k === key ? 'wrong-purpose-alias' : k);
     }, 'REQUIRED_VISUAL_BRAND_REFERENCE_MISSING');
   }
+});
+
+test('T19 reconciliation locks the current three identities to distinct face masters', () => {
+  assert.deepEqual(clone().characters, {
+    founder: { name: 'Muhammad Devry Handoyo', master_reference: 'face-founder' },
+    host: { name: 'Muhammad Wildanil Hafizh', master_reference: 'face-wildan' },
+    learner: { name: 'Ahmad Baihaqi Yordani', master_reference: 'face-yordani' },
+  });
+  invalid(p => { p.characters.learner.name = 'Ahmad Muhammad Aries Fathul Ilmi'; }, 'LOCKED_CHARACTER_REFERENCE_REQUIRED');
+  invalid(p => { p.characters.host.master_reference = 'face-yordani'; }, 'LOCKED_CHARACTER_REFERENCE_REQUIRED');
+  invalid(p => { p.brand_references.host = 'face-yordani'; }, 'BRAND_REFERENCE_REQUIRED');
+  invalid(p => { delete p.characters.host; }, 'EXACT_FIELDS_REQUIRED');
+});
+
+test('T19 reconciliation requires each participating face asset and host wardrobe continuity', () => {
+  invalid(p => { p.derivatives[0].storyboard[0].wardrobe.host = 'Different outfit within the same chapter'; }, 'CHAPTER_WARDROBE_DRIFT');
+  invalid(p => { p.derivatives[0].script[0].dialogue.push({ character: 'aries', text: 'Legacy fixture' }); }, 'INVALID_DIALOGUE');
+  invalid(p => { p.derivatives[0].storyboard[0].characters = ['founder', 'learner']; }, 'CHAPTER_WARDROBE_DRIFT');
+  invalid(p => { p.assets.find(a => a.key === 'host-reference').reference = 'face-founder'; }, 'REQUIRED_BRAND_ASSET_PLAN_MISSING');
+  const p = clone();
+  p.chapters[0].wardrobe.host = 'Alternate illustrative host outfit';
+  p.derivatives.forEach(d => d.storyboard.forEach(b => { b.wardrobe.host = p.chapters[0].wardrobe.host; }));
+  assert.equal(validateProductionPackage(p).structural_valid, true);
+});
+
+test('T19 old production contracts are not silently adopted for new production', () => {
+  invalid(p => { p.contract_version = 1; }, 'INVALID_CONTRACT');
+  const original = JSON.parse(execFileSync('git', ['show', '46daf152904bace017a9bb3d81e3dfd7021e297f:docs/templates/t19-production-package.json'], { encoding: 'utf8' }));
+  assert.equal(validateProductionPackage(original).structural_valid, false);
+});
+
+test('T19 local master integrity evidence is separate from READY, visual QC and approval', () => {
+  const result = validateProductionPackage(clone());
+  for (const role of ['logo', 'watermark', 'founder', 'host', 'learner']) assert.ok(!result.visual_blockers.includes(`BRAND_UNVERIFIED:${role}`));
+  assert.equal(result.visual_production_readiness, 'BLOCKED');
+  assert.ok(result.visual_blockers.includes('ASSET_READINESS_UNVERIFIED'));
+  assert.equal(result.founder_approval_readiness, 'BLOCKED_PENDING_AUTHENTICATED_FOUNDER_REVIEW');
+  assert.equal(inventory.verification.cloud_ready, 'NOT_VERIFIED');
+  assert.match(inventory.voice_policy, /NOT permanently locked/);
+});
+
+test('T19 master evidence rejects substituted hash, MIME or size without granting authority', () => {
+  for (const change of [{ sha256: 'a'.repeat(64) }, { mime_type: 'image/png' }, { byte_size: 1 }]) {
+    const forged = structuredClone(inventory); Object.assign(forged.references[0], change);
+    const result = validateProductionPackage(clone(), forged);
+    assert.ok(result.visual_blockers.includes('BRAND_UNVERIFIED:logo'));
+    assert.equal(result.visual_production_readiness, 'BLOCKED');
+  }
+});
+
+test('T19 reconciliation returns controlled errors for malformed participating face roles', () => {
+  for (const role of [{ toString: null }, {}, ['host'], null, true, 1, 'aries']) {
+    const p = clone(), scene = p.derivatives[0].storyboard[0];
+    scene.characters = [role]; scene.wardrobe = {};
+    const result = validateProductionPackage(p);
+    assert.equal(result.structural_valid, false);
+    assert.ok(result.errors.some(e => e.code === 'UNRESOLVED_OR_DUPLICATE_REFERENCE'));
+    assert.equal(result.visual_production_readiness, 'BLOCKED');
+  }
+  const p = clone(), scene = p.derivatives[0].storyboard[0];
+  scene.characters = ['founder', 'learner']; delete scene.wardrobe.host;
+  scene.asset_requirements = scene.asset_requirements.filter(k => k !== 'host-reference');
+  assert.equal(validateProductionPackage(p).structural_valid, true);
 });

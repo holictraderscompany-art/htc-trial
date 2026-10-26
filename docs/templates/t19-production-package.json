@@ -1,8 +1,8 @@
 {
-  "contract_version": 1,
+  "contract_version": 2,
   "illustrative_only": true,
   "topic_key": "trial-orientation",
-  "revision": 1,
+  "revision": 2,
   "category": "INTRODUCTION",
   "pillar": "Education",
   "classification": "htc-orientation",
@@ -50,11 +50,15 @@
   "characters": {
     "founder": {
       "name": "Muhammad Devry Handoyo",
-      "master_reference": "character-master"
+      "master_reference": "face-founder"
+    },
+    "host": {
+      "name": "Muhammad Wildanil Hafizh",
+      "master_reference": "face-wildan"
     },
     "learner": {
-      "name": "Ahmad Muhammad Aries Fathul Ilmi",
-      "master_reference": "character-master"
+      "name": "Ahmad Baihaqi Yordani",
+      "master_reference": "face-yordani"
     }
   },
   "chapters": [
@@ -62,6 +66,7 @@
       "key": "orientation",
       "wardrobe": {
         "founder": "White shirt, consistent throughout the orientation chapter",
+        "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
         "learner": "Black jacket, consistent throughout the orientation chapter"
       }
     }
@@ -69,7 +74,9 @@
   "brand_references": {
     "logo": "official-logo",
     "watermark": "official-watermark",
-    "character_master": "character-master"
+    "founder": "face-founder",
+    "host": "face-wildan",
+    "learner": "face-yordani"
   },
   "assets": [
     {
@@ -87,9 +94,23 @@
       "readiness_evidence_ref": null
     },
     {
-      "key": "character-reference",
+      "key": "founder-reference",
       "purpose": "CHARACTER_MASTER",
-      "reference": "character-master",
+      "reference": "face-founder",
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    },
+    {
+      "key": "host-reference",
+      "purpose": "CHARACTER_MASTER",
+      "reference": "face-wildan",
+      "asset_id": null,
+      "readiness_evidence_ref": null
+    },
+    {
+      "key": "learner-reference",
+      "purpose": "CHARACTER_MASTER",
+      "reference": "face-yordani",
       "asset_id": null,
       "readiness_evidence_ref": null
     },
@@ -107,7 +128,7 @@
       "format": "CAROUSEL",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": null,
       "script": [
@@ -139,22 +160,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": null
@@ -167,7 +192,7 @@
       "format": "REEL",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": 20,
       "script": [
@@ -199,22 +224,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 20
@@ -227,7 +256,7 @@
       "format": "CAROUSEL",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": null,
       "script": [
@@ -259,22 +288,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": null
@@ -287,7 +320,7 @@
       "format": "REEL",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": 20,
       "script": [
@@ -319,22 +352,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 20
@@ -347,7 +384,7 @@
       "format": "PHOTO_CAROUSEL",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": null,
       "script": [
@@ -379,22 +416,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": null
@@ -407,7 +448,7 @@
       "format": "ANIMATED_VIDEO",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": 20,
       "script": [
@@ -439,22 +480,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 20
@@ -467,7 +512,7 @@
       "format": "LONG_FORM_VIDEO",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": 600,
       "script": [
@@ -539,22 +584,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 180
@@ -565,22 +614,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 240
@@ -591,22 +644,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 180
@@ -619,7 +676,7 @@
       "format": "SHORT",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": 20,
       "script": [
@@ -651,22 +708,26 @@
           "chapter": "orientation",
           "characters": [
             "founder",
+            "host",
             "learner"
           ],
           "wardrobe": {
             "founder": "White shirt, consistent throughout the orientation chapter",
+            "host": "Illustrative blue shirt, consistent throughout the orientation chapter",
             "learner": "Black jacket, consistent throughout the orientation chapter"
           },
-          "composition": "Cinematic stylized 3D two-shot: mentor left, learner right; readable captions and approved brand overlays",
+          "composition": "Cinematic stylized 3D three-character composition; readable captions and original brand overlays",
           "camera": "Eye-level establishing shot; measured movement that supports the explanation",
-          "continuity_notes": "Use the approved poster identities; preserve facial traits and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
+          "continuity_notes": "Preserve the current Founder, Host and Learner face identities and chapter wardrobe. Final framing, pacing and overlay positions require human review.",
           "claim_refs": [
             "trial-scope"
           ],
           "asset_requirements": [
             "logo-overlay",
             "watermark-overlay",
-            "character-reference",
+            "founder-reference",
+            "host-reference",
+            "learner-reference",
             "scene-art"
           ],
           "duration_seconds": 20
@@ -679,7 +740,7 @@
       "format": "ARTICLE",
       "language": "en",
       "source_topic_key": "trial-orientation",
-      "source_revision": 1,
+      "source_revision": 2,
       "translation_review_ref": null,
       "duration_seconds": null,
       "script": [],

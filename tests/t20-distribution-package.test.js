@@ -57,7 +57,7 @@ test('T20 source revision, package digest and per-derivative provenance are boun
   const revised = prepareDistributionPackage(p);
   assert.notEqual(revised.package_id, m.package_id);
   assert.notEqual(revised.items[0].distribution_id, m.items[0].distribution_id);
-  assert.equal(revised.source.editorial_revision, 2);
+  assert.equal(revised.source.editorial_revision, p.revision);
   bad(x => { x.items[0].content_ref = '/derivatives/1'; }, 'DERIVATION_MISMATCH');
 });
 
@@ -144,11 +144,31 @@ test('T20 stale source revision and editorial approval cannot become distributio
   bad(m => { m.approval_evidence = { ...localReceipt(m), source_revision: 99 }; }, 'STALE_OR_MISSCOPED_APPROVAL');
 });
 
-test('T20 unresolved originals and human visual QC remain explicit blockers', () => {
+test('T20 available local masters do not waive actual asset readiness or human visual QC', () => {
   const result = check(bundle()[1]);
-  for (const role of ['logo', 'watermark', 'character_master']) assert.ok(result.blockers.includes(`T19:BRAND_UNVERIFIED:${role}`));
+  for (const role of ['logo', 'watermark', 'founder', 'host', 'learner']) assert.ok(!result.blockers.includes(`T19:BRAND_UNVERIFIED:${role}`));
+  assert.ok(result.blockers.includes('T19:ASSET_READINESS_UNVERIFIED'));
   assert.equal(result.actual_media_readiness, 'BLOCKED');
   assert.equal(result.external_platform_integration, 'NOT_IMPLEMENTED');
+});
+
+test('T20 reconciled three-face requirements derive into all nine non-executable handoffs', () => {
+  const [p, m] = bundle();
+  assert.deepEqual(m.brand_requirements, { logo: 'official-logo', watermark: 'official-watermark', founder: 'face-founder', host: 'face-wildan', learner: 'face-yordani' });
+  for (const item of m.items.filter(i => i.recipe !== 'website-article'))
+    for (const key of ['founder-reference', 'host-reference', 'learner-reference']) assert.ok(item.media_sequence[0].source_asset_keys.includes(key));
+  assert.equal(m.items.length, 9);
+  assert.equal(prepareDistributionHandoff(p, m).executable, false);
+  assert.equal(check(m, p).publishing_authorization, 'BLOCKED');
+});
+
+test('T20 refuses a legacy cast source and invalidates pre-reconciliation distribution evidence', () => {
+  const [p, m] = bundle();
+  p.characters.learner.name = 'Ahmad Muhammad Aries Fathul Ilmi';
+  assert.throws(() => prepareDistributionPackage(p), /INVALID_SOURCE_PACKAGE/);
+  assert.equal(check(m, p).structural_valid, false);
+  bad(x => { x.brand_requirements = { logo: 'official-logo', watermark: 'official-watermark', character_master: 'character-master' }; }, 'SOURCE_OR_CONTRACT_MISMATCH');
+  bad(x => { x.source.editorial_revision = 1; }, 'SOURCE_OR_CONTRACT_MISMATCH');
 });
 
 test('T20 deterministic identity distinguishes intentional variants and rejects duplicates', () => {

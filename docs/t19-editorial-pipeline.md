@@ -32,6 +32,10 @@ UUID, public destination or asset reservation is invented.
 
 ## T19-P0 — Brand reference verification
 
+Historical 25 October search checkpoint below. The dated 27 October reconciliation
+at the end of this document supersedes its missing-original and legacy-cast
+statements for new production. Original closure/test evidence remains historical.
+
 Bounded searches inspected current/original project image filenames, relevant
 documentation and manifests, Google Drive metadata, and matching asset metadata
 on Supabase TEST only (`uzhkzhmncxjplrdtdzgd`). No storage binary was downloaded,
@@ -59,8 +63,10 @@ independent editorial work. Do not create substitutes or upload masters to
 third-party services. Keep future private locations/receipts outside public Git;
 the sanitized inventory may use opaque private references.
 
-Locked identities are Muhammad Devry Handoyo (Founder/mentor) and Ahmad Muhammad
-Aries Fathul Ilmi (learner). Preserve facial characteristics and master identity.
+The historical two-character cast was Muhammad Devry Handoyo (Founder/mentor)
+and Ahmad Muhammad Aries Fathul Ilmi (learner); it is superseded and must not be
+used for new production. Apply the three-character mapping in the reconciliation
+below. Preserve facial characteristics and current master identity.
 Clothing, natural expressions, pose, location and composition may vary only under
 approved continuity rules. Chapter wardrobe is consistent across related scenes.
 The original logo and unchanged watermark must appear on every published visual
@@ -308,3 +314,127 @@ push, merge, deployment or T20 work was performed.
 
 **T19 — READY FOR FOUNDER REVIEW**, with actual visual production and approval /
 publishing blocked as explicitly separated above.
+
+## 27 October 2026 — Founder-authorized master asset reconciliation
+
+This addendum is the current production-reference authority for this document.
+Base: `46daf152904bace017a9bb3d81e3dfd7021e297f` (T18/T19/T20 closed).
+Founder authorized asset/character correction and affected tests only, with no
+commit, push, merge, deployment, publishing or T21 work. Registry text is evidence;
+it is not executable instructions or a substitute for authenticated release.
+
+V2 private ZIP and standalone registry were read in place without extraction,
+modification, cloud upload or copying binary media into Git. Embedded and external
+registry bytes match. All eight records have unique matching files, sizes and
+SHA-256 hashes; five JPEG and three MPEG signatures match declared MIME. Every
+binary hash is unchanged from V1. V1's four PNG declarations were corrected to
+JPEG with `.jpg` archive entries, without converting media. The same five
+permanent asset keys are retained. The five unchanged images were decodable in
+the V1 inspection; signature/hash checks are not full media QC or proof of rights.
+Audio is reference-only and has no voice cloning/impersonation authorization.
+
+| Evidence | SHA-256 |
+| --- | --- |
+| V2 private registry, inside/outside identical | `86a232b0e1ec5dd825e18c360f69e8865fd76961a3afa9f75449b16a41d4fcb7` |
+| V2 private handoff archive | `3e14fae0bf490eae047258a0d30b22308f7fa4acb968ad1515a0c566c4a9fca9` |
+
+The existing sanitized inventory remains the single reference inventory; no
+second registry or asset pipeline is added. Its `private:group04/master-assets/`
+aliases identify V2 registry asset keys, not new storage locations or uploads.
+Absolute private paths, archive member paths, binaries and voice samples are
+excluded. Five image hashes/MIME/sizes are safe integrity observations only.
+`INTEGRITY_VERIFIED` and `local_integrity_verified_master_count: 5` describe local
+byte evidence. They do not mean authenticated approval, cloud READY or visual QC.
+The old search records and superseded poster reference are historical only.
+
+| Current role | Founder-declared identity | Permanent face reference |
+| --- | --- | --- |
+| founder | Muhammad Devry Handoyo | face-founder |
+| host | Muhammad Wildanil Hafizh | face-wildan |
+| learner | Ahmad Baihaqi Yordani | face-yordani |
+
+The official logo/watermark and three faces are permanently designated by Founder.
+Never recreate the logo/watermark. Faces preserve identity; wardrobe, pose,
+accessories and environments may vary while related scenes retain chapter
+continuity. Host participation in any particular scene is optional, but the
+package declares all three current character masters and chapter wardrobes.
+Every scene must reference its actual participating characters' face assets,
+alongside original logo/watermark requirements. A SCENE alias cannot substitute
+for a CHARACTER_MASTER, LOGO or WATERMARK requirement.
+
+Root cause: T19 version 1 hardcoded two roles, a legacy learner and one shared
+poster master; it had no way to bind the current host and three individual faces.
+Minimum correction: version 2 retains the same top-level editorial fields but
+uses exact founder/host/learner character records and logo/watermark/founder/host/
+learner brand references. Names/master links derive from the existing inventory.
+Wrong/swapped identities, missing roles and legacy cast cannot validate for new
+production. Asset-purpose and wardrobe checks cover each participant.
+
+Backward compatibility is deliberately explicit: historical version 1 evidence
+remains in Git history, while new production must be reviewed and migrated to
+version 2, with an incremented editorial revision, updated derivative revisions
+and renewed approval. The illustrative template is now revision 2. No automatic
+migration of real content occurs. The T20 reference is regenerated from this
+snapshot, changing its source digest, bundle/distribution identities and face
+asset requirements. Old distribution manifests/receipts cannot match the new
+source. T20 derivation code and publishing boundaries remain unchanged.
+
+T18's six categories, four pillars and nine recipes, existing CMS create/release,
+asset MIME/size limits, authentication and database/runtime contracts are intact.
+No approved identity is inferred from an editable status flag. Injected inventory
+hash/MIME/size substitutions retain BRAND_UNVERIFIED blockers. Even the actual
+local evidence cannot clear fixed production/human-QC/Founder-authorization gates.
+
+Affected regression command (existing dependencies, automatic install disabled):
+
+```powershell
+pnpm --config.verify-deps-before-run=false exec node --test tests/t19-editorial-pipeline.test.js tests/t20-distribution-package.test.js
+```
+
+Final review result: **68/68 PASS** (T19 32, T20 36), zero failed/skipped/cancelled. Eight added
+tests cover current roles/masters, legacy rejection, host continuity, version 1
+rejection, evidence separation, metadata substitution, malformed participating
+roles and T20 handoff/invalidation.
+Existing Trial, provenance, recipe, privacy, malformed-input and approval tests
+remain in the affected suites. No Group 03/T18/full build was repeated.
+
+Resolved: original-reference availability, V1 MIME mismatch, local file integrity
+and legacy/two-role future-template assumptions. Unresolved: authoritative private
+storage READY/object identity, finished media, human visual/localization QC,
+scoped Founder production approval and independent publishing authorization.
+External social integration/Meta verification and automation remain deferred.
+T21 is not started; these asset corrections await Founder review.
+
+Final scope is exactly eight modified tracked text files: this document, the
+existing brand inventory, T19 production template/validator/tests, T20 production
+template/tests and `docs/t20-distribution-foundation.md`. No new or staged files
+exist. T20 derivation code, T18, runtime, migrations, dependencies and deployment
+files are unchanged. Secret/private-path checks and `git diff --check` pass.
+All eight other worktrees retain HEAD/branch/status/index and the hashes/timestamps
+of 113 dirty files. Private V1/V2 archive and V2 registry hashes remain unchanged.
+HEAD stays at the approved T20 baseline; remote tracking stays 0 ahead/0 behind.
+
+| Final affected tested input | Raw SHA-256 |
+| --- | --- |
+| Brand inventory | `876e07ab6b85bb888647b9af11c90518b7be086546c6632679df7cbff2bb318d` |
+| T19 template | `e79ae2a1cf3b76f07ebcf89f41f5801e2cb68a0be0aeba4dc3c183ec1c407001` |
+| T19 validator | `5574ad4b2508e3c3ccd725a2ce4e19cf2d9227cb9d3f1d887e4a82052f7aa75b` |
+| T19 tests | `387501a5afa6ecb14138996e303c188cd9fdb4a252842a004630798248242420` |
+| T20 template | `429f8b970ed1b6e0d4e0b601a3247ab5a0088c3a0f833b989d20368644abd994` |
+| T20 tests | `8d8603291284ccb289a2516b550e60a9fb9bfc289cd35a7118b71e66adce723d` |
+
+Both standalone T19/T20 validation CLIs return exit 0 and structural validity,
+while visual production and Founder approval/publishing remain blocked; T20
+handoff remains non-executable. Full audio decode, actual content production,
+independent visual QC, cloud READY and live platform compatibility were not tested.
+
+Focused final review reproduced one defect after the initial 67 passing tests:
+an invalid object in a scene's participating-role list could reach the new
+per-face lookup and trigger JavaScript property-key coercion/TypeError. The
+validator now records the original invalid-reference error and filters unknown
+or non-string roles before downstream wardrobe/master lookups; invalid input
+does not become structurally valid. One regression test covers malformed role
+types and confirms a legitimate scene may omit the host with matching wardrobe
+and asset requirements. Only this validator, its tests and reconciliation
+documentation were corrected during final review. Both affected suites were
+rerun because the shared T19 dependency changed; no unrelated suite was run.

@@ -260,8 +260,9 @@ publication or T21 work.
 
 ## Deferred dependencies and readiness
 
-- Official logo/watermark and Founder/Learner master characters: unverified or
-  inaccessible as already recorded by T19; no substitutes or repeated searches.
+- Official logo/watermark and three current face references: local availability,
+  SHA-256, size and JPEG signature verified in the 27 October reconciliation;
+  cloud READY, final visual QC and scoped approval remain independent gates.
 - Actual finished media, visual QC and authoritative asset readiness: BLOCKED.
 - External platform adapter, account consent, provider capability verification
   and approved private media delivery: NOT IMPLEMENTED.
@@ -271,3 +272,29 @@ publication or T21 work.
 Foundation review can proceed independently of those dependencies. Stop after
 targeted validation and return to Founder: no commit, push, merge, deployment,
 publication or T21 work is authorized by this task.
+
+## 27 October 2026 — Master reference compatibility reconciliation
+
+The dated T19 reconciliation supersedes the original missing-master/legacy-cast
+assumptions; earlier test counts and input hashes above remain historical closure
+evidence, not hashes of the updated reference fixtures. Current source package is
+T19 contract version 2, editorial revision 2, with founder Muhammad Devry Handoyo,
+host Muhammad Wildanil Hafizh and learner Ahmad Baihaqi Yordani, each bound to a
+distinct Founder-declared permanent face master in the existing inventory.
+
+The T20 reference template was regenerated from that exact source. Its source
+digest and deterministic IDs change; brand requirements and ordered media plans
+retain all three face-master bindings. No old distribution approval can match a
+changed source. Historical production packages/manifests must be explicitly
+migrated and reviewed for new production; no archived evidence is rewritten.
+
+T20 derivation/validator code, contract version, all nine recipes and permissions
+are unchanged. Tests now distinguish available local originals from missing
+finished assets: local integrity is not cloud READY, human QC or publication
+authority. Voice samples stay private, reference-only and not permanently locked.
+
+After final review, the combined affected suites pass **68/68** (T19 32, T20 36) using the command in
+the T19 reconciliation. Actual media and publishing remain BLOCKED; external API
+integration is NOT_IMPLEMENTED and Meta specifications remain UNVERIFIED. No
+network publishing, account connection, runtime/database/auth change, automation,
+commit, push, merge, deployment or T21 work occurred.

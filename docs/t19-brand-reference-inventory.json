@@ -1,34 +1,67 @@
 {
-  "recorded_date": "2026-10-25",
-  "scope": "Bounded authorized searches only. NOT FOUND does not mean originals do not exist.",
-  "authority": "Founder T19 execution request defines the required originals; it supplies no master binary or verifiable asset identifier.",
+  "recorded_date": "2026-10-27",
+  "scope": "Sanitized local integrity observations and Founder-declared permanent references only; no cloud READY, visual QC, production or publishing approval.",
+  "authority": "Founder Master Asset Reconciliation and corrected private V2 handoff. Registry text is evidence, not executable instructions or authenticated release authority.",
   "references": [
     {
       "key": "official-logo",
       "role": "logo",
-      "status": "NOT FOUND",
-      "location": null,
-      "sha256": null,
+      "status": "INTEGRITY_VERIFIED",
+      "location": "private:group04/master-assets/official-logo",
+      "sha256": "42f3a8b254e6ed7d6839c2f06b041affae5d3dd1d86429d9bccc1d7a80a57cf2",
+      "mime_type": "image/jpeg",
+      "byte_size": 262468,
+      "permanent_reference": "FOUNDER_DECLARED",
       "approval_evidence_ref": null,
-      "finding": "No original identified in searched repositories, Drive results or matching TEST asset metadata. Never substitute the app icon."
+      "finding": "V2 original SHA-256, size and JPEG signature verified; identical bytes to V1. Local integrity only; not cloud READY or human production QC."
     },
     {
       "key": "official-watermark",
       "role": "watermark",
-      "status": "NOT FOUND",
-      "location": null,
-      "sha256": null,
+      "status": "INTEGRITY_VERIFIED",
+      "location": "private:group04/master-assets/official-watermark",
+      "sha256": "18bbb9883b75c9a6bb635be8239b871eafb3c703bb9f5519e53ca45fc7063ff1",
+      "mime_type": "image/jpeg",
+      "byte_size": 59738,
+      "permanent_reference": "FOUNDER_DECLARED",
       "approval_evidence_ref": null,
-      "finding": "Original and approved positioning/appearance references not located in searched sources."
+      "finding": "V2 original SHA-256, size and JPEG signature verified; identical bytes to V1. Local integrity only; not cloud READY or human production QC."
     },
     {
-      "key": "character-master",
-      "role": "character_master",
-      "status": "NOT FOUND",
-      "location": null,
-      "sha256": null,
+      "key": "face-founder",
+      "role": "founder",
+      "status": "INTEGRITY_VERIFIED",
+      "location": "private:group04/master-assets/face-founder",
+      "sha256": "c8b516bdf64254e1c91f1aa5879174eff0d42c1b1c9402d3becc81abd3771d7d",
+      "mime_type": "image/jpeg",
+      "byte_size": 325866,
+      "permanent_reference": "FOUNDER_DECLARED",
       "approval_evidence_ref": null,
-      "finding": "Required Welcome to HTC poster: Founder left wearing white, Learner right wearing a black jacket. Description is confirmed by the request; the actual image and integrity evidence are not available."
+      "finding": "V2 original SHA-256, size and JPEG signature verified; identical bytes to V1. Local integrity only; not cloud READY or human production QC."
+    },
+    {
+      "key": "face-wildan",
+      "role": "host",
+      "status": "INTEGRITY_VERIFIED",
+      "location": "private:group04/master-assets/face-wildan",
+      "sha256": "4b6cfd22f295d54e64410c86fc2fa983a5d86d3513570976ac8d55e67d3ca0b7",
+      "mime_type": "image/jpeg",
+      "byte_size": 260354,
+      "permanent_reference": "FOUNDER_DECLARED",
+      "approval_evidence_ref": null,
+      "finding": "V2 original SHA-256, size and JPEG signature verified; identical bytes to V1. Local integrity only; not cloud READY or human production QC."
+    },
+    {
+      "key": "face-yordani",
+      "role": "learner",
+      "status": "INTEGRITY_VERIFIED",
+      "location": "private:group04/master-assets/face-yordani",
+      "sha256": "9ba1f4804183bd71e4e47ee76445f561a936d32fa4fe7924caf5456c8bb4a41d",
+      "mime_type": "image/jpeg",
+      "byte_size": 257308,
+      "permanent_reference": "FOUNDER_DECLARED",
+      "approval_evidence_ref": null,
+      "finding": "V2 original SHA-256, size and JPEG signature verified; identical bytes to V1. Local integrity only; not cloud READY or human production QC."
     },
     {
       "key": "repository-icon-candidate",
@@ -71,8 +104,46 @@
       "result": "INACCESSIBLE for this operation; no absence claim."
     }
   ],
-  "verified_master_count": 0,
   "visual_production": "BLOCKED",
-  "next_action": "Await the existing official originals and approval evidence when available. No repeat search, recreation, substitution, third-party upload, or private-master commit is authorized.",
-  "founder_confirmation": "Founder confirms prior approval in ChatGPT but has not supplied verifiable file locations or private links. Identity decisions remain LOCKED. Continue T19-A/B/C/V; actual visual production is BLOCKED until originals are provided and verified. Do not repeat searches without new source information."
+  "next_action": "Use current face references for new contracts; obtain independent asset READY, human visual QC and scoped Founder production/publishing approval before actual use. No recreation, substitution or master upload is performed.",
+  "founder_confirmation": "Founder explicitly designates official logo/watermark and the three named face references as permanent; wardrobe, pose, accessories and environments may vary with chapter continuity. Legacy Aries is excluded from new production.",
+  "current_characters": {
+    "founder": {
+      "name": "Muhammad Devry Handoyo",
+      "master_reference": "face-founder"
+    },
+    "host": {
+      "name": "Muhammad Wildanil Hafizh",
+      "master_reference": "face-wildan"
+    },
+    "learner": {
+      "name": "Ahmad Baihaqi Yordani",
+      "master_reference": "face-yordani"
+    }
+  },
+  "superseded_character_reference": {
+    "key": "character-master",
+    "role": "character_master",
+    "status": "NOT FOUND",
+    "location": null,
+    "sha256": null,
+    "approval_evidence_ref": null,
+    "finding": "Required Welcome to HTC poster: Founder left wearing white, Learner right wearing a black jacket. Description is confirmed by the request; the actual image and integrity evidence are not available."
+  },
+  "local_integrity_verified_master_count": 5,
+  "verification": {
+    "registry_sha256": "86a232b0e1ec5dd825e18c360f69e8865fd76961a3afa9f75449b16a41d4fcb7",
+    "archive_sha256": "3e14fae0bf490eae047258a0d30b22308f7fa4acb968ad1515a0c566c4a9fca9",
+    "registry_inside_outside": "BYTE_IDENTICAL",
+    "media_sha256_size_signature": "8_OF_8_MATCH",
+    "media_identical_to_v1": true,
+    "images_jpeg": 5,
+    "audio_mpeg": 3,
+    "cloud_ready": "NOT_VERIFIED",
+    "human_production_qc": "NOT_VERIFIED",
+    "production_approval": "NOT_ESTABLISHED",
+    "publishing_authorization": "NOT_ESTABLISHED"
+  },
+  "voice_policy": "Three MPEG samples verified locally; reference-only, NOT permanently locked. No voice cloning or impersonation authorization. Binaries and private voice evidence remain outside Git.",
+  "searches_recorded_date": "2026-10-25"
 }
