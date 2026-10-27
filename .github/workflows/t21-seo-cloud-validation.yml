@@ -1,0 +1,363 @@
+name: HTC T21 Next build and synthetic SSR (no deployment)
+
+# Implementation is not execution evidence. Requires separately approved commit/push.
+# No dispatch, PR, schedule, environment secrets, deployment or artifact upload.
+on:
+  push:
+    branches: [codex/group04-t18]
+    paths:
+      - .github/workflows/t21-seo-cloud-validation.yml
+      - src/app/layout.js
+      - src/app/(public)/page.js
+      - src/app/(public)/content/**
+      - src/app/robots.txt/route.js
+      - src/app/sitemap.xml/route.js
+      - src/server/search-context.js
+      - src/server/search-metadata.js
+      - tests/t21-search-metadata.test.js
+      - docs/t21-search-discovery.md
+
+permissions:
+  contents: read
+concurrency:
+  group: htc-t21-cloud-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-ssr:
+    if: >-
+      github.repository == 'holictraderscompany-art/htc-trial' &&
+      github.ref == 'refs/heads/codex/group04-t18' &&
+      github.event_name == 'push' && github.event.deleted == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      NODE_OPTIONS: --max-old-space-size=4096
+      HTC_SUPABASE_TARGET: test
+      SUPABASE_URL: https://uzhkzhmncxjplrdtdzgd.supabase.co
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_t21_synthetic_fixture_only
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 11.25.0
+          run_install: false
+
+      - name: Verify executor, exact checkout, approved scope and locked dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$RUNNER_OS" = Linux
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test "$GITHUB_REPOSITORY" = holictraderscompany-art/htc-trial
+          test "$GITHUB_REF" = refs/heads/codex/group04-t18
+          test "$GITHUB_EVENT_NAME" = push
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+          test "$(node --version)" = v24.21.0
+          test "$(pnpm --version)" = 11.25.0
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { execFileSync } from 'node:child_process';
+          import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const base = '108b39a4295c281011b755b23b7e943d3eb3226f';
+          const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
+          git('merge-base', '--is-ancestor', base, 'HEAD');
+          const paths = ['src/app/layout.js', 'src/app/(public)/page.js',
+            'src/app/(public)/content/page.js', 'src/app/(public)/content/[id]/page.js',
+            'src/app/robots.txt/route.js', 'src/app/sitemap.xml/route.js',
+            'src/server/search-context.js', 'src/server/search-metadata.js',
+            'tests/t21-search-metadata.test.js', 'docs/t21-search-discovery.md',
+            '.github/workflows/t21-seo-cloud-validation.yml'];
+          const changed = git('diff', '--name-only', base, 'HEAD').split('\n').filter(Boolean);
+          assert(changed.every(path => paths.includes(path)), 'STOP_UNAPPROVED_SOURCE_SCOPE');
+          for (const key of ['SUPABASE_SERVICE_ROLE_KEY', 'DATABASE_URL', 'CLOUDFLARE_API_TOKEN',
+            'VERCEL_TOKEN', 'HTC_SEO_CANONICAL_ORIGIN', 'HTC_SEO_INDEXING'])
+            assert(!process.env[key], 'STOP_UNEXPECTED_EXECUTION_INPUT');
+          assert(!readdirSync('.').some(path => /^\.env(?:\.|$)/.test(path)), 'STOP_DOTENV_INPUT');
+          const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+          const manifest = paths.sort().map(path => ({ path, sha256: hash(readFileSync(path)) }));
+          const lock = readFileSync('pnpm-lock.yaml');
+          assert.equal(hash(lock), hash(execFileSync('git', ['show', base + ':pnpm-lock.yaml'])));
+          assert.equal(git('diff', base, 'HEAD', '--', 'package.json', 'pnpm-lock.yaml'), '');
+          writeFileSync(process.env.RUNNER_TEMP + '/t21-lock.sha256', hash(lock));
+          console.log(JSON.stringify({ stage: 'SOURCE', sha: git('rev-parse', 'HEAD'),
+            tree: git('rev-parse', 'HEAD^{tree}'), node: process.version, pnpm: '11.25.0',
+            lock_sha256: hash(lock), manifest, live_validation: false }));
+          NODE
+
+      - name: Frozen cloud install without project lifecycle scripts or policy exceptions
+        timeout-minutes: 10
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Production Next build with synthetic TEST configuration only
+        timeout-minutes: 10
+        # Never invoke build:workers, wrangler, platform deploy CLIs or OAuth.
+        run: pnpm run build
+
+      - name: Validate built Next HTML and HTTP contracts on runner loopback
+        timeout-minutes: 8
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { spawn } from 'node:child_process';
+          import { once } from 'node:events';
+          import { request } from 'node:http';
+          import { writeFileSync, openSync, closeSync, appendFileSync } from 'node:fs';
+          import { setTimeout as delay } from 'node:timers/promises';
+          const directory = process.env.RUNNER_TEMP;
+          const fixtureFile = directory + '/t21-ssr-fixture.mjs';
+          const origin = 'https://htc-seo-fixture.example.org'; // Reserved synthetic fixture, NOT HTC's domain.
+          const host = new URL(origin).host;
+          const id = n => '00000000-0000-4000-8000-' + String(n).padStart(12, '0');
+          const body = 'Introductory awareness only. Curriculum begins January 2027.';
+          const canaries = ['T21_PRIVATE_DRAFT', 'T21_PRIVATE_WITHDRAWN', 'T21_PRIVATE_FOUNDER',
+            'T21_PRIVATE_STORAGE', 'T21_PRIVATE_SIGNED_URL', 'sb_publishable_'];
+          // Same production Next custom-server fixture pattern as tests/founder-content.fixture.mjs.
+          // Only this disposable runner script replaces transport; application bytes are untouched.
+          writeFileSync(fixtureFile, String.raw`
+          import assert from 'node:assert/strict';
+          import { createServer } from 'node:http';
+          import { createRequire } from 'node:module';
+          const require = createRequire(process.cwd() + '/package.json');
+          const id = n => '00000000-0000-4000-8000-' + String(n).padStart(12, '0');
+          const records = Array.from({ length: 15 }, (_, n) => ({ id: id(n + 1), category: 'INTRODUCTION',
+            title: n === 13 ? 'T21_PRIVATE_DRAFT' : n === 14 ? 'T21_PRIVATE_WITHDRAWN' : 'T21 released fixture ' + (n + 1),
+            body: 'Introductory awareness only. Curriculum begins January 2027.',
+            state: n === 13 ? 'DRAFT' : n === 14 ? 'WITHDRAWN' : 'RELEASED',
+            founder_id: 'T21_PRIVATE_FOUNDER', storage_path: 'T21_PRIVATE_STORAGE',
+            signed_url: 'T21_PRIVATE_SIGNED_URL', created_at: '2026-10-27T00:00:00Z' }));
+          let poison = false;
+          const stats = { blocked: 0, page: 0, detail: 0, assets: 0, anonymous: 0 };
+          globalThis.fetch = async (input, options = {}) => {
+            const url = new URL(typeof input === 'string' ? input : input.url ?? String(input));
+            const headers = new Headers(options.headers);
+            const deny = () => { stats.blocked++; throw Error('STOP_UNHANDLED_FIXTURE_TRANSPORT'); };
+            if (url.origin !== process.env.SUPABASE_URL || url.search) return deny();
+            if (url.pathname === '/auth/v1/user' && headers.get('authorization') === 'Bearer synthetic-user')
+              return Response.json({ id: id(99), is_anonymous: false });
+            if (url.pathname === '/rest/v1/rpc/is_founder' && headers.get('authorization') === 'Bearer synthetic-user')
+              return Response.json(false);
+            if (options.method !== 'POST' || headers.has('authorization') ||
+              headers.get('apikey') !== 'sb_publishable_t21_synthetic_fixture_only') return deny();
+            const payload = JSON.parse(options.body ?? '{}');
+            const visible = records.filter(row => row.state === 'RELEASED');
+            stats.anonymous++;
+            if (url.pathname === '/rest/v1/rpc/read_released_content_page') {
+              stats.page++;
+              assert.equal(payload.page_size, 12);
+              const eligible = (poison ? [records[13]] : visible)
+                .filter(row => (!payload.category_filter || row.category === payload.category_filter) &&
+                  (!payload.after_id || row.id > payload.after_id));
+              const items = eligible.slice(0, payload.page_size);
+              return Response.json({ items, next_position: eligible.length > items.length ?
+                { id: items.at(-1).id, created_at: items.at(-1).created_at } : null });
+            }
+            if (url.pathname === '/rest/v1/rpc/read_released_content') {
+              stats.detail++;
+              return Response.json((poison ? [records[13]] : visible).filter(row => row.id === payload.content_id));
+            }
+            if (url.pathname === '/rest/v1/rpc/read_released_content_assets') {
+              stats.assets++;
+              return Response.json(visible.filter(row => payload.content_ids.includes(row.id))
+                .map(row => ({ content_id: row.id, assets: [] })));
+            }
+            return deny(); // No forwarding: no live Auth, PostgreSQL, Storage or publishing.
+          };
+          process.on('message', message => {
+            if (message === 'withdraw') records[0].state = 'WITHDRAWN';
+            else if (message === 'poison') poison = true;
+            else if (message !== 'stats') throw Error('STOP_FIXTURE_CONTROL');
+            process.send({ control: message, stats });
+          });
+          const next = require('next');
+          const app = next({ dev: false, hostname: '127.0.0.1', port: 3108 });
+          await app.prepare();
+          const handle = app.getRequestHandler();
+          const server = createServer((req, res) => handle(req, res));
+          await new Promise(resolve => server.listen(3108, '127.0.0.1', resolve));
+          process.send({ ready: true });
+          process.on('SIGTERM', () => server.close(() => process.exit(0)));
+          `);
+          const environment = {
+            PATH: process.env.PATH, HOME: process.env.HOME, NODE_ENV: 'production', CI: 'true',
+            NEXT_TELEMETRY_DISABLED: '1', NODE_OPTIONS: '--max-old-space-size=4096',
+            SUPABASE_URL: 'https://vzkbcgfywyhtvprxpwfb.supabase.co',
+            SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_t21_synthetic_fixture_only',
+            HTC_SEO_INDEXING: 'enabled',
+          };
+          function get(path, headers = {}) {
+            return new Promise((resolve, reject) => {
+              const req = request({ hostname: '127.0.0.1', port: 3108, path,
+                headers: { host, 'user-agent': 'Twitterbot/1.0', ...headers } }, res => {
+                let text = '';
+                res.setEncoding('utf8');
+                res.on('data', chunk => { text += chunk; if (text.length > 2000000) req.destroy(Error('STOP_RESPONSE_SIZE')); });
+                res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, text }));
+                res.on('error', reject);
+              });
+              req.setTimeout(15000, () => req.destroy(Error('STOP_HTTP_TIMEOUT')));
+              req.on('error', reject); req.end();
+            });
+          }
+          const decode = text => text.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#x27;', "'");
+          function tags(html, name) {
+            const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1];
+            assert(head, 'STOP_MISSING_RENDERED_HEAD');
+            return [...head.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(tag =>
+              Object.fromEntries([...tag[0].matchAll(/([\w:-]+)="([^"]*)"/g)].map(m => [m[1], decode(m[2])])));
+          }
+          function clean(text) { for (const marker of canaries) assert(!text.includes(marker), 'STOP_PRIVATE_RESPONSE'); }
+          function seo(response, { title, description, canonical = null, index = false } = {}) {
+            assert.equal(response.status, 200, 'STOP_SSR_STATUS'); clean(response.text);
+            const meta = tags(response.text, 'meta');
+            const values = name => meta.filter(tag => tag.name === name || tag.property === name).map(tag => tag.content);
+            if (title) assert.equal(decode(response.text.match(/<title>([^<]*)<\/title>/)?.[1] ?? ''), title);
+            if (description) assert.deepEqual(values('description'), [description]);
+            assert.deepEqual(tags(response.text, 'link').filter(tag => tag.rel === 'canonical').map(tag => tag.href), canonical ? [canonical] : []);
+            const robots = values('robots'); assert(robots.length > 0, 'STOP_MISSING_ROBOTS');
+            assert(robots.every(value => index ? /\bindex\b/.test(value) && !/noindex/.test(value) : /\bnoindex\b/.test(value)));
+            assert.deepEqual(values('og:url'), canonical ? [canonical] : []);
+            if (description) assert.deepEqual(values('og:description'), [description]);
+          }
+          async function control(child, command) {
+            return new Promise((resolve, reject) => {
+              const timer = setTimeout(() => { child.off('message', receive); reject(Error('STOP_IPC_TIMEOUT')); }, 5000);
+              const receive = msg => { if (msg.control === command) { clearTimeout(timer); child.off('message', receive); resolve(msg.stats); } };
+              child.on('message', receive); child.send(command);
+            });
+          }
+          const modes = [
+            ['missing-domain', {}],
+            ['test', { HTC_SUPABASE_TARGET: 'test', SUPABASE_URL: 'https://uzhkzhmncxjplrdtdzgd.supabase.co', HTC_SEO_CANONICAL_ORIGIN: origin }],
+            ['preview', { VERCEL_ENV: 'preview', CONTEXT: 'deploy-preview', HTC_SEO_CANONICAL_ORIGIN: origin }],
+            ['synthetic-production', { HTC_SEO_CANONICAL_ORIGIN: origin }],
+          ];
+          let completed = 0;
+          for (const [mode, overrides] of modes) {
+            const log = openSync(directory + '/t21-' + mode + '.log', 'w');
+            const child = spawn(process.execPath, [fixtureFile], { env: { ...environment, ...overrides }, stdio: ['ignore', log, log, 'ipc'] });
+            closeSync(log);
+            try {
+              await new Promise((resolve, reject) => {
+                const timer = setTimeout(() => reject(Error('STOP_SSR_START_TIMEOUT')), 60000);
+                child.once('error', error => { clearTimeout(timer); reject(error); });
+                child.once('exit', () => { clearTimeout(timer); reject(Error('STOP_SSR_EARLY_EXIT')); });
+                child.on('message', msg => { if (msg.ready) { clearTimeout(timer); resolve(); } });
+              });
+              const index = mode === 'synthetic-production';
+              const home = await get('/');
+              seo(home, { title: 'Introduction to HTC | HTC Trial',
+                description: 'Discover Holic Traders Company during the September–December 2026 Trial. Introductory content only; curriculum begins January 2027.',
+                canonical: index ? origin + '/' : null, index });
+              const listing = await get('/content');
+              seo(listing, { title: 'Introductory content | HTC Trial',
+                description: 'Browse released introductory and educational HTC Trial content. Lessons, enrollment and learning progress are not part of this Trial.',
+                canonical: index ? origin + '/content' : null, index });
+              const before = await control(child, 'stats');
+              const article = await get('/content/' + id(1));
+              seo(article, { title: 'T21 released fixture 1 | HTC Trial', description: body,
+                canonical: index ? origin + '/content/' + id(1) : null, index });
+              const after = await control(child, 'stats');
+              assert.equal(after.detail - before.detail, 1, 'STOP_HEAD_BODY_DUPLICATE_READ');
+              assert.equal(after.assets - before.assets, 1, 'STOP_HEAD_BODY_DUPLICATE_ASSETS');
+              const api = await get('/api/content?paged=1&limit=12&assets=1');
+              assert.equal(api.status, 200); clean(api.text);
+              const first = JSON.parse(api.text); assert.equal(first.ok, true);
+              assert.equal(first.data.items.length, 12); assert(first.data.next_cursor);
+              const second = await get('/api/content?paged=1&limit=12&assets=1&cursor=' + encodeURIComponent(first.data.next_cursor));
+              assert.equal(second.status, 200); clean(second.text);
+              assert.deepEqual(JSON.parse(second.text).data.items.map(row => row.id), [id(13)]);
+              for (const privateId of [id(14), id(15)]) {
+                const hidden = await get('/content/' + privateId);
+                assert.equal(hidden.status, 404, 'STOP_PRIVATE_DETAIL_VISIBLE'); clean(hidden.text);
+                assert(tags(hidden.text, 'meta').some(tag => tag.name === 'robots' && /noindex/.test(tag.content)));
+                assert(!tags(hidden.text, 'link').some(tag => tag.rel === 'canonical'));
+              }
+              const robots = await get('/robots.txt');
+              assert.equal(robots.status, 200); assert.match(robots.headers['content-type'], /^text\/plain/);
+              assert.equal(robots.headers['cache-control'], 'no-store');
+              assert.equal(robots.headers['x-robots-tag'], 'noindex'); clean(robots.text);
+              for (const rule of ['Allow: /', 'Disallow: /founder', 'Disallow: /api/', 'Disallow: /auth/', 'Disallow: /sign-in']) assert(robots.text.includes(rule));
+              assert.equal(robots.text.includes('Sitemap: ' + origin + '/sitemap.xml'), index);
+              const sitemapBefore = await control(child, 'stats');
+              const sitemap = await get('/sitemap.xml');
+              assert.equal(sitemap.status, 200); assert.match(sitemap.headers['content-type'], /^application\/xml/);
+              assert.equal(sitemap.headers['cache-control'], 'no-store'); clean(sitemap.text);
+              const locations = [...sitemap.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => decode(m[1]));
+              assert.deepEqual(locations, index ? [origin + '/', origin + '/content',
+                ...Array.from({ length: 13 }, (_, n) => origin + '/content/' + id(n + 1))] : []);
+              const sitemapAfter = await control(child, 'stats');
+              assert.equal(sitemapAfter.page - sitemapBefore.page, index ? 2 : 0, 'STOP_SITEMAP_READ_POLICY');
+              for (const path of ['/founder', '/founder/content', '/founder/assets', '/founder/publishing', '/founder/operations']) {
+                const anonymous = await get(path);
+                assert.equal(anonymous.status, 307, 'STOP_FOUNDER_ANONYMOUS_BOUNDARY');
+                assert.equal(anonymous.headers.location, '/sign-in'); clean(anonymous.text);
+                const denied = await get(path, { cookie: 'htc_trial_session=synthetic-user' });
+                seo(denied); assert(denied.text.includes('Access denied'));
+              }
+              seo(await get('/sign-in'));
+              const unknown = await get('/admin'); assert.equal(unknown.status, 404); clean(unknown.text);
+              assert(tags(unknown.text, 'meta').some(tag => tag.name === 'robots' && /noindex/.test(tag.content)));
+              if (index) {
+                seo(await get('/', { host: 'host-poison.example.org', 'x-forwarded-host': host }));
+                seo(await get('/content?category=INTRODUCTION'));
+                await control(child, 'withdraw'); // Memory-only lifecycle change; no application write endpoint.
+                const withdrawn = await get('/content/' + id(1));
+                assert.equal(withdrawn.status, 404); clean(withdrawn.text);
+                assert(!tags(withdrawn.text, 'link').some(tag => tag.rel === 'canonical'));
+                assert(tags(withdrawn.text, 'meta').some(tag => tag.name === 'robots' && /noindex/.test(tag.content)));
+                const refreshed = await get('/sitemap.xml'); assert.equal(refreshed.status, 200);
+                assert(!refreshed.text.includes(origin + '/content/' + id(1) + '</loc>'));
+                assert(refreshed.text.includes(origin + '/content/' + id(2) + '</loc>'));
+                await control(child, 'poison'); // A malformed upstream must fail closed, never leak its DRAFT row.
+                seo(await get('/content'));
+                const rejected = await get('/sitemap.xml');
+                assert.equal(rejected.status, 503); clean(rejected.text); assert(!rejected.text.includes('<loc>'));
+              }
+              const stats = await control(child, 'stats');
+              assert.equal(stats.blocked, 0, 'STOP_UNEXPECTED_EXTERNAL_TRANSPORT');
+              completed++;
+              const result = { stage: 'SSR', mode, status: 'PASS', fixture: 'SYNTHETIC_ONLY', stats };
+              console.log(JSON.stringify(result));
+              appendFileSync(process.env.GITHUB_STEP_SUMMARY, '- SSR ' + mode + ': PASS (synthetic upstream; loopback only)\n');
+            } finally {
+              if (child.exitCode === null) {
+                const exited = once(child, 'exit'); child.kill('SIGTERM');
+                await Promise.race([exited, delay(5000)]);
+                if (child.exitCode === null) { child.kill('SIGKILL'); await exited; }
+              }
+            }
+          }
+          assert.equal(completed, modes.length);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            '\nBuild/SSR fixtures do not verify live SQL/RLS, actual domain ownership, cloud adapter deployment, production QC or publication authorization.\n');
+          NODE
+
+      - name: Verify immutable lockfile and source after validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          assert.equal(createHash('sha256').update(readFileSync('pnpm-lock.yaml')).digest('hex'),
+            readFileSync(process.env.RUNNER_TEMP + '/t21-lock.sha256', 'utf8'));
+          NODE
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+          printf '%s\n' 'Next production build and all synthetic SSR scenarios: PASS. No deployment or live publication attempted.' >> "$GITHUB_STEP_SUMMARY"

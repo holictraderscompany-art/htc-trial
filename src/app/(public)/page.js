@@ -1,3 +1,10 @@
+import { currentSearchPolicy } from '../../server/search-context.js';
+import { publicPageMetadata } from '../../server/search-metadata.js';
+
+export async function generateMetadata() {
+  return publicPageMetadata('home', await currentSearchPolicy());
+}
+
 export default function HomePage() {
   return <section className="entry">
     <p className="category">HTC Trial</p>

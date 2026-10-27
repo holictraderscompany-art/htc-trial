@@ -1,12 +1,20 @@
 import { discoveryContent } from '../../../server/public-experience.js';
+import { cache } from 'react';
 import { categoryLabels, continuationPath } from '../../../public/content-presentation.js';
 import { ContentList, PageState } from '../../../components/content-views.js';
+import { currentSearchPolicy } from '../../../server/search-context.js';
+import { publicPageMetadata } from '../../../server/search-metadata.js';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Content' };
+const readDiscovery = cache(discoveryContent);
+export async function generateMetadata({ searchParams }) {
+  const parameters = await searchParams;
+  const result = await readDiscovery(parameters);
+  return publicPageMetadata('content', await currentSearchPolicy(), parameters, result.status === 200);
+}
 export default async function DiscoveryPage({ searchParams }) {
   const parameters = await searchParams;
-  const result = await discoveryContent(parameters);
+  const result = await readDiscovery(parameters);
   if (result.status === 400) return <PageState title="Invalid content request">Choose a category from the content page to start again.</PageState>;
   if (result.status !== 200) return <PageState title="Content is unavailable" action="Try again" alert>Content could not be loaded. Please try again.</PageState>;
   const category = parameters.category ?? '';
