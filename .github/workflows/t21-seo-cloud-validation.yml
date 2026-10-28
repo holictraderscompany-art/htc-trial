@@ -416,6 +416,196 @@ jobs:
             console.log(JSON.stringify(result));
             return result;
           }
+          function unavailableDiagnostic(response, extra = []) {
+            const result = { stage: 'UNAVAILABLE_DIAGNOSTIC', analysis_complete: true,
+              http_status: Number.isInteger(response?.status) && response.status >= 100 && response.status <= 599 ? response.status : 0,
+              response_bytes: 0, document_envelope_complete: false, decoded_flight_chunks: 0,
+              heading_in_rendered_markup: false, description_in_rendered_markup: false, action_in_rendered_markup: false,
+              candidate_in_visible_markup: false, candidate_in_hidden_segments: false, candidate_in_templates: false,
+              candidate_in_decoded_flight: false, loading_fallback_detected: false, replacement_markers_detected: false,
+              possible_non_rendered_only: false, private_canary_detected: false, unexpected_article_detected: false,
+              effective_noindex_detected: false, canonical_url_present: false, og_url_present: false };
+            // Only this closed primitive schema may cross the response -> CI log boundary.
+            // analysis_complete describes parsing, never security approval or browser visibility.
+            const text = typeof response?.text === 'string' ? response.text : '';
+            result.response_bytes = Math.min(Buffer.byteLength(text), 8000000);
+            if (!text || text.length > 2000000) { result.analysis_complete = false; return result; }
+            const probe = (read, fallback) => { try { return read(); } catch { result.analysis_complete = false; return fallback; } };
+            const markers = [...canaries, ...extra].map(value => evidenceText(value).toLowerCase());
+            result.private_canary_detected = markers.some(value => text.toLowerCase().includes(value));
+            let flight = probe(() => {
+              const decoded = flightText(text);
+              result.decoded_flight_chunks = (text.match(/self\.__next_f\.push\s*\(/g) ?? []).length;
+              return decoded;
+            }, '');
+            flight = probe(() => evidenceText(flight), '');
+            const full = probe(() => evidenceText(text + '\n' + flight), text).toLowerCase();
+            result.private_canary_detected ||= markers.some(value => full.includes(value));
+            probe(() => {
+              const attributes = tag => {
+                const source = tag.replace(/^<[\w:-]+\b/i, '').replace(/>$/, '').trim(), attrs = Object.create(null);
+                const pattern = /\s*([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/y;
+                let offset = 0;
+                while (offset < source.length) {
+                  if (source.slice(offset).trim() === '/') break;
+                  pattern.lastIndex = offset;
+                  const match = pattern.exec(source); assert(match);
+                  offset = pattern.lastIndex;
+                  const name = match[1].toLowerCase(); assert(!Object.hasOwn(attrs, name));
+                  attrs[name] = evidenceText(match[2] ?? match[3] ?? match[4] ?? '');
+                }
+                return attrs;
+              };
+              const markup = text.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+              const parts = { visible: [], hidden: [], template: [] }, stack = [];
+              const voidTags = new Set('area base br col embed hr img input link meta param source track wbr'.split(' '));
+              let hidden = 0, inert = 0, cursor = 0, count = 0;
+              const region = () => inert ? 'template' : hidden ? 'hidden' : 'visible';
+              for (const match of markup.matchAll(/<(\/?)([a-z][\w:-]*)\b[^>]*>/gi)) {
+                assert(++count <= 65536 && stack.length <= 2048);
+                parts[region()].push(markup.slice(cursor, match.index));
+                const tag = match[2].toLowerCase();
+                if (match[1]) {
+                  parts[region()].push(match[0]);
+                  const index = stack.findLastIndex(entry => entry.tag === tag); assert(index >= 0);
+                  for (const entry of stack.splice(index)) { hidden -= Number(entry.hidden); inert -= Number(entry.inert); }
+                } else {
+                  const attrs = attributes(match[0]);
+                  const entry = { tag, hidden: Object.hasOwn(attrs, 'hidden') || /(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden)\b/i.test(attrs.style ?? ''), inert: tag === 'template' };
+                  hidden += Number(entry.hidden); inert += Number(entry.inert);
+                  parts[region()].push(match[0]);
+                  if (voidTags.has(tag) || /\/>$/.test(match[0])) { hidden -= Number(entry.hidden); inert -= Number(entry.inert); }
+                  else stack.push(entry);
+                }
+                cursor = match.index + match[0].length;
+              }
+              parts[region()].push(markup.slice(cursor));
+              assert(stack.length === 0 && !/<!--|<\/?(?:script|style)\b/i.test(markup));
+              const visible = parts.visible.join(''), concealed = parts.hidden.join(''), templates = parts.template.join('');
+              const rendered = visible + concealed;
+              result.document_envelope_complete = [...rendered.matchAll(/<(\/?(?:html|head|body))\b[^>]*>/gi)]
+                .map(match => match[1].toLowerCase()).join(',') === 'html,head,/head,body,/body,/html';
+              if (!result.document_envelope_complete) result.analysis_complete = false;
+              const plain = value => evidenceText(value.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
+              const has = (value, tag, expected) => [...value.matchAll(new RegExp('<' + tag + '\\b[^>]*>([\\s\\S]*?)<\\/' + tag + '\\s*>', 'gi'))]
+                .some(match => plain(match[1]) === expected);
+              const heading = value => has(value, 'h1', 'Content not found');
+              const description = value => has(value, 'p', 'This page is unavailable. Browse the currently released content instead.');
+              const action = value => [...value.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi)]
+                .some(match => attributes(match[1]).href === '/content' && plain(match[2]) === 'Browse content');
+              const candidate = value => [...value.matchAll(/<section\b[^>]*>/gi)].some(match => {
+                if (!(attributes(match[0]).class ?? '').split(/\s+/).includes('page-state')) return false;
+                const end = value.toLowerCase().indexOf('</section', match.index + match[0].length);
+                if (end < 0) return false;
+                const contents = value.slice(match.index + match[0].length, end);
+                return heading(contents) && description(contents) && action(contents);
+              });
+              result.heading_in_rendered_markup = heading(rendered);
+              result.description_in_rendered_markup = description(rendered);
+              result.action_in_rendered_markup = action(rendered);
+              result.candidate_in_visible_markup = candidate(visible);
+              result.candidate_in_hidden_segments = candidate(concealed);
+              result.candidate_in_templates = candidate(templates);
+              // RSC model text is a candidate signal, never proof of rendered UI.
+              result.candidate_in_decoded_flight = candidate(flight) || ['"section"', 'page-state', 'Content not found',
+                'This page is unavailable. Browse the currently released content instead.', 'Browse content']
+                .every(value => flight.includes(value)) && /"href"\s*:\s*"\/content"/.test(flight);
+              result.possible_non_rendered_only = !result.candidate_in_visible_markup && !result.candidate_in_hidden_segments &&
+                (result.candidate_in_templates || result.candidate_in_decoded_flight);
+              result.loading_fallback_detected = /<!--\$(?:\?|!)-->/.test(text) || /Loading content(?:…|&hellip;)/.test(rendered);
+              result.replacement_markers_detected = /\$(?:RC|RX|RS)\s*\(/.test(text);
+              result.unexpected_article_detected = /<article\b/i.test(rendered) || /\[\s*"\$"\s*,\s*"article"\s*,/i.test(flight);
+              const tags = name => [...rendered.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(match => attributes(match[0]));
+              const meta = tags('meta'), robots = meta.filter(tag => ['robots', 'googlebot', 'bingbot'].includes((tag.name ?? '').toLowerCase()));
+              const noindex = value => { const tokens = value.toLowerCase().split(/[,\s:]+/); return tokens.includes('noindex') && !tokens.includes('index'); };
+              const header = response.headers?.['x-robots-tag'];
+              result.effective_noindex_detected = robots.some(tag => tag.name.toLowerCase() === 'robots') &&
+                robots.every(tag => noindex(tag.content ?? '')) && (!header || typeof header === 'string' && noindex(header));
+              const allTags = name => [...markup.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(match => attributes(match[0]));
+              result.canonical_url_present = allTags('link').some(tag => (tag.rel ?? '').toLowerCase().split(/\s+/).includes('canonical')) || /"rel"\s*:\s*"canonical"/i.test(flight);
+              result.og_url_present = allTags('meta').some(tag => [tag.name, tag.property].some(value => value?.toLowerCase() === 'og:url')) || /"(?:property|name)"\s*:\s*"og:url"/i.test(flight);
+            }, undefined);
+            return result;
+          }
+          function unavailableWithDiagnostics(response, extra = []) {
+            try { return unavailable(response, extra); }
+            catch (error) {
+              try { console.log(JSON.stringify(unavailableDiagnostic(response, extra))); } catch { /* Never replace the original failure. */ }
+              throw error;
+            }
+          }
+          function runDiagnosticRegressions() {
+            assert.equal(typeof unavailableDiagnostic, 'function', 'STOP_DIAGNOSTIC_NOT_IMPLEMENTED');
+            const section = '<section class="page-state"><h1>Content not found</h1><p>This page is unavailable. Browse the currently released content instead.</p><a href="/content">Browse content</a></section>';
+            const robot = '<meta name="robots" content="noindex, nofollow"/>';
+            const page = (content = section, head = robot) => '<html><head>' + head + '</head><body>' + content + '</body></html>';
+            const response = text => ({ status: 200, headers: {}, text });
+            const flight = text => '<script>self.__next_f.push(' + JSON.stringify([1, text]) + ')</script>';
+            const keys = ['stage', 'analysis_complete', 'http_status', 'response_bytes', 'document_envelope_complete',
+              'decoded_flight_chunks', 'heading_in_rendered_markup', 'description_in_rendered_markup', 'action_in_rendered_markup',
+              'candidate_in_visible_markup', 'candidate_in_hidden_segments', 'candidate_in_templates', 'candidate_in_decoded_flight',
+              'loading_fallback_detected', 'replacement_markers_detected', 'possible_non_rendered_only', 'private_canary_detected',
+              'unexpected_article_detected', 'effective_noindex_detected', 'canonical_url_present', 'og_url_present'];
+            const schema = value => {
+              assert.deepEqual(Object.keys(value).sort(), [...keys].sort());
+              assert.equal(value.stage, 'UNAVAILABLE_DIAGNOSTIC');
+              for (const key of keys.filter(key => key !== 'stage')) {
+                if (['http_status', 'response_bytes', 'decoded_flight_chunks'].includes(key))
+                  assert(Number.isSafeInteger(value[key]) && value[key] >= 0 && value[key] <= 8000000);
+                else assert.equal(typeof value[key], 'boolean');
+              }
+              assert(Buffer.byteLength(JSON.stringify(value)) < 1500, 'STOP_DIAGNOSTIC_OUTPUT_SIZE');
+            };
+            const model = JSON.stringify(['$', 'section', null, { className: 'page-state', children: [
+              ['$', 'h1', null, { children: 'Content not found' }],
+              ['$', 'p', null, { children: 'This page is unavailable. Browse the currently released content instead.' }],
+              ['$', 'a', null, { href: '/content', children: 'Browse content' }]] }]);
+            const cases = [
+              [response(page()), { analysis_complete: true, candidate_in_visible_markup: true, heading_in_rendered_markup: true,
+                description_in_rendered_markup: true, action_in_rendered_markup: true, effective_noindex_detected: true }],
+              [response(page('<div hidden="false">' + section + '</div>')), { candidate_in_visible_markup: false,
+                candidate_in_hidden_segments: true, possible_non_rendered_only: false }],
+              [response(page('<template><div>' + section + '</div></template>')), { candidate_in_visible_markup: false,
+                candidate_in_templates: true, possible_non_rendered_only: true }],
+              [response(page(flight(model))), { candidate_in_visible_markup: false, candidate_in_decoded_flight: true,
+                decoded_flight_chunks: 1, possible_non_rendered_only: true }],
+              [response(page('<section aria-busy="true"><h1>Content</h1><p>Loading content…</p></section><script>$RC("B:1","S:1")</script>')),
+                { loading_fallback_detected: true, replacement_markers_detected: true, candidate_in_visible_markup: false }],
+              [response(page('<article>T21_PRIVATE_BODY_DRAFT</article>', '<meta name="robots" content="index"/>' +
+                '<link rel="canonical" href="https://private.invalid/PRIVATE_SENTINEL"/><meta property="og:url" content="PRIVATE_SENTINEL"/>')),
+                { private_canary_detected: true, unexpected_article_detected: true, effective_noindex_detected: false,
+                  canonical_url_present: true, og_url_present: true }],
+              [response(page(section + '<script>self.__next_f.push([1)</script>')), { analysis_complete: false }],
+              [response(page().replace('</body></html>', '')), { analysis_complete: false, document_envelope_complete: false }],
+              [response(page(section, '<meta name="robots" content content="noindex"/>')), { analysis_complete: false,
+                effective_noindex_detected: false }],
+              [null, { analysis_complete: false, http_status: 0, response_bytes: 0 }],
+              [response('x'.repeat(2000001)), { analysis_complete: false, candidate_in_visible_markup: false }],
+            ];
+            for (const [input, expected] of cases) {
+              const value = unavailableDiagnostic(input); schema(value);
+              for (const [key, wanted] of Object.entries(expected)) assert.equal(value[key], wanted, key);
+              assert(!JSON.stringify(value).includes('PRIVATE_SENTINEL'));
+            }
+            const withdrawn = unavailableDiagnostic(response(page(section + 'FORMER_PRIVATE_SENTINEL')), ['FORMER_PRIVATE_SENTINEL']);
+            schema(withdrawn); assert.equal(withdrawn.private_canary_detected, true);
+            const messages = [], log = console.log, validate = unavailable;
+            let original;
+            // Observe the real validator's Error; acceptance logic still runs unchanged.
+            unavailable = (...args) => { try { return validate(...args); } catch (error) { original = error; throw error; } };
+            try {
+              console.log = value => messages.push(value);
+              unavailableWithDiagnostics(response(page())); assert.equal(messages.length, 0);
+              const unsafe = response(page(section + flight('T21_PRIVATE_STORAGE PRIVATE_SENTINEL')));
+              unsafe.headers['x-private-header'] = 'PRIVATE_SENTINEL';
+              assert.throws(() => unavailableWithDiagnostics(unsafe), error => error === original && error.message === 'STOP_PRIVATE_RESPONSE');
+              assert.equal(messages.length, 1); schema(JSON.parse(messages[0]));
+              assert(!/PRIVATE_SENTINEL|T21_PRIVATE_STORAGE/.test(messages[0]));
+              console.log = () => { throw Error('PRIVATE_SENTINEL'); };
+              assert.throws(() => unavailableWithDiagnostics(unsafe), error => error === original && error.message === 'STOP_PRIVATE_RESPONSE');
+            } finally { console.log = log; unavailable = validate; }
+            console.log(JSON.stringify({ stage: 'DIAGNOSTIC_REGRESSION', status: 'PASS', cases: cases.length + 4, cloud_ssr: false }));
+          }
           function seo(response, { title, description, canonical = null, index = false } = {}) {
             assert.equal(response.status, 200, 'STOP_SSR_STATUS'); clean(response.text);
             const meta = tags(response.text, 'meta');
@@ -436,6 +626,7 @@ jobs:
             });
           }
           runUnavailableRegressions();
+          runDiagnosticRegressions();
           const modes = [
             ['missing-domain', {}],
             ['test', { HTC_SUPABASE_TARGET: 'test', SUPABASE_URL: 'https://uzhkzhmncxjplrdtdzgd.supabase.co', HTC_SEO_CANONICAL_ORIGIN: origin }],
@@ -480,7 +671,7 @@ jobs:
               for (const [kind, privateId] of [['DRAFT', id(14)], ['WITHDRAWN', id(15)]]) {
                 const hidden = await get('/content/' + privateId);
                 console.log(JSON.stringify({ stage: 'UNAVAILABLE_CHECK', mode, kind, status: hidden.status }));
-                const proof = unavailable(hidden);
+                const proof = unavailableWithDiagnostics(hidden);
                 privateApi(await get('/api/content?id=' + privateId + '&assets=1'));
                 console.log(JSON.stringify({ stage: 'UNAVAILABLE_PASS', mode, kind, status: hidden.status,
                   api_status: 404, ...proof })); // Sanitized evidence only, never raw response bodies.
@@ -517,7 +708,7 @@ jobs:
                 const withdrawn = await get('/content/' + id(1));
                 const formerContent = ['T21 released fixture 1', body];
                 console.log(JSON.stringify({ stage: 'UNAVAILABLE_CHECK', mode, kind: 'POST_WITHDRAWAL', status: withdrawn.status }));
-                const proof = unavailable(withdrawn, formerContent);
+                const proof = unavailableWithDiagnostics(withdrawn, formerContent);
                 privateApi(await get('/api/content?id=' + id(1) + '&assets=1'), formerContent);
                 console.log(JSON.stringify({ stage: 'UNAVAILABLE_PASS', mode, kind: 'POST_WITHDRAWAL',
                   status: withdrawn.status, api_status: 404, ...proof }));
