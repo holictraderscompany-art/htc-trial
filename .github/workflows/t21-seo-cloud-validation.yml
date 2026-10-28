@@ -125,7 +125,9 @@ jobs:
           const id = n => '00000000-0000-4000-8000-' + String(n).padStart(12, '0');
           const body = 'Introductory awareness only. Curriculum begins January 2027.';
           const canaries = ['T21_PRIVATE_DRAFT', 'T21_PRIVATE_WITHDRAWN', 'T21_PRIVATE_FOUNDER',
-            'T21_PRIVATE_STORAGE', 'T21_PRIVATE_SIGNED_URL', 'sb_publishable_'];
+            'T21_PRIVATE_STORAGE', 'T21_PRIVATE_SIGNED_URL', 'sb_publishable_',
+            'T21_PRIVATE_BODY_DRAFT', 'T21_PRIVATE_BODY_WITHDRAWN', 'T21_PRIVATE_RECORD_IDENTIFIER',
+            '00000000-0000-4000-9000-000000000014', '00000000-0000-4000-9000-000000000015'];
           // Same production Next custom-server fixture pattern as tests/founder-content.fixture.mjs.
           // Only this disposable runner script replaces transport; application bytes are untouched.
           writeFileSync(fixtureFile, String.raw`
@@ -136,8 +138,12 @@ jobs:
           const id = n => '00000000-0000-4000-8000-' + String(n).padStart(12, '0');
           const records = Array.from({ length: 15 }, (_, n) => ({ id: id(n + 1), category: 'INTRODUCTION',
             title: n === 13 ? 'T21_PRIVATE_DRAFT' : n === 14 ? 'T21_PRIVATE_WITHDRAWN' : 'T21 released fixture ' + (n + 1),
-            body: 'Introductory awareness only. Curriculum begins January 2027.',
+            body: n === 13 ? 'T21_PRIVATE_BODY_DRAFT' : n === 14 ? 'T21_PRIVATE_BODY_WITHDRAWN' :
+              'Introductory awareness only. Curriculum begins January 2027.',
             state: n === 13 ? 'DRAFT' : n === 14 ? 'WITHDRAWN' : 'RELEASED',
+            // Private upstream identifiers are distinct from the caller-supplied route UUID.
+            private_identifier: n >= 13 ? '00000000-0000-4000-9000-' + String(n + 1).padStart(12, '0') :
+              'T21_PRIVATE_RECORD_IDENTIFIER',
             founder_id: 'T21_PRIVATE_FOUNDER', storage_path: 'T21_PRIVATE_STORAGE',
             signed_url: 'T21_PRIVATE_SIGNED_URL', created_at: '2026-10-27T00:00:00Z' }));
           let poison = false;
@@ -220,7 +226,196 @@ jobs:
             return [...head.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(tag =>
               Object.fromEntries([...tag[0].matchAll(/([\w:-]+)="([^"]*)"/g)].map(m => [m[1], decode(m[2])])));
           }
-          function clean(text) { for (const marker of canaries) assert(!text.includes(marker), 'STOP_PRIVATE_RESPONSE'); }
+          function evidenceText(text) {
+            // Decode serializer/entity escapes without evaluating response JavaScript.
+            for (let layer = 0; layer < 8; layer++) {
+              const next = text.replace(/\\u([0-9a-f]{4})|\\x([0-9a-f]{2})|\\(["\\/])/gi,
+                (_, unicode, hex, escaped) => escaped ?? String.fromCharCode(parseInt(unicode ?? hex, 16)))
+                .replace(/&#(?:x([0-9a-f]+)|([0-9]+));/gi, (_, hex, decimal) => {
+                  const code = parseInt(hex ?? decimal, hex ? 16 : 10);
+                  assert(code <= 0x10ffff, 'STOP_INVALID_ENTITY');
+                  return String.fromCodePoint(code);
+                }).replace(/&(amp|lt|gt|quot|apos);/gi,
+                  (_, name) => ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" })[name.toLowerCase()]);
+              if (next === text) return text;
+              text = next;
+            }
+            assert.fail('STOP_EXCESSIVE_ENCODING');
+          }
+          function flightText(html) {
+            const chunks = [];
+            const pattern = /self\.__next_f\.push\(\s*\[\s*([13])\s*,\s*("(?:[^"\\]|\\.)*")\s*\]\s*\)/g;
+            // Every direct Flight push must be a complete supported payload, even
+            // if truncation occurs before the type's comma or string argument.
+            const expected = (html.match(/self\.__next_f\.push\s*\(/g) ?? []).length;
+            for (const match of html.matchAll(pattern)) {
+              let value;
+              try { value = JSON.parse(match[2]); } catch { assert.fail('STOP_MALFORMED_FLIGHT'); }
+              if (match[1] === '3') {
+                assert(/^[A-Za-z0-9+/]*={0,2}$/.test(value) && value.length % 4 === 0, 'STOP_INVALID_BINARY_FLIGHT');
+                value = Buffer.from(value, 'base64').toString('utf8');
+              }
+              chunks.push(value);
+            }
+            assert.equal(chunks.length, expected, 'STOP_UNSUPPORTED_FLIGHT');
+            return chunks.join(''); // Detect canaries split across successive Flight chunks.
+          }
+          function clean(text, extra = []) {
+            const full = evidenceText(text + '\n' + flightText(text)).toLowerCase();
+            for (const marker of [...canaries, ...extra])
+              assert(!full.includes(evidenceText(marker).toLowerCase()), 'STOP_PRIVATE_RESPONSE');
+          }
+          function unavailable(response, extra = []) {
+            // Next streamed notFound may retain 200; neither status bypasses these security checks.
+            assert(response && typeof response === 'object', 'STOP_INVALID_RESPONSE');
+            assert([200, 404].includes(response.status), 'STOP_UNAVAILABLE_STATUS');
+            assert(typeof response.text === 'string' && response.text.length <= 2000000, 'STOP_RESPONSE_SIZE');
+            clean(response.text, extra); // Full HTML and serialized Flight, not just the head.
+            const html = response.text.replace(/<!--[\s\S]*?-->/g, '')
+              .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+            const ui = html.replace(/<template\b[^>]*>[\s\S]*?<\/template\s*>/gi, '');
+            assert(!/<!--|-->|<\/?(?:script|style|template)\b/i.test(ui), 'STOP_INCOMPLETE_MARKUP');
+            // Require the complete document envelope without prohibiting React's
+            // late streamed segments/scripts after the closing html element.
+            assert.deepEqual([...ui.matchAll(/<(\/?(?:html|head|body))\b[^>]*>/gi)].map(m => m[1].toLowerCase()),
+              ['html', 'head', '/head', 'body', '/body', '/html'], 'STOP_INCOMPLETE_DOCUMENT');
+            const attributes = tag => {
+              const result = Object.create(null);
+              const source = tag.replace(/^<[\w:-]+\b/i, '').replace(/>$/, '').trim();
+              const pattern = /\s*([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/y;
+              let offset = 0;
+              while (offset < source.length) {
+                if (source.slice(offset).trim() === '/') break; // A separate self-closing marker only.
+                pattern.lastIndex = offset;
+                const match = pattern.exec(source);
+                assert(match, 'STOP_MALFORMED_ATTRIBUTE');
+                offset = pattern.lastIndex;
+                const name = match[1].toLowerCase();
+                // Browsers use the first duplicate; silently taking the last can
+                // hide an index directive or canonical URL. Bare attributes count.
+                assert(!Object.hasOwn(result, name), 'STOP_DUPLICATE_ATTRIBUTE');
+                result[name] = evidenceText(match[2] ?? match[3] ?? match[4] ?? '');
+              }
+              return result;
+            };
+            const elements = (markup, name) => [...markup.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))]
+              .map(m => attributes(m[0]));
+            const plain = value => evidenceText(value.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
+            const sections = [...ui.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section\s*>/gi)];
+            assert(sections.some(([, attrs, contents]) =>
+              (attributes(attrs).class ?? '').split(/\s+/).includes('page-state') &&
+              [...contents.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)].some(m => plain(m[1]) === 'Content not found') &&
+              [...contents.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p\s*>/gi)].some(m =>
+                plain(m[1]) === 'This page is unavailable. Browse the currently released content instead.') &&
+              [...contents.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi)].some(m =>
+                attributes(m[1]).href === '/content' && plain(m[2]) === 'Browse content')),
+            'STOP_MISSING_NOT_FOUND_UI');
+            // React may reveal a hidden streamed segment; require real emitted UI,
+            // not a matching string found only inside a script/Flight/template.
+            assert(!/<article\b/i.test(ui), 'STOP_UNAVAILABLE_ARTICLE');
+            const directives = value => value.toLowerCase().split(/[,\s:]+/).filter(Boolean);
+            const meta = elements(ui, 'meta');
+            const robots = meta.filter(tag => ['robots', 'googlebot', 'bingbot'].includes((tag.name ?? '').toLowerCase()));
+            assert(robots.some(tag => tag.name.toLowerCase() === 'robots'), 'STOP_MISSING_NOINDEX');
+            assert(robots.every(tag => {
+              const tokens = directives(tag.content ?? '');
+              return tokens.includes('noindex') && !tokens.includes('index');
+            }), 'STOP_INEFFECTIVE_NOINDEX');
+            const header = response.headers?.['x-robots-tag'];
+            if (header) assert(directives(header).includes('noindex') && !directives(header).includes('index'),
+              'STOP_CONFLICTING_ROBOTS_HEADER');
+            assert(!elements(html, 'link').some(tag => (tag.rel ?? '').toLowerCase().split(/\s+/).includes('canonical')),
+              'STOP_UNAVAILABLE_CANONICAL');
+            assert(!elements(html, 'meta').some(tag => [tag.property, tag.name].some(value => value?.toLowerCase() === 'og:url')),
+              'STOP_UNAVAILABLE_OG_URL');
+            const serialized = evidenceText(flightText(response.text));
+            assert(!/"rel"\s*:\s*"canonical"/i.test(serialized), 'STOP_FLIGHT_CANONICAL');
+            assert(!/"(?:property|name)"\s*:\s*"og:url"/i.test(serialized), 'STOP_FLIGHT_OG_URL');
+            return { ui: 'NOT_FOUND', noindex: true, canonical: false, og_url: false, private_disclosure: false };
+          }
+          function privateApi(response, extra = []) {
+            assert.equal(response.status, 404, 'STOP_PRIVATE_API_STATUS');
+            assert(typeof response.text === 'string' && response.text.length <= 2000000, 'STOP_RESPONSE_SIZE');
+            clean(response.text, extra);
+            let value;
+            try { value = JSON.parse(response.text); } catch { assert.fail('STOP_PRIVATE_API_JSON'); }
+            assert(value?.ok === false && Object.keys(value).sort().join(',') === 'error,ok' &&
+              value.error?.code === 'NOT_FOUND' && value.error?.message === 'Resource not found.' &&
+              Object.keys(value.error).sort().join(',') === 'code,message', 'STOP_PRIVATE_API_PAYLOAD');
+          }
+          function runUnavailableRegressions() {
+            const section = '<section class="page-state"><h1>Content not found</h1><p>This page is unavailable. Browse the currently released content instead.</p><a href="/content">Browse content</a></section>';
+            const robot = '<meta name="robots" content="noindex, nofollow"/>';
+            const page = (head = robot, content = section) => '<html><head>' + head + '</head><body>' + content + '</body></html>';
+            const response = (text, status = 200) => ({ status, headers: {}, text });
+            const flight = text => '<script>self.__next_f.push(' + JSON.stringify([1, text]) + ')</script>';
+            // A route UUID was supplied by the caller; undisclosed upstream record
+            // identifiers have separate canaries and must never enter the response.
+            const positives = [
+              response(page(), 404), response(page()),
+              response(page('', section + robot)),
+              response(page(robot, section + flight(JSON.stringify({ params: { id: id(14) } })))),
+              response(page(robot, section + flight('{"canonical":null}'))),
+              response(page() + '<div hidden id="S:1">' + section + '</div><script>$RC("B:1","S:1")</script>'),
+              response(page('<meta name="robots" data-fixture content="noindex"/>')),
+            ];
+            for (const value of positives) assert.doesNotThrow(() => unavailable(value), 'SAFE_UNAVAILABLE_REJECTED');
+            const escaped = 'T21_PRIVATE_BODY_DRAFT'.split('').map(char =>
+              '\\u' + char.charCodeAt(0).toString(16).padStart(4, '0')).join('');
+            const negatives = [
+              ['private title', page(robot, section + 'T21_PRIVATE_DRAFT')],
+              ['private DRAFT body only', page(robot, section + 'T21_PRIVATE_BODY_DRAFT')],
+              ['private WITHDRAWN body only', page(robot, section + 'T21_PRIVATE_BODY_WITHDRAWN')],
+              ['private identifier', page(robot, section + flight('00000000-0000-4000-9000-000000000014'))],
+              ['private asset path', page(robot, section + flight('T21_PRIVATE_STORAGE'))],
+              ['signed URL', page(robot, section + flight('T21_PRIVATE_SIGNED_URL'))],
+              ['no unavailable UI', page(robot, '<p>Successful content</p>')],
+              ['UI only in Flight', page(robot, flight(section))],
+              ['UI only in inert template', page(robot, '<template>' + section + '</template>')],
+              ['missing noindex', page('')],
+              ['noindex only in Flight', page('', section + flight(robot))],
+              ['conflicting index', page(robot + '<meta name="robots" content="index"/>')],
+              ['canonical in head', page(robot + '<link rel="canonical" href="https://unsafe.example.org"/>')],
+              ['canonical in body', page(robot, section + '<link rel="canonical" href="https://unsafe.example.org"/>')],
+              ['OG URL in head', page(robot + '<meta property="og:url" content="https://unsafe.example.org"/>')],
+              ['OG URL in body', page(robot, section + '<meta property="og:url" content="https://unsafe.example.org"/>')],
+              ['canonical in Flight', page(robot, section + flight('{"rel":"canonical","href":"https://unsafe.example.org"}'))],
+              ['OG URL in Flight', page(robot, section + flight('{"property":"og:url","content":"https://unsafe.example.org"}'))],
+              ['escaped Flight body', page(robot, section + flight(escaped))],
+              ['body split across Flight chunks', page(robot, section + flight('T21_PRIVATE_') + flight('BODY_DRAFT'))],
+              ['entity-encoded private body', page(robot, section + 'T21&#95;PRIVATE&#95;BODY&#95;DRAFT')],
+              ['private binary Flight', page(robot, section + '<script>self.__next_f.push(' +
+                JSON.stringify([3, Buffer.from('T21_PRIVATE_BODY_WITHDRAWN').toString('base64')]) + ')</script>')],
+              ['successful article beside decoy UI', page(robot, section + '<article>Public article</article>')],
+              ['wrong generic message', page(robot, section.replace('This page is unavailable.', 'Content is available.'))],
+              ['HTML fragment without document envelope', robot + section],
+              ['truncated document', page().replace('</body></html>', '')],
+              ['unclosed trailing Flight script', page() + '<script>self.__next_f.push([1'],
+              ['truncated Flight argument', page(robot, section + '<script>self.__next_f.push([1)</script>')],
+              ['missing Flight payload', page(robot, section + '<script>self.__next_f.push([1])</script>')],
+              ['duplicate robots content', page('<meta name="robots" content="index" content="noindex"/>')],
+              ['duplicate canonical relation', page(robot + '<link rel="canonical" rel="stylesheet" href="https://unsafe.example.org"/>')],
+              ['case-insensitive duplicate attribute', page('<meta name="robots" content="index" CONTENT="noindex"/>')],
+              ['duplicate bare robots content', page('<meta name="robots" content content="noindex"/>')],
+              ['duplicate bare robots name', page('<meta name name="robots" content="noindex"/>')],
+              ['slash in unquoted robots value', page('<meta name=robots content=noindex/>')],
+            ];
+            for (const [label, html] of negatives)
+              assert.throws(() => unavailable(response(html)), { name: 'AssertionError' }, label);
+            assert.throws(() => unavailable(response(page(), 500)), { name: 'AssertionError' });
+            assert.throws(() => unavailable(response(page(robot, section + 'T21_PRIVATE_BODY_DRAFT'), 404)), { name: 'AssertionError' });
+            assert.throws(() => unavailable(response(page(robot, section + 'T21 released fixture 1')), ['T21 released fixture 1']), { name: 'AssertionError' });
+            assert.throws(() => unavailable(response(page(robot, section + body)), [body]), { name: 'AssertionError' });
+            const error = JSON.stringify({ ok: false, error: { code: 'NOT_FOUND', message: 'Resource not found.' } });
+            assert.doesNotThrow(() => privateApi(response(error, 404)));
+            for (const value of [response(error), response('{"ok":true,"data":{}}', 404),
+              response('{"ok":false,"error":{"code":"NOT_FOUND","message":"Resource not found."},"data":null}', 404)])
+              assert.throws(() => privateApi(value), { name: 'AssertionError' });
+            const result = { stage: 'UNAVAILABLE_VERIFIER_REGRESSION', status: 'PASS',
+              positive: positives.length + 1, negative: negatives.length + 7, cloud_ssr: false };
+            console.log(JSON.stringify(result));
+            return result;
+          }
           function seo(response, { title, description, canonical = null, index = false } = {}) {
             assert.equal(response.status, 200, 'STOP_SSR_STATUS'); clean(response.text);
             const meta = tags(response.text, 'meta');
@@ -240,6 +435,7 @@ jobs:
               child.on('message', receive); child.send(command);
             });
           }
+          runUnavailableRegressions();
           const modes = [
             ['missing-domain', {}],
             ['test', { HTC_SUPABASE_TARGET: 'test', SUPABASE_URL: 'https://uzhkzhmncxjplrdtdzgd.supabase.co', HTC_SEO_CANONICAL_ORIGIN: origin }],
@@ -281,11 +477,13 @@ jobs:
               const second = await get('/api/content?paged=1&limit=12&assets=1&cursor=' + encodeURIComponent(first.data.next_cursor));
               assert.equal(second.status, 200); clean(second.text);
               assert.deepEqual(JSON.parse(second.text).data.items.map(row => row.id), [id(13)]);
-              for (const privateId of [id(14), id(15)]) {
+              for (const [kind, privateId] of [['DRAFT', id(14)], ['WITHDRAWN', id(15)]]) {
                 const hidden = await get('/content/' + privateId);
-                assert.equal(hidden.status, 404, 'STOP_PRIVATE_DETAIL_VISIBLE'); clean(hidden.text);
-                assert(tags(hidden.text, 'meta').some(tag => tag.name === 'robots' && /noindex/.test(tag.content)));
-                assert(!tags(hidden.text, 'link').some(tag => tag.rel === 'canonical'));
+                console.log(JSON.stringify({ stage: 'UNAVAILABLE_CHECK', mode, kind, status: hidden.status }));
+                const proof = unavailable(hidden);
+                privateApi(await get('/api/content?id=' + privateId + '&assets=1'));
+                console.log(JSON.stringify({ stage: 'UNAVAILABLE_PASS', mode, kind, status: hidden.status,
+                  api_status: 404, ...proof })); // Sanitized evidence only, never raw response bodies.
               }
               const robots = await get('/robots.txt');
               assert.equal(robots.status, 200); assert.match(robots.headers['content-type'], /^text\/plain/);
@@ -317,9 +515,12 @@ jobs:
                 seo(await get('/content?category=INTRODUCTION'));
                 await control(child, 'withdraw'); // Memory-only lifecycle change; no application write endpoint.
                 const withdrawn = await get('/content/' + id(1));
-                assert.equal(withdrawn.status, 404); clean(withdrawn.text);
-                assert(!tags(withdrawn.text, 'link').some(tag => tag.rel === 'canonical'));
-                assert(tags(withdrawn.text, 'meta').some(tag => tag.name === 'robots' && /noindex/.test(tag.content)));
+                const formerContent = ['T21 released fixture 1', body];
+                console.log(JSON.stringify({ stage: 'UNAVAILABLE_CHECK', mode, kind: 'POST_WITHDRAWAL', status: withdrawn.status }));
+                const proof = unavailable(withdrawn, formerContent);
+                privateApi(await get('/api/content?id=' + id(1) + '&assets=1'), formerContent);
+                console.log(JSON.stringify({ stage: 'UNAVAILABLE_PASS', mode, kind: 'POST_WITHDRAWAL',
+                  status: withdrawn.status, api_status: 404, ...proof }));
                 const refreshed = await get('/sitemap.xml'); assert.equal(refreshed.status, 200);
                 assert(!refreshed.text.includes(origin + '/content/' + id(1) + '</loc>'));
                 assert(refreshed.text.includes(origin + '/content/' + id(2) + '</loc>'));
