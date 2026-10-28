@@ -69,7 +69,7 @@ jobs:
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import { execFileSync } from 'node:child_process';
-          import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+          import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
           import { createHash } from 'node:crypto';
           const base = '108b39a4295c281011b755b23b7e943d3eb3226f';
           const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -80,8 +80,25 @@ jobs:
             'src/server/search-context.js', 'src/server/search-metadata.js',
             'tests/t21-search-metadata.test.js', 'docs/t21-search-discovery.md',
             '.github/workflows/t21-seo-cloud-validation.yml'];
-          const changed = git('diff', '--name-only', base, 'HEAD').split('\n').filter(Boolean);
-          assert(changed.every(path => paths.includes(path)), 'STOP_UNAPPROVED_SOURCE_SCOPE');
+          // One controlled exception: remove only the original automatic loading boundary.
+          // Disable rename detection so any backup/move also appears as an unapproved addition.
+          const removed = 'src/app/(public)/content/loading.js';
+          const removedBlob = 'df07ff6cc9266a59a98f9826e33c2fa3ffadde4a';
+          const changed = execFileSync('git', ['diff', '--name-status', '--no-renames', '-z', base, 'HEAD'], { encoding: 'utf8' }).split('\0');
+          assert.equal(changed.pop(), '', 'STOP_INVALID_SOURCE_DIFF');
+          assert.equal(changed.length % 2, 0, 'STOP_INVALID_SOURCE_DIFF');
+          let deletions = 0;
+          for (let i = 0; i < changed.length; i += 2) {
+            const status = changed[i], path = changed[i + 1];
+            if (path === removed) {
+              assert.equal(status, 'D', 'STOP_LOADING_CHANGE_NOT_DELETION');
+              deletions++;
+            } else assert(paths.includes(path), 'STOP_UNAPPROVED_SOURCE_SCOPE');
+          }
+          assert.equal(deletions, 1, 'STOP_LOADING_DELETION_REQUIRED');
+          assert.equal(git('rev-parse', base + ':' + removed), removedBlob, 'STOP_LOADING_BLOB_MISMATCH');
+          assert.equal(git('ls-tree', 'HEAD', '--', removed), '', 'STOP_LOADING_STILL_TRACKED');
+          assert(!existsSync(removed), 'STOP_LOADING_STILL_PRESENT');
           for (const key of ['SUPABASE_SERVICE_ROLE_KEY', 'DATABASE_URL', 'CLOUDFLARE_API_TOKEN',
             'VERCEL_TOKEN', 'HTC_SEO_CANONICAL_ORIGIN', 'HTC_SEO_INDEXING'])
             assert(!process.env[key], 'STOP_UNEXPECTED_EXECUTION_INPUT');
