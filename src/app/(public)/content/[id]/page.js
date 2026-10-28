@@ -12,7 +12,7 @@ const readDetail = cache(detailContent);
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const result = await readDetail(id);
-  if ([400, 404].includes(result.status)) notFound();
+  // Keep unavailable metadata fail-closed; the page owns the not-found boundary.
   return articleMetadata(id, result, await currentSearchPolicy());
 }
 export default async function DetailPage({ params }) {

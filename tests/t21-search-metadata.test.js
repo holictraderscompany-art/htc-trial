@@ -209,6 +209,34 @@ test('T21 route exports use dynamic no-store factories and no mutations', async 
   }
 });
 
+test('T21 unavailable metadata resolves safely while the page retains notFound enforcement', async () => {
+  const source = read('src/app/(public)/content/[id]/page.js');
+  const start = source.indexOf('export async function generateMetadata({ params }) {');
+  const end = source.indexOf('\nexport default async function DetailPage', start);
+  assert(start >= 0 && end > start);
+  // Execute the actual route metadata body with only transport/request context injected.
+  // This isolates metadata exceptions; it does not simulate Next streaming or hydration.
+  const body = source.slice(start, end).replace(/^export async function generateMetadata\(\{ params \}\) \{/, '').replace(/\}\s*$/, '');
+  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+  const execute = new AsyncFunction('params', 'readDetail', 'articleMetadata', 'currentSearchPolicy', 'notFound', body);
+  const fixture = publicFixture();
+  for (const value of [id(1), id(2), id(3), id(99), 'invalid-id']) {
+    let reads = 0, exceptions = 0;
+    const result = await fixture.detail(value);
+    const metadata = await execute(Promise.resolve({ id: value }), async received => {
+      reads++; assert.equal(received, value); return result;
+    }, articleMetadata, async () => policy(), () => { exceptions++; throw Error('UNEXPECTED_METADATA_NOT_FOUND'); });
+    assert.equal(reads, 1); assert.equal(exceptions, 0);
+    assert.deepEqual(metadata, articleMetadata(value, result, policy()));
+    if (value !== id(1)) {
+      assert.equal(metadata.robots.index, false); assert.deepEqual(metadata.alternates, {});
+      assert.doesNotMatch(JSON.stringify(metadata), /PRIVATE_|https?:\/\//);
+    }
+  }
+  const page = source.slice(end);
+  assert.match(page, /\[400, 404\]\.includes\(result.status\)\) notFound\(\)/);
+});
+
 test('T21 metadata wiring retains request memoization, notFound and inherited protected noindex', () => {
   const root = read('src/app/layout.js'), detail = read('src/app/(public)/content/[id]/page.js');
   assert.match(root, /robots: \{ index: false, follow: false \}/);
