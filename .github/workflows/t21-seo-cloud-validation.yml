@@ -69,7 +69,7 @@ jobs:
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import { execFileSync } from 'node:child_process';
-          import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+          import { readFileSync, writeFileSync, readdirSync, lstatSync } from 'node:fs';
           import { createHash } from 'node:crypto';
           const base = '108b39a4295c281011b755b23b7e943d3eb3226f';
           const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -80,25 +80,21 @@ jobs:
             'src/server/search-context.js', 'src/server/search-metadata.js',
             'tests/t21-search-metadata.test.js', 'docs/t21-search-discovery.md',
             '.github/workflows/t21-seo-cloud-validation.yml'];
-          // One controlled exception: remove only the original automatic loading boundary.
-          // Disable rename detection so any backup/move also appears as an unapproved addition.
-          const removed = 'src/app/(public)/content/loading.js';
-          const removedBlob = 'df07ff6cc9266a59a98f9826e33c2fa3ffadde4a';
+          // Loading recovery must restore the historical file, never authorize new content.
+          // It remains outside the change allowlist: its cumulative diff must be empty.
+          const loading = 'src/app/(public)/content/loading.js';
+          const loadingBlob = 'df07ff6cc9266a59a98f9826e33c2fa3ffadde4a';
           const changed = execFileSync('git', ['diff', '--name-status', '--no-renames', '-z', base, 'HEAD'], { encoding: 'utf8' }).split('\0');
           assert.equal(changed.pop(), '', 'STOP_INVALID_SOURCE_DIFF');
           assert.equal(changed.length % 2, 0, 'STOP_INVALID_SOURCE_DIFF');
-          let deletions = 0;
           for (let i = 0; i < changed.length; i += 2) {
-            const status = changed[i], path = changed[i + 1];
-            if (path === removed) {
-              assert.equal(status, 'D', 'STOP_LOADING_CHANGE_NOT_DELETION');
-              deletions++;
-            } else assert(paths.includes(path), 'STOP_UNAPPROVED_SOURCE_SCOPE');
+            assert(paths.includes(changed[i + 1]), 'STOP_UNAPPROVED_SOURCE_SCOPE');
           }
-          assert.equal(deletions, 1, 'STOP_LOADING_DELETION_REQUIRED');
-          assert.equal(git('rev-parse', base + ':' + removed), removedBlob, 'STOP_LOADING_BLOB_MISMATCH');
-          assert.equal(git('ls-tree', 'HEAD', '--', removed), '', 'STOP_LOADING_STILL_TRACKED');
-          assert(!existsSync(removed), 'STOP_LOADING_STILL_PRESENT');
+          assert.equal(git('rev-parse', base + ':' + loading), loadingBlob, 'STOP_LOADING_HISTORY_MISMATCH');
+          assert.equal(git('ls-tree', 'HEAD', '--', loading), '100644 blob ' + loadingBlob + '\t' + loading, 'STOP_LOADING_TREE_MISMATCH');
+          assert(lstatSync(loading, { throwIfNoEntry: false })?.isFile(), 'STOP_LOADING_NOT_REGULAR_FILE');
+          // Compare exact checkout bytes using Git filters, including the original Windows CRLF.
+          assert(readFileSync(loading).equals(execFileSync('git', ['cat-file', '--filters', '--path=' + loading, loadingBlob])), 'STOP_LOADING_CHECKOUT_MISMATCH');
           for (const key of ['SUPABASE_SERVICE_ROLE_KEY', 'DATABASE_URL', 'CLOUDFLARE_API_TOKEN',
             'VERCEL_TOKEN', 'HTC_SEO_CANONICAL_ORIGIN', 'HTC_SEO_INDEXING'])
             assert(!process.env[key], 'STOP_UNEXPECTED_EXECUTION_INPUT');
@@ -437,6 +433,7 @@ jobs:
             const result = { stage: 'UNAVAILABLE_DIAGNOSTIC', analysis_complete: true,
               http_status: Number.isInteger(response?.status) && response.status >= 100 && response.status <= 599 ? response.status : 0,
               response_bytes: 0, document_envelope_complete: false, decoded_flight_chunks: 0,
+              error_shell_document: false, application_root_marker: false,
               heading_in_rendered_markup: false, description_in_rendered_markup: false, action_in_rendered_markup: false,
               candidate_in_visible_markup: false, candidate_in_hidden_segments: false, candidate_in_templates: false,
               candidate_in_decoded_flight: false, loading_fallback_detected: false, replacement_markers_detected: false,
@@ -476,7 +473,7 @@ jobs:
               const markup = text.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
               const parts = { visible: [], hidden: [], template: [] }, stack = [];
               const voidTags = new Set('area base br col embed hr img input link meta param source track wbr'.split(' '));
-              let hidden = 0, inert = 0, cursor = 0, count = 0;
+              let hidden = 0, inert = 0, cursor = 0, count = 0, rootAttributes = null;
               const region = () => inert ? 'template' : hidden ? 'hidden' : 'visible';
               for (const match of markup.matchAll(/<(\/?)([a-z][\w:-]*)\b[^>]*>/gi)) {
                 assert(++count <= 65536 && stack.length <= 2048);
@@ -488,6 +485,10 @@ jobs:
                   for (const entry of stack.splice(index)) { hidden -= Number(entry.hidden); inert -= Number(entry.inert); }
                 } else {
                   const attrs = attributes(match[0]);
+                  if (tag === 'html') {
+                    assert(count === 1 && stack.length === 0 && rootAttributes === null);
+                    rootAttributes = attrs;
+                  }
                   const entry = { tag, hidden: Object.hasOwn(attrs, 'hidden') || /(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden)\b/i.test(attrs.style ?? ''), inert: tag === 'template' };
                   hidden += Number(entry.hidden); inert += Number(entry.inert);
                   parts[region()].push(match[0]);
@@ -503,6 +504,10 @@ jobs:
               result.document_envelope_complete = [...rendered.matchAll(/<(\/?(?:html|head|body))\b[^>]*>/gi)]
                 .map(match => match[1].toLowerCase()).join(',') === 'html,head,/head,body,/body,/html';
               if (!result.document_envelope_complete) result.analysis_complete = false;
+              // Inspect only the parsed document root, never marker text in scripts/Flight/templates.
+              result.error_shell_document = result.document_envelope_complete && rootAttributes?.id === '__next_error__';
+              // Matches HTC's root layout signature; absence leaves the document unclassified.
+              result.application_root_marker = result.document_envelope_complete && !result.error_shell_document && rootAttributes?.lang === 'en';
               const plain = value => evidenceText(value.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
               const has = (value, tag, expected) => [...value.matchAll(new RegExp('<' + tag + '\\b[^>]*>([\\s\\S]*?)<\\/' + tag + '\\s*>', 'gi'))]
                 .some(match => plain(match[1]) === expected);
@@ -559,6 +564,7 @@ jobs:
             const response = text => ({ status: 200, headers: {}, text });
             const flight = text => '<script>self.__next_f.push(' + JSON.stringify([1, text]) + ')</script>';
             const keys = ['stage', 'analysis_complete', 'http_status', 'response_bytes', 'document_envelope_complete',
+              'error_shell_document', 'application_root_marker',
               'decoded_flight_chunks', 'heading_in_rendered_markup', 'description_in_rendered_markup', 'action_in_rendered_markup',
               'candidate_in_visible_markup', 'candidate_in_hidden_segments', 'candidate_in_templates', 'candidate_in_decoded_flight',
               'loading_fallback_detected', 'replacement_markers_detected', 'possible_non_rendered_only', 'private_canary_detected',
@@ -598,6 +604,26 @@ jobs:
                 effective_noindex_detected: false }],
               [null, { analysis_complete: false, http_status: 0, response_bytes: 0 }],
               [response('x'.repeat(2000001)), { analysis_complete: false, candidate_in_visible_markup: false }],
+              [response(page(flight(model)).replace('<html>', '<html id="__next_error__">')), {
+                error_shell_document: true, application_root_marker: false, candidate_in_decoded_flight: true,
+                candidate_in_visible_markup: false, possible_non_rendered_only: true }],
+              [response(page().replace('<html>', "<HTML ID='__next_error__'>")), { error_shell_document: true }],
+              [response(page().replace('<html>', '<html id=__next_error__>')), { error_shell_document: true }],
+              [response(page().replace('<html>', '<html id="&#95;&#95;next_error__">')), { error_shell_document: true }],
+              [response(page().replace('<html>', '<html lang="en">')), { error_shell_document: false, application_root_marker: true }],
+              [response(page()), { error_shell_document: false, application_root_marker: false }],
+              [response(page('<div id="__next_error__"></div>')), { error_shell_document: false }],
+              [response(page('<script>const marker = \'<html id="__next_error__">\';</script>')), { error_shell_document: false }],
+              [response(page(flight('<html id="__next_error__">'))), { error_shell_document: false }],
+              [response(page('<!-- <html id="__next_error__"> -->')), { error_shell_document: false }],
+              [response(page('<template><div id="__next_error__"></div></template>')), { error_shell_document: false }],
+              [response(page('<template><html id="__next_error__"></html></template>')), { error_shell_document: false, analysis_complete: false }],
+              [response(page().replace('<html>', '<html data-marker="__next_error__">')), { error_shell_document: false }],
+              [response(page().replace('<html>', '<html id="__next_error__suffix">')), { error_shell_document: false }],
+              [response(page().replace('<html>', '<html id="ordinary" ID="__next_error__">')), { error_shell_document: false, analysis_complete: false }],
+              [response(page().replace('<html>', '<html id="__next_error__">').replace('</body></html>', '')), { error_shell_document: false, analysis_complete: false }],
+              [response(page('<html id="__next_error__"></html>')), { error_shell_document: false, analysis_complete: false }],
+              [response(page().replace('<html>', '<html lang="en" data-private="PRIVATE_SENTINEL">')), { application_root_marker: true, private_canary_detected: false }],
             ];
             for (const [input, expected] of cases) {
               const value = unavailableDiagnostic(input); schema(value);
@@ -613,6 +639,10 @@ jobs:
             try {
               console.log = value => messages.push(value);
               unavailableWithDiagnostics(response(page())); assert.equal(messages.length, 0);
+              assert.throws(() => unavailableWithDiagnostics({ ...response(page(flight(model)).replace('<html>', '<html id="__next_error__">')), status: 404 }),
+                error => error === original && error.message === 'STOP_MISSING_NOT_FOUND_UI');
+              assert.equal(messages.length, 1); schema(JSON.parse(messages[0]));
+              assert.equal(JSON.parse(messages[0]).error_shell_document, true); messages.length = 0;
               const unsafe = response(page(section + flight('T21_PRIVATE_STORAGE PRIVATE_SENTINEL')));
               unsafe.headers['x-private-header'] = 'PRIVATE_SENTINEL';
               assert.throws(() => unavailableWithDiagnostics(unsafe), error => error === original && error.message === 'STOP_PRIVATE_RESPONSE');
@@ -621,7 +651,7 @@ jobs:
               console.log = () => { throw Error('PRIVATE_SENTINEL'); };
               assert.throws(() => unavailableWithDiagnostics(unsafe), error => error === original && error.message === 'STOP_PRIVATE_RESPONSE');
             } finally { console.log = log; unavailable = validate; }
-            console.log(JSON.stringify({ stage: 'DIAGNOSTIC_REGRESSION', status: 'PASS', cases: cases.length + 4, cloud_ssr: false }));
+            console.log(JSON.stringify({ stage: 'DIAGNOSTIC_REGRESSION', status: 'PASS', cases: cases.length + 5, cloud_ssr: false }));
           }
           function seo(response, { title, description, canonical = null, index = false } = {}) {
             assert.equal(response.status, 200, 'STOP_SSR_STATUS'); clean(response.text);
