@@ -209,3 +209,148 @@ References checked 27 October 2026 (read-only official documentation):
 - [Next robots convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots)
 - [Next sitemap convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
 - [Google noindex and robots interaction](https://developers.google.com/search/docs/crawling-indexing/block-indexing)
+
+## 2026-10-29: production SSR root correction checkpoint
+
+This section supersedes the earlier NOT RUN integration status for the private
+cloud experiment only. No new GitHub Actions execution, commit, push, deployment
+or indexing activation is claimed.
+
+The Next 16.4.1 request-time not-found recovery builds an empty
+`__next_error__` HTML document while the Not Found tree exists only in the
+original Flight stream. Restoring the content loading boundary also lets
+Suspense flush a loading response before the page-level notFound reaches root
+recovery. Reproductions distinguished both paths: recovery alone fixes HTML
+without loading, but is insufficient with the restored loading component.
+
+`validation/t21/next-not-found-backport.mjs` applies a temporary local backport
+inspired by [Next.js PR #100648](https://github.com/vercel/next.js/pull/100648);
+this is not an official released framework fix. For the exact HTC dynamic
+content-detail route, request-time 404 recovery renders the nearest existing
+Not Found tree through the framework component-tree builder. Initial HTML
+documents omit the automatic loading data until content resolution completes;
+RSC requests and other routes retain their loading data. Initial HTML and its
+initial Flight agree. The original accessible loading.js remains unchanged.
+
+The build invokes this helper explicitly before the existing webpack build.
+Next/React versions and the lockfile are unchanged. Unknown runtime bytes or
+Next versions stop the build. Same-directory atomic replacement preserves file
+mode and leaves pnpm shared hardlinks/store untouched; parent/global Next
+resolution is rejected. There is no install hook. The source guard allows only
+this exact build-command change in package.json; all other package fields and
+the original lockfile remain locked. SSR assertions and the final integrity
+step are byte-identical to the preceding checkpoint.
+
+Verified runtime SHA-256 values:
+
+- Original: `76557c74ce6f2e8a592ef8c0810c58b8563f1e8b6e86aa71ca933eafc87902a4`
+- Patched: `3f86228bcdb279e219f78fc1c7482a9f1ef85d36e2530990390ecfbddac97e95`
+- Lockfile: `f3dd0c9c7f92f8cec9ebacaf0912b8144ac1f773800771f90ea661db82cc89d6`
+- Restored loading Git blob: `df07ff6cc9266a59a98f9826e33c2fa3ffadde4a`
+
+### Rollback runbook — separate Founder authorization required
+
+This runbook is documentation only. Do not execute it under the current
+documentation approval. Rollback is incomplete if the build script is restored
+while `node_modules` still contains the patched Next runtime.
+
+1. **Approve and restore the source configuration.** Record the rollback target,
+   branch/HEAD, dirty and staged inventory, file hashes and the other worktree
+   states. Verify the pre-backport checkpoint
+   `53801312bca32f9400d8ff44b8aee09eecbaf4a1` against Git history before using it
+   as a source reference. Use a separately reviewed, explicit-path Git patch or
+   revert for the backport changes: restore `build` to `next build --webpack`,
+   remove the helper invocation and backport-only helper from the approved source,
+   and reconcile the paired CI package guard/tests with that restored command.
+   Keep the SSR/security assertions, restored loading boundary, historical evidence
+   and unrelated changes. Do not reset, clean, switch branches, stash or revert
+   unrelated history automatically; committing/pushing a rollback needs its own
+   Founder approval.
+2. **Remove residual patched artifacts only in disposable isolation.** Stop only
+   the processes belonging to the authorized rollback sandbox. Resolve and inspect
+   the absolute paths of its local `node_modules` and generated `.next` output
+   before removing/recreating those directories. Reject paths outside that
+   disposable root, shared installations, symlinks/junctions and mounts that could
+   reach another checkout or store. Do not overwrite the vendor file in place or
+   delete/prune the shared pnpm store; its hardlinks may serve other worktrees.
+   Remove any owned partial patch temporary file only after identifying its exact
+   path. Prefer a fresh disposable checkout with no inherited `node_modules` or
+   build output if isolation cannot be proven. This clears the installed patched
+   runtime and generated artifacts, rather than merely disabling its build hook.
+3. **Restore official dependencies from the verified lockfile.** Confirm the
+   restored package configuration and `pnpm-lock.yaml` agree with the approved
+   source; retain the lockfile SHA-256 recorded above. In that isolated root, use
+   the approved Node 24.21.0/pnpm 11.25.0 toolchain and run
+   `pnpm install --frozen-lockfile --ignore-scripts`. Do not upgrade Next/React,
+   regenerate the lockfile, enable install hooks or copy vendor files from another
+   worktree. Stop on an installation or package-integrity error.
+4. **Verify the restored package before building.** Resolve Next from the isolated
+   project and confirm it stays inside that project's installation. Verify Next
+   is exactly `16.4.1` and the official
+   `next/dist/compiled/next-server/app-page.runtime.prod.js` SHA-256 equals
+   `76557c74ce6f2e8a592ef8c0810c58b8563f1e8b6e86aa71ca933eafc87902a4`,
+   not the patched hash above. Confirm pnpm's frozen install verified package
+   integrity, the lockfile bytes/hash are unchanged, the original build command
+   contains no helper, and no backport install hook remains. Stop on any mismatch;
+   do not hand-edit bytes or substitute another framework version to pass a hash.
+5. **Rebuild and validate only after rollback execution is separately approved.**
+   Use the restored `pnpm run build` in the isolated cloud environment, then the
+   relevant unchanged SSR/security verifier and affected T10/T21 regressions.
+   Recheck HTTP 400/404, server Not Found HTML without hydration, RELEASED access,
+   DRAFT/WITHDRAWN privacy, metadata/noindex and actual navigation. Compare the
+   recorded worktree inventories afterward; no other checkout may be changed.
+   The official 16.4.1 runtime still has the known SSR limitation: a rollback does
+   not inherit the patched runtime's PASS. Retain existing results as historical
+   evidence for their exact tested hash; report any rollback failure as BLOCKED
+   without weakening assertions. Domain activation, merge, deployment and
+   publishing require separate authorization and are not part of this procedure.
+
+Private cloud evidence: Vercel Hobby sandbox
+`htc-t21-framework-acceptance-20261029`, session
+`sbx_LkZG1DpZ07608s9WPYgwIUE5QQbc`, Ubuntu 26.04.1 LTS. Validation shells
+selected the downloaded Node 24.21.0 toolchain and pnpm 11.25.0. The separate
+report-probe command used the image's default Node 24.22.1; its process.version
+is not a build-runner version attestation. Chromium system libraries were
+installed only in the disposable sandbox. No project dependency was added.
+
+The cloud Git transport checkout was 13d6e9b, overlaid with the actual uncommitted
+source from local checkpoint `53801312bca32f9400d8ff44b8aee09eecbaf4a1`.
+All 69 executable/configuration/test manifest entries matched local canonical
+bytes, manifest SHA-256
+`6e7d4865305ad3b13797fa0f076f778425728b2d76024c747fbde59d25964a3f`.
+The overlay is not represented as a committed cloud revision.
+
+Actual results:
+
+- Frozen install and production `pnpm run build`: PASS.
+- Unchanged workflow SSR verifier: all four modes PASS (missing domain, TEST,
+  Preview, reserved synthetic production), including withdrawal lifecycle,
+  RELEASED-only discovery, Founder access, robots/sitemap and fail-closed
+  malformed upstream handling. Verifier regressions: 8 positive/42 negative;
+  diagnostic regressions: 34 PASS.
+- Additional unavailable matrix: 16/16 PASS: DRAFT, WITHDRAWN, missing and invalid
+  IDs across all four modes. Page HTTP 404, API HTTP 400 for invalid IDs and 404
+  for other unavailable IDs, actual Not Found HTML, full HTML/decoded Flight
+  private-canary exclusion, effective noindex, no canonical/OG URL.
+- Real Chromium with JavaScript disabled: 404 Not Found UI and Browse Content
+  navigation PASS. With JavaScript enabled: RELEASED, WITHDRAWN 404, Browse
+  Content/Home and back/forward navigation PASS; zero page/hydration errors.
+  These are HTC's actual anchor navigations, not arbitrary SPA cache parity.
+- `pnpm exec node --test tests/t21-framework-backport.test.js
+  tests/t21-search-metadata.test.js tests/content-discovery.test.js
+  tests/public-experience.test.js`: 76/76 PASS (10 backport, 22 T21, 22 T09,
+  22 T10). Independent source-guard tests: 1 positive/9 negative PASS;
+  YAML, all three embedded JS blocks, all five shell blocks and diff check PASS.
+
+Cloud commands: build/initial acceptance `cmd_18c75fc4f8f248f2916f0818ffca`;
+final unchanged SSR/regressions `cmd_1376e17c95334368b28bb0d734a2`;
+completed browser/matrix `cmd_c6ee109ca225404faafab688a367`;
+source/result attestation `cmd_c3f63518d58349aaaae03b122ec3`.
+Only synthetic fixture transports and loopback servers were used. The sandbox
+subsequently expired and stopped; no public service remains running.
+
+Technical SSR validation PASS is limited to this tested standard production
+webpack runtime. Development/Turbopack, Edge, Cache Components and deployment
+adapters are not validated by this backport. Production domain verification and
+indexing activation remain separate prerequisites. Founder final review and
+separate commit/push approval remain required; T22 is not authorized.

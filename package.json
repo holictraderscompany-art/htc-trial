@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
-    "build": "next build --webpack",
+    "build": "node validation/t21/next-not-found-backport.mjs && next build --webpack",
     "start": "next start --hostname 127.0.0.1",
     "local:sqlite": "node tests/founder-content.fixture.mjs --sqlite",
     "test:local:sqlite": "node --test --test-concurrency=1 tests/local-sqlite.test.js",

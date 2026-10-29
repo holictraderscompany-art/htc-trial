@@ -16,6 +16,9 @@ on:
       - src/server/search-metadata.js
       - tests/t21-search-metadata.test.js
       - docs/t21-search-discovery.md
+      - package.json
+      - validation/t21/next-not-found-backport.mjs
+      - tests/t21-framework-backport.test.js
 
 permissions:
   contents: read
@@ -79,7 +82,8 @@ jobs:
             'src/app/robots.txt/route.js', 'src/app/sitemap.xml/route.js',
             'src/server/search-context.js', 'src/server/search-metadata.js',
             'tests/t21-search-metadata.test.js', 'docs/t21-search-discovery.md',
-            '.github/workflows/t21-seo-cloud-validation.yml'];
+            '.github/workflows/t21-seo-cloud-validation.yml', 'package.json',
+            'validation/t21/next-not-found-backport.mjs', 'tests/t21-framework-backport.test.js'];
           // Loading recovery must restore the historical file, never authorize new content.
           // It remains outside the change allowlist: its cumulative diff must be empty.
           const loading = 'src/app/(public)/content/loading.js';
@@ -103,7 +107,13 @@ jobs:
           const manifest = paths.sort().map(path => ({ path, sha256: hash(readFileSync(path)) }));
           const lock = readFileSync('pnpm-lock.yaml');
           assert.equal(hash(lock), hash(execFileSync('git', ['show', base + ':pnpm-lock.yaml'])));
-          assert.equal(git('diff', base, 'HEAD', '--', 'package.json', 'pnpm-lock.yaml'), '');
+          assert.equal(git('diff', base, 'HEAD', '--', 'pnpm-lock.yaml'), '');
+          const originalPackage = JSON.parse(execFileSync('git', ['show', base + ':package.json']));
+          const currentPackage = JSON.parse(readFileSync('package.json'));
+          assert.equal(currentPackage.scripts.build,
+            'node validation/t21/next-not-found-backport.mjs && next build --webpack', 'STOP_UNAPPROVED_BUILD_COMMAND');
+          currentPackage.scripts.build = originalPackage.scripts.build;
+          assert.deepEqual(currentPackage, originalPackage, 'STOP_UNAPPROVED_PACKAGE_CHANGE');
           writeFileSync(process.env.RUNNER_TEMP + '/t21-lock.sha256', hash(lock));
           console.log(JSON.stringify({ stage: 'SOURCE', sha: git('rev-parse', 'HEAD'),
             tree: git('rev-parse', 'HEAD^{tree}'), node: process.version, pnpm: '11.25.0',
