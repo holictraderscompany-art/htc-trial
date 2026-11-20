@@ -1,8 +1,7 @@
 import { randomBytes, createHash } from 'node:crypto';
-import { ApiError, authorize, reply } from './api-foundation.js';
+import { ApiError, authorize, reply, supabaseConfiguration } from './api-foundation.js';
 import { sessionCookie, tokenPattern, readCookie as cookie } from './session-token.js';
 
-const project = 'https://vzkbcgfywyhtvprxpwfb.supabase.co';
 const flowCookie = 'htc_trial_pkce';
 function setCookie(response, request, name, value, age, path = '/') {
   response.headers.append('Set-Cookie', `${name}=${value}; Path=${path}; HttpOnly; SameSite=Lax; Max-Age=${age}${new URL(request.url).protocol === 'https:' ? '; Secure' : ''}`);
@@ -22,12 +21,12 @@ function sameOrigin(request) {
 // through the existing Foundation authorize helper, never by decoding a client JWT.
 export function createTrialSessionHandlers({ env = process.env, fetchImpl = fetch } = {}) {
   function configuration() {
-    if (env.SUPABASE_URL !== project || !/^sb_publishable_[A-Za-z0-9_-]+$/.test(env.SUPABASE_PUBLISHABLE_KEY ?? '')) throw new ApiError(500);
-    return env.SUPABASE_PUBLISHABLE_KEY;
+    return supabaseConfiguration(env);
   }
   async function authFetch(path, options) {
-    return fetchImpl(`${project}/auth/v1/${path}`, { ...options, headers: {
-      apikey: configuration(), 'Content-Type': 'application/json', ...options.headers,
+    const config = configuration();
+    return fetchImpl(`${config.url}/auth/v1/${path}`, { ...options, headers: {
+      apikey: config.key, 'Content-Type': 'application/json', ...options.headers,
     }, cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(10000) });
   }
   async function identity(request, token) {
@@ -42,7 +41,7 @@ export function createTrialSessionHandlers({ env = process.env, fetchImpl = fetc
         const verifier = randomBytes(64).toString('base64url');
         const attempt = randomBytes(16).toString('hex');
         const callback = new URL('/auth/callback', request.url); callback.searchParams.set('attempt', attempt);
-        const destination = new URL(`${project}/auth/v1/authorize`);
+        const destination = new URL(`${configuration().url}/auth/v1/authorize`);
         destination.search = new URLSearchParams({ provider: 'google', redirect_to: callback.href,
           code_challenge: createHash('sha256').update(verifier).digest('base64url'), code_challenge_method: 's256' }).toString();
         const response = redirect(request, destination.href);

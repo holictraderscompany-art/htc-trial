@@ -1,0 +1,40 @@
+{
+  "project_id": "uzhkzhmncxjplrdtdzgd",
+  "migrations": [
+    {
+      "version": "20261012061832",
+      "name": "htc_group3_core_auth_content_draft",
+      "source_sha256": "b7edbca78c80a41c573fb143daf93c3dba9374411a073207f3920ab7a0763185"
+    },
+    {
+      "version": "20261012062050",
+      "name": "trial_assets",
+      "source_sha256": "969da9143410bc88a23b1fe2e297ec96c7e04b1d46a1b45475da49cbbbbf12c3"
+    },
+    {
+      "version": "20261012062052",
+      "name": "trial_content_assets",
+      "source_sha256": "9e1dfbfb25aeeee803d1a78d8ef749a8496f9a0aee262e4fefaf1839c38b4300"
+    },
+    {
+      "version": "20261012062053",
+      "name": "public_content_discovery",
+      "source_sha256": "3efec7f567f1d77e2d2ff4a9396a66c8984feef9f5124f88714d48d9b483a846"
+    },
+    {
+      "version": "20261012062054",
+      "name": "founder_content_list",
+      "source_sha256": "5ccccd25dea555958009053245458ff180569e9e87e29456426e4fbb5c0ae17a"
+    },
+    {
+      "version": "20261012062323",
+      "name": "founder_operation_workspaces",
+      "source_sha256": "6e871712780602fbf9c1f89ecd20ea266b69c9a984cce55d68eaa439d3b31e4a"
+    },
+    {
+      "version": "20261012062809",
+      "name": "founder_asset_delete_bridge",
+      "source_sha256": "31e35dab9b3cc07567adf320f8f888ddc97e0ded1a70191bb03d38a1e197ee0f"
+    }
+  ]
+}
