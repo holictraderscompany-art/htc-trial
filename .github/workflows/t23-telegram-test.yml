@@ -1,4 +1,4 @@
-name: T23 Telegram TEST preflight
+name: T23 Telegram TEST group readback
 
 # GitHub discovers workflow_dispatch on main. Select codex/group04-t18
 # when dispatching. The environment and this job both enforce that ref.
@@ -14,39 +14,70 @@ jobs:
     timeout-minutes: 2
     environment: htc-telegram-test
     steps:
-      - name: Verify Telegram TEST bot identity
+      - name: Verify Telegram TEST group access
         shell: bash
         env:
           HTC_TELEGRAM_TEST_BOT_TOKEN: ${{ secrets.HTC_TELEGRAM_TEST_BOT_TOKEN }}
+          HTC_T23_TELEGRAM_G1_CHAT_ID: ${{ secrets.HTC_T23_TELEGRAM_G1_CHAT_ID }}
+          HTC_T23_TELEGRAM_G2_CHAT_ID: ${{ secrets.HTC_T23_TELEGRAM_G2_CHAT_ID }}
         run: |
           node --input-type=module <<'NODE'
-          async function verifyBot() {
-            const token = process.env.HTC_TELEGRAM_TEST_BOT_TOKEN;
+          const token = process.env.HTC_TELEGRAM_TEST_BOT_TOKEN;
+          const groups = [
+            ['HTC-T23-TEST-G1', process.env.HTC_T23_TELEGRAM_G1_CHAT_ID],
+            ['HTC-T23-TEST-G2', process.env.HTC_T23_TELEGRAM_G2_CHAT_ID],
+          ];
+          const validId = value => /^-[1-9]\d{0,15}$/.test(value ?? '') &&
+            Number.isSafeInteger(Number(value));
+          const permissions = [
+            'can_manage_chat', 'can_change_info', 'can_delete_messages',
+            'can_invite_users', 'can_restrict_members', 'can_promote_members',
+            'can_pin_messages', 'can_manage_topics',
+          ];
+
+          async function readTelegram(method, params) {
+            const url = new URL('https://api.telegram.org/bot' + token + '/' + method);
+            url.search = new URLSearchParams(params);
+            const response = await fetch(url, { redirect: 'error', signal: AbortSignal.timeout(10000) });
+            if (!response.ok) return null;
+            const data = await response.json();
+            return data?.ok === true ? data.result : null;
+          }
+
+          function fail(code, group) {
+            console.log(group ? group + ' ' + code : code);
+            process.exitCode = 1;
+          }
+
+          async function verifyGroups() {
             if (!/^\d{1,20}:[A-Za-z0-9_-]{20,128}$/.test(token ?? '')) {
-              return 'TOKEN_MISSING_OR_INVALID';
+              return fail('TOKEN_MISSING_OR_INVALID');
             }
+            if (!groups.every(([, id]) => validId(id)) || groups[0][1] === groups[1][1]) {
+              return fail('TEST_CHAT_IDS_MISSING_OR_INVALID');
+            }
+            const botId = token.split(':', 1)[0];
 
-            try {
-              const response = await fetch('https://api.telegram.org/bot' + token + '/getMe', {
-                redirect: 'error',
-                signal: AbortSignal.timeout(10000),
-              });
-              if (!response.ok) return 'TELEGRAM_HTTP_FAILURE';
-
-              const data = await response.json();
-              if (data?.ok !== true) return 'TELEGRAM_API_FAILURE';
-              const bot = data.result;
-              if (bot?.is_bot !== true || typeof bot.username !== 'string' ||
-                  bot.username.toLowerCase() !== 'htct23testbot') {
-                return 'UNEXPECTED_BOT_IDENTITY';
+            for (const [label, chatId] of groups) {
+              try {
+                const chat = await readTelegram('getChat', { chat_id: chatId });
+                if (String(chat?.id) !== chatId || chat?.title !== label ||
+                    !['group', 'supergroup'].includes(chat?.type) || chat?.username ||
+                    (chat?.active_usernames?.length ?? 0) !== 0) {
+                  return fail('TEST_CHAT_IDENTITY_NOT_VERIFIED', label);
+                }
+                const member = await readTelegram('getChatMember', { chat_id: chatId, user_id: botId });
+                if (member?.status !== 'administrator' || String(member?.user?.id) !== botId ||
+                    member?.user?.is_bot !== true || member?.user?.username?.toLowerCase() !== 'htct23testbot') {
+                  return fail('TEST_BOT_ADMIN_NOT_VERIFIED', label);
+                }
+                const rights = Object.fromEntries(permissions.map(key => [key, member[key] === true]));
+                console.log(label + ' TEST_BOT_ADMIN_VERIFIED ' + JSON.stringify(rights));
+              } catch {
+                return fail('TELEGRAM_READ_FAILED', label);
               }
-              return 'TEST_BOT_IDENTITY_VERIFIED';
-            } catch {
-              return 'TELEGRAM_REQUEST_FAILURE';
             }
           }
 
-          const result = await verifyBot();
-          console.log(result);
-          if (result !== 'TEST_BOT_IDENTITY_VERIFIED') process.exitCode = 1;
+          await verifyGroups();
           NODE
