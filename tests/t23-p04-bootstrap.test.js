@@ -15,9 +15,10 @@ const env = {
   HTC_T23_TELEGRAM_G2_CHAT_ID: '-1002222', HTC_T23_P04_ENROLLMENT_PROOF_KEY: key,
   HTC_T23_P04_PROVISION_NONCE: nonce, HTC_T23_P04_PROVISION_PUBLIC_KEY: keys.publicKey.export({ type: 'spki', format: 'pem' }),
 };
-const request = (from = origin) => new Request(origin + '/api/founder/telegram-test-bootstrap', {
-  method: 'POST', headers: { origin: from, cookie: 'htc_trial_session=fixture' },
+const request = (from = origin, body) => new Request(origin + '/api/founder/telegram-test-bootstrap', {
+  method: 'POST', headers: { origin: from, cookie: 'htc_trial_session=fixture' }, body, duplex: 'half',
 });
+const emptyStream = () => new ReadableStream({ start(controller) { controller.close(); } });
 
 function fixture({ founder = true, config, failNative = false } = {}) {
   const calls = [];
@@ -40,7 +41,7 @@ function fixture({ founder = true, config, failNative = false } = {}) {
 
 test('only verified G1 goes into a sealed Founder response and the registration boundary consumes once', async () => {
   const h = fixture();
-  const response = await h.handler(request());
+  const response = await h.handler(request(origin, emptyStream()));
   assert.equal(response.status, 200);
   const { data } = await response.json();
   assert.deepEqual(Object.keys(data), ['sealedProof']);
@@ -70,12 +71,28 @@ test('wrong nonce, expiry, bad signing key and fabricated ciphertext are rejecte
 test('cross-origin, non-Founder, wrong branch and mismatched native identity cannot obtain a proof', async () => {
   for (const [h, input, status, nativeCalls] of [
     [fixture(), request('https://wrong.example.invalid'), 403, 0],
-    [fixture({ founder: false }), request(), 403, 0],
+    [fixture({ founder: false }), request(origin, emptyStream()), 403, 0],
     [fixture({ config: { VERCEL_GIT_COMMIT_REF: 'main' } }), request(), 404, 0],
     [fixture({ failNative: true }), request(), 403, 1],
   ]) {
     assert.equal((await h.handler(input)).status, status);
     assert.equal(h.calls.length, nativeCalls);
+  }
+});
+
+test('nonempty, errored, and stalled request streams are rejected before upstream checks', async () => {
+  const handler = createP04BootstrapHandler({
+    env,
+    fetchImpl: () => assert.fail('Supabase must not be called'),
+    fetchTelegram: () => assert.fail('Telegram must not be called'),
+  });
+  const bodies = [
+    new Uint8Array([0]),
+    new ReadableStream({ start(controller) { controller.error(new Error('stream failure')); } }),
+    new ReadableStream(),
+  ];
+  for (const body of bodies) {
+    assert.equal((await handler(request(origin, body))).status, 403);
   }
 });
 

@@ -17,13 +17,41 @@ const isId = (value, sign) => typeof value === 'string' && String(Number(value))
   Number.isSafeInteger(Number(value)) && sign * Number(value) > 0;
 const rsa = { padding: constants.RSA_PKCS1_OAEP_PADDING, oaepHash: 'sha256' };
 
+async function hasEmptyBody(body) {
+  if (body === null) return true;
+  const reader = body.getReader();
+  let timer;
+  let ended = false;
+  try {
+    const timeout = new Promise(resolve => { timer = setTimeout(() => resolve(null), 1_000); });
+    // Next.js may wrap a payload-free POST in an empty stream.
+    while (true) {
+      const chunk = await Promise.race([reader.read(), timeout]);
+      if (chunk === null) return false;
+      if (chunk.done) {
+        ended = true;
+        return true;
+      }
+      if (chunk.value.byteLength !== 0) return false;
+    }
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+    if (!ended) void reader.cancel().catch(() => {});
+    reader.releaseLock();
+  }
+}
+
 export function createP04BootstrapHandler({ env = process.env, fetchImpl = fetch, fetchTelegram, now = Date.now } = {}) {
   return async function bootstrap(request) {
     if (env.VERCEL_ENV !== 'preview' || env.VERCEL_GIT_COMMIT_REF !== 'codex/group04-t18' ||
         env.HTC_SUPABASE_TARGET !== 'test' || env.SUPABASE_URL !== `https://${project}.supabase.co`) return reply(404);
     if (request.method !== 'POST') return reply(405, null, 'POST');
     try {
-      if (request.headers.get('origin') !== new URL(request.url).origin || new URL(request.url).search || request.body) return reply(403);
+      const url = new URL(request.url);
+      if (request.headers.get('origin') !== url.origin || url.search) return reply(403);
+      if (!await hasEmptyBody(request.body)) return reply(403);
       const headers = { authorization: `Bearer ${readSessionToken(request)}` };
       await authorize(new Request(request.url, { headers }), 'founder', { env, fetchImpl });
 
